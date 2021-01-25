@@ -1,0 +1,60 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+.Nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.logoapp{
+    width: 100;
+}
+
+
+.Navmenu{
+
+}
+
+a{
+    margin-right: 30px;
+}
+
+img{
+    margin-right:4px ;
+}
+
+a{
+    font-size: 20px;
+    color: #3F3F3F;
+}
+
+.homelogo{
+    margin-bottom: 2px;
+}
+
+
+.listmenu{
+    margin-right: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* margin-left:50px ; */
+}
+
+.sign{
+    background-color: #1BA0E2;
+    border: none;
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 18px;
+    color: white;
+}
+
+
