@@ -8,7 +8,7 @@ function register() {
    <>
     <Navbar></Navbar>
     <div className="container">
-        
+        <form className = "form1">
         <div className="container1">
             <ul className="containerlist">
                 <h1>สมัครสมาชิก</h1>
@@ -27,7 +27,8 @@ function register() {
                 <button className="buttonregister">สมัครสมาชิก</button>
             </ul>
         <img src={img} className="img" width="400" height="470"></img>
-        </div>        
+        </div>
+        </form>        
     </div>
    </>
   );

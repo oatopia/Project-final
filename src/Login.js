@@ -10,7 +10,7 @@ function Login() {
     <div className="containerlog">
         
         <div className="container1">
-            <form className="for">
+            <form className="form2">
                 <ul className="containerlist">
                     <h1>เข้าสู่ระบบ</h1>
                     <a>ชื่อผู้ใช้</a>
