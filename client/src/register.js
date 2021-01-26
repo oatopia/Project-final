@@ -11,7 +11,7 @@ function register() {
         <form className = "form1">
         <div className="container1">
             <ul className="containerlist">
-                <h1>สมัครสมาชิก</h1>
+                <h1 id="3">สมัครสมาชิก</h1>
                 <a>ชื่อผู้ใช้</a>
                 <input></input>
                 <br></br>

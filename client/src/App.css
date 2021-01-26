@@ -9,6 +9,10 @@ body{
 .appcontainer{
   background-image: url("./img/background.jpg");
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  min-height: 145vh;
 }
 
 .searchbar{

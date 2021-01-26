@@ -7,7 +7,7 @@ import Operator from './operator';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Operator/>
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );
