@@ -7,7 +7,6 @@ body{
       background-image: url("./img/baregister.png");
       background-size: cover;
       background-attachment: fixed;
-      height: 200%;
       width: 100%;
       box-sizing: border-box;
       display: flex;
@@ -16,21 +15,19 @@ body{
       
   }
   .container1{
-    margin: auto;
     display: flex;
     flex-direction: row;
+
     
   }
 
-  .containerlist{
-      padding: 50px;
+  .containerlist{   
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-        border-radius: 10px 0 0 10px;
-      background-color: white;
+      border-radius: 10px 0 0 10px;
+      background-color:white;
       box-shadow: 2px 10px 10px 0 rgba(0, 0, 0, 0.2);
-     
   }
 
   .img{
@@ -45,7 +42,7 @@ body{
   }
 
 
-  a{
+  p{
       color: #464646;
       font-size: 18px;
   }
@@ -68,4 +65,20 @@ body{
       border: none;
       border-radius: 5px;
       box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .type{
+    
+    height: 40px;
+  }
+
+  select {
+    margin-top: 10px;
+    width: 60%;
+    font-size: 17px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border: none;
+    background-color: #E8E8E8;
+    height: 50px;
   }
