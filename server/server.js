@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import bodyparser from 'body-parser'
 import userRouter from './router/userRouter.js'
+import factorRouter from './router/matchRouter.js'
 import db from './util/database.js'
 import session from 'express-session'
 import path from 'path'
@@ -26,8 +27,8 @@ app.use(session({
 // });
 
 
-app.get('/user',(req,res)=>{
-    db.query("SELECT * FROM userinformation",(err,result)=>{
+app.get('/factor',(req,res)=>{
+    db.query("SELECT * FROM factor",(err,result)=>{
         if(err){
             console.log(err);
         }else{
@@ -54,6 +55,8 @@ app.post('/log',(req,res)=>{
         }
     });
 });
+
+
 
 
 // app.post('/create',(req,res)=>{
