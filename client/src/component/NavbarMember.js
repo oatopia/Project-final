@@ -10,7 +10,7 @@ export default function Navbar() {
     window.location.href = "/member";
   };
   return (
-    <div className="Nav">
+    <div className="NavMember-container">
       <img
         src={logoapp}
         className="logoapp"
@@ -19,10 +19,10 @@ export default function Navbar() {
         onClick={gotohome}
       ></img>
 
-      <ul className="listmenu">
+      <ul className="listmenu-Navbarmember">
         <img
           src={homelogo}
-          className="homelogo"
+          className="homelogo-Navbarmember"
           width="40"
           height="38"
           onClick={gotohome
@@ -30,18 +30,15 @@ export default function Navbar() {
         <Link to="/">
           <a>หน้าหลัก</a>
         </Link>{" "}
-        <img src={userlogo} className="userlogo" width="40" height="38" onClick={()=>{
-          window.location.href="/login"
-        }}></img>
+        <img src={userlogo} className="userlogo" width="40" height="38" ></img>
         <Link to="/login">
-          <a>เข้าสู่ระบบ</a>
+          <a>รายการหอพักที่บันทึก</a>
         </Link>
         <button
-          className="sign"
+          className="sign-Navbarmember"
           onClick={() => {
             window.location.href = "/register";
-          }}
-        >
+          }}>
           สมัครสมาชิก
         </button>
       </ul>
