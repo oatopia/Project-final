@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import bodyparser from 'body-parser'
 import userRouter from './router/userRouter.js'
-import factorRouter from './router/matchRouter.js'
+import matchRouter from './router/matchRouter.js'
 import db from './util/database.js'
 import session from 'express-session'
 import path from 'path'
@@ -37,24 +37,24 @@ app.get('/factor',(req,res)=>{
     });
 });
 
-let typeofuser ="";
-app.post('/log',(req,res)=>{
-    const username = req.body.username;
-    const password = req.body.password;
-    db.query("SELECT * FROM userinformation WHERE username = ? ",username,(err,result)=>{
-        if(err){
-            console.log(err);
-        }else{
+
+// app.post('/log',(req,res)=>{
+//     const username = req.body.username;
+//     const password = req.body.password;
+//     db.query("SELECT * FROM userinformation WHERE username = ? ",username,(err,result)=>{
+//         if(err){
+//             console.log(err);
+//         }else{
             
-            if(username == result[0].username){
-                if(password == result[0].password){
-                    res.send(result[0].type);
-                    console.log(result[0].type)
-                }
-            }
-        }
-    });
-});
+//             if(username == result[0].username){
+//                 if(password == result[0].password){
+//                     res.send(result[0].type);
+//                     console.log(result[0].type)
+//                 }
+//             }
+//         }
+//     });
+// });
 
 
 
@@ -75,6 +75,7 @@ app.post('/log',(req,res)=>{
 // })
 
 app.use("/api/user",userRouter);
+app.use("/api/match",matchRouter);
 
 app.listen(port,()=>{
     console.log('Server running port 4000');

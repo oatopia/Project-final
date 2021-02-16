@@ -10,7 +10,7 @@ const Login = ()=> {
     const [password,setpassword] = useState("");
     const [type,settype] = useState("");
     const login = () =>{
-        Axios.post('/log',{
+        Axios.post('/api/user/login',{
             username: username,
             password: password
         }).then( Response =>{

@@ -21,16 +21,19 @@ Userinfo.create = (newUser,result) =>{
 };
 
 Userinfo.login = (userlog,result) =>{
-    db.query("SELECT * FROM userinformation WHERE username = ? ",userlog.username,(err,res)=>{
+    db.query("SELECT * FROM userinformation WHERE username = ? ", userlog,(err,res)=>{
         if(err){
             console.log("error: ",err);
             result(err,null);
             return;
         }
-        
-        console.log("found user",res[0]);
-        
-        return res;
+        // if(res[0].lenght){
+        //     console.log("found user",res[0]);
+        //     result(null,res[0]);
+        //     return;
+        // }
+        console.log(res);
+        result(null,res);
     });
 };
 

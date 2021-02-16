@@ -27,29 +27,18 @@ export const login = (req,res) =>{
         username: req.body.username,
         password: req.body.password
     });
-    userModel.login(userlogin,(err,data)=>{
-        if(username == data.username){
-            if(password == data.password){
-                res.redirect();
-            }
-        }
+    userModel.login(userlogin.username,(err,data)=>{
         if(err){
-            if(err.kind == "not found"){
-                res.status(400).send({
-                    message: 'not found'
-                });
-            }else{
-                res.status(500).send({
-                    message: 'Error'
-                });
-            }
+            console.log(err);
         }else{
-            console.log(data);
-            res.json(data);
+            if(userlogin.username == data[0].username){
+                if(userlogin.password == data[0].password){
+                    res.send(data[0].type);
+                    console.log(data[0].type)
+                }
+            }
         }
-        
     });
-    res.redirect("/client/src/member.js")
-    res.send("login ");
+    
     
 };
