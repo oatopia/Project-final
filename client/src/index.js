@@ -5,10 +5,11 @@ import App from './App';
 import Register from './register';
 import Login from './Login';
 import Operator from './operator';
+import Member from './member';
 
 ReactDOM.render(
   <BrowserRouter>
-  <App/>
+    <Member/>
   </BrowserRouter>,
   document.getElementById('root')
 );

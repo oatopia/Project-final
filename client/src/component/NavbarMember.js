@@ -3,6 +3,8 @@ import "./NavbarMember.css";
 import logoapp from "../img/logoapp.png";
 import homelogo from "../img/Home.png";
 import userlogo from "../img/user.png";
+import savelogo from "../img/savelogo.png";
+import profilelogo from "../img/profile-user.png";
 import { BrowserRouter, Route, Link, Router, Redirect } from "react-router-dom";
 
 export default function Navbar() {
@@ -18,7 +20,7 @@ export default function Navbar() {
         height="100"
         onClick={gotohome}
       ></img>
-
+    <div className="NavMember-container2">
       <ul className="listmenu-Navbarmember">
         <img
           src={homelogo}
@@ -30,18 +32,16 @@ export default function Navbar() {
         <Link to="/">
           <a>หน้าหลัก</a>
         </Link>{" "}
-        <img src={userlogo} className="userlogo" width="40" height="38" ></img>
+        <img src={savelogo} className="savelogo" width="38" height="39" ></img>
         <Link to="/login">
           <a>รายการหอพักที่บันทึก</a>
         </Link>
-        <button
-          className="sign-Navbarmember"
-          onClick={() => {
-            window.location.href = "/register";
-          }}>
-          สมัครสมาชิก
-        </button>
-      </ul>
+        </ul>
+        <div className="profile-Navbarmember">
+            <img src={profilelogo} className="profilelogo" width="35" height="36" ></img>
+          <p>Kanchana</p>
+        </div>
+      </div>
     </div>
   );
 }
