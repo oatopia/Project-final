@@ -14,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended: true}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
 	secret: 'secret',
@@ -23,8 +24,12 @@ app.use(session({
 
 
 
-// app.get('/',(req,res)=>{
-// });
+app.get('/',(req,res)=>{
+    res.send("hello")
+});
+app.post('/',(req,res)=>{
+    res.send("post")
+});
 
 
 app.get('/factor',(req,res)=>{

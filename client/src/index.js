@@ -9,7 +9,7 @@ import Member from './member';
 
 ReactDOM.render(
   <BrowserRouter>
-    <Member/>
+    <App/>
   </BrowserRouter>,
   document.getElementById('root')
 );
