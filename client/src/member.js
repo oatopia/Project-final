@@ -1,7 +1,7 @@
 import React from 'react';
 import './member.css';
 import NavbarMember from './component/NavbarMember.js';
-import Match from './component/Match';
+import Match_member from './component/Match-member';
 
 
 function Member() {
@@ -13,7 +13,7 @@ function Member() {
         <input className="searchinput-member"></input> 
         <button className="searchbutton-member">ค้นหา</button>
       </div>
-      <Match/>
+      <Match_member/>
     </div>
     );
 }
