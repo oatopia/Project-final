@@ -20,10 +20,19 @@
 
 
 .select-score{
+    display: block;
     width: 10px;
 }
 
-select{
+img{
+    display: block;
+}
+
+/* select{
+    display: inline-block;
     width: 20px;
-    height: 50px;
+} */
+
+#contain-match-display{
+    display: inline-block;
 }

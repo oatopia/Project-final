@@ -23,24 +23,15 @@ app.use(session({
 }));
 
 
-
-app.get('/',(req,res)=>{
-    res.send("hello")
-});
-app.post('/',(req,res)=>{
-    res.send("post")
-});
-
-
-app.get('/factor',(req,res)=>{
-    db.query("SELECT * FROM factor",(err,result)=>{
-        if(err){
-            console.log(err);
-        }else{
-            res.send(result);
-        }
-    });
-});
+// app.get('/factor',(req,res)=>{
+//     db.query("SELECT * FROM factor",(err,result)=>{
+//         if(err){
+//             console.log(err);
+//         }else{
+//             res.send(result);
+//         }
+//     });
+// });
 
 
 // app.post('/log',(req,res)=>{
@@ -82,6 +73,6 @@ app.get('/factor',(req,res)=>{
 app.use("/api/user",userRouter);
 app.use("/api/match",matchRouter);
 
-app.listen(port,()=>{
+app.listen(4000,()=>{
     console.log('Server running port 4000');
 });
