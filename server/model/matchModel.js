@@ -18,4 +18,17 @@ Factorinfo.getallfactor = result =>{
     });
 };
 
+Factorinfo.createWeight = ([newWeight],result) =>{
+    db.query("INSERT INTO weight (weight_id, comparator, weight) VALUES ?",[newWeight.map(item=>[item.Id,item.Image,item.Weight])],(err,res)=>{
+        if(err){
+            console.log("error: ",err);
+        result(err,null);
+        return;
+        }
+        
+
+        console.log("create user:" ,{ ...newWeight});
+    });
+}
+
 export default Factorinfo;

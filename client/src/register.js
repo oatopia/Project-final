@@ -11,7 +11,7 @@ function Register() {
     const [type,settype] = useState("สมาชิก");
 
     const addinfo = () =>{
-        Axios.post('/api/user/register',{
+        Axios.post('api/user/register',{
             username: username,
             password: password,
             type: type

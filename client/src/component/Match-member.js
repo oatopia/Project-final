@@ -7,17 +7,28 @@ import './Match.css';
 export default function Match(){
     const [factorlist,setFactorlist] = useState([]);
     const [weight,setWeight] = useState([]);
-
-    Axios.get('api/match/getfactor',{timeout: 100
-    }).then(Response=>{
-        setFactorlist(Response.data);
-    })
-
-    const saveweight = () =>{
-        Axios.post('api/match/saveweight',{
-            weight
+    var payload = {
+        "id":"0",
+        "Image":"D1.png",
+        "Weight":"5"
+    }
+    useEffect(()=>{
+        Axios.get('api/match/getfactor',{
         }).then(Response=>{
             setFactorlist(Response.data);
+            
+        }).catch((error)=>{
+            console.log(error);
+        })
+    },[])
+
+    const saveweight = () =>{
+        console.log(weight);
+        Axios.post('api/match/createweight',weight)
+        .then(Response => {
+            console.log(Response);
+        }).catch(error=>{
+            console.log(error);
         })
     }
     
@@ -154,8 +165,8 @@ export default function Match(){
             <div className="containermatch-3">
                 {showimage()}
             </div>
-            <button >บันทึก</button>
-            <button onClick={showweight}>จับคู่หอพัก</button>
+            <button onClick={saveweight}>บันทึก</button>
+            <button >จับคู่หอพัก</button>
             <pre>{JSON.stringify(weight,null,2)}</pre>
         </div>
         
