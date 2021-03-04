@@ -7,13 +7,9 @@ import './Match.css';
 export default function Match(){
     const [factorlist,setFactorlist] = useState([]);
     const [weight,setWeight] = useState([]);
-    var payload = {
-        "id":"0",
-        "Image":"D1.png",
-        "Weight":"5"
-    }
+
     useEffect(()=>{
-        Axios.get('api/match/getfactor',{
+        Axios.get('/api/match/getfactor',{
         }).then(Response=>{
             setFactorlist(Response.data);
             
@@ -23,8 +19,7 @@ export default function Match(){
     },[])
 
     const saveweight = () =>{
-        console.log(weight);
-        Axios.post('api/match/createweight',weight)
+        Axios.post('/api/match/createweight',weight)
         .then(Response => {
             console.log(Response);
         }).catch(error=>{
@@ -93,15 +88,6 @@ export default function Match(){
         }else{
             setWeight([...weight,{Id:index, Image:"", Weight:e.target.value}]);
         }
-        // for(let i =0 ; i<weight.length;i++){
-        //     if(index == weight[i].Id){
-        //         let editw = [...weight];
-        //         editw[i].Weight = e.target.value;
-        //         setWeight(editw);
-        //     }else{
-                
-        //     }
-        // }
     }
 
     const showimage = () =>{
@@ -110,12 +96,12 @@ export default function Match(){
         for (let i = 0; i < factorlist.length; i++) {
             for (let j = i+1; j < factorlist.length; j++) {
                 array.push(<div id="contain-match-display" key={index}>
-                    <img for="radio-1" value={factorlist[i].Image_factor} src={('http://localhost:4000/images/'+factorlist[i].Image_factor)} width="100" height="100"></img>
+                    <img  value={factorlist[i].Image_factor} src={('http://localhost:4000/images/'+factorlist[i].Image_factor)} width="100" height="100"></img>
                     <input value={factorlist[i].Image_factor} type="radio" id="radio-1" name={index} onChange={addImage(index)} ></input>
-                    <img for="radio-2"value={factorlist[j].Image_factor} src={('http://localhost:4000/images/'+factorlist[j].Image_factor)} width="100" height="100"></img>
+                    <img value={factorlist[j].Image_factor} src={('http://localhost:4000/images/'+factorlist[j].Image_factor)} width="100" height="100"></img>
                     <input value={factorlist[j].Image_factor} type="radio" id="radio-2" name={index} onChange={addImage(index)}></input>
-                    <select classname="select-score" onChange={addWeight(index)}>
-                        <option selected  value="1">1</option>
+                    <select className="select-score" defaultValue="1" onChange={addWeight(index)}>
+                        <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
@@ -131,31 +117,16 @@ export default function Match(){
             
         }
         return array;
-    }
-
-    const showweight = () =>{
-        return (
-            <div>
-                {weight.map(data=>{
-                    return(
-                        <div>
-                    <p>{data.Image}</p>
-                    <p>{data.weight}</p>
-                    </div>)
-                })}
-            </div>
-        )
-    }
-    
+    }  
     return(
     <div className="containermatch"> 
         <div >
             <h1 id="header2" >โปรดให้คะแนนระดับความสำคัญของปัจจัย ดังต่อไปนี้</h1>
 
             <div className="containermatch-2">
-                {factorlist.map(data=>{
+                {factorlist.map((data,key)=>{
                     return(
-                        <div>
+                        <div key={key}>
                             <img src={('http://localhost:4000/images/'+data.Image_factor)} width="100" height="100"></img>
                             <p>มีความหมายว่า {data.Factor_name}</p>
                         </div>

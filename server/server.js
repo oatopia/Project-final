@@ -3,6 +3,7 @@ import cors from 'cors'
 import bodyparser from 'body-parser'
 import userRouter from './router/userRouter.js'
 import matchRouter from './router/matchRouter.js'
+import dormRouter from './router/DormRouter.js'
 import db from './util/database.js'
 import session from 'express-session'
 import path from 'path'
@@ -72,7 +73,8 @@ app.use(session({
 
 app.use("/api/user",userRouter);
 app.use("/api/match",matchRouter);
+app.use('/api/dorm',dormRouter);
 
-app.listen(4000,()=>{
+app.listen(port,()=>{
     console.log('Server running port 4000');
 });

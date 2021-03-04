@@ -4,9 +4,12 @@ body{
 
 .containIn{
     min-height: 100vh;
-    display: flex;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
 }
 
 .Indorm{
@@ -19,14 +22,16 @@ body{
 
 h2{
     color: #0475AD;
+    margin-bottom: 10px;
 }
 
 h4{
     color: #00689B;
 }
 
-input{
+div.Indorm > input{
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .addimg{
@@ -37,4 +42,13 @@ input{
 .save{
     width: 50%;
     height: 30px;
+}
+
+select{
+    margin-bottom: 10px;
+}
+
+.facilities{
+    display: flex;
+    justify-content: space-around;
 }

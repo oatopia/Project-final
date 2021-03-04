@@ -11,6 +11,9 @@ export default function Navbar() {
   const gotohome = () => {
     window.location.href = "/member";
   };
+  const logout = () =>{
+    window.location.href = "/";
+  }
   return (
     <div className="NavMember-container">
       <img
@@ -29,18 +32,15 @@ export default function Navbar() {
           height="38"
           onClick={gotohome
           }></img>
-        <Link to="/">
-          <a>หน้าหลัก</a>
-        </Link>{" "}
+        <Link to="/">หน้าหลัก </Link>
         <img src={savelogo} className="savelogo" width="38" height="39" ></img>
-        <Link to="/login">
-          <a>รายการหอพักที่บันทึก</a>
-        </Link>
+        <Link to="/login">รายการหอพักที่บันทึก</Link>
         </ul>
         <div className="profile-Navbarmember">
             <img src={profilelogo} className="profilelogo" width="35" height="36" ></img>
           <p>Kanchana</p>
         </div>
+        <button onClick={logout}></button>
       </div>
     </div>
   );

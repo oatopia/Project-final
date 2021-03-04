@@ -6,13 +6,17 @@ import D1 from '../img/icon/D1.png'
 
 
 export default function Match(){
-    let i=0;
-    const [factorlist,setFactorlist] = useState([]);
 
-    Axios.get('/api/match/getfactor',{timeout: 100
-    }).then(Response=>{
-        setFactorlist(Response.data);
-    })
+    const [factorlist,setFactorlist] = useState([]);
+    const [weight,setWeight] = useState([]);
+
+    useEffect(()=>{
+        Axios.get('/api/match/getfactor',{
+        }).then(Response=>{
+            setFactorlist(Response.data);
+        })
+    },[])
+    
 
     const showimage = () =>{
         let array = [];
@@ -21,8 +25,8 @@ export default function Match(){
                 array.push(<img src={('http://localhost:4000/images/'+factorlist[i].Image_factor)} width="100" height="100"></img>);
                 array.push(<img src={('http://localhost:4000/images/'+factorlist[j].Image_factor)} width="100" height="100"></img>);
                 array.push(
-                    <select classname="select-score">
-                        <option selected  value="1">1</option>
+                    <select className="select-score" defaultValue="1">
+                        <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
@@ -44,9 +48,9 @@ export default function Match(){
             <h1 id="header2" >โปรดให้คะแนนระดับความสำคัญของปัจจัย ดังต่อไปนี้</h1>
 
             <div className="containermatch-2">
-                {factorlist.map(data=>{
+                {factorlist.map((data,key)=>{
                     return(
-                        <div>
+                        <div key={key} >
                             <img src={('http://localhost:4000/images/'+data.Image_factor)} width="100" height="100"></img>
                             <p>มีความหมายว่า {data.Factor_name}</p>
                         </div>
@@ -55,11 +59,7 @@ export default function Match(){
             </div>
             <div className="containermatch-3">
                 {showimage()}
-            </div>
-            <select>
-                <option>op</option>
-            </select>
-            
+            </div> 
         </div>
         
     </div>

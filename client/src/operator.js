@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './operator.css';
-import Navbar from './component/Navbar'
+import Navbar from './component/NavbarOwner'
 import Indorm from './component/Indorm'
+import Axios from 'axios'
+import backgroundimg from './img/operatorbackground.jpg'
 
-function operator() {
+function owner() {
+  // useEffect(()=>{
+  //   Axios.get('/api/owner/getdorm').then(res=>{
+  //   })
+  // })
   return (
-    <div>
-    <header className="con">
+    <div className="owner-container">
       <Navbar/>
       <Indorm/>
-    </header>
     </div>
   );
 }
 
-export default operator;
+export default owner;

@@ -1,14 +1,12 @@
 body{
-    
     margin: 0;
-    height: 100%;
     
 }
 
 
-.con{
+.owner-container{
     background-image: url("./img/operatorbackground.jpg");
     background-size: cover;
-    min-height: 100vh;
+    min-height: 200vh;
     
 }

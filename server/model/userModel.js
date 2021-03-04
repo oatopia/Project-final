@@ -1,4 +1,3 @@
-import { request } from 'express';
 import db from '../util/database.js'
 
 const Userinfo = function(e) {

@@ -1,24 +1,26 @@
 import React,{useState} from 'react';
-import {Redirect} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import './Login.css';
 import img from './img/loginimg.jpg'
 import Navbar from './component/Navbar'
 import Axios from 'axios'
 
 const Login = ()=> {
+    
+    var history = useHistory();
     const [username,setusername] = useState("");
     const [password,setpassword] = useState("");
     const [type,settype] = useState("");
-    const login = () =>{
-        Axios.post('api/user/login',{
+    const login = (e) =>{
+        e.preventDefault();
+        Axios.post('/api/user/login',{
             username: username,
             password: password
         }).then( Response =>{
-            // console.log(res);
-            if(Response.data == "สมาชิก"){
-                return window.location.href="/member";
+            if(Response.data.type == "สมาชิก"){
+                history.push("/member");
             }else{
-                return window.location.href="/owner";
+                history.push("/owner");
             }
         })
     }
@@ -37,12 +39,12 @@ const Login = ()=> {
             <form className="form2">
                 <ul className="containerlist">
                     <h1 id="1">เข้าสู่ระบบ</h1>
-                    <a>ชื่อผู้ใช้</a>
+                    <p>ชื่อผู้ใช้</p>
                     <input onChange={(e)=>{
                              setusername(e.target.value);
                          }}></input>
                     <br></br>
-                    <a>รหัสผ่าน</a>
+                    <p>รหัสผ่าน</p>
                     <input onChange={(e)=>{
                              setpassword(e.target.value);
                          }}></input>

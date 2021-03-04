@@ -10,7 +10,8 @@ function Register() {
     const [password,setpassword] = useState("");
     const [type,settype] = useState("สมาชิก");
 
-    const addinfo = () =>{
+    const addinfo = (e) =>{
+        e.preventDefault();
         Axios.post('api/user/register',{
             username: username,
             password: password,

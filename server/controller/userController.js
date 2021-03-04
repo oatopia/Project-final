@@ -33,8 +33,8 @@ export const login = (req,res) =>{
         }else{
             if(userlogin.username == data[0].username){
                 if(userlogin.password == data[0].password){
-                    res.send(data[0].type);
-                    console.log(data[0].type)
+                    res.send(data[0]);
+                    console.log(data[0]);
                 }
             }
         }

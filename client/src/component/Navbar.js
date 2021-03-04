@@ -28,13 +28,13 @@ export default function Navbar() {
           onClick={gotohome
           }></img>
         <Link to="/">
-          <a>หน้าหลัก</a>
-        </Link>{" "}
+          หน้าหลัก
+        </Link>
         <img src={userlogo} className="userlogo" width="40" height="38" onClick={()=>{
           window.location.href="/login"
         }}></img>
         <Link to="/login">
-          <a>เข้าสู่ระบบ</a>
+          เข้าสู่ระบบ
         </Link>
         <button
           className="sign"
