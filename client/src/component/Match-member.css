@@ -1,4 +1,5 @@
 .containermatch{
+    padding: 20px;
     margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
@@ -13,18 +14,24 @@
 }
 
 #header2{
-    
     /* padding: 10px; */
     color: black;
+    margin-bottom: 10px;
+    
 }
 
 
 .select-score{
     display: block;
+    width: 40px;
 }
 
 img{
     display: block;
+}
+
+.containermatch-2{
+    align-content: center;
 }
 
 /* select{
@@ -33,5 +40,37 @@ img{
 } */
 
 #contain-match-display{
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+}
+
+.detail{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-bottom: 20px;
+}
+
+.containermatch-3{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto auto ;
+    
+    
+}
+
+
+input{
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+}
+
+button{
+    margin-right: 20px;
+    width: 100px;
+    height: 50px;
 }

@@ -1,6 +1,6 @@
 import {React,useEffect,useState} from "react";
 import Axios from 'axios'
-import './Match.css';
+import './Match-member.css';
 
 
 
@@ -96,9 +96,9 @@ export default function Match(){
         for (let i = 0; i < factorlist.length; i++) {
             for (let j = i+1; j < factorlist.length; j++) {
                 array.push(<div id="contain-match-display" key={index}>
-                    <img  value={factorlist[i].Image_factor} src={('http://localhost:4000/images/'+factorlist[i].Image_factor)} width="100" height="100"></img>
+                    <img  value={factorlist[i].Image_factor} src={('http://localhost:4000/images/'+factorlist[i].Image_factor)} width="70" height="70"></img>
                     <input value={factorlist[i].Image_factor} type="radio" id="radio-1" name={index} onChange={addImage(index)} ></input>
-                    <img value={factorlist[j].Image_factor} src={('http://localhost:4000/images/'+factorlist[j].Image_factor)} width="100" height="100"></img>
+                    <img value={factorlist[j].Image_factor} src={('http://localhost:4000/images/'+factorlist[j].Image_factor)} width="70" height="70"></img>
                     <input value={factorlist[j].Image_factor} type="radio" id="radio-2" name={index} onChange={addImage(index)}></input>
                     <select className="select-score" defaultValue="1" onChange={addWeight(index)}>
                         <option value="1">1</option>
@@ -122,13 +122,12 @@ export default function Match(){
     <div className="containermatch"> 
         <div >
             <h1 id="header2" >โปรดให้คะแนนระดับความสำคัญของปัจจัย ดังต่อไปนี้</h1>
-
             <div className="containermatch-2">
                 {factorlist.map((data,key)=>{
                     return(
-                        <div key={key}>
-                            <img src={('http://localhost:4000/images/'+data.Image_factor)} width="100" height="100"></img>
-                            <p>มีความหมายว่า {data.Factor_name}</p>
+                        <div className='detail' key={key}>
+                            <img src={('http://localhost:4000/images/'+data.Image_factor)} width="50" height="50" id={key}></img>
+                            <label >{data.Factor_name}</label>
                         </div>
                     )
                 })}
@@ -138,7 +137,6 @@ export default function Match(){
             </div>
             <button onClick={saveweight}>บันทึก</button>
             <button >จับคู่หอพัก</button>
-            <pre>{JSON.stringify(weight,null,2)}</pre>
         </div>
         
     </div>

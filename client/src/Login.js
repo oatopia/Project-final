@@ -18,9 +18,9 @@ const Login = ()=> {
             password: password
         }).then( Response =>{
             if(Response.data.type == "สมาชิก"){
-                history.push("/member");
+                history.push("/member/id:"+Response.data.user_id);
             }else{
-                history.push("/owner");
+                history.push("/owner/id:"+Response.data.user_id);
             }
         })
     }

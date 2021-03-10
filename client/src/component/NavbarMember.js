@@ -40,7 +40,7 @@ export default function Navbar() {
             <img src={profilelogo} className="profilelogo" width="35" height="36" ></img>
           <p>Kanchana</p>
         </div>
-        <button onClick={logout}></button>
+        <button onClick={logout}>Logout</button>
       </div>
     </div>
   );

@@ -47,7 +47,7 @@ a:hover{
     /* margin-left:50px ; */
 }
 
-div.NavMember-container2{
+.NavMember-container2{
     margin-right: 20px;
     display: flex;
     justify-content:space-evenly;
