@@ -40,12 +40,12 @@ const Login = ()=> {
                 <ul className="containerlist">
                     <h1 id="1">เข้าสู่ระบบ</h1>
                     <p>ชื่อผู้ใช้</p>
-                    <input onChange={(e)=>{
+                    <input className="text-input" onChange={(e)=>{
                              setusername(e.target.value);
                          }}></input>
                     <br></br>
                     <p>รหัสผ่าน</p>
-                    <input onChange={(e)=>{
+                    <input className="text-input" onChange={(e)=>{
                              setpassword(e.target.value);
                          }}></input>
                     <br></br>
