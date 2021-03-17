@@ -1,12 +1,19 @@
 
 import userModel from '../model/userModel.js'
+import bcrypt from 'bcrypt'
+import jsonwebtoken from 'jsonwebtoken'
+// import { jwtSecret} from '../config/Jwt-Config'
 
+
+// create User
 export const create = (req,res) =>{
     const user = new userModel({
         username: req.body.username,
         password: req.body.password,
         type: req.body.type
     });
+    const salt = bcrypt.genSaltSync(10);
+    user.password = bcrypt.hashSync(user.password,salt);
     userModel.create(user,(err,data)=>{
         if(err){
             res.status(500).send({
