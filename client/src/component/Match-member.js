@@ -7,6 +7,7 @@ import './Match-member.css';
 export default function Match(){
     const [factorlist,setFactorlist] = useState([]);
     const [weight,setWeight] = useState([]);
+    const [match,setMatch] = useState([]);
 
     useEffect(()=>{
         Axios.get('/api/match/getfactor',{
@@ -48,10 +49,12 @@ export default function Match(){
                 setWeight(edit);
             }else{
                 setWeight([...weight,{Id:index, Image:e.target.value, Weight:'1'}]);
+                console.log(weight)
             }
             
         }else{
-            setWeight([...weight,{Id:index, Image:e.target.value, Weight:'1'}]);
+            setWeight([{Id:index, Image:e.target.value, Weight:'1'}]);
+            console.log(weight)
         }
         // for(let i =0 ; i<weight.length;i++){
         //     if(index == weight[i].Id){
@@ -83,10 +86,12 @@ export default function Match(){
                 setWeight(edit);
             }else{
                 setWeight([...weight,{Id:index, Image:"", Weight:e.target.value}]);
+                console.log(weight);
             }
             
         }else{
-            setWeight([...weight,{Id:index, Image:"", Weight:e.target.value}]);
+            setWeight([{Id:index, Image:"", Weight:e.target.value}]);
+            
         }
     }
 
@@ -97,9 +102,9 @@ export default function Match(){
             for (let j = i+1; j < factorlist.length; j++) {
                 array.push(<div id="contain-match-display" key={index}>
                     <img  value={factorlist[i].Image_factor} src={('http://localhost:4000/images/'+factorlist[i].Image_factor)} width="70" height="70"></img>
-                    <input value={factorlist[i].Image_factor} type="radio" id="radio-1" name={index} onChange={addImage(index)} ></input>
+                    <input value={factorlist[i].Id} type="radio" id="radio-1" name={index} onChange={addImage(index)} ></input>
                     <img value={factorlist[j].Image_factor} src={('http://localhost:4000/images/'+factorlist[j].Image_factor)} width="70" height="70"></img>
-                    <input value={factorlist[j].Image_factor} type="radio" id="radio-2" name={index} onChange={addImage(index)}></input>
+                    <input value={factorlist[j].Id} type="radio" id="radio-2" name={index} onChange={addImage(index)}></input>
                     <select className="select-score" defaultValue="1" onChange={addWeight(index)}>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -118,6 +123,86 @@ export default function Match(){
         }
         return array;
     }  
+
+    const matchFac = () => {
+        let matrix = [];
+        let matrixlenght = factorlist.length;
+        for (let i = 0; i < matrixlenght; i++) {
+            for (let j = 0; j < matrixlenght; j++) {
+                matrix[i] = [];
+            }
+        }
+
+        let n =0 ;
+        let n2 = 0;
+        for (let i = 0; i < matrixlenght; i++) {
+            for (let j = 0; j < matrixlenght; j++) {
+                if(i == j){
+                    matrix[i][j] = 1;
+                }else{
+                    if(j > i){
+                        let id = (weight[n].Image) - 1;
+                        if(i == id){
+                            matrix[i][j] = weight[n].Weight;
+                            n++;
+                        }else{
+                            var number = 1/weight[n].Weight;
+                            matrix[i][j] = number.toFixed(2);
+                            // matrix[i][j] = 1/weight[n].Weight;
+                            n++;
+                        }
+                    }else {
+                        let id2 = (weight[n2].Image) - 1;
+                        if(i == id2){
+                            matrix[i][j] = weight[n2].Weight;
+                            n2++;
+                        }else{
+                            var number = 1/weight[n2].Weight;
+                            matrix[i][j] = number.toFixed(2);
+                            // matrix[i][j] = 1/weight[n2].Weight;
+                            n2++;
+                        }
+                        // n2++;
+                    }
+                }
+            }
+            
+        }
+
+        for (let i = 0; i < matrix.length; i++) {
+            for (let j = 0; j < matrix.length; j++) {
+                console.log(matrix[i][j]+' ');
+            }
+            console.log(' ')
+            
+        }
+        console.log(matrix);
+
+        let sum
+        let arraysum = [];
+        for (let i = 0; i < matrixlenght; i++) {
+            for (let j = 0; j < matrixlenght; j++) {
+                sum = sum + matrix[j][i];
+            }
+            arraysum.push(sum);
+            sum = 0;
+        }
+
+        
+
+        for (let i = 0; i < matrixlenght; i++) {
+            for (let j = 0; j < matrixlenght; j++) {
+                let value = matrix[i][j]/arraysum[j];
+                matrix[i][j] = value.toFixed(2);
+            }
+            
+        }
+
+        return matrix;
+    }
+
+
+
     return(
     <div className="containermatch"> 
         <div >
@@ -135,8 +220,10 @@ export default function Match(){
             <div className="containermatch-3">
                 {showimage()}
             </div>
+
+           
             <button onClick={saveweight}>บันทึก</button>
-            <button >จับคู่หอพัก</button>
+            <button onClick={matchFac}>จับคู่หอพัก</button>
         </div>
         
     </div>

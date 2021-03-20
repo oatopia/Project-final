@@ -14,14 +14,8 @@ const port = 4000;
 app.use(cors());
 app.use(express.json());
 app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended: true}));
+app.use(bodyparser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true
-}));
 
 
 // app.get('/factor',(req,res)=>{
@@ -70,7 +64,6 @@ app.use(session({
 //     });
 
 // })
-
 app.use("/api/user",userRouter);
 app.use("/api/match",matchRouter);
 app.use('/api/dorm',dormRouter);

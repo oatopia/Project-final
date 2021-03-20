@@ -30,16 +30,18 @@ export const create = (req,res) =>{
 };
 
 export const login = (req,res) =>{
-    const userlogin = new userModel({
-        username: req.body.username,
-        password: req.body.password
-    });
-    userModel.login(userlogin.username,(err,data)=>{
+    const username = req.body.username
+    const password = req.body.password
+    // const userlogin = new userModel({
+    //     username: req.body.username,
+    //     password: req.body.password
+    // });
+    userModel.login(username,(err,data)=>{
         if(err){
             console.log(err);
         }else{
-            if(userlogin.username == data[0].username){
-                if(userlogin.password == data[0].password){
+            if(username == data[0].username){
+                if(password == data[0].password){
                     res.send(data[0]);
                     console.log(data[0]);
                 }
