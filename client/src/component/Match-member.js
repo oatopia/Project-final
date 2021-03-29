@@ -85,12 +85,12 @@ export default function Match(){
                 });
                 setWeight(edit);
             }else{
-                setWeight([...weight,{Id:index, Image:"", Weight:e.target.value}]);
+                setWeight([...weight,{Id:index, Image:'', Weight:e.target.value}]);
                 console.log(weight);
             }
             
         }else{
-            setWeight([{Id:index, Image:"", Weight:e.target.value}]);
+            setWeight([{Id:index, Image:'', Weight:e.target.value}]);
             
         }
     }
@@ -125,80 +125,83 @@ export default function Match(){
     }  
 
     const matchFac = () => {
-        let matrix = [];
-        let matrixlenght = factorlist.length;
-        for (let i = 0; i < matrixlenght; i++) {
-            for (let j = 0; j < matrixlenght; j++) {
-                matrix[i] = [];
-            }
-        }
-
-        let n =0 ;
-        let n2 = 0;
-        for (let i = 0; i < matrixlenght; i++) {
-            for (let j = 0; j < matrixlenght; j++) {
-                if(i == j){
-                    matrix[i][j] = 1;
-                }else{
-                    if(j > i){
-                        let id = (weight[n].Image) - 1;
-                        if(i == id){
-                            matrix[i][j] = weight[n].Weight;
-                            n++;
-                        }else{
-                            var number = 1/weight[n].Weight;
-                            matrix[i][j] = number.toFixed(2);
-                            // matrix[i][j] = 1/weight[n].Weight;
-                            n++;
-                        }
-                    }else {
-                        let id2 = (weight[n2].Image) - 1;
-                        if(i == id2){
-                            matrix[i][j] = weight[n2].Weight;
-                            n2++;
-                        }else{
-                            var number = 1/weight[n2].Weight;
-                            matrix[i][j] = number.toFixed(2);
-                            // matrix[i][j] = 1/weight[n2].Weight;
-                            n2++;
-                        }
-                        // n2++;
-                    }
-                }
-            }
-            
-        }
-
-        for (let i = 0; i < matrix.length; i++) {
-            for (let j = 0; j < matrix.length; j++) {
-                console.log(matrix[i][j]+' ');
-            }
-            console.log(' ')
-            
-        }
-        console.log(matrix);
-
-        let sum
-        let arraysum = [];
-        for (let i = 0; i < matrixlenght; i++) {
-            for (let j = 0; j < matrixlenght; j++) {
-                sum = sum + matrix[j][i];
-            }
-            arraysum.push(sum);
-            sum = 0;
-        }
+        Axios.post('/api/match/matchDorm',weight)
+        .then(Response => {
+            console.log(Response);
+        }).catch(error=>{
+            console.log(error);
+        })
+        // let matrix = [[]];
+        // let matrixlenght = factorlist.length;
+        // for (let i = 0; i < matrixlenght; i++) {
+        //     for (let j = 0; j < matrixlenght; j++) {
+        //         matrix[i] = [];
+        //     }
+        // }
 
         
+        // for (let i = 0; i < matrixlenght; i++) {
+        //     for (let j = 0; j < matrixlenght; j++) {
+        //         matrix[i][j] = 1;
+        //     }
+        // }
 
-        for (let i = 0; i < matrixlenght; i++) {
-            for (let j = 0; j < matrixlenght; j++) {
-                let value = matrix[i][j]/arraysum[j];
-                matrix[i][j] = value.toFixed(2);
-            }
-            
-        }
+        // let n =0 ;
+        // for (let i = 0; i < matrixlenght; i++) {
+        //     for (let j = 0; j < matrixlenght; j++) {
+        //         if(i == j){
+        //             matrix[i][j] = 1;
+        //         }else{
+        //             if(j > i){
+                        // let id = (weight[n].Image) - 1;
+                        // if(i == id){
+                            // matrix[i][j] = 1;
 
-        return matrix;
+                            // var number = 1/weight[n].Weight;
+                            // matrix[j][i] = number.toFixed(2);
+                            // matrix[j][i] = 2;
+                            // n++;
+                        // }else{
+                            // var number = 1/weight[n].Weight;
+                            // matrix[i][j] = number.toFixed(2);
+                            // matrix[i][j] = 2;
+
+                            // matrix[j][i] = 1;
+                            // n++;
+                        // }
+        //             }
+        //         }
+        //     }
+        // }
+
+        
+        // console.log(matrix);
+
+        // let sum
+        // let arraysum = [];
+        // for (let i = 0; i < matrixlenght; i++) {
+        //     for (let j = 0; j < matrixlenght; j++) {
+        //         sum = sum + matrix[j][i];
+        //     }
+        //     arraysum.push(sum);
+        //     sum = 0;
+        // }
+
+        // console.log(arraysum);
+
+        // for (let i = 0; i < matrixlenght; i++) {
+        //     for (let j = 0; j < matrixlenght; j++) {
+        //         let value = matrix[i][j]/arraysum[j];
+        //         matrix[i][j] = value.toFixed(2);
+        //     }
+        // }
+
+        // for (let i = 0; i < matrix.length; i++) {
+        //     for (let j = 0; j < matrix.length; j++) {
+        //         console.log(matrix[i][j]+' ');
+        //     }
+        //     console.log(' ');
+        // }
     }
 
 
