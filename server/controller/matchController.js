@@ -88,3 +88,16 @@ export const searchDorm = (req, res) => {
     }
   });
 };
+
+export const test = (req, res) => {
+  const Dorm_name = req.body.Search;
+  matchmodel.searchbyName(Dorm_name,(err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data);
+      res.send(data);
+      
+    }
+  });
+};
