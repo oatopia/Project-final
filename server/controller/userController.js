@@ -32,10 +32,6 @@ export const create = (req,res) =>{
 export const login = (req,res) =>{
     const username = req.body.username
     const password = req.body.password
-    // const userlogin = new userModel({
-    //     username: req.body.username,
-    //     password: req.body.password
-    // });
     userModel.login(username,(err,data)=>{
         if(err){
             console.log(err);
