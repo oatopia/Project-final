@@ -7,7 +7,7 @@ import './Match-member.css';
 export default function Match(){
     const [factorlist,setFactorlist] = useState([]);
     const [weight,setWeight] = useState([]);
-    const [match,setMatch] = useState([]);
+    
 
     useEffect(()=>{
         Axios.get('/api/match/getfactor',{
@@ -131,79 +131,9 @@ export default function Match(){
         }).catch(error=>{
             console.log(error);
         })
-        // let matrix = [[]];
-        // let matrixlenght = factorlist.length;
-        // for (let i = 0; i < matrixlenght; i++) {
-        //     for (let j = 0; j < matrixlenght; j++) {
-        //         matrix[i] = [];
-        //     }
-        // }
-
-        
-        // for (let i = 0; i < matrixlenght; i++) {
-        //     for (let j = 0; j < matrixlenght; j++) {
-        //         matrix[i][j] = 1;
-        //     }
-        // }
-
-        // let n =0 ;
-        // for (let i = 0; i < matrixlenght; i++) {
-        //     for (let j = 0; j < matrixlenght; j++) {
-        //         if(i == j){
-        //             matrix[i][j] = 1;
-        //         }else{
-        //             if(j > i){
-                        // let id = (weight[n].Image) - 1;
-                        // if(i == id){
-                            // matrix[i][j] = 1;
-
-                            // var number = 1/weight[n].Weight;
-                            // matrix[j][i] = number.toFixed(2);
-                            // matrix[j][i] = 2;
-                            // n++;
-                        // }else{
-                            // var number = 1/weight[n].Weight;
-                            // matrix[i][j] = number.toFixed(2);
-                            // matrix[i][j] = 2;
-
-                            // matrix[j][i] = 1;
-                            // n++;
-                        // }
-        //             }
-        //         }
-        //     }
-        // }
-
-        
-        // console.log(matrix);
-
-        // let sum
-        // let arraysum = [];
-        // for (let i = 0; i < matrixlenght; i++) {
-        //     for (let j = 0; j < matrixlenght; j++) {
-        //         sum = sum + matrix[j][i];
-        //     }
-        //     arraysum.push(sum);
-        //     sum = 0;
-        // }
-
-        // console.log(arraysum);
-
-        // for (let i = 0; i < matrixlenght; i++) {
-        //     for (let j = 0; j < matrixlenght; j++) {
-        //         let value = matrix[i][j]/arraysum[j];
-        //         matrix[i][j] = value.toFixed(2);
-        //     }
-        // }
-
-        // for (let i = 0; i < matrix.length; i++) {
-        //     for (let j = 0; j < matrix.length; j++) {
-        //         console.log(matrix[i][j]+' ');
-        //     }
-        //     console.log(' ');
-        // }
     }
 
+    
 
 
     return(
@@ -220,6 +150,7 @@ export default function Match(){
                     )
                 })}
             </div>
+            <h3 id="header3" >โปรดเลือกปัจจัยที่ท่านให้ความสำคัญมากที่สุดในแต่ละคู่</h3>
             <div className="containermatch-3">
                 {showimage()}
             </div>

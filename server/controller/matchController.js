@@ -1,114 +1,90 @@
+import matchmodel from "../model/matchModel.js";
+import {calmatrix,calMatLength,magDorm}from '../util/calmatch.js';
+import fs from 'fs'
 
-import matchmodel from '../model/matchModel.js'
-
-export const getall = (req,res) =>{
-    matchmodel.getallfactor((err,data)=>{
-        if(err){
-            console.log(err);
-        }else{
-            res.send(data);
-        }
-         
-        
-    });
+export const getall = (req, res) => {
+  matchmodel.getallfactor((err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
 };
 
-export const createweight = (req,res) =>{
-    let jsondata = req.body;
-    matchmodel.createWeight([jsondata],(err,data)=>{
-        if(err){
-            console.log(err);
-        }else{
-            res.send(data);
-        }
-         
-        
-    });
+export const createweight = (req, res) => {
+  let jsondata = req.body;
+  matchmodel.createWeight([jsondata], (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
 };
 
+export const matchDorm = (req, res) => {
+  let jsondata = req.body;
+  console.log(jsondata);
+  // let matrix = [];
+  let Matrixlength = calMatLength(jsondata.length);
+  console.log(Matrixlength);
 
-export const matchDorm = (req,res) =>{
-    let jsondata = req.body;
-    let matrix = [];
-    // let matrixlenght = (jsondata.lenght*(jsondata.lenght-1))/2;
-    let matrixlenght = 0;
-    let l = jsondata.length
-    for (let i = 1; i < jsondata.length+1; i++) {
-        l = l - i;
-        if(l==0){
-            matrixlenght = i+1;
-        }
+  let Matrixcal = calmatrix(jsondata);
+  console.log("data",Matrixcal);
+
+
+  let DormData = [];
+  try{
+    DormData = JSON.parse(fs.readFileSync("Score_Dorm.txt",'utf-8'));
+  }catch(err){
+    console.log(err);
+  }
+  
+  console.log("Dorm data:"+DormData);
+  let ArrayDorm = magDorm(DormData,Matrixlength);
+  console.log("Array Dorm",ArrayDorm);
+
+  let suiValue = 0;
+  for (let i = 0; i < ArrayDorm.length; i++) {
+    for (let j = 0; j < Matrixcal.length; j++) {
+      if((j+1) == ArrayDorm[i].Score_ID[j].Feature_ID){
+        suiValue = suiValue + (ArrayDorm[i].Score_ID[j].Score * Matrixcal[j])
+      }
     }
+    ArrayDorm[i].Sui_Value = suiValue;
+    suiValue = 0;
+  }
 
-    console.log(jsondata);
-    for (let i = 0; i < matrixlenght; i++) {
-            for (let j = 0; j < matrixlenght; j++) {
-                matrix[i] = [];
-            }
-        }
+  console.log("Suitable Value: ",ArrayDorm);
 
-    let index = 0;
-    for (let i = 0; i < matrixlenght; i++) {
-        for (let j = 0; j < matrixlenght; j++) {
-            if(i == j){
-                matrix[i][j] = 1;
-            }else{
-                if(j > i){
-                    let id = (jsondata[index].Image) - 1;
-                    if(i == id){
-                        matrix[i][j] = parseInt(jsondata[index].Weight);
+  let MatchArray = [];
+  let index = 0;
+  for (let i = 0; i < 3; i++) {
+    let maxvalue = ArrayDorm.reduce((max,value)=>(max > value.Sui_Value) ? max : value.Sui_Value);
+    index = ArrayDorm.findIndex(i=>i.Sui_Value == maxvalue);
+    MatchArray.push(ArrayDorm[index].Dorm_ID);
+    ArrayDorm.splice(index,1);
+  }
+  console.log(MatchArray);
 
-                        var number = 1/jsondata[index].Weight;
-                        matrix[j][i] = parseFloat(number.toFixed(2));
-                        index++;
-                    }else{
-                        var number = 1/jsondata[index].Weight;
-                        matrix[i][j] = parseFloat(number.toFixed(2));
-
-                        matrix[j][i] = parseInt(jsondata[index].Weight);
-                        index++;
-                    }
-                }
-            }
-            
-        }
-        
+  matchmodel.getDormbyID(MatchArray, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data);
     }
-    console.log(matrix);
-    let sum = 0;
-    let arraysum = [];
-    for (let i = 0; i < matrixlenght; i++) {
-        for (let j = 0; j < matrixlenght; j++) {
-            sum = sum + (matrix[j][i]);
-        }
-            arraysum[i]= sum;
-            sum = 0;
-    }
-    console.log(arraysum);
+  });
+};
 
-    for (let i = 0; i < matrixlenght; i++) {
-            for (let j = 0; j < matrixlenght; j++) {
-                let value = matrix[j][i]/arraysum[i];
-                matrix[j][i] = parseFloat(value.toFixed(2));
-        }
+export const searchDorm = (req, res) => {
+  const Dorm_name = req.body.Search;
+  matchmodel.searchbyName(Dorm_name,(err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data);
+      res.send(data);
     }
-    console.log(matrix);
-    
-    let arrayWeight = [];
-    let sumW = 0;
-    for (let i = 0; i < matrixlenght; i++) {
-        for (let j = 0; j < matrixlenght; j++) {
-            sumW = sumW + (matrix[i][j]);
-        }
-            
-            arrayWeight[i]= parseFloat(sumW.toFixed(2));
-            sumW = 0;
-    }
-    console.log(arrayWeight);
-
-    for (let i = 0; i < arrayWeight.length; i++) {
-        arrayWeight[i] = parseFloat((arrayWeight[i]/matrixlenght).toFixed(2));
-    }
-    console.log(arrayWeight);
-
+  });
 };
