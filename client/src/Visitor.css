@@ -14,14 +14,14 @@
     min-height: 145vh;
   }
   
-  .searchbar{
+  .searchbar-Visitor{
     display: flex;
     justify-content: center;
     margin-top: 40px;
     
   }
   
-  .searchinput{
+  .searchinput-Visitor{
     width: 40%;
     height: 40px;
     border-radius: 5px 0 0 5px ;
@@ -30,7 +30,7 @@
     
   }
   
-  .searchbutton{
+  .searchbutton-Visitor{
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
     /* position: relative;
     right: 5px; */

@@ -9,9 +9,9 @@ function Visitor() {
     return (
     <div className="appcontainer" style={{backgroundImage: `url(${backgroundvisitor})`}}>
       <Navbar></Navbar>
-      <div className="searchbar">
-        <input className="searchinput"></input> 
-        <button className="searchbutton">ค้นหา</button>
+      <div className="searchbar-Visitor">
+        <input className="searchinput-Visitor"></input> 
+        <button className="searchbutton-Visitor">ค้นหา</button>
       </div>
       <Match/>
     </div>
