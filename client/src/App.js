@@ -19,6 +19,7 @@ function App() {
       <Route path ='/login' component={login}/>
       <Route path ='/member' component={member}/>
       <Route path ='/owner' component={owner}/>
+      <Route path ='/match' component={owner}/>
       </Switch>
     </BrowserRouter>
   );
