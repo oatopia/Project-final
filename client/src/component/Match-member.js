@@ -128,8 +128,11 @@ export default function Match(){
     const matchFac = () => {
         Axios.post('/api/match/matchDorm',weight)
         .then(Response => {
-                console.log(Response);
-                history.push("/match");
+                console.log(Response.data);
+                history.push({
+                    pathname:"/match",
+                    state: Response.data
+            });
         }).catch(error=>{
             console.log(error);
         })

@@ -8,6 +8,7 @@ import register from './register.js'
 import login from './Login'
 import member from './member'
 import owner from './operator'
+import match from './Match'
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
       <Route path ='/login' component={login}/>
       <Route path ='/member' component={member}/>
       <Route path ='/owner' component={owner}/>
-      <Route path ='/match' component={owner}/>
+      <Route path ='/match' component={match}/>
       </Switch>
     </BrowserRouter>
   );
