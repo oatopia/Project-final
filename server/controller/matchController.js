@@ -44,6 +44,7 @@ export const matchDorm = (req, res) => {
   console.log("Dorm data:"+DormData);
   let ArrayDorm = magDorm(DormData,Matrixlength);
   console.log("Array Dorm",ArrayDorm);
+  const ArrayDormlength = ArrayDorm.length;
 
   let suiValue = 0;
   for (let i = 0; i < ArrayDorm.length; i++) {
@@ -58,13 +59,15 @@ export const matchDorm = (req, res) => {
 
   console.log("Suitable Value: ",ArrayDorm);
 
+
+  ArrayDorm.sort((a,b)=>b.Sui_Value-a.Sui_Value);
+  console.log("Array sort:",ArrayDorm);
+
   let MatchArray = [];
-  let index = 0;
-  for (let i = 0; i < 3; i++) {
-    let maxvalue = ArrayDorm.reduce((max,value)=>(max > value.Sui_Value) ? max : value.Sui_Value);
-    index = ArrayDorm.findIndex(i=>i.Sui_Value == maxvalue);
-    MatchArray.push(ArrayDorm[index].Dorm_ID);
-    ArrayDorm.splice(index,1);
+  // let index = 0;
+  
+  for (let i = 0; i < ArrayDorm.length; i++) {
+    MatchArray.push(ArrayDorm[i].Dorm_ID);
   }
   console.log(MatchArray);
 

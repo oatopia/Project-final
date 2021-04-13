@@ -43,12 +43,14 @@ Matching.getallDormScore = result =>{
 };
 
 Matching.getDormbyID = (Array_ID,result) =>{
-    db.query("SELECT * FROM dormitory WHERE Dorm_ID IN (?)",[Array_ID],(err,res)=>{
+    console.log("in MatchModel:",Array_ID);
+    db.query("SELECT * FROM dormitory WHERE Dorm_ID IN ("+db.escape(Array_ID)+")",(err,res)=>{
         if(err){
             console.log("error:",err);
-            result(null,err);
+            result(err,null);
             return;
         }
+        console.log(res);
         result(null,res);    
     });
 };

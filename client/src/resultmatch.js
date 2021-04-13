@@ -1,11 +1,14 @@
 import {React,useEffect,useState} from 'react';
-import './Match.css';
+import './resultmatch.css';
 import NavbarMember from './component/NavbarMember.js';
 import Axios from 'axios' 
+import { useLocation } from 'react-router';
 
 
 function Match() {
-    
+  var location = useLocation();
+  const state = location.state;
+  console.log("hi",state);
 //   const [search,setSearch] = useState("");
 
 //   const searchFac = (e) => {
@@ -24,6 +27,15 @@ function Match() {
 return (
     <div className="contain-match">
       <NavbarMember></NavbarMember>
+      <div className="content-resultmatchpage">
+        {state.map((data)=>{
+          return(
+            <div className="Dorm-block">
+              <label>{data.Dorm_Name}</label>
+            </div>
+          )}
+        )}
+      </div>
     </div>
     );
 }

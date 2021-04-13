@@ -130,7 +130,7 @@ export default function Match(){
         .then(Response => {
                 console.log(Response.data);
                 history.push({
-                    pathname:"/match",
+                    pathname:"/resultmatch",
                     state: Response.data
             });
         }).catch(error=>{
