@@ -71,12 +71,21 @@ export const matchDorm = (req, res) => {
   }
   console.log(MatchArray);
 
-  matchmodel.getDormbyID(MatchArray, (err, data) => {
+  matchmodel.getAllDorm((err, data) => {
     if (err) {
       console.log(err);
     } else {
       console.log(data);
-      res.send(data);
+      let DormArray = [];
+      for (let i = 0; i < MatchArray.length; i++) {
+        for (let j = 0; j < data.length; j++) {
+          if(MatchArray[i] == data[j].Dorm_ID){
+            DormArray.push(data[j]);
+          }
+        }
+      }
+      console.log(DormArray);                                    
+      res.send(DormArray);
     }
   });
 };
