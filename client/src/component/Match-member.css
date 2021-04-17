@@ -57,9 +57,7 @@ img{
 .containermatch-3{
     margin-top: 20px;
     display: grid;
-    grid-template-columns: auto auto ;
-    
-    
+    grid-template-columns: auto auto ;   
 }
 
 

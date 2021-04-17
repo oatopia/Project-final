@@ -10,6 +10,7 @@ import member from './member'
 import owner from './operator'
 import resultmatch from './resultmatch.js'
 import visitorResult from './visitorResult.js'
+import admin from './Admin.js'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path ='/owner' component={owner}/>
       <Route path ='/resultmatch' component={resultmatch}/>
       <Route path ='/visitorResult' component={visitorResult}/>
+      <Route path ='/Admin' component={admin}/>
       </Switch>
     </BrowserRouter>
   );

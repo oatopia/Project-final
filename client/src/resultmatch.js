@@ -31,6 +31,7 @@ return (
         {state.map((data)=>{
           return(
             <div className="Dorm-block">
+              
               <label>{data.Dorm_Name}</label>
             </div>
           )}
