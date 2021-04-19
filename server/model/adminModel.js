@@ -12,4 +12,27 @@ Admin.getallUser = result =>{
     });
 };
 
+Admin.getallfactor = result =>{
+    db.query("SELECT * FROM factor ",(err,res)=>{
+        if(err){
+            console.log("error:",err);
+            result(null,err);
+            return;
+        }
+        console.log("factor info: ",res);
+        result(null,res);    
+    });
+};
+
+Admin.deleteUserbyId = (data,result) =>{
+    db.query("DELETE FROM userinformation WHERE user_id = ?",data,(err,res)=>{
+        if(err){
+            console.log("error:",err);
+            result(null,err);
+            // return;
+        }
+        result(null,res);    
+    });
+};
+
 export default Admin;

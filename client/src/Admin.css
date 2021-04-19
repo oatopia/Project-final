@@ -32,6 +32,10 @@
     margin-bottom: 20px;
 }
 
-.clear{
+.clear-user-Admin{
     clear: both;
+}
+
+.user-box-Admin img:active{
+    background-color: darkred;
 }

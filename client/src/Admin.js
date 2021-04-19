@@ -6,6 +6,15 @@ import deleteicon from "./img/deleteicon.png";
 
 function Admin() {
   const [user, setUser] = useState([]);
+  const deleteAccount = (id)=>{
+    console.log("ID:",id);
+    Axios.delete(`/api/Admin/userDelete/${id}`)
+    .then((Response)=>{
+        setUser(user.filter((val)=>{
+            return val.user_id != id;
+        }))
+    })
+}
 
   useEffect(() => {
     Axios.get("/api/Admin/user", {})
@@ -16,7 +25,7 @@ function Admin() {
         console.log(error);
       });
   }, []);
-
+  
   return (
     <div className="contnet-user-Admin">
       <NavbarAdmin></NavbarAdmin>
@@ -29,12 +38,12 @@ function Admin() {
               <label className="user-info">{data.username}</label>
               {/* <label className="user-info">{data.password}</label> */}
               <label className="user-info">{data.type}</label>
-              <img src={deleteicon}></img>
+              <img src={deleteicon} onClick={()=> {deleteAccount(data.user_id)}} ></img>
             </div>
           );
         })}
       </div>
-      <div className="clear"></div>
+      <div className="clear-user-Admin"></div>
     </div>
   );
 }

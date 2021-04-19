@@ -11,6 +11,7 @@ import owner from './operator'
 import resultmatch from './resultmatch.js'
 import visitorResult from './visitorResult.js'
 import admin from './Admin.js'
+import adminfactor from './Adminfactor.js'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Route path ='/resultmatch' component={resultmatch}/>
       <Route path ='/visitorResult' component={visitorResult}/>
       <Route path ='/Admin' component={admin}/>
+      <Route path ='/Adminfactor' component={adminfactor}/>
       </Switch>
     </BrowserRouter>
   );
