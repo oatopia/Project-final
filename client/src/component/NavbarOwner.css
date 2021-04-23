@@ -15,7 +15,7 @@
     background-color: #F1EDED;
     width: 150px;
     height: 55px;
-    border-radius: 5px;
+    border-radius: 7px;
     font-size: 10px;
     color: white;
     display: flex;
@@ -39,3 +39,4 @@ img.profilelogo{
     align-items: center;
     justify-content: space-evenly;
 }
+
