@@ -8,7 +8,7 @@ import adminRouter from './router/AdminRouter.js'
 import db from './util/database.js'
 import session from 'express-session'
 import path from 'path'
-
+import fileupload from 'express-fileupload'
 const __dirname = path.resolve();
 const app = express();
 const port = 4000;
@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(fileupload());
 
 
 // app.get('/factor',(req,res)=>{

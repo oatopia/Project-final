@@ -15,13 +15,15 @@
     margin-left:auto ;
     margin-right: auto;
     border-radius: 5px;
-    vertical-align: middle;
-    /* margin-bottom: 10px; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
 
 .factor-info{
     margin-left: 30px;
-    font-size: 28px;
+    font-size: 20px;
 }
 
 .content2-factor-Admin{
@@ -34,8 +36,8 @@
     background-color: darkorange;
 }
 
-.deleteicon-factor-Admin{
-    float: right;
+#fname{
+    margin-right: 20px;
 }
 
 .add-factor-Admin{
@@ -59,4 +61,33 @@
 
 .add-box input{
     width: 200px;
+}
+
+.factor-inner-box-Admin{
+    display: flex;
+    align-items: center;
+}
+
+.icon-factor-Admin{
+    margin-right: 20px;
+}
+
+.factor-icon-box-Admin{
+    display: flex;
+    align-items: center;
+}
+
+#edit-input{
+    width: 300px;
+    height: 40px;
+}
+
+.edit-image{
+    width: 200px;
+    height: 40px;
+}
+
+.edit-mini-box{
+    display: flex;
+    align-items: center;
 }
