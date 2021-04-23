@@ -14,7 +14,7 @@
     margin-top: 10px;
     margin-left:auto ;
     margin-right: auto;
-    /* margin-bottom: 10px; */
+    /* margin-bottom: 10px; t*/
 }
 
 .user-info{
@@ -39,3 +39,4 @@
 .user-box-Admin img:active{
     background-color: darkred;
 }
+

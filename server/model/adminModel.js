@@ -35,4 +35,15 @@ Admin.deleteUserbyId = (data,result) =>{
     });
 };
 
+Admin.insertFactor = (newfactor,result) =>{
+    db.query("INSERT INTO factor SET ?",[newfactor],(err,res)=>{
+        if(err){
+            console.log("error: ",err);
+        result(err,null);
+        return;
+        }
+        console.log("create factor:",res);
+    });
+};
+
 export default Admin;
