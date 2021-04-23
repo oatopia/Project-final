@@ -7,7 +7,7 @@ import backgroundvisitor from './img/background.jpg';
 function Visitor() {
     
     return (
-    <div className="appcontainer" style={{backgroundImage: `url(${backgroundvisitor})`}}>
+    <div className="appcontainer" >
       <Navbar></Navbar>
       <div className="searchbar-Visitor">
         <input className="searchinput-Visitor"></input> 

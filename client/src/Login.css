@@ -10,7 +10,7 @@ body{
       box-sizing: border-box;
       display: flex;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       
   }
   .container1{
@@ -37,7 +37,7 @@ body{
       box-shadow: 2px 10px 10px 0 rgba(0, 0, 0, 0.2);
   }
 
-  h1{
+  #heaed-login{
     color: #0E57C5;
     margin-left: 25px;
     margin-bottom: 40px;

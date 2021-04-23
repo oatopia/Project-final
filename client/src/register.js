@@ -27,7 +27,7 @@ function Register() {
                  <div className="container1">
                  <form className = "form1" action="" method="">
                      <ul className="containerlist">
-                         <h1 id="3">สมัครสมาชิก</h1>
+                         <h1 id="head-register">สมัครสมาชิก</h1>
                          <p>ชื่อผู้ใช้</p>
                          <input onChange={(e)=>{
                              setusername(e.target.value);

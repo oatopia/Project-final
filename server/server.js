@@ -4,6 +4,7 @@ import bodyparser from 'body-parser'
 import userRouter from './router/userRouter.js'
 import matchRouter from './router/matchRouter.js'
 import dormRouter from './router/DormRouter.js'
+import adminRouter from './router/AdminRouter.js'
 import db from './util/database.js'
 import session from 'express-session'
 import path from 'path'
@@ -67,6 +68,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/api/user",userRouter);
 app.use("/api/match",matchRouter);
 app.use('/api/dorm',dormRouter);
+app.use('/api/Admin',adminRouter);
 
 
 

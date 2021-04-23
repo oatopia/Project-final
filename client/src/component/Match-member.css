@@ -52,10 +52,11 @@ img {
   margin-bottom: 20px;
 }
 
-.containermatch-3 {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: auto auto;
+
+.containermatch-3{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto auto ;
 }
 
 input {

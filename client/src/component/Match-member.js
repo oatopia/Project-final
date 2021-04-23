@@ -1,13 +1,14 @@
 import {React,useEffect,useState} from "react";
 import Axios from 'axios'
 import './Match-member.css';
+import {useHistory} from 'react-router-dom';
 
 
 
 export default function Match(){
     const [factorlist,setFactorlist] = useState([]);
     const [weight,setWeight] = useState([]);
-    
+    var history = useHistory();
 
     useEffect(()=>{
         Axios.get('/api/match/getfactor',{
@@ -127,7 +128,11 @@ export default function Match(){
     const matchFac = () => {
         Axios.post('/api/match/matchDorm',weight)
         .then(Response => {
-            console.log(Response);
+                console.log(Response.data);
+                history.push({
+                    pathname:"/resultmatch",
+                    state: Response.data
+            });
         }).catch(error=>{
             console.log(error);
         })

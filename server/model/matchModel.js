@@ -6,6 +6,7 @@ const Matching = function(e){
     this.weight = e.weight;
 }
 
+
 Matching.getallfactor = result =>{
     db.query("SELECT * FROM factor ",(err,res)=>{
         if(err){
@@ -17,6 +18,7 @@ Matching.getallfactor = result =>{
         result(null,res);    
     });
 };
+
 
 Matching.createWeight = ([newWeight],result) =>{
     db.query("INSERT INTO weight (weight_id, comparator, weight) VALUES ?",[newWeight.map(item=>[item.Id,item.Image,item.Weight])],(err,res)=>{
@@ -31,6 +33,7 @@ Matching.createWeight = ([newWeight],result) =>{
     });
 }
 
+
 Matching.getallDormScore = result =>{
     db.query("SELECT * FROM Scoring_Factors ",(err,res)=>{
         if(err){
@@ -42,16 +45,32 @@ Matching.getallDormScore = result =>{
     });
 };
 
+
 Matching.getDormbyID = (Array_ID,result) =>{
-    db.query("SELECT * FROM dormitory WHERE Dorm_ID IN (?)",[Array_ID],(err,res)=>{
+    console.log("in MatchModel:",Array_ID);
+    db.query("SELECT * FROM dormitory WHERE Dorm_ID IN ("+db.escape(Array_ID)+")",(err,res)=>{
         if(err){
             console.log("error:",err);
-            result(null,err);
+            result(err,null);
             return;
         }
+        console.log(res);
         result(null,res);    
     });
 };
+
+Matching.getAllDorm = (result) =>{
+    db.query("SELECT * FROM dormitory ",(err,res)=>{
+        if(err){
+            console.log("error:",err);
+            result(err,null);
+            return;
+        }
+        console.log(res);
+        result(null,res);    
+    });
+};
+
 
 Matching.searchbyName = (name,result) =>{
     db.query("SELECT * FROM dormitory WHERE Dorm_Name = ?",name,(err,res)=>{
@@ -63,5 +82,6 @@ Matching.searchbyName = (name,result) =>{
         result(null,res);    
     });
 };
+
 
 export default Matching;

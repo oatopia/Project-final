@@ -8,6 +8,10 @@ import register from './register.js'
 import login from './Login'
 import member from './member'
 import owner from './operator'
+import resultmatch from './resultmatch.js'
+import visitorResult from './visitorResult.js'
+import admin from './Admin.js'
+import adminfactor from './Adminfactor.js'
 
 function App() {
   return (
@@ -19,6 +23,10 @@ function App() {
       <Route path ='/login' component={login}/>
       <Route path ='/member' component={member}/>
       <Route path ='/owner' component={owner}/>
+      <Route path ='/resultmatch' component={resultmatch}/>
+      <Route path ='/visitorResult' component={visitorResult}/>
+      <Route path ='/Admin' component={admin}/>
+      <Route path ='/Adminfactor' component={adminfactor}/>
       </Switch>
     </BrowserRouter>
   );
