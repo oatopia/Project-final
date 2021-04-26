@@ -1,9 +1,10 @@
 import express from 'express'
-import {createDorm, createfacilities} from '../controller/DormController.js'
+import {createDorm, createFacilities, createImage} from '../controller/DormController.js'
 const router = express.Router();
 
 
 router.post('/createDorm',createDorm);
-router.post('/facilities',createfacilities);
+router.post('/createFacilities',createFacilities);
+router.post('/createImage',createImage);
 
 export default router;

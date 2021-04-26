@@ -48,6 +48,7 @@ div.Indorm > input {
 }
 
 .save {
+  display: block;
   width: 100px;
   height: 35px;
   margin-top: 20px;
@@ -140,7 +141,6 @@ h2 {
 .baht {
   display: inline-block;
   color: #00689B;
-  font-size: ;
 }
 
 .pay {
@@ -179,4 +179,10 @@ h2 {
     color: rgb(87, 80, 80);
     margin-bottom: 10px;
     font-size: 18px;
+}
+
+.file-input{
+  display: block;
+  width: 200px;
+  height: 50px;
 }
