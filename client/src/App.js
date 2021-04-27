@@ -5,9 +5,9 @@ import Match from './component/Match';
 import { BrowserRouter, Route, Link, Router, Redirect, Switch } from 'react-router-dom';
 import visitor from './Visitor.js'
 import register from './register.js'
-import login from './Login'
-import member from './member'
-import owner from './operator'
+import login from './Login.js'
+import member from './member.js'
+import owner from './owner.js'
 import resultmatch from './resultmatch.js'
 import visitorResult from './visitorResult.js'
 import admin from './Admin.js'
@@ -19,8 +19,8 @@ function App() {
     <BrowserRouter>
       <Switch>
       <Route exact path ='/' component={visitor}/>
-      <Route path ='/register' component={register}/>
-      <Route path ='/login' component={login}/>
+      <Route exact path ='/register' component={register}/>
+      <Route exact path ='/login' component={login}/>
       <Route path ='/member' component={member}/>
       <Route path ='/owner' component={owner}/>
       <Route path ='/resultmatch' component={resultmatch}/>

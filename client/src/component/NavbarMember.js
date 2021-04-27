@@ -5,15 +5,23 @@ import homelogo from "../img/Home.png";
 import userlogo from "../img/user.png";
 import savelogo from "../img/savelogo.png";
 import profilelogo from "../img/profile-user.png";
-import { BrowserRouter, Route, Link, Router, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Link, Router, Redirect,useHistory } from "react-router-dom";
+import Auth from '../service/authService.js'
 
 export default function Navbar() {
+  const history = useHistory();
+  const currentUser = Auth.getCurrentUser();
+
   const gotohome = () => {
-    window.location.href = "/member";
+    history.push("/member");
   };
-  const logout = () =>{
-    window.location.href = "/";
+
+  
+  const logout =()=>{
+    Auth.logout();
+    history.push("/");
   }
+  // console.log("navbar curretnuser: ",currentUser);
   return (
     <div className="NavMember-container">
       <img
@@ -38,7 +46,7 @@ export default function Navbar() {
         </ul>
         <div className="profile-Navbarmember">
             <img src={profilelogo} className="profilelogo" width="35" height="36" ></img>
-          <p>Kanchana</p>
+          <p>{currentUser.username}</p>
         </div>
         <button onClick={logout}>Logout</button>
       </div>

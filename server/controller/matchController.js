@@ -13,8 +13,9 @@ export const getall = (req, res) => {
 };
 
 export const createweight = (req, res) => {
-  let jsondata = req.body;
-  matchmodel.createWeight([jsondata], (err, data) => {
+  let payload = req.body;
+  console.log(payload);
+  matchmodel.createWeight(payload, (err, data) => {
     if (err) {
       console.log(err);
     } else {
@@ -92,27 +93,28 @@ export const matchDorm = (req, res) => {
 
 export const searchDorm = (req, res) => {
   const Dorm_name = req.body.Search;
+  console.log("dorm name: ",Dorm_name);
   matchmodel.searchbyName(Dorm_name,(err, data) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(data);
+      console.log(data[0]);
+      res.send(data[0]);
+    }
+  });
+};
+
+export const getWeight = (req, res) => {
+  const user_id = req.body.user_id
+  matchmodel.getweightbyID(user_id,(err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("data from get weight: ",data)
       res.send(data);
     }
   });
 };
 
-export const testing = (req, res) => {
-  const Dorm_name = req.body.Search;
-  matchmodel.searchbyName(Dorm_name,(err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(data);
-      res.send(data);
-      
-    }
-  });
-};
 
 

@@ -1,4 +1,5 @@
 import db from '../util/database.js'
+import bcrypt from "bcrypt";
 
 const Userinfo = function(e) {
     this.username = e.username;
@@ -13,27 +14,36 @@ Userinfo.create = (newUser,result) =>{
         result(err,null);
         return;
         }
-        
-
-        console.log("create user:" ,{ ...newUser});
+        result(null,res);
     });
 };
 
-Userinfo.login = (userlog,result) =>{
-    db.query("SELECT * FROM userinformation WHERE username = ? ", userlog,(err,res)=>{
+Userinfo.login = (username,result) =>{
+    db.query("SELECT * FROM userinformation WHERE username = ? ", username,(err,res)=>{
         if(err){
             console.log("error: ",err);
             result(err,null);
             return;
         }
-        // if(res[0].lenght){
-        //     console.log("found user",res[0]);
-        //     result(null,res[0]);
-        //     return;
-        // }
         console.log(res);
         result(null,res);
     });
 };
+
+Userinfo.validPassword =  (loginpassword,datapassword)=> {
+    return bcrypt.compareSync(loginpassword, datapassword);
+}
+
+Userinfo.validateUser = (username) =>{
+    db.query("SELECT username FROM userinformation WHERE username = ? ", username,(err,res)=>{
+        if(err){
+            console.log("error: ",err);
+            result(err,null);
+            return;
+        }
+        console.log(res);
+        result(null,res);
+    });
+}
 
 export default Userinfo;
