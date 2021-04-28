@@ -1,3 +1,4 @@
+import con from '../config/config.js';
 import db from '../util/database.js'
 
 const Matching = function(e){
@@ -21,7 +22,7 @@ Matching.getallfactor = result =>{
 
 
 Matching.createWeight = (newWeight,result) =>{
-    db.query("INSERT INTO weight (comparator, weight, user_id, index_compare) VALUES ?",[newWeight.data.map(item=>[item.Image,item.Weight,newWeight.user_id,item.Id])],(err,res)=>{
+    db.query("INSERT INTO weight (comparator, weight, user_id, index_compare) VALUES ?",[newWeight.data.map(item=>[item.comparator,item.weight,newWeight.user_id,item.index_compare])],(err,res)=>{
         if(err){
             console.log("error: ",err);
         result(err,null);
@@ -93,5 +94,22 @@ Matching.getweightbyID = (user_id,result) =>{
         result(null,res);    
     });
 };
+
+Matching.updateweightbyID = (data,result) =>{
+    console.log(data);
+    let lengthDATA = data.data.length
+    for (let i = 0; i < lengthDATA; i++) {
+        db.query("UPDATE weight SET comparator = ?, weight = ? WHERE user_id = ? AND index_compare = ? ",[data.data[i].comparator,data.data[i].weight,data.user_id,data.data[i].index_compare],(err,res)=>{
+            if(err){
+                console.log("error:",err);
+                result(null,err);
+            }
+            console.log("update complete at index_compare: ",data.data[i].index_compare)
+        });
+        
+    }
+    
+};
+
 
 export default Matching;

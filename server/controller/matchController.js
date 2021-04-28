@@ -118,3 +118,13 @@ export const getWeight = (req, res) => {
 
 
 
+export const updateWeight = (req, res) => {
+  let payload = req.body;
+  console.log(payload);
+  matchmodel.updateweightbyID(payload, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+    }
+  });
+};

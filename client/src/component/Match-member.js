@@ -11,7 +11,8 @@ export default function Match() {
   const [getweight, setGetweight] = useState([]);
   var history = useHistory();
   const currentUser = Auth.getCurrentUser();
-  var have = false;
+  const [GETResponse, setGETResponse] = useState(false);
+  const [state, setState] = useState(false);
 
   useEffect(() => {
     Axios.get("/api/match/getfactor", { headers: authHeader() })
@@ -29,12 +30,16 @@ export default function Match() {
     )
       .then((Response) => {
         console.log("Respone from get weight", Response.data);
-        if(Response.data.length>0){
-            console.log("Have!!!!")
-            setGetweight(Response.data);
-            have = true;
+        if (Response.data.length > 0) {
+          console.log("Get!!!!");
+          setWeight(Response.data);
+          setGETResponse(true);
+          setState(true);
+        } else {
+          console.log("not get!!!");
+          setGETResponse(false);
+          setState(false);
         }
-        console.log("Nooooo!!!")
       })
       .catch((err) => {
         console.log("Error from get Weight", err);
@@ -42,84 +47,102 @@ export default function Match() {
   }, []);
 
   const saveweight = () => {
-    const payload = {
-      user_id: currentUser.user_id,
-      data: weight,
-    };
-    Axios.post("/api/match/createweight", payload, { headers: authHeader() })
-      .then((Response) => {
-        console.log(Response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (state == false) {
+      const arrayweight = [];
+      for (let i = 0; i < weight.length; i++) {
+        weight.map((data) => {
+          if (data.index_compare == i) {
+            arrayweight.push(data);
+          }
+        });
+      }
+      console.log("save weight: ", arrayweight);
+      const payload = {
+        user_id: currentUser.user_id,
+        data: arrayweight,
+      };
+      Axios.post("/api/match/createweight", payload, { headers: authHeader() })
+        .then((Response) => {
+          console.log(Response.data);
+          setState(true);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      console.log("edit getweight save: ", weight);
+      const payload = {
+        user_id: currentUser.user_id,
+        data: weight,
+      };
+      Axios.put("/api/match/editWeight", payload, { headers: authHeader() })
+        .then((Response) => {
+          console.log(Response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const addImage = (index) => (e) => {
     if (weight.length > 0) {
-      let have = "false";
-      weight.map((item) => {
-        if (item.Id == index) {
-          return (have = "true");
+      var check = false;
+      var INDEX = 0;
+      for (let i = 0; i < weight.length; i++) {
+        if (weight[i].index_compare == index) {
+          check = true;
+          INDEX = i;
         }
-        return (have = "false");
-      });
-      if (have == "true") {
-        let edit = weight.map((item) => {
-          if (item.Id == index) {
-            return { ...item, Image: e.target.value };
-          }
-          return item;
-        });
-        setWeight(edit);
+      }
+      if (check == true) {
+        const newWeight = [...weight];
+        console.log("check true comparator: ", newWeight);
+        newWeight[INDEX].comparator = e.target.value;
+        setWeight(newWeight);
       } else {
         setWeight([
           ...weight,
-          { Id: index, Image: e.target.value, Weight: "1" },
+          { comparator: e.target.value, weight: "1", index_compare: index },
         ]);
         console.log(weight);
       }
     } else {
-      setWeight([{ Id: index, Image: e.target.value, Weight: "1" }]);
+      setWeight([
+        { comparator: e.target.value, weight: "1", index_compare: index },
+      ]);
       console.log(weight);
     }
-    // for(let i =0 ; i<weight.length;i++){
-    //     if(index == weight[i].Id){
-    //         let editimg = [...weight];
-    //         editimg[i].Image = e.target.value;
-    //         setWeight(editimg);
-    //     }else{
-    //         setWeight([...weight,{Id:index, Image:e.target.value, Weight:'1'}]);
-    //     }
-    // }
   };
 
   const addWeight = (index) => (e) => {
-    if (weight.length) {
-      let have = "false";
-      weight.map((item) => {
-        if (item.Id == index) {
-          return (have = "true");
+    if (weight.length > 0) {
+      var check = false;
+      var INDEX = 0;
+
+      for (let i = 0; i < weight.length; i++) {
+        if (weight[i].index_compare == index) {
+          check = true;
+          INDEX = i;
         }
-        return (have = "false");
-      });
-      if (have == "true") {
-        let edit = weight.map((item) => {
-          if (item.Id == index) {
-            return { ...item, Weight: e.target.value };
-          }
-          return item;
-        });
-        setWeight(edit);
+      }
+
+      if (check == true) {
+        const newWeight = [...weight];
+        console.log("check true weight: ", newWeight);
+        newWeight[INDEX].weight = e.target.value;
+        setWeight(newWeight);
       } else {
         setWeight([
           ...weight,
-          { Id: index, Image: "", Weight: e.target.value },
+          { comparator: "", weight: e.target.value, index_compare: index },
         ]);
         console.log(weight);
       }
     } else {
-      setWeight([{ Id: index, Image: "", Weight: e.target.value }]);
+      setWeight([
+        { comparator: "", weight: e.target.value, index_compare: index },
+      ]);
     }
   };
 
@@ -177,6 +200,46 @@ export default function Match() {
     return array;
   };
 
+  const onChangeWeight = (index) => (e) => {
+    console.log(weight);
+    let INDEX = 0;
+    for (let i = 0; i < weight.length; i++) {
+      if (weight[i].index_compare == index) {
+        INDEX = i;
+      }
+    }
+    const newWeight = [...weight];
+    newWeight[INDEX].weight = e.target.value;
+    setWeight(newWeight);
+
+    // setWeight(
+    //   weight.map((data) => {
+    //     if (data.index_compare == index) {
+    //       return { ...data, weight: e.target.value };
+    //     }
+    //   })
+    // );
+  };
+
+  const onChangeFactor = (index) => (e) => {
+    let INDEX = 0;
+    for (let i = 0; i < weight.length; i++) {
+      if (weight[i].index_compare == index) {
+        INDEX = i;
+      }
+    }
+    const newWeight = [...weight];
+    newWeight[INDEX].comparator = e.target.value;
+    setWeight(newWeight);
+    // setWeight(
+    //   weight.map((data) => {
+    //     if (data.index_compare == index) {
+    //       return { ...data, comparator: e.target.value };
+    //     }
+    //   })
+    // );
+  };
+
   const showfacwithWeight = () => {
     let index = 0;
     let array = [];
@@ -184,21 +247,29 @@ export default function Match() {
       for (let j = i + 1; j < factorlist.length; j++) {
         array.push(
           <div id="contain-match-display" key={index}>
-              
             <img
               value={factorlist[i].Image_factor}
               src={"http://localhost:4000/images/" + factorlist[i].Image_factor}
               width="70"
               height="70"
             ></img>
-            {factorlist[i].Id == getweight[index].comparator ? (
+
+            <input
+              value={factorlist[i].Id}
+              type="radio"
+              id="radio-1"
+              name={index}
+              onChange={onChangeFactor(index)}
+              checked={factorlist[i].Id == weight[index].comparator}
+            ></input>
+            {/* {factorlist[i].Id == weight[index].comparator ? (
               <input
                 value={factorlist[i].Id}
                 type="radio"
                 id="radio-1"
                 name={index}
-                onChange={addImage(index)}
-                checked
+                onChange={onChangeFactor(index)}
+                checked={}
               ></input>
             ) : (
               <input
@@ -206,9 +277,9 @@ export default function Match() {
                 type="radio"
                 id="radio-1"
                 name={index}
-                onChange={addImage(index)}
+                onChange={onChangeFactor(index)}
               ></input>
-            )}
+            )} */}
 
             <img
               value={factorlist[j].Image_factor}
@@ -216,13 +287,22 @@ export default function Match() {
               width="70"
               height="70"
             ></img>
-            {factorlist[j].Id == getweight[index].comparator ? (
+
+            <input
+              value={factorlist[j].Id}
+              type="radio"
+              id="radio-2"
+              name={index}
+              onChange={onChangeFactor(index)}
+              checked ={factorlist[j].Id == weight[index].comparator}
+            ></input>
+            {/* {factorlist[j].Id == weight[index].comparator ? (
               <input
                 value={factorlist[j].Id}
                 type="radio"
                 id="radio-2"
                 name={index}
-                onChange={addImage(index)}
+                onChange={onChangeFactor(index)}
                 checked
               ></input>
             ) : (
@@ -231,13 +311,14 @@ export default function Match() {
                 type="radio"
                 id="radio-2"
                 name={index}
-                onChange={addImage(index)}
+                onChange={onChangeFactor(index)}
               ></input>
-            )}
+            )} */}
 
             <select
               className="select-score"
-              defaultValue={getweight[index].weight}
+              defaultValue={weight[index].weight}
+              onChange={onChangeWeight(index)}
             >
               <option value="1">1</option>
               <option value="2">2</option>
@@ -292,7 +373,7 @@ export default function Match() {
           โปรดเลือกปัจจัยที่ท่านให้ความสำคัญมากที่สุดในแต่ละคู่
         </h3>
         <div className="containermatch-3">
-          {getweight.length==0 ? showimage() : showfacwithWeight()}
+          {GETResponse == false ? showimage() : showfacwithWeight()}
         </div>
 
         <button onClick={saveweight}>บันทึก</button>
