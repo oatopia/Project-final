@@ -128,3 +128,41 @@ export const updateWeight = (req, res) => {
     }
   });
 };
+
+export const createBook = (req, res) => {
+  let  payload = req.body;
+  console.log(payload);
+  matchmodel.createbookbyID(payload, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("data from create bookmark",data);
+      res.send(data);
+    }
+  });
+};
+
+export const getBookmark = (req, res) => {
+  const id = req.body.user_id
+  matchmodel.getbookmarkbyID(id,(err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("data from get bookmark: ",data)
+      res.send(data);
+    }
+  });
+};
+
+export const deleteBook= (req, res) => {
+  const id = req.params.id
+  console.log("id to delete bookmark:",id)
+  matchmodel.deletebookmarkbyID(id,(err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("data from delete bookmark: ",data)
+      res.send(data);
+    }
+  });
+};

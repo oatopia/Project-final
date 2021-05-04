@@ -1,5 +1,5 @@
 import {React,useEffect,useState} from 'react';
-import './resultmatch.css';
+import './visitorResult.css';
 import Navbar from './component/Navbar.js';
 import Axios from 'axios' 
 import { useLocation } from 'react-router';

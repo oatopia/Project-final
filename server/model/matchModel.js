@@ -112,4 +112,39 @@ Matching.updateweightbyID = (data,result) =>{
 };
 
 
+Matching.getbookmarkbyID = (id,result) =>{
+    db.query("SELECT * FROM bookmark WHERE user_id = ? ",id,(err,res)=>{
+        if(err){
+            console.log("error:",err);
+            result(null,err);
+            return;
+        }
+        result(null,res);    
+    });
+};
+
+Matching.createbookbyID = (newbook,result) =>{
+    db.query("INSERT INTO bookmark SET user_id = ?, Dorm_ID = ?",[newbook.user_id,newbook.Dorm_ID],(err,res)=>{
+        if(err){
+            console.log("error: ",err);
+        result(err,null);
+        return;
+        }
+        
+        result(null,res);
+    });
+}
+
+Matching.deletebookmarkbyID = (id,result) =>{
+    db.query("DELETE FROM bookmark WHERE M_ID = ?",id,(err,res)=>{
+        if(err){
+            console.log("error:",err);
+            result(null,err);
+            // return;
+        }
+        console.log("delete bookmark: ",res)
+        result(null,res);    
+    });
+};
+
 export default Matching;

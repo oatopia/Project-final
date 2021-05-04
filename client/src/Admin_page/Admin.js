@@ -1,9 +1,9 @@
 import { React, useEffect, useState } from "react";
 import "./Admin.css";
 import Axios from "axios";
-import NavbarAdmin from "./component/NavbarAdmin.js";
-import deleteicon from "./img/deleteicon.png";
-import editicon from "./img/edit.png";
+import NavbarAdmin from "../component/NavbarAdmin.js";
+import deleteicon from "../img/deleteicon.png";
+import editicon from "../img/edit.png";
 
 function Admin() {
   const [user, setUser] = useState([]);

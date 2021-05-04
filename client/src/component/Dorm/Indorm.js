@@ -1,7 +1,10 @@
 import axios from "axios";
 import { React, useState } from "react";
 import "./Indorm.css";
-import addImgicon from "../img/Group 86.png";
+import addImgicon from "../../img/Group 86.png";
+import Auth from "../../service/authService.js";
+import authHeader from "../../service/auth-header.js";
+import { Redirect,useHistory } from "react-router-dom";
 
 export default function Indorm() {
   const facilitiesinsidedorm = [
@@ -53,10 +56,11 @@ export default function Indorm() {
   const [email, setEmail] = useState("");
   const [lineid, setLineid] = useState("");
   const [image, setImage] = useState([]);
+  const currentUser = Auth.getCurrentUser();
   const formData = new FormData();
+  const history = useHistory();
 
   const saveinfordorm = () => {
-    console.log("Image file: ", image);
     axios.post('/api/dorm/createDorm', {
       Dorm_Name: name,
       Type_D: type,
@@ -70,11 +74,13 @@ export default function Indorm() {
       Contact_Number: phone,
       E_mail: email,
       Line_ID: lineid,
-    }).then((Response) => {
+      user_id: currentUser.user_id
+    },{ headers: authHeader() }).then((Response) => {
       const ID = Response.data.insertId;
-      axios.post("/api/dorm/createFacilities",{Dorm_ID: ID, Facilities: facilities}).then((Response) => {
+      axios.post("/api/dorm/createFacilities",{Dorm_ID: ID, Facilities: facilities},{ headers: authHeader() }).then((Response) => {
         console.log(Response);
       });
+      formData.append("Image", "");
       formData.append("Dorm_ID",ID);
       const config = {
         headers: {
@@ -84,6 +90,7 @@ export default function Indorm() {
       axios.post("/api/dorm/createImage", formData, config).then((Response) => {
         console.log(Response);
       });
+      history.push("/owner");
     })
 
     // for (let i = 0; i < image.length; i++) {

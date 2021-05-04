@@ -13,9 +13,7 @@ const Dorminfo = function(e) {
     this.Contact_Number = e.Contact_Number;
     this.E_mail = e.E_mail;
     this.Line_ID = e.Line_ID;
-    // this.Facilities = [e.Facilities];
-    // this.Image = e.Image
-
+    this.user_id = e.user_id;
 }
 
 Dorminfo.createDorminfo = (newDorm,result) =>{
@@ -23,10 +21,11 @@ Dorminfo.createDorminfo = (newDorm,result) =>{
     // console.log("in model image: ",newDorm.Image)
     // console.log("in model facilities: ",newDorm.Facilities)
     // newDorm.Facilities.map(i =>{console.log("facili: ",i.Facility)});
-    db.query("INSERT INTO dormitory (Dorm_Name,Type_D,Address,Deposit,Electric_Bill,Water_Bill,Common_fee,Information,L_name,Contact_Number,E_mail,Line_ID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
-    ,[newDorm.Dorm_Name,newDorm.Type_D,newDorm.Address,newDorm.Deposit,newDorm.Electric_Bill,newDorm.Water_Bill,
-    newDorm.Common_fee,newDorm.Information,newDorm.L_name,newDorm.Contact_Number,newDorm.E_mail,newDorm.Line_ID],(err,res)=>{
+    // db.query("INSERT INTO dormitory (Dorm_Name,Type_D,Address,Deposit,Electric_Bill,Water_Bill,Common_fee,Information,L_name,Contact_Number,E_mail,Line_ID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)"
+    // ,[newDorm.Dorm_Name,newDorm.Type_D,newDorm.Address,newDorm.Deposit,newDorm.Electric_Bill,newDorm.Water_Bill,
+    // newDorm.Common_fee,newDorm.Information,newDorm.L_name,newDorm.Contact_Number,newDorm.E_mail,newDorm.Line_ID],(err,res)=>{
         // db.query("INSERT INTO facilities SET ?",newDorm,(err,res)=>{
+        db.query("INSERT INTO dormitory SET ?",newDorm,(err,res)=>{
         if(err){
             console.log("error: ",err);
         result(err,null);
@@ -78,5 +77,76 @@ Dorminfo.createImg = (newImg,result)=>{
     })
 }
 
+Dorminfo.getdormbyID = (id,result)=>{
+    db.query("SELECT * FROM dormitory WHERE user_id = ?",id,(err,res)=>{
+        if(err){
+            console.log("error: ",err);
+        result(err,null);
+        return;
+        }
+        console.log(res);
+        result(null,res)
+    })
+}
+
+Dorminfo.getdormdatabyID = (id,result)=>{
+    db.query("SELECT * FROM dormitory WHERE Dorm_ID = ?",id,(err,res)=>{
+        if(err){
+            console.log("error: ",err);
+        result(err,null);
+        return;
+        }
+        console.log(res);
+        result(null,res)
+    })
+}
+
+Dorminfo.getfacilitiesbyID = (id,result)=>{
+    db.query("SELECT * FROM facilities WHERE Dorm_ID = ?",id,(err,res)=>{
+        if(err){
+            console.log("error: ",err);
+        result(err,null);
+        return;
+        }
+        console.log(res);
+        result(null,res)
+    })
+}
+
+Dorminfo.getimagebyID = (id,result)=>{
+    db.query("SELECT * FROM image_dorm WHERE Dorm_ID = ?",id,(err,res)=>{
+        if(err){
+            console.log("error: ",err);
+        result(err,null);
+        return;
+        }
+        console.log(res);
+        result(null,res)
+    })
+}
+
+Dorminfo.deleteFacbyId = (fid,result) =>{
+    db.query("DELETE FROM facilities WHERE F_ID = ?",fid,(err,res)=>{
+        if(err){
+            console.log("error:",err);
+            result(null,err);
+            // return;
+        }
+        console.log("delete fac: ",res)
+        result(null,res);    
+    });
+};
+
+Dorminfo.addFac = (fac,result)=>{
+    db.query("INSERT INTO facilities SET ?",fac,(err,res)=>{
+        if(err){
+            console.log("error: ",err);
+        result(err,null);
+        return;
+        }
+        console.log("res insertID: ",res.insertId);
+        result(null,res);
+    })
+}
 
 export default Dorminfo;

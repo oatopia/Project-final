@@ -21,9 +21,7 @@ export default function Navbar() {
       <img src={logoapp} className="logoapp" width="200" height="100"></img>
       <div className="NavOwner-container2">
         <img src={add} className="add" width="50" height="28"></img>
-        <Link>เพิ่มข้อมูลหอพัก</Link>
         <img src={edit} className="edit" width="50" height="28"></img>
-        <Link>แก้ไขข้อมูลหอพัก</Link>
         <div className="profile-NavOwner" onClick={logout}>
           <img src={profilelogo} className="profilelogo" width="35" height="36" ></img>
           <p>{currentUser.username}</p>

@@ -260,7 +260,7 @@ export default function Match() {
               id="radio-1"
               name={index}
               onChange={onChangeFactor(index)}
-              checked={factorlist[i].Id == weight[index].comparator}
+              defaultChecked={factorlist[i].Id == weight[index].comparator}
             ></input>
             {/* {factorlist[i].Id == weight[index].comparator ? (
               <input
@@ -294,7 +294,7 @@ export default function Match() {
               id="radio-2"
               name={index}
               onChange={onChangeFactor(index)}
-              checked ={factorlist[j].Id == weight[index].comparator}
+              defaultChecked ={factorlist[j].Id == weight[index].comparator}
             ></input>
             {/* {factorlist[j].Id == weight[index].comparator ? (
               <input
@@ -337,7 +337,7 @@ export default function Match() {
   };
 
   const matchFac = () => {
-    Axios.post("/api/match/matchDorm", weight)
+    Axios.post("/api/match/matchDorm", weight,{ headers: authHeader() })
       .then((Response) => {
         console.log(Response.data);
         history.push({
