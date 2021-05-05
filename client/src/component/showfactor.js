@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import Axios from "axios";
-import "./Match.css";
+import "./showfactor.css";
 import D1 from "../img/icon/D1.png";
 import { useHistory } from "react-router";
 
@@ -9,7 +9,7 @@ export default function Match() {
   const [weight, setWeight] = useState([]);
   var history = useHistory();
   useEffect(() => {
-    Axios.get("/api/match/getfactor", {}).then((Response) => {
+    Axios.get("/api/visitor/getfactor").then((Response) => {
       setFactorlist(Response.data);
     });
   }, []);
@@ -43,7 +43,7 @@ export default function Match() {
     }
   };
 
-  const addImage = (index) => (e) => { 
+  const addImage = (index) => (e) => {
     if (weight.length > 0) {
       let have = "false";
       weight.map((item) => {
@@ -71,37 +71,8 @@ export default function Match() {
       setWeight([{ Id: index, Image: e.target.value, Weight: "1" }]);
       console.log(weight);
     }
-    // for(let i =0 ; i<weight.length;i++){
-    //     if(index == weight[i].Id){
-    //         let editimg = [...weight];
-    //         editimg[i].Image = e.target.value;
-    //         setWeight(editimg);
-    //     }else{
-    //         setWeight([...weight,{Id:index, Image:e.target.value, Weight:'1'}]);
-    //     }
-    // }
   };
   const showimage = () => {
-    // let array = [];
-    // for (let i = 0; i < factorlist.length; i++) {
-    //     for (let j = i+1; j < factorlist.length; j++) {
-    //         array.push(<img src={('http://localhost:4000/images/'+factorlist[i].Image_factor)} width="100" height="100"></img>);
-    //         array.push(<img src={('http://localhost:4000/images/'+factorlist[j].Image_factor)} width="100" height="100"></img>);
-    //         array.push(
-    //             <select className="select-score" defaultValue="1">
-    //                 <option value="1">1</option>
-    //                 <option value="2">2</option>
-    //                 <option value="3">3</option>
-    //                 <option value="4">4</option>
-    //                 <option value="5">5</option>
-    //                 <option value="6">6</option>
-    //                 <option value="7">7</option>
-    //             </select>
-    //         );
-    //     }
-
-    // }
-    // return array;
     let index = 0;
     let array = [];
     for (let i = 0; i < factorlist.length; i++) {
@@ -174,28 +145,41 @@ export default function Match() {
   };
 
   return (
-    <div className="contentbox-visitor"> 
-      <h1 className="header2-visitor">
-        โปรดให้คะแนนระดับความสำคัญของปัจจัย ดังต่อไปนี้
-      </h1>
-      <div className="containermatch-visitor">
-        {factorlist.map((data, key) => {
-          return (
-            <div key={key} className="detail-visitor">
-              <img
-                src={"http://localhost:4000/images/" + data.Image_factor}
-                width="50"
-                height="50"
-              ></img>
-              <p className="Fn-visitor">{data.Factor_name}</p>
-            </div>
-          );
-        })}
+    <div className="container-visitor">
+
+      <div className="contain-factor-visitor">
+        <div className="showfactor-left-box">
+          <h1>จับคู่หอพัก</h1>
+            วิธีการจับคู่
+          <ol>
+            <li>ให้ท่านเลือกปัจจัยที่ท่านคิดว่ามีความสำคัญมากที่สุดในแต่ละคู่</li>
+            <li>จากนั้นเลือกระดับความสำคัญของปัจจัยให้ครบทุกคู่</li>
+            <li>สุดท้ายกดปุ่มจับคู่</li>
+          </ol>
+        </div>
+        <div className="showfactor-right-box">
+          {factorlist.map((data, key) => {
+            return (
+              <div key={key} className="detail-visitor">
+                <img
+                  src={"http://localhost:4000/images/" + data.Image_factor}
+                  width="50"
+                  height="50"
+                ></img>
+                <p className="Fn-visitor">{data.Factor_name}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <div className="containermatch2-visitor">{showimage()}</div>
-      <div>
-        <button onClick={matchFac} className="button-match-visitor">จับคู่หอพัก</button>
+
+      <div className="containermatch2-visitor">
+        {showimage()}
+        <button onClick={matchFac} className="button-match-visitor">
+          จับคู่หอพัก
+        </button>
       </div>
+
     </div>
   );
 }

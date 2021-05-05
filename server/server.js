@@ -5,6 +5,7 @@ import userRouter from './router/userRouter.js'
 import matchRouter from './router/matchRouter.js'
 import dormRouter from './router/DormRouter.js'
 import adminRouter from './router/AdminRouter.js'
+import visitorRouter from './router/visitorRouter.js'
 import db from './util/database.js'
 import session from 'express-session'
 import path from 'path'
@@ -70,6 +71,7 @@ app.use("/api/user",userRouter);
 app.use("/api/match",matchRouter);
 app.use('/api/dorm',dormRouter);
 app.use('/api/Admin',adminRouter);
+app.use('/api/visitor',visitorRouter);
 
 
 
