@@ -20,7 +20,9 @@ app.use(bodyparser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileupload());
 
-
+app.get( '/', ( req, res ) => {
+    res.render('home')
+} );
 // app.get('/factor',(req,res)=>{
 //     db.query("SELECT * FROM factor",(err,result)=>{
 //         if(err){
