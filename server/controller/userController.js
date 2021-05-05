@@ -1,7 +1,8 @@
 import userModel from "../model/userModel.js";
 import jsonwebtoken from "jsonwebtoken";
 import { jwtSecret} from '../config/Jwt-Config.js'
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
+
 
 // create User
 export const create = (req, res) => {

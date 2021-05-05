@@ -1,5 +1,5 @@
 import db from '../util/database.js'
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const Userinfo = function(e) {
     this.username = e.username;
