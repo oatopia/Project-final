@@ -7,6 +7,7 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 10px;
+    /* position: fixed; */
 }
 
 .logoapp{
@@ -50,18 +51,19 @@ a:hover{
 }
 
 .sign{
-    background-color: #1BA0E2;
+    background-color: #1655a7;
     border: none;
-    width: 120px;
-    height: 40px;
+    width: 150px;
+    height: 50px;
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: bold;
     color: white;
 }
 
 
 .linkhead{
-    color: #1655a7;
+    color: #000066;
     font-weight: bold;
-    font-size: 28px; 
+    font-size: 24px; 
 }

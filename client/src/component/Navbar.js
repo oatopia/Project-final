@@ -23,16 +23,22 @@ export default function Navbar() {
         <img
           src={homelogo}
           className="homelogo"
-          width="40"
-          height="38"
-          onClick={gotohome
-          }></img>
+          width="33px"
+          height="31px"
+          onClick={gotohome}
+        ></img>
         <Link to="/" className="linkhead">
           หน้าหลัก
         </Link>
-        <img src={userlogo} className="userlogo" width="40" height="38" onClick={()=>{
-          window.location.href="/login"
-        }}></img>
+        <img
+          src={userlogo}
+          className="userlogo"
+          width="33px"
+          height="32px"
+          onClick={() => {
+            window.location.href = "/login";
+          }}
+        ></img>
         <Link to="/login" className="linkhead">
           เข้าสู่ระบบ
         </Link>

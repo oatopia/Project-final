@@ -9,7 +9,9 @@ function Visitor() {
   return (
     <div className="parrent-contain">
       <div className="appcontainer">
+        <div className="sticky">
         <Navbar></Navbar>
+        </div>
       </div>
       <div className="searchbar-Visitor">
         <input className="searchinput-Visitor" placeholder="ค้นหาหอพัก..."></input>
