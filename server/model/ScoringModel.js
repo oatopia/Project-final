@@ -7,8 +7,10 @@ import fs from "fs";
           return;
         }
         console.log(res);
-        fs.writeFile("Score_Drom.json", JSON.stringify(res), function (err) {
-          if (err) throw err;
+        fs.writeFile("Score_Drom.json", JSON.stringify(res), function (error) {
+          if (error) {
+            console.log("error in scoringmodel",error)
+          };
           console.log("save file sucsess!");
         });
       });
