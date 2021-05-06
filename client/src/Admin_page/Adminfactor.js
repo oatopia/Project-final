@@ -6,6 +6,7 @@ import deleteicon from "../img/deleteicon.png";
 import editicon from "../img/edit.png";
 
 function Adminfactor() {
+  const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const [factor, setFactor] = useState([]);
   const [showadd, setShowadd] = useState(false);
   const [textinput, setTextinput] = useState("");
@@ -15,7 +16,7 @@ function Adminfactor() {
   const [editimg, setEditimg] = useState("");
 
   useEffect(() => {
-    Axios.get("/api/Admin/factor")
+    Axios.get(url+"api/Admin/factor")
       .then((Response) => {
         setFactor(Response.data);
       })
@@ -33,7 +34,7 @@ function Adminfactor() {
         "content-type": "multipart/form-data",
       },
     };
-    Axios.post("/api/Admin/saveFactor", formData, config)
+    Axios.post(url+"api/Admin/saveFactor", formData, config)
       .then((Response) => {
         console.log(Response);
         setShowadd(false);
@@ -74,7 +75,7 @@ function Adminfactor() {
 
   const deleteFactor = (id) => {
     console.log("ID:", id);
-    Axios.delete(`/api/Admin/factorDelete/${id}`).then((Response) => {
+    Axios.delete(url+`api/Admin/factorDelete/${id}`).then((Response) => {
       setFactor(
         factor.filter((val) => {
           return val.Id != id;
@@ -93,7 +94,7 @@ function Adminfactor() {
         "content-type": "multipart/form-data",
       },
     };
-    Axios.put(`/api/Admin/updateFactor/${id}`,formData,config)
+    Axios.put(url+`api/Admin/updateFactor/${id}`,formData,config)
     .then((Response) => {
       setFactor(
       factor.map((item)=>{
@@ -155,7 +156,7 @@ function Adminfactor() {
                   </div>
                 ) : (
                   <img
-                    src={"http://localhost:4000/images/" + data.Image_factor}
+                    src={url+"images/" + data.Image_factor}
                     width="50px"
                     height="50px"
                   ></img>

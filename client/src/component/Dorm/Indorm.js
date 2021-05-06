@@ -7,6 +7,7 @@ import authHeader from "../../service/auth-header.js";
 import { Redirect,useHistory } from "react-router-dom";
 
 export default function Indorm() {
+  const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const facilitiesinsidedorm = [
     "เครื่องปรับอากาศ",
     "เครื่องทำน้ำอุ่น",
@@ -61,7 +62,7 @@ export default function Indorm() {
   const history = useHistory();
 
   const saveinfordorm = () => {
-    axios.post('/api/dorm/createDorm', {
+    axios.post(url+'api/dorm/createDorm', {
       Dorm_Name: name,
       Type_D: type,
       Address: address,
@@ -77,7 +78,7 @@ export default function Indorm() {
       user_id: currentUser.user_id
     },{ headers: authHeader() }).then((Response) => {
       const ID = Response.data.insertId;
-      axios.post("/api/dorm/createFacilities",{Dorm_ID: ID, Facilities: facilities},{ headers: authHeader() }).then((Response) => {
+      axios.post(url+"api/dorm/createFacilities",{Dorm_ID: ID, Facilities: facilities},{ headers: authHeader() }).then((Response) => {
         console.log(Response);
       });
       formData.append("Image", "");
@@ -87,7 +88,7 @@ export default function Indorm() {
           "content-type": "multipart/form-data",
         },
       };
-      axios.post("/api/dorm/createImage", formData, config).then((Response) => {
+      axios.post(url+"api/dorm/createImage", formData, config).then((Response) => {
         console.log(Response);
       });
       history.push("/owner");

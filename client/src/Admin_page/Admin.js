@@ -6,6 +6,7 @@ import deleteicon from "../img/deleteicon.png";
 import editicon from "../img/edit.png";
 
 function Admin() {
+  const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const [user, setUser] = useState([]);
   const [editAC, setEditAC] = useState("");
   const [editun, setEditUN] = useState("");
@@ -13,7 +14,7 @@ function Admin() {
 
   const deleteAccount = (id) => {
     console.log("ID:", id);
-    Axios.delete(`/api/Admin/userDelete/${id}`).then((Response) => {
+    Axios.delete(url+`api/Admin/userDelete/${id}`).then((Response) => {
       setUser(
         user.filter((val) => {
           return val.user_id != id;
@@ -24,7 +25,7 @@ function Admin() {
 
   const updateAccount = (id) => {
     console.log("ID:", id);
-    Axios.put(`/api/Admin/userUpdate/${id}`,{user_id: id, username: editun, type: editT}).then((Response) => {
+    Axios.put(url+`api/Admin/userUpdate/${id}`,{user_id: id, username: editun, type: editT}).then((Response) => {
       setEditAC("");
       setUser(user.map((item)=>{
         return item.user_id == id ? {user_id:id,username:editun,type:editT} 
@@ -37,7 +38,7 @@ function Admin() {
   };
 
   useEffect(() => {
-    Axios.get("/api/Admin/user", {})
+    Axios.get(url+"api/Admin/user", {})
       .then((Response) => {
         setUser(Response.data);
       })

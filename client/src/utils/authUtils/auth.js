@@ -2,7 +2,7 @@ import history from './history';
 import jwt_decode from 'jwt-decode';
 
 class Auth {
-    url = "/api/user/";
+    url = "https://matching-dorm-tu-server.herokuapp.com/api/user/";
     profile = {};
 
     signin = (data, error) => { // data consists of email and password

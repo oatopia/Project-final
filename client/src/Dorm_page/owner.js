@@ -8,12 +8,13 @@ import { Redirect, useHistory } from "react-router-dom";
 import authHeader from "../service/auth-header.js";
 
 const Owner = () => {
+  const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const [dorm, setDorm] = useState([]);
   const currentUser = Auth.getCurrentUser();
   const history = useHistory();
   useEffect(() => {
     Axios.post(
-      "/api/dorm/getDorm",
+      url+"api/dorm/getDorm",
       { user_id: currentUser.user_id },
       { headers: authHeader() }
     )

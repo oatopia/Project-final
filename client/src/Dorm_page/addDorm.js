@@ -8,7 +8,7 @@ import authHeader from "../service/auth-header.js";
 import Indorm from "../component/Dorm/Indorm.js";
 
 const Adddorm = () => {
-
+  const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const [dorm, setDorm] = useState([]);
   const currentUser = Auth.getCurrentUser();
   const history = useHistory();

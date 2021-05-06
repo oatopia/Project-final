@@ -6,6 +6,7 @@ import authHeader from "../service/auth-header.js";
 import Auth from "../service/authService.js";
 
 export default function Match() {
+  const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const [factorlist, setFactorlist] = useState([]);
   const [weight, setWeight] = useState([]);
   const [getweight, setGetweight] = useState([]);
@@ -15,7 +16,7 @@ export default function Match() {
   const [state, setState] = useState(false);
 
   useEffect(() => {
-    Axios.get("/api/match/getfactor", { headers: authHeader() })
+    Axios.get(url+"api/match/getfactor", { headers: authHeader() })
       .then((Response) => {
         console.log(Response.data);
         setFactorlist(Response.data);
@@ -24,7 +25,7 @@ export default function Match() {
         console.log("Error from get Factor", error);
       });
     Axios.post(
-      "/api/match/getWeight",
+      url+"api/match/getWeight",
       { user_id: currentUser.user_id },
       { headers: authHeader() }
     )
@@ -61,7 +62,7 @@ export default function Match() {
         user_id: currentUser.user_id,
         data: arrayweight,
       };
-      Axios.post("/api/match/createweight", payload, { headers: authHeader() })
+      Axios.post(url+"api/match/createweight", payload, { headers: authHeader() })
         .then((Response) => {
           console.log(Response.data);
           setState(true);
@@ -75,7 +76,7 @@ export default function Match() {
         user_id: currentUser.user_id,
         data: weight,
       };
-      Axios.put("/api/match/editWeight", payload, { headers: authHeader() })
+      Axios.put(url+"api/match/editWeight", payload, { headers: authHeader() })
         .then((Response) => {
           console.log(Response.data);
         })
@@ -155,7 +156,7 @@ export default function Match() {
           <div id="contain-match-display" key={index}>
             <img
               value={factorlist[i].Image_factor}
-              src={"http://localhost:4000/images/" + factorlist[i].Image_factor}
+              src={url+"images/" + factorlist[i].Image_factor}
               width="70"
               height="70"
             ></img>
@@ -168,7 +169,7 @@ export default function Match() {
             ></input>
             <img
               value={factorlist[j].Image_factor}
-              src={"http://localhost:4000/images/" + factorlist[j].Image_factor}
+              src={url+"images/" + factorlist[j].Image_factor}
               width="70"
               height="70"
             ></img>
@@ -249,7 +250,7 @@ export default function Match() {
           <div id="contain-match-display" key={index}>
             <img
               value={factorlist[i].Image_factor}
-              src={"http://localhost:4000/images/" + factorlist[i].Image_factor}
+              src={url+"images/" + factorlist[i].Image_factor}
               width="70"
               height="70"
             ></img>
@@ -283,7 +284,7 @@ export default function Match() {
 
             <img
               value={factorlist[j].Image_factor}
-              src={"http://localhost:4000/images/" + factorlist[j].Image_factor}
+              src={url+"images/" + factorlist[j].Image_factor}
               width="70"
               height="70"
             ></img>
@@ -337,7 +338,7 @@ export default function Match() {
   };
 
   const matchFac = () => {
-    Axios.post("/api/match/matchDorm", weight,{ headers: authHeader() })
+    Axios.post(url+"api/match/matchDorm", weight,{ headers: authHeader() })
       .then((Response) => {
         console.log(Response.data);
         history.push({
@@ -359,7 +360,7 @@ export default function Match() {
             return (
               <div className="detail" key={key}>
                 <img
-                  src={"http://localhost:4000/images/" + data.Image_factor}
+                  src={url+"images/" + data.Image_factor}
                   width="50"
                   height="50"
                   id={key}

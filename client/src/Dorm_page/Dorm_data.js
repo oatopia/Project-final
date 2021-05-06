@@ -10,6 +10,7 @@ import { useLocation } from "react-router";
 import Dorminfo from "../component/Dorm/Dorm_info.js";
 
 const Owner = () => {
+  const url = "https://matching-dorm-tu-server.herokuapp.com/"
   //  -------------------------------------------------------
   const facilitiesinsidedorm = [
     "เครื่องปรับอากาศ",
@@ -72,7 +73,7 @@ const Owner = () => {
 
   useEffect(() => {
     Axios.post(
-      "/api/dorm/getDormdatabyId",
+      url+"api/dorm/getDormdatabyId",
       { Dorm_ID: Dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
@@ -81,7 +82,7 @@ const Owner = () => {
     });
 
     Axios.post(
-      "/api/dorm/getFac",
+      url+"api/dorm/getFac",
       { Dorm_ID: Dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
@@ -90,7 +91,7 @@ const Owner = () => {
     });
 
     Axios.post(
-      "/api/dorm/getImg",
+      url+"api/dorm/getImg",
       { Dorm_ID: Dorm_ID },
       { headers: authHeader() }
     )
@@ -120,7 +121,7 @@ const Owner = () => {
                 <img
                   key={key}
                   className="img-dorm-data"
-                  src={"http://localhost:4000/img_Dorm/" + pic.Image}
+                  src={url+"img_Dorm/" + pic.Image}
                 />
               );
             })}
@@ -295,7 +296,7 @@ const Owner = () => {
                             if (checkinner == true) {
                               let id = fac[indinner].F_ID;
                               Axios.delete(
-                                `/api/dorm/facdeleteDelete/${id}`
+                                url+`api/dorm/facdeleteDelete/${id}`
                               ).then((Response) => {
                                 setFac(
                                   fac.filter((item) => {
@@ -310,7 +311,7 @@ const Owner = () => {
                                 Type_F: "ภายในห้องพัก",
                                 Facility: data,
                               };
-                              Axios.post("/api/dorm/addfacil", facil, {
+                              Axios.post(url+"api/dorm/addfacil", facil, {
                                 headers: authHeader(),
                               }).then((Response) => {
                                 console.log("Response dorm: ", Response.data);
@@ -364,7 +365,7 @@ const Owner = () => {
                             if (check == true) {
                               let id = fac[ind].F_ID;
                               Axios.delete(
-                                `/api/dorm/facdeleteDelete/${id}`
+                                url+`api/dorm/facdeleteDelete/${id}`
                               ).then((Response) => {
                                 setFac(
                                   fac.filter((item) => {
@@ -380,7 +381,7 @@ const Owner = () => {
                                 Type_F: "ส่วนกลาง",
                                 Facility: data,
                               };
-                              Axios.post("/api/dorm/addfacil", facil, {
+                              Axios.post(url+"api/dorm/addfacil", facil, {
                                 headers: authHeader(),
                               }).then((Response) => {
                                 console.log("Response ID: ", Response.data);

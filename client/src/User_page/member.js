@@ -8,13 +8,14 @@ import Auth from '../service/authService.js'
 import authHeader from '../service/auth-header.js';
 
 function Member() {
+  const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const [search,setSearch] = useState("");
   const currentUser = Auth.getCurrentUser();
 
   const searchFac = (e) => {
     e.preventDefault();
     console.log(search)
-    Axios.post('/api/match/searchDorm',{
+    Axios.post(url+'api/match/searchDorm',{
       Search:search
     },{headers: authHeader()})
     .then(Response => {

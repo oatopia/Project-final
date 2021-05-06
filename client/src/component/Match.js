@@ -5,11 +5,12 @@ import D1 from "../img/icon/D1.png";
 import { useHistory } from "react-router";
 
 export default function Match() {
+  const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const [factorlist, setFactorlist] = useState([]);
   const [weight, setWeight] = useState([]);
   var history = useHistory();
   useEffect(() => {
-    Axios.get("/api/match/getfactor", {}).then((Response) => {
+    Axios.get(url+"api/match/getfactor", {}).then((Response) => {
       setFactorlist(Response.data);
     });
   }, []);
@@ -111,7 +112,7 @@ export default function Match() {
             <img
               className="img-match-visitor"
               value={factorlist[i].Image_factor}
-              src={"http://localhost:4000/images/" + factorlist[i].Image_factor}
+              src={url+"images/" + factorlist[i].Image_factor}
               width="70px"
               height="70px"
               onClick={addImage(index)}
@@ -126,7 +127,7 @@ export default function Match() {
             <img
               className="img-match-visitor"
               value={factorlist[j].Image_factor}
-              src={"http://localhost:4000/images/" + factorlist[j].Image_factor}
+              src={url+"images/" + factorlist[j].Image_factor}
               width="70px"
               height="70px"
               onClick={addImage(index)}
@@ -160,7 +161,7 @@ export default function Match() {
   };
 
   const matchFac = () => {
-    Axios.post("/api/match/matchDorm", weight)
+    Axios.post(url+"api/match/matchDorm", weight)
       .then((Response) => {
         console.log(Response.data);
         history.push({
@@ -183,7 +184,7 @@ export default function Match() {
           return (
             <div key={key} className="detail-visitor">
               <img
-                src={"http://localhost:4000/images/" + data.Image_factor}
+                src={url+"images/" + data.Image_factor}
                 width="50"
                 height="50"
               ></img>

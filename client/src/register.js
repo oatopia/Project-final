@@ -8,8 +8,8 @@ import {useHistory} from 'react-router-dom';
 // import History from './utils/authUtils/History.js'
 
 
-
 function Register() {
+    const url = "https://matching-dorm-tu-server.herokuapp.com/"
     const history = useHistory();
     const [username,setusername] = useState("");
     const [password,setpassword] = useState("");
@@ -17,7 +17,7 @@ function Register() {
 
     const addinfo = (e) =>{
         e.preventDefault();
-        Axios.post('api/user/register',{
+        Axios.post(url+'api/user/register',{
             username: username,
             password: password,
             type: type

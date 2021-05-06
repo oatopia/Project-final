@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "/api/user/";
+const API_URL = "https://matching-dorm-tu-server.herokuapp.com/api/user/";
 
 class AuthService {
   login(username, password) {

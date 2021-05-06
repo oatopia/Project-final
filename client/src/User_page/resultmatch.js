@@ -9,6 +9,7 @@ import Auth from "../service/authService.js";
 import authHeader from "../service/auth-header.js";
 
 function ResultMatch() {
+  const url = "https://matching-dorm-tu-server.herokuapp.com/"
   var location = useLocation();
   const state = location.state;
   const currentUser = Auth.getCurrentUser();
@@ -17,7 +18,7 @@ function ResultMatch() {
   const [bookstate, setBookState] = useState([]);
   useEffect(() => {
     Axios.post(
-      "/api/match/getBookmark",
+      url+"/api/match/getBookmark",
       { user_id: currentUser.user_id },
       { headers: authHeader() }
     )
@@ -66,7 +67,7 @@ function ResultMatch() {
     if (stateinside == true) {
       e.target.setAttribute("src", bookoff);
       let id = mid;
-      Axios.delete(`/api/match/deletebook/${id}`, {
+      Axios.delete(url+`/api/match/deletebook/${id}`, {
         headers: authHeader(),
       })
         .then((Response) => {
@@ -87,7 +88,7 @@ function ResultMatch() {
         user_id: currentUser.user_id,
         Dorm_ID: data.Dorm_ID,
       };
-      Axios.post("/api/match/createbook", payload, {
+      Axios.post(url+"api/match/createbook", payload, {
         headers: authHeader(),
       })
         .then((Response) => {

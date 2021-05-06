@@ -7,6 +7,7 @@ import authHeader from "../../service/auth-header.js";
 import { useLocation } from "react-router";
 
 export default function Dorminfo() {
+  const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const [dorm, setDorm] = useState([]);
   const [fac, setFac] = useState([]);
   const [img, setImg] = useState([]);
@@ -18,7 +19,7 @@ export default function Dorminfo() {
 
   useEffect(() => {
     Axios.post(
-      "/api/dorm/getDormdatabyId",
+      url+"api/dorm/getDormdatabyId",
       { Dorm_ID: Dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
@@ -27,7 +28,7 @@ export default function Dorminfo() {
     });
 
     Axios.post(
-      "/api/dorm/getFac",
+      url+"api/dorm/getFac",
       { Dorm_ID: Dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
@@ -36,7 +37,7 @@ export default function Dorminfo() {
     });
 
     Axios.post(
-      "/api/dorm/getImg",
+      url+"api/dorm/getImg",
       { Dorm_ID: Dorm_ID },
       { headers: authHeader() }
     )
@@ -60,7 +61,7 @@ export default function Dorminfo() {
           return (
             <img
               className="img-dorm-data"
-              src={"http://localhost:4000/img_Dorm/" + pic.Image}
+              src={url+"img_Dorm/" + pic.Image}
             />
           );
         })}
