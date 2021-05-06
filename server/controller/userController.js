@@ -1,7 +1,7 @@
 import userModel from "../model/userModel.js";
 import jsonwebtoken from "jsonwebtoken";
 import { jwtSecret} from '../config/Jwt-Config.js'
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt-nodejs";
 
 
 // create User
