@@ -15,9 +15,7 @@ connection.connect(err =>{
     console.log("sucsessfully");
     connection.query("SELECT * FROM Scoring_Factors ",(err,res)=>{
         if(err){
-                console.log("error:",err);
-                result(null,err);
-                return;
+                throw err;
             }
             console.log(res);
             fs.w
