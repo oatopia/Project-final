@@ -12,7 +12,7 @@ import path from 'path'
 import fileupload from 'express-fileupload'
 const __dirname = path.resolve();
 const app = express();
-const port = process.env.port || 4000;
+const port = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 app.use(bodyparser.json());
@@ -79,5 +79,5 @@ app.use('/api/visitor',visitorRouter);
 
 
 app.listen(port,()=>{
-    console.log('Server running port 4000');
+    console.log(`Server running port ${port}`);
 });
