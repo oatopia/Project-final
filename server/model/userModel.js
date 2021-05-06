@@ -8,7 +8,7 @@ const Userinfo = function(e) {
 }
 
 Userinfo.create = (newUser,result) =>{
-    db.query("INSERT INTO userinformation SET ?",newUser,(err,res)=>{
+    db.query("INSERT INTO user SET ?",newUser,(err,res)=>{
         if(err){
             console.log("error: ",err);
         result(err,null);
@@ -19,7 +19,7 @@ Userinfo.create = (newUser,result) =>{
 };
 
 Userinfo.login = (username,result) =>{
-    db.query("SELECT * FROM userinformation WHERE username = ? ", username,(err,res)=>{
+    db.query("SELECT * FROM user WHERE username = ? ", username,(err,res)=>{
         if(err){
             console.log("error: ",err);
             result(err,null);
@@ -35,7 +35,7 @@ Userinfo.validPassword =  (loginpassword,datapassword)=> {
 }
 
 Userinfo.validateUser = (username) =>{
-    db.query("SELECT username FROM userinformation WHERE username = ? ", username,(err,res)=>{
+    db.query("SELECT username FROM user WHERE username = ? ", username,(err,res)=>{
         if(err){
             console.log("error: ",err);
             result(err,null);
