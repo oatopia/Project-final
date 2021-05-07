@@ -6,6 +6,7 @@ import matchRouter from './router/matchRouter.js'
 import dormRouter from './router/DormRouter.js'
 import adminRouter from './router/AdminRouter.js'
 import visitorRouter from './router/visitorRouter.js'
+const router = express.Router();
 import db from './util/database.js'
 import session from 'express-session'
 import path from 'path'
@@ -20,6 +21,12 @@ app.use(bodyparser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileupload());
 
+router.get('/', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true); 
+});
 // app.get( '/', ( req, res ) => {
 //     res.render('home')
 // } );
