@@ -2,7 +2,7 @@ import mysql from "mysql";
 import config from "../config/config.js";
 import fs from "fs";
 
-const connection = mysql.createConnection({
+const pool = mysql.createPool({
   host: config.host,
   user: config.user,
   password: config.password,
@@ -10,12 +10,12 @@ const connection = mysql.createConnection({
   connectionLimit: 15,
 });
 
-connection.connect((err) => {
+pool.getConnection((err,connection) => {
   if (err) {
     console.log("Error in connection ", err);
   } else {
     console.log("sucsessfully");
-    connection.query("SELECT * FROM Scoring_Factors ", (error, res) => {
+    pool.query("SELECT * FROM Scoring_Factors ", (error, res) => {
       if (error) {
         console.log(error);
       } else {
@@ -25,9 +25,10 @@ connection.connect((err) => {
           if (err) return err;
           console.log("save!");
         });
+        connection.release();
       }
     }); 
   }
 });
 
-export default connection;
+export default pool;
