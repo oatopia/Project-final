@@ -67,7 +67,7 @@ select{
 .showfactor-right-box{
     background-color: rgb(253, 255, 158);
     padding: 20px;
-    width: 200px;
+    width: 100%;
 }
 /* .containermatch-visitor{
     justify-content: center;
