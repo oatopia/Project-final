@@ -27,9 +27,9 @@ router.get('/', function(req, res) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true); 
 });
-// app.get( '/', ( req, res ) => {
-//     res.render('home')
-// } );
+app.get( '/', ( req, res ) => {
+    res.render('home')
+} );
 // app.get('/factor',(req,res)=>{
 //     db.query("SELECT * FROM factor",(err,result)=>{
 //         if(err){
