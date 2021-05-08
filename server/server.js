@@ -13,6 +13,7 @@ import path from 'path'
 import fileupload from 'express-fileupload'
 const __dirname = path.resolve();
 const app = express();
+
 const port = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
@@ -28,7 +29,8 @@ router.get('/', function(req, res) {
     res.setHeader('Access-Control-Allow-Credentials', true); 
 });
 app.get( '/', ( req, res ) => {
-    res.render('home')
+    console.log("hiii")
+    res.send("Hello world")
 } );
 // app.get('/factor',(req,res)=>{
 //     db.query("SELECT * FROM factor",(err,result)=>{
