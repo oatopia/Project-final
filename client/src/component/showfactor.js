@@ -10,7 +10,8 @@ export default function Match() {
   const [weight, setWeight] = useState([]);
   var history = useHistory();
   useEffect(() => {
-    Axios.get(url+"api/visitor/getfactor").then((Response) => {
+    fetch(url+"api/visitor/getfactor")
+    .then((Response) => {
       setFactorlist(Response.data);
     });
   }, []);
