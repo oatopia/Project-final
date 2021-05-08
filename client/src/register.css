@@ -17,7 +17,6 @@ body {
 .container1-register {
   margin: auto;
   display: flex;
-  /* flex-direction: row; */
 }
 
 .form1 {
@@ -38,8 +37,6 @@ body {
 
 #head-register {
   color: #0e57c5;
-
-  /* margin-bottom: 40px; */
 }
 
 p {
@@ -85,8 +82,4 @@ select {
   border: none;
   background-color: #e8e8e8;
   height: 50px;
-}
-
-.form1 {
-  /* height: 500px; */
 }
