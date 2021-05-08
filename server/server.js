@@ -29,7 +29,7 @@ router.get('/', function(req, res) {
     res.setHeader('Access-Control-Allow-Credentials', true); 
 });
 app.get( '/', ( req, res ) => {
-    console.log("hiii")
+    console.log("FUck youuuuuuuuu heroku")
     res.send("Hello world")
 } );
 // app.get('/factor',(req,res)=>{
