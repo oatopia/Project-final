@@ -14,7 +14,7 @@ import fileupload from 'express-fileupload'
 const __dirname = path.resolve();
 const app = express();
 
-const port = process.env.PORT || 8080;
+
 app.use(cors());
 app.use(express.json());
 app.use(bodyparser.json());
@@ -22,12 +22,13 @@ app.use(bodyparser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileupload());
 
-router.get('/', function(req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true); 
-});
+// router.get('/', function(req, res) {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+//     res.setHeader('Access-Control-Allow-Credentials', true); 
+// });
+
 app.get( '/', ( req, res ) => {
     console.log("FUck youuuuuuuuu heroku")
     res.send("Hello world")
@@ -86,7 +87,7 @@ app.use('/api/visitor',visitorRouter);
 
 
 
-
+const port = process.env.PORT || 8080;
 app.listen(port,()=>{
     console.log(`Server running port ${port}`);
 });
