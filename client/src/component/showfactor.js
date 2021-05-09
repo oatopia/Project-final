@@ -80,49 +80,59 @@ export default function Match() {
       for (let j = i + 1; j < factorlist.length; j++) {
         array.push(
           <div id="contain-match-display" key={index}>
-            <img
-              className="img-match-visitor"
-              value={factorlist[i].Image_factor}
-              src={url + "images/" + factorlist[i].Image_factor}
-              width="70px"
-              height="70px"
-              onClick={addImage(index)}
-            ></img>
-            <input
-              value={factorlist[i].Id}
-              type="radio"
-              id="radio-1"
-              name={index}
-              onChange={addImage(index)}
-            ></input>
-            <img
-              className="img-match-visitor"
-              value={factorlist[j].Image_factor}
-              src={url + "images/" + factorlist[j].Image_factor}
-              width="70px"
-              height="70px"
-              onClick={addImage(index)}
-            ></img>
-            <input
-              value={factorlist[j].Id}
-              type="radio"
-              id="radio-2"
-              name={index}
-              onChange={addImage(index)}
-            ></input>
-            <select
-              className="select-score"
-              defaultValue="1"
-              onChange={addWeight(index)}
-            >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-            </select>
+            <div className="box-match" id="box-match-1">
+              <img
+                className="img-match-visitor"
+                value={factorlist[i].Image_factor}
+                src={url + "images/" + factorlist[i].Image_factor}
+                width="40px"
+                height="40px"
+                onClick={addImage(index)}
+              ></img>
+              <h4>{factorlist[i].Factor_head}</h4>
+              {/* <input
+                value={factorlist[i].Id}
+                type="radio"
+                id="radio-1"
+                name={index}
+                onChange={addImage(index)}
+              ></input> */}
+            </div>
+
+            <div className="box-match" id="box-match-2">
+              <img
+                className="img-match-visitor"
+                value={factorlist[j].Image_factor}
+                src={url + "images/" + factorlist[j].Image_factor}
+                width="40px"
+                height="40px"
+                onClick={addImage(index)}
+              ></img>
+              <h4>{factorlist[j].Factor_head}</h4>
+              {/* <input
+                value={factorlist[j].Id}
+                type="radio"
+                id="radio-2"
+                name={index}
+                onChange={addImage(index)}
+              ></input> */}
+            </div>
+            <div className="custom-select">
+              <select
+                className="select-score"
+                defaultValue="1"
+                onChange={addWeight(index)}
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+              </select>
+            </div>
+            <hr/>
           </div>
         );
         index++;
@@ -156,8 +166,9 @@ export default function Match() {
               ให้ท่านเลือกปัจจัยที่ท่านคิดว่า
               <span>มีความสำคัญมากที่สุดในแต่ละคู่</span>
             </li>
-            <li>จากนั้นเลือกระดับความสำคัญ
-            <span>ของปัจจัยให้ครบทุกคู่</span>
+            <li>
+              จากนั้นเลือกระดับความสำคัญ
+              <span>ของปัจจัยให้ครบทุกคู่</span>
             </li>
             <li>สุดท้ายกดปุ่มจับคู่</li>
           </ol>

@@ -63,8 +63,13 @@
     margin-right: 0px;
     font-family: 'Prompt', sans-serif;
     font-weight: bold;
+    transition-duration: 0.5s;
   }
 
+  .searchbutton-Visitor:hover{
+    transition-duration: 0.5s;
+    background-color: #002a61;
+  }
 
   .match-container{
     text-align: center;
