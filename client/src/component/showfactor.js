@@ -5,12 +5,12 @@ import D1 from "../img/icon/D1.png";
 import { useHistory } from "react-router";
 
 export default function Match() {
-  const url = "https://matching-dorm-tu-server.herokuapp.com/"
+  const url = "https://matching-dorm-tu-server.herokuapp.com/";
   const [factorlist, setFactorlist] = useState([]);
   const [weight, setWeight] = useState([]);
   var history = useHistory();
   useEffect(() => {
-    Axios.get(url+"api/visitor/getfactor").then((Response) => {
+    Axios.get(url + "api/visitor/getfactor").then((Response) => {
       setFactorlist(Response.data);
     });
   }, []);
@@ -83,7 +83,7 @@ export default function Match() {
             <img
               className="img-match-visitor"
               value={factorlist[i].Image_factor}
-              src={url+"images/" + factorlist[i].Image_factor}
+              src={url + "images/" + factorlist[i].Image_factor}
               width="70px"
               height="70px"
               onClick={addImage(index)}
@@ -98,7 +98,7 @@ export default function Match() {
             <img
               className="img-match-visitor"
               value={factorlist[j].Image_factor}
-              src={url+"images/" + factorlist[j].Image_factor}
+              src={url + "images/" + factorlist[j].Image_factor}
               width="70px"
               height="70px"
               onClick={addImage(index)}
@@ -132,7 +132,7 @@ export default function Match() {
   };
 
   const matchFac = () => {
-    Axios.post(url+"api/match/matchDorm", weight)
+    Axios.post(url + "api/match/matchDorm", weight)
       .then((Response) => {
         console.log(Response.data);
         history.push({
@@ -147,40 +147,51 @@ export default function Match() {
 
   return (
     <div className="container-visitor">
-
       <div className="contain-factor-visitor">
         <div className="showfactor-left-box">
           <h1>จับคู่หอพัก</h1>
-            วิธีการจับคู่
+          <h2>วิธีการจับคู่หอพัก</h2>
           <ol>
-            <li>ให้ท่านเลือกปัจจัยที่ท่านคิดว่ามีความสำคัญมากที่สุดในแต่ละคู่</li>
-            <li>จากนั้นเลือกระดับความสำคัญของปัจจัยให้ครบทุกคู่</li>
+            <li>
+              ให้ท่านเลือกปัจจัยที่ท่านคิดว่า
+              <span>มีความสำคัญมากที่สุดในแต่ละคู่</span>
+            </li>
+            <li>จากนั้นเลือกระดับความสำคัญ
+            <span>ของปัจจัยให้ครบทุกคู่</span>
+            </li>
             <li>สุดท้ายกดปุ่มจับคู่</li>
           </ol>
         </div>
         <div className="showfactor-right-box">
+          <h2>ความหมายของปัจจัยในการตัดสินใจเลือกหอพัก</h2>
           {factorlist.map((data, key) => {
             return (
-              <div key={key} className="detail-visitor">
+              <div key={key} className="detail-factor-visitor">
                 <img
-                  src={url+"images/" + data.Image_factor}
+                  src={url + "images/" + data.Image_factor}
                   width="50"
                   height="50"
                 ></img>
-                <p className="Fn-visitor">{data.Factor_name}</p>
+                <div className="detail-visitor">
+                  <h3>{data.Factor_head}</h3>
+                  <p className="Fn-visitor">{data.Factor_name}</p>
+                </div>
               </div>
             );
           })}
         </div>
       </div>
 
-      <div className="containermatch2-visitor">
-        {showimage()}
-        <button onClick={matchFac} className="button-match-visitor">
-          จับคู่หอพัก
-        </button>
+      <div className="container-match-visitor">
+        <div className="image-left-side-match"></div>
+        <div className="container-inner-match-visitor">
+          <div className="containermatch2-visitor">{showimage()}</div>
+          <button onClick={matchFac} className="button-match-visitor">
+            จับคู่หอพัก
+          </button>
+        </div>
+        <div className="image-right-side-match"></div>
       </div>
-
     </div>
   );
 }

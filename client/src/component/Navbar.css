@@ -1,7 +1,4 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-}
+
 .Nav{
     display: flex;
     flex-direction: row;
@@ -14,27 +11,8 @@
     width: 100;
 }
 
-
-.Navmenu{
-
-}
-
-a{
-    margin-right: 30px;
-}
-
 img{
     margin-right:4px ;
-}
-
-a{
-    font-size: 20px;
-    color: #3F3F3F;
-    text-decoration: none;
-}
-
-a:hover{
-    color: blue;
 }
 
 .homelogo{
@@ -52,18 +30,31 @@ a:hover{
 
 .sign{
     background-color: #1655a7;
+    /* border: 2px solid #1655a7; */
     border: none;
-    width: 150px;
+    width: 130px;
     height: 50px;
     border-radius: 5px;
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: normal;
     color: white;
+    transition-duration:0.8s;
+}
+
+.sign:hover{
+    background-color:#002a61;
+    transition-duration:0.8s;
 }
 
 
-.linkhead{
-    color: #000066;
-    font-weight: bold;
-    font-size: 24px; 
+.linkhead p{
+    color: #1655a7;
+    font-weight: normal;
+    font-size: 28px; 
+    transition-duration:0.5s;
+}
+
+.linkhead p:hover{
+    color: #002a61;
+    transition-duration:0.5s;
 }

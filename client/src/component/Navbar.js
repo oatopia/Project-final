@@ -20,17 +20,17 @@ export default function Navbar() {
       ></img>
 
       <ul className="listmenu">
-        <img
+        {/* <img
           src={homelogo}
           className="homelogo"
           width="33px"
           height="31px"
           onClick={gotohome}
-        ></img>
+        ></img> */}
         <Link to="/" className="linkhead">
-          หน้าหลัก
+          <p>หน้าหลัก</p>
         </Link>
-        <img
+        {/* <img
           src={userlogo}
           className="userlogo"
           width="33px"
@@ -38,9 +38,9 @@ export default function Navbar() {
           onClick={() => {
             window.location.href = "/login";
           }}
-        ></img>
+        ></img> */}
         <Link to="/login" className="linkhead">
-          เข้าสู่ระบบ
+          <p>เข้าสู่ระบบ</p>
         </Link>
         <button
           className="sign"
