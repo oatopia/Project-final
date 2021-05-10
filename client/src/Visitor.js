@@ -4,6 +4,7 @@ import Navbar from "./component/Navbar";
 import Match from "./component/Match";
 import Showfactor from './component/showfactor.js'
 import { useHistory } from "react-router";
+import Axios from "axios";
 
 // const required = value => {
 //   if (!value) {
@@ -16,21 +17,22 @@ import { useHistory } from "react-router";
 // };
 
 function Visitor() {
+  const url = "https://matching-dorm-tu-server.herokuapp.com/";
   const [search,setSearch] = useState("");
   const history = useHistory();
 
   const onClickforSerach = (e) => {
-    e.preventDefault();
     console.log(search)
     Axios.post(url+'api/visitor/searchDorm',{
       dormname:search
     },)
     .then(Response => {
         console.log("Respone search: ",Response.data);
-        history.push({
-          pathname: "/visitorResult",
-          state: Response.data,
-        });
+          history.push({
+            pathname: "/searchvisitor",
+            state: Response.data,
+          });
+        
     }).catch(error=>{
         console.log(error);
     })
@@ -47,8 +49,8 @@ function Visitor() {
         </div>
       </div>
       <div className="searchbar-Visitor">
-          <input className="searchinput-Visitor" placeholder="ค้นหาหอพัก..."></input>
-          <button className="searchbutton-Visitor" onClick={onClickforSerach()}>ค้นหา</button>
+          <input className="searchinput-Visitor" placeholder="ค้นหาหอพัก..." onChange={e=>{setSearch(e.target.value)}}></input>
+          <button className="searchbutton-Visitor" onClick={()=>{onClickforSerach()}}>ค้นหา</button>
       </div>
       <div className="match-container">
         {/* <Match /> */}

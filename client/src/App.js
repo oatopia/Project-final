@@ -14,7 +14,7 @@ import login from "./Login.js";
 import member from "./User_page/member.js";
 import owner from "./Dorm_page/owner.js";
 import resultmatch from "./User_page/resultmatch.js";
-import visitorResult from "./visitorResult.js";
+import searchvisitor from "./visitorResult.js";
 import admin from "./Admin_page/Admin.js";
 import adminfactor from "./Admin_page/Adminfactor.js";
 import addDorm from "./Dorm_page/addDorm.js";
@@ -29,7 +29,7 @@ function App() {
         <Route path="/member" component={member} />
         <Route path="/owner" component={owner} />
         <Route path="/resultmatch" component={resultmatch} />
-        <Route path="/visitorResult" component={visitorResult} />
+        <Route path="/searchvisitor" component={searchvisitor} />
         <Route path="/Admin" component={admin} />
         <Route path="/Adminfactor" component={adminfactor} />
         <Route path="/addDorm" component={addDorm} />

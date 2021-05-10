@@ -14,6 +14,7 @@ Visitormodel.getallfactor = result => {
 };
 
 Visitormodel.searchbyName = (name, result) => {
+    let  dormid = 0;
     db.query("SELECT * FROM dormitory WHERE Dorm_Name = ?", name, (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -21,7 +22,9 @@ Visitormodel.searchbyName = (name, result) => {
             return;
         }
         result(null, res);
+        dormid=res[0].Dorm_ID;
     });
+    console.log("dorm id by search",dormid);
 };
 
 export default Visitormodel;

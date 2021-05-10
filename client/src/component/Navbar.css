@@ -57,3 +57,6 @@ img{
     transition-duration:0.5s;
 }
 
+.logo-box img:hover{
+    cursor: pointer;
+}
