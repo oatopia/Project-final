@@ -19,8 +19,8 @@ export const searchdorm = (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(data[0]);
-      res.send(data[0]);
+      console.log(data);
+      res.send(data);
     }
   });
 };
