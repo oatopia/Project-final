@@ -1,5 +1,6 @@
 
 .Nav{
+    height: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -7,9 +8,6 @@
     /* position: fixed; */
 }
 
-.logoapp{
-    width: 100;
-}
 
 img{
     margin-right:4px ;
@@ -58,3 +56,4 @@ img{
     color: #002a61;
     transition-duration:0.5s;
 }
+

@@ -1,6 +1,6 @@
 import React from "react";
 import "./Navbar.css";
-import logoapp from "../img/logoapp.png";
+import logoapp from "../img/logo.png";
 import homelogo from "../img/Home.png";
 import userlogo from "../img/user.png";
 import { BrowserRouter, Route, Link, Router, Redirect } from "react-router-dom";
@@ -11,14 +11,13 @@ export default function Navbar() {
   };
   return (
     <div className="Nav">
-      <img
-        src={logoapp}
-        className="logoapp"
-        width="200"
-        height="100"
-        onClick={gotohome}
-      ></img>
-
+      <div className="logo-box">
+        <img
+          src={logoapp}
+          className="logoapp"
+          onClick={gotohome}
+        ></img>
+      </div>
       <ul className="listmenu">
         {/* <img
           src={homelogo}
