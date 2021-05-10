@@ -19,7 +19,6 @@ import admin from "./Admin_page/Admin.js";
 import adminfactor from "./Admin_page/Adminfactor.js";
 import addDorm from "./Dorm_page/addDorm.js";
 import dormdata from "./Dorm_page/Dorm_data.js";
-
 function App() {
   return (
     <BrowserRouter>
