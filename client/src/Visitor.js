@@ -28,10 +28,8 @@ function Visitor() {
         </div>
       </div>
       <div className="searchbar-Visitor">
-        <form>
           <input className="searchinput-Visitor" placeholder="ค้นหาหอพัก..." validations={[required]}></input>
           <button className="searchbutton-Visitor">ค้นหา</button>
-        </form>
       </div>
       <div className="match-container">
         {/* <Match /> */}

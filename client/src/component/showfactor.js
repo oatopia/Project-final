@@ -157,7 +157,7 @@ export default function Match() {
   return (
     <div className="container-visitor">
       <div className="contain-factor-visitor">
-        <div className="contain-in-visitor">
+        {/* <div className="contain-in-visitor"> */}
           <div className="showfactor-left-box">
             <h1>จับคู่หอพัก</h1>
             <h2>วิธีการจับคู่หอพัก</h2>
@@ -173,7 +173,7 @@ export default function Match() {
               <li>สุดท้ายกดปุ่มจับคู่</li>
             </ol>
           </div>
-        </div>
+        {/* </div> */}
         <div className="showfactor-right-box">
           <h2>ความหมายของปัจจัยในการตัดสินใจเลือกหอพัก</h2>
           {factorlist.map((data, key) => {
