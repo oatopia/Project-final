@@ -132,7 +132,6 @@ export default function Match() {
                 <option value="7">7</option>
               </select>
             </div>
-            <hr/>
           </div>
         );
         index++;
@@ -158,20 +157,22 @@ export default function Match() {
   return (
     <div className="container-visitor">
       <div className="contain-factor-visitor">
-        <div className="showfactor-left-box">
-          <h1>จับคู่หอพัก</h1>
-          <h2>วิธีการจับคู่หอพัก</h2>
-          <ol>
-            <li>
-              ให้ท่านเลือกปัจจัยที่ท่านคิดว่า
+        <div className="contain-in-visitor">
+          <div className="showfactor-left-box">
+            <h1>จับคู่หอพัก</h1>
+            <h2>วิธีการจับคู่หอพัก</h2>
+            <ol>
+              <li>
+                ให้ท่านเลือกปัจจัยที่ท่านคิดว่า
               <span>มีความสำคัญมากที่สุดในแต่ละคู่</span>
-            </li>
-            <li>
-              จากนั้นเลือกระดับความสำคัญ
+              </li>
+              <li>
+                จากนั้นเลือกคะแนนความสำคัญ
               <span>ของปัจจัยให้ครบทุกคู่</span>
-            </li>
-            <li>สุดท้ายกดปุ่มจับคู่</li>
-          </ol>
+              </li>
+              <li>สุดท้ายกดปุ่มจับคู่</li>
+            </ol>
+          </div>
         </div>
         <div className="showfactor-right-box">
           <h2>ความหมายของปัจจัยในการตัดสินใจเลือกหอพัก</h2>
@@ -194,14 +195,16 @@ export default function Match() {
       </div>
 
       <div className="container-match-visitor">
-        <div className="image-left-side-match"></div>
+        {/* <div className="image-left-side-match"></div> */}
         <div className="container-inner-match-visitor">
-          <div className="containermatch2-visitor">{showimage()}</div>
+          <div className="containermatch2-visitor">
+            <p className="head-match">โปรดเลือกปัจจัยและให้คะแนนความสำคัญที่ท่านคิดว่ามีความสำคัญมากที่สุดในแต่ละคู่</p>
+            {showimage()}</div>
           <button onClick={matchFac} className="button-match-visitor">
             จับคู่หอพัก
           </button>
         </div>
-        <div className="image-right-side-match"></div>
+        {/* <div className="image-right-side-match"></div> */}
       </div>
     </div>
   );

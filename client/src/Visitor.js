@@ -13,7 +13,7 @@ function Visitor() {
         <Navbar></Navbar>
         <div className="header-contain">
           <h1>Dorm Matching TU</h1>
-          <h2>เว็บจับคู่หอพักที่ช่วยให้คุณตัดสินใจเลือกหอพักได้ง่ายขึ้น</h2>
+          <h2>เว็บจับคู่หอพักที่จะช่วยให้คุณตัดสินใจเลือกหอพักได้ง่ายขึ้น</h2>
         </div>
         </div>
       </div>
