@@ -1,6 +1,6 @@
 
 .Nav{
-    height: 100px;
+    height: 120px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -60,3 +60,4 @@ img{
 .logo-box img:hover{
     cursor: pointer;
 }
+
