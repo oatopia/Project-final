@@ -1,0 +1,14 @@
+.dorm-container{
+    width: 80%;
+    background-color: #decebe;
+    height: 100px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 0px  rgba(0, 0, 0, 0.2);
+}
+
+.result-container{
+    margin-top: 20px;
+}
