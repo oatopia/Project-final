@@ -37,18 +37,18 @@ export const calmatrix = (jsondata) => {
         matrix[i][j] = 1;
       } else {
         if (j > i) {
-          let id = jsondata[index].Image - 1;
+          let id = jsondata[index].comparator - 1;
           if (i == id) {
-            matrix[i][j] = parseInt(jsondata[index].Weight);
+            matrix[i][j] = parseInt(jsondata[index].weight);
 
-            var number = 1 / jsondata[index].Weight;
+            var number = 1 / jsondata[index].weight;
             matrix[j][i] = parseFloat(number.toFixed(2));
             index++;
           } else {
-            var number = 1 / jsondata[index].Weight;
+            var number = 1 / jsondata[index].weight;
             matrix[i][j] = parseFloat(number.toFixed(2));
 
-            matrix[j][i] = parseInt(jsondata[index].Weight);
+            matrix[j][i] = parseInt(jsondata[index].weight);
             index++;
           }
         }

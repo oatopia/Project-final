@@ -34,13 +34,13 @@ export default function Match() {
       } else {
         setWeight([
           ...weight,
-          { comparator: factor, weight: "1", index_compare: index },
+          { comparator: factor, weight: 1, index_compare: index },
         ]);
         console.log(weight);
       }
     } else {
       setWeight([
-        { comparator: factor, weight: "1", index_compare: index },
+        { comparator: factor, weight: 1, index_compare: index },
       ]);
       console.log(weight);
     }
@@ -135,11 +135,11 @@ export default function Match() {
   };
 
   const matchFac = () => {
-    Axios.post(url + "api/match/matchDorm", weight)
+    Axios.post(url + "api/visitor/matchDorm", weight)
       .then((Response) => {
         console.log(Response.data);
         history.push({
-          pathname: "/visitorResult",
+          pathname: "/matchVisitor",
           state: Response.data,
         });
       })
@@ -189,7 +189,6 @@ export default function Match() {
       </div>
 
       <div className="container-match-visitor">
-        {/* <div className="image-left-side-match"></div> */}
         <div className="container-inner-match-visitor">
           <div className="containermatch2-visitor">
             <p className="head-match">โปรดเลือกปัจจัยและให้คะแนนความสำคัญที่ท่านคิดว่ามีความสำคัญมากที่สุดในแต่ละคู่</p>
@@ -198,7 +197,6 @@ export default function Match() {
             จับคู่หอพัก
           </button>
         </div>
-        {/* <div className="image-right-side-match"></div> */}
       </div>
     </div>
   );

@@ -57,5 +57,19 @@ Visitormodel.searchbyName = (name, result) => {
     });
 };
 
+
+
+Visitormodel.getAllDorm = (result) =>{
+    db.query("SELECT * FROM dormitory ",(err,res)=>{
+        if(err){
+            console.log("error:",err);
+            result(err,null);
+            return;
+        }
+        console.log(res);
+        result(null,res);    
+    });
+};
+
 export default Visitormodel;
 
