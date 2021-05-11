@@ -11,7 +11,7 @@ function VisitorResult() {
   var location = useLocation();
   const state = location.state;
   console.log("sate match:", state);
-  const [srcimg, setSrcimg] = useState(state.image[0].Image);
+  const [srcimg, setSrcimg] = useState('');
 
 
   return (
@@ -26,6 +26,9 @@ function VisitorResult() {
               <img className="image-big" src={url + "img_Dorm/" + srcimg}></img>
               <div className="image-mini-container">
                 {state.image.map((data, key) => {
+                  if(key == 0){
+                    setSrcimg(data.Image)
+                  }
                   return (
                     <img className="image-mini" src={url + "img_Dorm/" + data.Image} key={key} ></img>
                   )

@@ -48,7 +48,7 @@ Visitormodel.searchbyName = (name, result) => {
                     })
                 })
             }else{
-                result(null,res);
+                result(null,"");
             }
         }
 
