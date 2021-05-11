@@ -207,6 +207,15 @@
     transition-duration: 0.5s;
 }
 
+#box-match-1:focus{
+  background-color:#abcbe2;
+  transition-duration: 0.5s;
+}
+
+#box-match-2:focus{
+  background-color:#abcbe2;
+  transition-duration: 0.5s;
+}
 
 .head-match{
   color: #23689b;

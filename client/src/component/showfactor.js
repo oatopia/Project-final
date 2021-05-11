@@ -15,107 +15,101 @@ export default function Match() {
     });
   }, []);
 
-  const addWeight = (index) => (e) => {
-    if (weight.length) {
-      let have = "false";
-      weight.map((item) => {
-        if (item.Id == index) {
-          return (have = "true");
-        }
-        return (have = "false");
-      });
-      if (have == "true") {
-        let edit = weight.map((item) => {
-          if (item.Id == index) {
-            return { ...item, Weight: e.target.value };
-          }
-          return item;
-        });
-        setWeight(edit);
-      } else {
-        setWeight([
-          ...weight,
-          { Id: index, Image: "", Weight: e.target.value },
-        ]);
-        console.log(weight);
-      }
-    } else {
-      setWeight([{ Id: index, Image: "", Weight: e.target.value }]);
-    }
-  };
-
-  const addImage = (index) => (e) => {
+  // choose factor--------------------------------------------
+  const addImage = (index,factor)=>e=> {
     if (weight.length > 0) {
-      let have = "false";
-      weight.map((item) => {
-        if (item.Id == index) {
-          return (have = "true");
+      var check = false;
+      var INDEX = 0;
+      for (let i = 0; i < weight.length; i++) {
+        if (weight[i].index_compare == index) {
+          check = true;
+          INDEX = i;
         }
-        return (have = "false");
-      });
-      if (have == "true") {
-        let edit = weight.map((item) => {
-          if (item.Id == index) {
-            return { ...item, Image: e.target.value };
-          }
-          return item;
-        });
-        setWeight(edit);
+      }
+      if (check == true) {
+        const newWeight = [...weight];
+        console.log("check true comparator: ", newWeight);
+        newWeight[INDEX].comparator = factor;
+        setWeight(newWeight);
       } else {
         setWeight([
           ...weight,
-          { Id: index, Image: e.target.value, Weight: "1" },
+          { comparator: factor, weight: "1", index_compare: index },
         ]);
         console.log(weight);
       }
     } else {
-      setWeight([{ Id: index, Image: e.target.value, Weight: "1" }]);
+      setWeight([
+        { comparator: factor, weight: "1", index_compare: index },
+      ]);
       console.log(weight);
     }
   };
+
+
+  // choose weight--------------------------------------------
+  const addWeight = (index) => (e) => {
+    if (weight.length > 0) {
+      var check = false;
+      var INDEX = 0;
+
+      for (let i = 0; i < weight.length; i++) {
+        if (weight[i].index_compare == index) {
+          check = true;
+          INDEX = i;
+        }
+      }
+
+      if (check == true) {
+        const newWeight = [...weight];
+        console.log("check true weight: ", newWeight);
+        newWeight[INDEX].weight = e.target.value;
+        setWeight(newWeight);
+      } else {
+        setWeight([
+          ...weight,
+          { comparator: "", weight: e.target.value, index_compare: index },
+        ]);
+        console.log(weight);
+      }
+    } else {
+      setWeight([
+        { comparator: "", weight: e.target.value, index_compare: index },
+      ]);
+    }
+  };
+  
+
+
   const showimage = () => {
     let index = 0;
     let array = [];
     for (let i = 0; i < factorlist.length; i++) {
       for (let j = i + 1; j < factorlist.length; j++) {
+        const factorI = factorlist[i].Id;
+        const factorJ = factorlist[j].Id
         array.push(
           <div id="contain-match-display" key={index}>
-            <div className="box-match" id="box-match-1">
+            <div className="box-match" id="box-match-1" onClick={addImage(index,factorI)}>
               <img
                 className="img-match-visitor"
                 value={factorlist[i].Image_factor}
                 src={url + "images/" + factorlist[i].Image_factor}
                 width="40px"
                 height="40px"
-                onClick={addImage(index)}
               ></img>
               <h4>{factorlist[i].Factor_head}</h4>
-              {/* <input
-                value={factorlist[i].Id}
-                type="radio"
-                id="radio-1"
-                name={index}
-                onChange={addImage(index)}
-              ></input> */}
             </div>
 
-            <div className="box-match" id="box-match-2">
+            <div className="box-match" id="box-match-2" onClick={addImage(index,factorJ)}>
               <img
                 className="img-match-visitor"
                 value={factorlist[j].Image_factor}
                 src={url + "images/" + factorlist[j].Image_factor}
                 width="40px"
                 height="40px"
-                onClick={addImage(index)}
               ></img>
               <h4>{factorlist[j].Factor_head}</h4>
-              {/* <input
-                value={factorlist[j].Id}
-                type="radio"
-                id="radio-2"
-                name={index}
-                onChange={addImage(index)}
-              ></input> */}
             </div>
             <div className="custom-select">
               <select

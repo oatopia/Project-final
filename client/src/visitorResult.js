@@ -6,31 +6,29 @@ import { useLocation } from 'react-router';
 import imagetest from './img/livingroom1.jpg'
 
 
+
 function VisitorResult() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/";
-  var location = useLocation();
-  const state = location.state;
+  let location = useLocation();
+  let state = location.state;
   console.log("sate match:", state);
-  const [srcimg, setSrcimg] = useState('');
-
+  const [srcimg, setSrcimg] = useState(state ? state.image[0].Image: "");
 
   return (
     <div className="contain-visitor-result">
       <Navbar></Navbar>
       {state == "" ? <h1>ไม่พบหอพักที่ท่านค้นหา</h1> :
         <div className="visitor-dorm-block">
-
           <div className="dorm-data-container">
             <label className="dormname">{state.information.Dorm_Name}</label>
             <div className="image-container">
               <img className="image-big" src={url + "img_Dorm/" + srcimg}></img>
               <div className="image-mini-container">
                 {state.image.map((data, key) => {
-                  if(key == 0){
-                    setSrcimg(data.Image)
-                  }
                   return (
-                    <img className="image-mini" src={url + "img_Dorm/" + data.Image} key={key} ></img>
+                    <img className="image-mini" src={url + "img_Dorm/" + data.Image} key={key}
+                    onClick={()=>{setSrcimg(data.Image)}}
+                    ></img>
                   )
 
                 })}
