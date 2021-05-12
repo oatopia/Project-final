@@ -157,7 +157,7 @@ const Owner = () => {
               </div>
             </div>
             <div className="box-2-inner-data">
-              <p>รายละเอียดหอพัก {dorm.Common_fee}</p>
+              <p>รายละเอียดหอพัก {dorm.Information}</p>
               <h2>ข้อมูลติดต่อ</h2>
               <p>ชื่อผู้ดูแลหอพัก {dorm.L_name}</p>
               <p>เบอร์ติดต่อ {dorm.Contact_Number}</p>
