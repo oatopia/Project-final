@@ -46,7 +46,7 @@ const Login = () => {
                         }}></input>
                         <br></br>
                         <button className="buttonregister" type="submit">เข้าสู่ระบบ</button>
-                        <hr></hr>
+                        <hr/>
                         <button className="buttonregister2" type="submit">สร้างบัญชีใหม่</button>
                     </form>
                     <img src={img} className="img" width="300" height="470"></img>

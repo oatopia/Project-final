@@ -150,7 +150,7 @@
 
 .container-inner-match-visitor {
   text-align: center;
-  width: 70%;
+  width: 80%;
   background-color: #eff7e1;
   margin: auto;
   border-radius: 10px;
@@ -181,7 +181,7 @@
   align-items: center;
   background-color: #d0e5f5;
   border-radius: 5px;
-  margin-right: 10px;
+  margin-right: 20px;
   width: 360px;
   padding: 10px;
   transition-duration: 0.5s;
@@ -223,16 +223,6 @@
   margin-bottom: 10px;
 }
 
-hr{
-  margin-top: 30px;
-  border: none;
-  height: 100px;
-  width: 50%;
-  background-image: url("../img/back5.jpg");
-  background-position: bottom;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
 .contain-in-visitor{
   /* margin-top: auto; */
