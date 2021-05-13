@@ -17,14 +17,7 @@ const Loginowner = () => {
         e.preventDefault();
         Auth.loginowner(username, password)
             .then(Response => {
-                console.log(Response);
-                if (Response.type == "สมาชิก") {
-                    history.push("/member");
-                    // window.location.reload();
-                } else if (Response.type == "ผู้ประกอบการ") {
                     history.push("/owner");
-                    // window.location.reload();
-                }
             })
     }
     const currentUser = Auth.getCurrentUser();

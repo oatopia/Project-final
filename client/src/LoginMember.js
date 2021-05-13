@@ -16,17 +16,10 @@ const Loginmember = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        Auth.loginmember(username, password,)
+        Auth.loginmember(username, password)
             .then(Response => {
-                <Redirect to="/member"/>
-                // console.log(Response);
-                // if (Response.type == "สมาชิก") {
-                //     history.push("/member");
-                //     // window.location.reload();
-                // } else if (Response.type == "ผู้ประกอบการ") {
-                //     history.push("/owner");
-                //     // window.location.reload();
-                // }
+                console.log(Response);
+                    history.push("/member");
             })
     }
     const currentUser = Auth.getCurrentUser();

@@ -30,7 +30,11 @@ function Register() {
         e.preventDefault();
         Auth.register(username, password, type)
             .then(Response => {
-                history.push("/login");
+                if(type=="สมาชิก"){
+                    history.push("/loginmember");
+                }else{
+                    history.push("/loginowner");
+                }
                 console.log(Response.data);
 
             })
@@ -47,7 +51,7 @@ function Register() {
                             setusername(e.target.value);
                         }} ></input>
                         <p>รหัสผ่าน</p>
-                        <input className="input-text-register" onChange={(e) => {
+                        <input type="password" className="input-text-register" onChange={(e) => {
                             setpassword(e.target.value);
                         }}></input>
                         <p>ประเภทผู้ใช้งาน</p>
