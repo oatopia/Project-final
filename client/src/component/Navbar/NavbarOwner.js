@@ -1,12 +1,11 @@
 import React from "react";
 import "./NavbarOwner.css";
-import logoapp from "../img/logoapp.png";
-import profilelogo from "../img/profile-user.png";
-import homelogo from '../img/Home.png';
-import add from '../img/Add.png';
-import edit from '../img/edit.png';
+import logoapp from "../../img/logoapp.png";
+import profilelogo from "../../img/profile-user.png";
+import add from '../../img/Add.png';
+import edit from '../../img/edit.png';
 import { BrowserRouter, Route, Link, Router, Redirect,useHistory } from "react-router-dom";
-import Auth from '../service/authService.js'
+import Auth from '../../service/authService.js'
 
 
 export default function Navbar() {

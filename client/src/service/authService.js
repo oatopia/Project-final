@@ -3,9 +3,24 @@ import axios from "axios";
 const API_URL = "https://matching-dorm-tu-server.herokuapp.com/api/user/";
 
 class AuthService {
-  login(username, password) {
+  loginmember(username, password) {
     return axios
-      .post(API_URL + "login", {
+      .post(API_URL + "loginmember", {
+        username,
+        password
+      })
+      .then(response => {
+        if (response.data.accessToken) {
+          localStorage.setItem("user", JSON.stringify(response.data));
+        }
+
+        return response.data;
+      });
+  }
+
+  loginowner(username, password) {
+    return axios
+      .post(API_URL + "loginowner", {
         username,
         password
       })

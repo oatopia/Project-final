@@ -1,6 +1,6 @@
 import './register.css';
 import img from './img/registerimg.png'
-import Navbar from './component/Navbar'
+import Navbar from './component/Navbar/Navbar.js'
 import Axios from 'axios'
 import React, { useState } from 'react';
 import Auth from './service/authService.js'

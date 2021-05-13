@@ -1,9 +1,9 @@
 import React from "react";
 import "./NavbarAdmin.css"
-import logoapp from "../img/logoapp.png"
-import profilelogo from "../img/profile-user.png"
-import usericon from '../img/user.png'
-import factoricon from '../img/factoricon.png'
+import logoapp from "../../img/logoapp.png"
+import profilelogo from "../../img/profile-user.png"
+import usericon from '../../img/user.png'
+import factoricon from '../../img/factoricon.png'
 import { Link } from "react-router-dom";
 
 export default function Navbar() {

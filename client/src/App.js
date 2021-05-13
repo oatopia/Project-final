@@ -10,7 +10,8 @@ import {
 } from "react-router-dom";
 import visitor from "./Visitor_page/Visitor.js";
 import register from "./register.js";
-import login from "./Login.js";
+import loginmember from "./LoginMember.js";
+import loginowner from "./LoginOwner.js";
 import member from "./User_page/member.js";
 import owner from "./Dorm_page/owner.js";
 import resultmatch from "./User_page/resultmatch.js";
@@ -27,7 +28,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={visitor} />
         <Route exact path="/register" component={register} />
-        <Route exact path="/login" component={login} />
+        <Route exact path="/loginmember" component={loginmember} />
+        <Route exact path="/loginowner" component={loginowner} />
         <Route path="/member" component={member} />
         <Route path="/owner" component={owner} />
         <Route path="/resultmatch" component={resultmatch} />

@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 import "./Adminfactor.css";
 import Axios from "axios";
-import NavbarAdmin from "../component/NavbarAdmin.js";
+import NavbarAdmin from "../component/Navbar/NavbarAdmin.js";
 import deleteicon from "../img/deleteicon.png";
 import editicon from "../img/edit.png";
 

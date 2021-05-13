@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import './Login.css';
+import './LoginOwner.css';
 import img from './img/loginimg.jpg'
-import Navbar from './component/Navbar'
+import Navbar from './component/Navbar/Navbar.js'
 import Axios from 'axios'
 import Auth from './service/authService.js'
 
 
-const Login = () => {
+const Loginowner = () => {
 
     var history = useHistory();
     const [username, setusername] = useState("");
@@ -15,7 +15,7 @@ const Login = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        Auth.login(username, password)
+        Auth.loginowner(username, password)
             .then(Response => {
                 console.log(Response);
                 if (Response.type == "สมาชิก") {
@@ -32,22 +32,30 @@ const Login = () => {
     return (
         <>
             <Navbar></Navbar>
-            <div className="containerlog">
-                <div className="container1">
-                    <form className="form2" onSubmit={handleLogin}>
-                        <h1 id="head-login">เข้าสู่ระบบ</h1>
+            <div className="owner-login-container">
+                <div className="content-owner-login-container">
+                    <form className="form-owner-login" onSubmit={handleLogin}>
+                        <div>
+                        <p id="h1-login-owner">เข้าสู่ระบบสำหรับ</p>
+                        <p id="h1-login-owner">ผู้ประกอบการ</p>
+                        </div>
+                        
+                        <div>
                         <p>ชื่อผู้ใช้</p>
-                        <input className="text-input" onChange={(e) => {
+                        <input className="text-input-owner-login" onChange={(e) => {
                             setusername(e.target.value);
                         }}></input>
+                        </div>
+                        <div>
                         <p>รหัสผ่าน</p>
-                        <input className="text-input" onChange={(e) => {
+                        <input type="password" className="text-input-owner-login" onChange={(e) => {
                             setpassword(e.target.value);
                         }}></input>
+                        </div>
                         <br></br>
-                        <button className="buttonregister" type="submit">เข้าสู่ระบบ</button>
+                        <button className="button-login-owner" type="submit">เข้าสู่ระบบ</button>
                         <hr/>
-                        <button className="buttonregister2" type="submit">สร้างบัญชีใหม่</button>
+                        <button className="button-register-owner" type="submit">สร้างบัญชีใหม่</button>
                     </form>
                     <img src={img} className="img" width="300" height="470"></img>
                 </div>
@@ -56,4 +64,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Loginowner;

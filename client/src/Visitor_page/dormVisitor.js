@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import './visitorResult.css';
-import Navbar from '../component/Navbar.js';
+import Navbar from '../component/Navbar/Navbar.js';
 import Axios from 'axios'
 import { useLocation } from 'react-router';
 import imagetest from '../img/livingroom1.jpg'

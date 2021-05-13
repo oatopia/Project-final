@@ -1,10 +1,5 @@
-body {
-  margin: 0;
-}
 
-.containerlog {
-  /* background-image: url("./img/l5.jpg"); */
-  /* background-size: cover; */
+.owner-login-container {
   background-color: #e9eaec;
   min-height: 100vh;
   width: 100%;
@@ -14,12 +9,12 @@ body {
   min-height: 100vh;
 }
 
-.container1 {
+.content-owner-login-container {
   margin: auto;
   display: flex;
 }
 
-.form2 {
+.form-owner-login {
   padding: 20px;
   width: 350px;
   display: flex;
@@ -35,19 +30,13 @@ body {
   box-shadow: 2px 10px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
-#head-login {
+#h1-login-owner {
   color: #0e57c5;
-  margin-top: 0px;
   font-weight: bold;
+  font-size: 32px;
 }
-/* 
-.form2 p {
-  color: #464646;
-  font-size: 20px;
-  font-weight: bold;
-} */
 
-input.text-input {
+.text-input-owner-login {
   background-color: #e8e8e8;
   border: none;
   border-radius: 3px;
@@ -58,11 +47,11 @@ input.text-input {
   font-size: 18px;
 }
 
-.text-input:focus {
+.text-input-owner-login:focus {
   outline-color: #a2a2a2;
 }
 
-.buttonregister {
+.button-login-owner {
   width: 100%;
   height: 50px;
   background-color: #0e57c5;
@@ -75,7 +64,7 @@ input.text-input {
   font-weight: bold;
 }
 
-.buttonregister2 {
+.button-register-owner {
   margin-left: auto;
   margin-right: auto;
   margin-top: 5px;
@@ -88,4 +77,4 @@ input.text-input {
   border-radius: 5px;
   box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
   font-weight: bold;
-}
+} 

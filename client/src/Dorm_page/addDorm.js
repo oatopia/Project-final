@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./addDorm.css";
-import Navbar from "../component/NavbarOwner";
+import Navbar from "../component/Navbar/NavbarOwner.js";
 import Axios from "axios";
 import Auth from "../service/authService.js";
 import { Redirect,useHistory } from "react-router-dom";

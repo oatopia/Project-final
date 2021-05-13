@@ -1,8 +1,8 @@
 import {React,useEffect,useState} from 'react';
 import {Redirect } from 'react-router-dom'
 import './member.css';
-import NavbarMember from '../component/NavbarMember.js';
-import Match_member from '../component/Match-member';
+import NavbarMember from '../component/Navbar/NavbarMember.js';
+import Match_member from '../component/Match/Match-member';
 import Axios from 'axios' 
 import Auth from '../service/authService.js'
 import authHeader from '../service/auth-header.js';

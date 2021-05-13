@@ -2,8 +2,8 @@ import { React, useEffect, useState } from "react";
 import Axios from "axios";
 import "./Match-member.css";
 import { useHistory } from "react-router-dom";
-import authHeader from "../service/auth-header.js";
-import Auth from "../service/authService.js";
+import authHeader from "../../service/auth-header.js";
+import Auth from "../../service/authService.js";
 
 export default function Match() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/"

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./owner.css";
-import Navbar from "../component/NavbarOwner";
+import Navbar from "../component/Navbar/NavbarOwner.js";
 import Axios from "axios";
 import backgroundimg from "../img/operatorbackground.jpg";
 import Auth from "../service/authService.js";

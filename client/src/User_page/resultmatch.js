@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import "./resultmatch.css";
-import NavbarMember from "../component/NavbarMember.js";
+import NavbarMember from "../component/Navbar/NavbarMember.js";
 import Axios from "axios";
 import { useLocation } from "react-router";
 import bookon from "../img/bookon.png";

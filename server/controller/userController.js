@@ -25,14 +25,16 @@ export const create = (req, res) => {
   console.log(user);
 };
 
-export const login = (req, res) => {
+export const loginmember = (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
     console.log("Username: ",username,"|| Password: ",password);
-  userModel.login(username, (err, data) => {
+  userModel.loginmember(username, (err, data) => {
     if (err) {
       console.log(err);
     } else {
+      console.log("user model return data",data)
+      console.log('password',data[0].password)
       var passwordIsValid = userModel.validPassword(password,data[0].password);
       if (!passwordIsValid) {
         return res.send({
@@ -40,13 +42,43 @@ export const login = (req, res) => {
           message: "Invalid Password!",
         });
       }
-      var token = jsonwebtoken.sign({ id: data[0].user_id }, jwtSecret, {
+      var token = jsonwebtoken.sign({ id: data[0].member_ID}, jwtSecret, {
         expiresIn: 86400, // 24 hours
       });
       res.send({
-        user_id: data[0].user_id,
+        user_id: data[0].member_ID,
         username: data[0].username,
-        type: data[0].type,
+        authen: true,
+        accessToken: token
+      });
+      }
+  });
+};
+
+
+export const loginowner = (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+    console.log("Username: ",username,"|| Password: ",password);
+  userModel.loginowner(username, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("user model return data",data)
+      var passwordIsValid = userModel.validPassword(password,data[0].password);
+      console.log('check valid',passwordIsValid)
+      if (!passwordIsValid) {
+        return res.send({
+          accessToken: null,
+          message: "Invalid Password!",
+        });
+      }
+      var token = jsonwebtoken.sign({ id: data[0].owner_ID}, jwtSecret, {
+        expiresIn: 86400, // 24 hours
+      });
+      res.send({
+        user_id: data[0].owner_ID,
+        username: data[0].username,
         authen: true,
         accessToken: token
       });
