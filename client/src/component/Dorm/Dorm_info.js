@@ -24,6 +24,7 @@ export default function Dorminfo() {
       { headers: authHeader() }
     ).then((Response) => {
       console.log("Response dorm: ", Response.data);
+      
       setDorm(Response.data[0]);
     });
 

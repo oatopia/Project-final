@@ -51,13 +51,13 @@ function VisitorResult() {
               <div className="fee-container">
                 <h2>รายละเอียดค่าใช้จ่าย</h2>
                 <h3>เงินมัดจำ/ประกัน</h3>
-                <p>{state.information.Address}</p>
+                <p>{state.information.Deposit}</p>
                 <h3>อัตราค่าน้ำ</h3>
-                <p>{state.information.Address}</p>
+                <p>{state.information.Water_bill}</p>
                 <h3>อัตราค่าไฟ</h3>
-                <p>{state.information.Address}</p>
+                <p>{state.information.Electric_bill}</p>
                 <h3>ค่าส่วนกลาง</h3>
-                <p>{state.information.Address}</p>
+                <p>{state.information.common_fee}</p>
               </div>
 
               <div className="facilities-container">
