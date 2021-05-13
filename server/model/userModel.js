@@ -9,7 +9,7 @@ const Userinfo = function(e) {
 
 Userinfo.create = (newUser,result) =>{
     if(newUser.type == "สมาชิก"){
-        db.query("INSERT INTO member SET ?",[newUser.username,newUser.password],(err,res)=>{
+        db.query("INSERT INTO member SET username = ? ,password = ?",[newUser.username,newUser.password],(err,res)=>{
             if(err){
                 console.log("error: ",err);
             result(err,null);
@@ -18,7 +18,7 @@ Userinfo.create = (newUser,result) =>{
             result(null,res);
         });
     }else{
-        db.query("INSERT INTO owner SET ?",[newUser.username,newUser.password],(err,res)=>{
+        db.query("INSERT INTO owner SET username = ? ,password = ?",[newUser.username,newUser.password],(err,res)=>{
             if(err){
                 console.log("error: ",err);
             result(err,null);
