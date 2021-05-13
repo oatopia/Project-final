@@ -8,14 +8,26 @@ const Userinfo = function(e) {
 }
 
 Userinfo.create = (newUser,result) =>{
-    db.query("INSERT INTO user SET ?",newUser,(err,res)=>{
-        if(err){
-            console.log("error: ",err);
-        result(err,null);
-        return;
-        }
-        result(null,res);
-    });
+    if(newUser.type == "สมาชิก"){
+        db.query("INSERT INTO member SET ?",[newUser.username,newUser.password],(err,res)=>{
+            if(err){
+                console.log("error: ",err);
+            result(err,null);
+            return;
+            }
+            result(null,res);
+        });
+    }else{
+        db.query("INSERT INTO owner SET ?",[newUser.username,newUser.password],(err,res)=>{
+            if(err){
+                console.log("error: ",err);
+            result(err,null);
+            return;
+            }
+            result(null,res);
+        });
+    }
+    
 };
 
 Userinfo.login = (username,result) =>{

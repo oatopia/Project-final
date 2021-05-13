@@ -1,9 +1,9 @@
 import { React, useEffect, useState } from 'react';
 import './matchVisitor.css';
-import Navbar from './component/Navbar.js';
+import Navbar from '../component/Navbar.js';
 import Axios from 'axios'
 import { useHistory, useLocation } from 'react-router';
-import imagetest from './img/livingroom1.jpg'
+import imagetest from '../img/livingroom1.jpg'
 
 function MatchVisitor(){
     let history = useHistory(); 

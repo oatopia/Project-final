@@ -8,20 +8,19 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import visitor from "./Visitor.js";
+import visitor from "./Visitor_page/Visitor.js";
 import register from "./register.js";
 import login from "./Login.js";
 import member from "./User_page/member.js";
 import owner from "./Dorm_page/owner.js";
 import resultmatch from "./User_page/resultmatch.js";
-import searchvisitor from "./visitorResult.js";
-import matchvisitor from "./matchVisitor.js";
-import dormvisitor from "./dormVisitor.js";
+import searchvisitor from "./Visitor_page/visitorResult.js";
+import matchvisitor from "./Visitor_page/matchVisitor.js";
+import dormvisitor from "./Visitor_page/dormVisitor.js";
 import admin from "./Admin_page/Admin.js";
 import adminfactor from "./Admin_page/Adminfactor.js";
 import addDorm from "./Dorm_page/addDorm.js";
 import dormdata from "./Dorm_page/Dorm_data.js";
-import matchVisitor from "./matchVisitor.js";
 function App() {
   return (
     <BrowserRouter>

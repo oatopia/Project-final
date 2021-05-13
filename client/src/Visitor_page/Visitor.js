@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./Visitor.css";
-import Navbar from "./component/Navbar";
-import Match from "./component/Match";
-import Showfactor from './component/showfactor.js'
+import Navbar from "../component/Navbar";
+import Match from "../component/Match";
+import Showfactor from '../component/showfactor.js'
 import { useHistory } from "react-router";
 import Axios from "axios";
 

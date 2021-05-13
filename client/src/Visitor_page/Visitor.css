@@ -12,7 +12,7 @@
   }
 
   .appcontainer{
-    background-image: url("./img/b6.jpg");
+    background-image: url("../img/b6.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
