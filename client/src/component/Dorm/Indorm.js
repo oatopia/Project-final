@@ -79,6 +79,7 @@ export default function Indorm() {
       owner_ID: currentUser.owner_ID
     },{ headers: authHeader() }).then((Response) => {
       const ID = Response.data.insertId;
+      console.log('ID',Response.data.insertId);
       axios.post(url+"api/dorm/createFacilities",{dorm_ID: ID, Facilities: facilities},{ headers: authHeader() }).then((Response) => {
         console.log(Response);
       });
@@ -190,7 +191,7 @@ export default function Indorm() {
                     onChange={(e) => {
                       setfacilities([
                         ...facilities,
-                        { Type_F: "ภายในห้องพัก", Facility: e.target.value },
+                        { type_F: "ภายในห้องพัก", facility: e.target.value },
                       ]);
                     }}
                   ></input>
@@ -211,7 +212,7 @@ export default function Indorm() {
                     onChange={(e) => {
                       setfacilities([
                         ...facilities,
-                        { Type_F: "ส่วนกลาง", Facility: e.target.value },
+                        { type_F: "ส่วนกลาง", facility: e.target.value },
                       ]);
                     }}
                   ></input>

@@ -30,7 +30,8 @@ Dorminfo.createDorminfo = (newDorm,result) =>{
 
 Dorminfo.createFac = (newfac,result)=>{
     const fac = newfac.Facilities;
-    db.query("INSERT INTO facilities_dorm (dorm_ID,type_F,facility) VALUES ?",[fac.map(item=>[newfac.Dorm_ID,item.Type_F,item.Facility])],(err,res)=>{
+    console.log("data come",newfac)
+    db.query("INSERT INTO facilities_dorm (dorm_ID,type_F,facility) VALUES ?",[fac.map(item=>[newfac.dorm_ID,item.type_F,item.facility])],(err,res)=>{
         if(err){
             console.log("error: ",err);
         result(err,null);
