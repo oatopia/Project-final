@@ -91,7 +91,7 @@ export const createImage = (req, res) => {
 };
 
 export const getDorm = (req, res) => {
-  const id = req.body.user_id;
+  const id = req.body.owner_ID;
   dormModel.getdormbyID(id, (err, data) => {
     if (err) {
       console.log(err);
@@ -102,7 +102,7 @@ export const getDorm = (req, res) => {
 };
 
 export const getDormDataByID = (req, res) => {
-    const id = req.body.Dorm_ID;
+    const id = req.body.dorm_ID;
     console.log("Dorm id: ",id);
     dormModel.getdormdatabyID(id, (err, data) => {
       if (err) {
@@ -114,7 +114,7 @@ export const getDormDataByID = (req, res) => {
   };
 
 export const getFacilities = (req, res) => {
-    const id = req.body.Dorm_ID;
+    const id = req.body.dorm_ID;
     console.log("Dorm id: ",id);
     dormModel.getfacilitiesbyID(id, (err, data) => {
       if (err) {
@@ -126,7 +126,7 @@ export const getFacilities = (req, res) => {
   };
 
   export const getImage = (req, res) => {
-    const id = req.body.Dorm_ID;
+    const id = req.body.dorm_ID;
     console.log("Dorm id: ",id);
     dormModel.getimagebyID(id, (err, data) => {
       if (err) {
@@ -150,9 +150,9 @@ export const getFacilities = (req, res) => {
   };
 
   export const addfac = (req, res) => {
-    const id = req.body.Dorm_ID;
-    const typef = req.body.Type_F;
-    const fac = req.body.Facility;
+    const id = req.body.dorm_ID;
+    const typef = req.body.type_F;
+    const fac = req.body.facility;
     const object = {
       dorm_ID:id,
       type_F:typef,
