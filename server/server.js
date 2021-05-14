@@ -11,6 +11,7 @@ import db from './util/database.js'
 import session from 'express-session'
 import path from 'path'
 import fileupload from 'express-fileupload'
+import multer from 'multer'
 const __dirname = path.resolve();
 const app = express();
 
@@ -21,16 +22,10 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileupload());
-
-// router.get('/', function(req, res) {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-//     res.setHeader('Access-Control-Allow-Credentials', true); 
-// });
+app.use(multer())
 
 app.get( '/', ( req, res ) => {
-    console.log("FUck youuuuuuuuu heroku")
+    console.log("run server success")
     res.send("Hello world")
 } );
 // app.get('/factor',(req,res)=>{
