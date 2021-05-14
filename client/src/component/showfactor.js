@@ -93,23 +93,23 @@ export default function Match() {
             <div className="box-match" id="box-match-1" onClick={addImage(index,factorI)}>
               <img
                 className="img-match-visitor"
-                value={factorlist[i].Image_factor}
-                src={url + "images/" + factorlist[i].Image_factor}
+                value={factorlist[i].image_Factor}
+                src={url + "images/" + factorlist[i].image_Factor}
                 width="40px"
                 height="40px"
               ></img>
-              <h4>{factorlist[i].Factor_head}</h4>
+              <h4>{factorlist[i].factor_Title}</h4>
             </div>
 
             <div className="box-match" id="box-match-2" onClick={addImage(index,factorJ)}>
               <img
                 className="img-match-visitor"
                 value={factorlist[j].Image_factor}
-                src={url + "images/" + factorlist[j].Image_factor}
+                src={url + "images/" + factorlist[j].image_Factor}
                 width="40px"
                 height="40px"
               ></img>
-              <h4>{factorlist[j].Factor_head}</h4>
+              <h4>{factorlist[j].factor_Title}</h4>
             </div>
             <div className="custom-select">
               <select
@@ -174,13 +174,13 @@ export default function Match() {
             return (
               <div key={key} className="detail-factor-visitor">
                 <img
-                  src={url + "images/" + data.Image_factor}
+                  src={url + "images/" + data.image_Factor}
                   width="50"
                   height="50"
                 ></img>
                 <div className="detail-visitor">
-                  <h3>{data.Factor_head}</h3>
-                  <p className="Fn-visitor">{data.Factor_name}</p>
+                  <h3>{data.factor_Title}</h3>
+                  <p className="Fn-visitor">{data.factor_Name}</p>
                 </div>
               </div>
             );

@@ -1,29 +1,48 @@
-body{
-    margin: 0;
-    
+
+.background-header{
+    width: 20%;
+    /* min-height: 30vh; */
+    /* text-align: end; */
 }
 
-
-.owner-container{
-    background-image: url("../img/operatorbackground.jpg");
-    background-size: cover;
-    min-height: 200vh;
-    
+.content-owner-container{
+    display: flex;
 }
 
-.add-dorm{
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+.add-text{
     margin-top: 20px;
-    background-color: yellowgreen;
+    font-weight: normal;
+    color: white;
+}
+.add-dorm{
+    border: none;
+    width: 80%;
+    height: 80px;
+    margin-left: 30px;
+    margin-top: 20px;
+    background-color: #1655a7;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition-duration: 0.5s;
+
+}
+
+.add-dorm:hover{
+    background-color: #002a61;
+    transition-duration: 0.5s;
 }
 
 .box-dorm{
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px;
     background-color: tomato;
     height: 50px;
+}
+
+.contain-dorm{
+    background-color: slategray;
+    width: 80%;
 }

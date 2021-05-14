@@ -59,7 +59,7 @@ Userinfo.validPassword = (loginpassword, datapassword) => {
 }
 
 Userinfo.validateUser = (username) => {
-    db.query("SELECT username FROM user WHERE username = ? ", username, (err, res) => {
+    db.query("SELECT user FROM user WHERE username = ? ", username, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);

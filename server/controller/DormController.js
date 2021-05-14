@@ -2,19 +2,19 @@ import dormModel from "../model/DormModel.js";
 
 export const createDorm = (req, res) => {
   const Dorm = new dormModel({
-    Dorm_Name: req.body.Dorm_Name,
-    Type_D: req.body.Type_D,
-    Address: req.body.Address,
-    Deposit: req.body.Deposit,
-    Electric_Bill: req.body.Electric_Bill,
-    Water_Bill: req.body.Water_Bill,
-    Common_fee: req.body.Common_fee,
-    Information: req.body.Information,
-    L_name: req.body.L_name,
-    Contact_Number: req.body.Contact_Number,
-    E_mail: req.body.E_mail,
-    Line_ID: req.body.Line_ID,
-    user_id: req.body.user_id,
+    dorm_Name: req.body.dorm_Name,
+    type_D: req.body.type_D,
+    address: req.body.address,
+    deposit: req.body.deposit,
+    electric_Bill: req.body.electric_Bill,
+    water_Bill: req.body.water_Bill,
+    common_Fee: req.body.common_Fee,
+    detail: req.body.detail,
+    ad_Name: req.body.ad_Name,
+    contact_Number: req.body.contact_Number,
+    e_Mail: req.body.e_Mail,
+    line_ID: req.body.line_ID,
+    owner_ID: req.body.owner_ID,
   });
   dormModel.createDorminfo(Dorm, (err, data) => {
     if (err) {
@@ -28,10 +28,10 @@ export const createDorm = (req, res) => {
 };
 
 export const createFacilities = (req, res) => {
-  const id = req.body.Dorm_ID;
-  const jsondata = req.body.Facilities;
+  const id = req.body.dorm_ID;
+  const jsondata = req.body.facilities;
   const object = {
-    Dorm_ID: id,
+    dorm_ID: id,
     Facilities: jsondata,
   };
   dormModel.createFac(object, (err, data) => {
@@ -44,7 +44,7 @@ export const createFacilities = (req, res) => {
 };
 
 export const createImage = (req, res) => {
-  const id = req.body.Dorm_ID;
+  const id = req.body.dorm_ID;
   var imagename = [];
   const file = req.files.Image;
   if (file.length === undefined) {
@@ -77,8 +77,8 @@ export const createImage = (req, res) => {
     }
   }
   const object = {
-    Dorm_ID: id,
-    Image_name: imagename,
+    dorm_ID: id,
+    image_Name: imagename,
   };
   console.log("object: ", object);
   dormModel.createImg(object, (err, data) => {
@@ -154,9 +154,9 @@ export const getFacilities = (req, res) => {
     const typef = req.body.Type_F;
     const fac = req.body.Facility;
     const object = {
-      Dorm_ID:id,
-      Type_F:typef,
-      Facility:fac
+      dorm_ID:id,
+      type_F:typef,
+      facility:fac
     };
     console.log(object)
     dormModel.addFac(object, (err, data) => {

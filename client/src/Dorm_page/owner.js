@@ -14,8 +14,8 @@ const Owner = () => {
   const history = useHistory();
   useEffect(() => {
     Axios.post(
-      url+"api/dorm/getDorm",
-      { user_id: currentUser.user_id },
+      url + "api/dorm/getDorm",
+      { owner_ID: currentUser.owner_ID },
       { headers: authHeader() }
     )
       .then((Response) => {
@@ -29,38 +29,44 @@ const Owner = () => {
   }, []);
 
   if (!currentUser) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/loginowner" />;
   }
 
   console.log("fuck dorm: ", dorm);
   return (
     <div className="owner-container">
-      <Navbar />
-      <div
-        className="add-dorm"
-        onClick={() => {
-          history.push("/addDorm");
-        }}
-      >
-        <h2 className="">เพิ่มข้อมูลหอพัก</h2>
+      <div className="navbar-owner-container">
+        <Navbar />
       </div>
-      <div className="contain-dorm">
-        {dorm.map((item, key) => {
-          return (
-            <div
-              className="box-dorm"
-              key={key}
-              onClick={() => {
-                history.push({
-                  pathname: "/dormdata",
-                  state: item.Dorm_ID,
-                });
-              }}
-            >
-              <h3 className="h3-dorm">{item.Dorm_Name}</h3>
-            </div>
-          );
-        })}
+      <div className="content-owner-container">
+        <div className="background-header">
+          <button
+            className="add-dorm"
+            onClick={() => {
+              history.push("/addDorm");
+            }}
+          >
+            <h2 className="add-text">เพิ่มข้อมูลหอพัก</h2>
+          </button>
+        </div>
+        <div className="contain-dorm">
+          {dorm.map((item, key) => {
+            return (
+              <div
+                className="box-dorm"
+                key={key}
+                onClick={() => {
+                  history.push({
+                    pathname: "/dormdata",
+                    state: item.dorm_ID,
+                  });
+                }}
+              >
+                <h3 className="h3-dorm">{item.dorm_Name}</h3>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

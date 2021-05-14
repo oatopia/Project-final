@@ -15,7 +15,7 @@ Visitormodel.getallfactor = result => {
 
 Visitormodel.searchbyName = (name, result) => {
     let dormid = 0;
-    db.query("SELECT * FROM dormitory WHERE Dorm_Name = ?", name, (err, res) => {
+    db.query("SELECT * FROM dormitory WHERE dorm_Name = ?", name, (err, res) => {
         if (err) {
             console.log("error:", err);
             result(null, err);
@@ -24,13 +24,13 @@ Visitormodel.searchbyName = (name, result) => {
             if (res.length > 0) {
                 console.log("Response in model", res);
                 dormid = res[0].Dorm_ID;
-                db.query("SELECT * FROM facilities WHERE Dorm_ID = ?", dormid, (err, resfac) => {
+                db.query("SELECT * FROM facilities_dorm WHERE dorm_ID = ?", dormid, (err, resfac) => {
                     if (err) {
                         console.log("error:", err);
                         result(null, err);
                         return;
                     }
-                    db.query("SELECT * FROM image_dorm WHERE Dorm_ID = ?", dormid, (err, resimg) => {
+                    db.query("SELECT * FROM image_dorm WHERE dorm_ID = ?", dormid, (err, resimg) => {
                         if (err) {
                             console.log("error:", err);
                             result(null, err);

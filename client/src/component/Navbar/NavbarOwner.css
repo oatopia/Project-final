@@ -12,15 +12,21 @@
 
 
 .profile-NavOwner{
-    background-color: #F1EDED;
+    /* background-color: #F1EDED; */
     width: 150px;
     height: 55px;
     border-radius: 7px;
-    font-size: 10px;
-    color: white;
+    
+    
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 20px;
+}
+
+.profile-NavOwner p{
+    font-size: 25px;
+    color: #214151;
 }
 
 
@@ -29,8 +35,19 @@ img.profilelogo{
 }
 
 #but-owner{
-    width: 50px;
+    border: none;
+    background-color: #a2d0c1;
+    font-size: 18px;
+    color:  #214151;
+    border-radius: 5px;
     height: 50px;
+    transition-duration: 0.5s;
+}
+
+#but-owner:hover{
+    color: #eff7e1;
+    background-color: #214151;
+    transition-duration: 0.5s;
 }
 
 .NavOwner-container2{

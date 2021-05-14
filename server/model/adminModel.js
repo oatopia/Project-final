@@ -48,7 +48,7 @@ Admin.insertFactor = (newfactor,result) =>{
 };
 
 Admin.deleteFactorbyId = (data,result) =>{
-    db.query("DELETE FROM factor WHERE Id = ?",data,(err,res)=>{
+    db.query("DELETE FROM factor WHERE factor_ID = ?",data,(err,res)=>{
         if(err){
             console.log("error:",err);
             result(null,err);
@@ -70,7 +70,7 @@ Admin.updateUserbyId = (data,result) =>{
 };
 
 Admin.updateFactorbyId = (data,result) =>{
-    db.query("UPDATE factor SET Factor_name = ?, Image_factor = ? WHERE Id = ? ",[data.Factor_name,data.Image_factor,data.Id],(err,res)=>{
+    db.query("UPDATE factor SET factor_Name = ?, image_Factor = ? WHERE factor_ID = ? ",[data.Factor_name,data.Image_factor,data.Id],(err,res)=>{
         if(err){
             console.log("error:",err);
             result(null,err);

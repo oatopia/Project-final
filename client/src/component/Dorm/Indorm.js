@@ -63,26 +63,26 @@ export default function Indorm() {
 
   const saveinfordorm = () => {
     axios.post(url+'api/dorm/createDorm', {
-      Dorm_Name: name,
-      Type_D: type,
-      Address: address,
-      Deposit: deposit,
-      Electric_Bill: elec,
-      Water_Bill: water,
-      Common_fee: common,
-      Information: des,
-      L_name: nameOwn,
-      Contact_Number: phone,
-      E_mail: email,
-      Line_ID: lineid,
-      user_id: currentUser.user_id
+      dorm_Name: name,
+      type_D: type,
+      address: address,
+      deposit: deposit,
+      electric_Bill: elec,
+      water_Bill: water,
+      common_fee: common,
+      detail: des,
+      ad_Name: nameOwn,
+      contact_Number: phone,
+      e_Mail: email,
+      line_ID: lineid,
+      owner_ID: currentUser.owner_ID
     },{ headers: authHeader() }).then((Response) => {
       const ID = Response.data.insertId;
-      axios.post(url+"api/dorm/createFacilities",{Dorm_ID: ID, Facilities: facilities},{ headers: authHeader() }).then((Response) => {
+      axios.post(url+"api/dorm/createFacilities",{dorm_ID: ID, Facilities: facilities},{ headers: authHeader() }).then((Response) => {
         console.log(Response);
       });
       formData.append("Image", "");
-      formData.append("Dorm_ID",ID);
+      formData.append("dorm_ID",ID);
       const config = {
         headers: {
           "content-type": "multipart/form-data",
@@ -92,13 +92,8 @@ export default function Indorm() {
         console.log(Response);
       });
       history.push("/owner");
+      window.location.reload()
     })
-
-    // for (let i = 0; i < image.length; i++) {
-    //   console.log("data: ",image[i]);
-    //   formData.append("Image", image[i]);
-    // }
-    
     
     
   };

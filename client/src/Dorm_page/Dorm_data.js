@@ -68,13 +68,13 @@ const Owner = () => {
   const currentUser = Auth.getCurrentUser();
   const history = useHistory();
   const location = useLocation();
-  const Dorm_ID = location.state;
+  const dorm_ID = location.state;
   const [showedit, setShowedit] = useState(false);
 
   useEffect(() => {
     Axios.post(
       url+"api/dorm/getDormdatabyId",
-      { Dorm_ID: Dorm_ID },
+      { dorm_ID: dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
       console.log("Response dorm: ", Response.data);
@@ -83,7 +83,7 @@ const Owner = () => {
 
     Axios.post(
       url+"api/dorm/getFac",
-      { Dorm_ID: Dorm_ID },
+      { dorm_ID: dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
       console.log("Response fac: ", Response.data);
@@ -92,7 +92,7 @@ const Owner = () => {
 
     Axios.post(
       url+"api/dorm/getImg",
-      { Dorm_ID: Dorm_ID },
+      { dorm_ID: dorm_ID },
       { headers: authHeader() }
     )
       .then((Response) => {
@@ -105,7 +105,7 @@ const Owner = () => {
   }, []);
 
   if (!currentUser) {
-    return <Redirect to="/login" />;
+    return <Redirect to="/loginowner" />;
   }
 
   return (
@@ -115,7 +115,7 @@ const Owner = () => {
         {/* ---------------------------------------------------------------------- */}
         {showedit == false ? (
           <div className="box-info">
-            <h1>{dorm.Dorm_Name}</h1>
+            <h1>{dorm.dorm_Name}</h1>
             {img.map((pic, key) => {
               return (
                 <img
@@ -126,13 +126,13 @@ const Owner = () => {
               );
             })}
             <div className="box-inner-data">
-              <p>ประเภทหอพัก {dorm.Type_D}</p>
-              <p>ที่อยู่ {dorm.Address}</p>
+              <p>ประเภทหอพัก {dorm.type_D}</p>
+              <p>ที่อยู่ {dorm.address}</p>
               <h2>รายละเอียดค่าใช้จ่าย</h2>
-              <p>ค่าส่วนกลาง {dorm.Deposit}</p>
-              <p>ค่าไฟ {dorm.Electric_Bill}</p>
-              <p>ค่าน้ำ {dorm.Water_Bill}</p>
-              <p>ค่าประกัน {dorm.Common_fee}</p>
+              <p>ค่าส่วนกลาง {dorm.deposit}</p>
+              <p>ค่าไฟ {dorm.electric_Bill}</p>
+              <p>ค่าน้ำ {dorm.water_Bill}</p>
+              <p>ค่าประกัน {dorm.common_Fee}</p>
             </div>
             <h2>สิ่งอำนวยความสะดวก</h2>
             <div className="box-fac-data">
@@ -140,8 +140,8 @@ const Owner = () => {
                 <h3>ภายในห้องพัก</h3>
                 <ul>
                   {fac.map((fa, index) => {
-                    if (fa.Type_F == "ภายในห้องพัก")
-                      return <li key={index}>{fa.Facility}</li>;
+                    if (fa.type_F == "ภายในห้องพัก")
+                      return <li key={index}>{fa.facility}</li>;
                   })}
                 </ul>
               </div>
@@ -150,19 +150,19 @@ const Owner = () => {
                 <h3>ส่วนกลาง</h3>
                 <ul>
                   {fac.map((fa, index) => {
-                    if (fa.Type_F == "ส่วนกลาง")
-                      return <li key={index}>{fa.Facility}</li>;
+                    if (fa.type_F == "ส่วนกลาง")
+                      return <li key={index}>{fa.facility}</li>;
                   })}
                 </ul>
               </div>
             </div>
             <div className="box-2-inner-data">
-              <p>รายละเอียดหอพัก {dorm.Information}</p>
+              <p>รายละเอียดหอพัก {dorm.detail}</p>
               <h2>ข้อมูลติดต่อ</h2>
-              <p>ชื่อผู้ดูแลหอพัก {dorm.L_name}</p>
-              <p>เบอร์ติดต่อ {dorm.Contact_Number}</p>
-              <p>อีเมล {dorm.E_mail}</p>
-              <p>lineid {dorm.Line_ID}</p>
+              <p>ชื่อผู้ดูแลหอพัก {dorm.ad_Name}</p>
+              <p>เบอร์ติดต่อ {dorm.contact_Number}</p>
+              <p>อีเมล {dorm.e_Mail}</p>
+              <p>lineid {dorm.line_ID}</p>
             </div>
           </div>
         ) : (
@@ -171,7 +171,7 @@ const Owner = () => {
               <h2>ชื่อหอพัก</h2>
               <input
                 className="chong-one"
-                defaultValue={dorm.Dorm_Name}
+                defaultValue={dorm.dorm_Name}
                 onChange={(e) => {
                   const name = { ...dorm };
                   name.Dorm_Name = e.target.value;
@@ -183,7 +183,7 @@ const Owner = () => {
               <h2>ประเภทหอพัก</h2>
               <select
                 className="type-dorm"
-                defaultValue={dorm.Type_D}
+                defaultValue={dorm.type_D}
                 onChange={(e) => {
                   const type = { ...dorm };
                   type.Type_D = e.target.value;
@@ -197,10 +197,10 @@ const Owner = () => {
               <h2>ที่อยู่หอพัก</h2>
               <textarea
                 className="chong-address"
-                defaultValue={dorm.Address}
+                defaultValue={dorm.address}
                 onChange={(e) => {
                   const add = { ...dorm };
-                  add.Address = e.target.value;
+                  add.address = e.target.value;
                   setDorm(add);
                 }}
               ></textarea>
@@ -212,10 +212,10 @@ const Owner = () => {
                 </h4>
                 <input
                   className="chong-pay"
-                  defaultValue={dorm.Deposit}
+                  defaultValue={dorm.deposit}
                   onChange={(e) => {
                     const depo = { ...dorm };
-                    depo.Deposit = e.target.value;
+                    depo.deposit = e.target.value;
                     setDorm(depo);
                   }}
                 ></input>
@@ -226,10 +226,10 @@ const Owner = () => {
                 </h4>
                 <input
                   className="chong-pay"
-                  defaultValue={dorm.Water_Bill}
+                  defaultValue={dorm.water_Bill}
                   onChange={(e) => {
                     const water = { ...dorm };
-                    water.Water_Bill = e.target.value;
+                    water.water_Bill = e.target.value;
                     setDorm(water);
                   }}
                 ></input>
@@ -240,10 +240,10 @@ const Owner = () => {
                 </h4>
                 <input
                   className="chong-pay"
-                  defaultValue={dorm.Electric_Bill}
+                  defaultValue={dorm.electric_Bill}
                   onChange={(e) => {
                     const eb = { ...dorm };
-                    eb.Electric_Bill = e.target.value;
+                    eb.electric_Bill = e.target.value;
                     setDorm(eb);
                   }}
                 ></input>
@@ -254,10 +254,10 @@ const Owner = () => {
                 </h4>
                 <input
                   className="chong-pay"
-                  defaultValue={dorm.Common_fee}
+                  defaultValue={dorm.common_Fee}
                   onChange={(e) => {
                     const cf = { ...dorm };
-                    cf.Common_fee = e.target.value;
+                    cf.common_Fee = e.target.value;
                     setDorm(cf);
                   }}
                 ></input>
@@ -272,7 +272,7 @@ const Owner = () => {
                     let state = false;
                     let indexinner = 0;
                     fac.map((item, key) => {
-                      if (data == item.Facility) {
+                      if (data == item.facility) {
                         state = true;
                         indexinner = key;
                       }
@@ -288,28 +288,28 @@ const Owner = () => {
                             let checkinner = false;
                             let indinner = 0;
                             fac.map((item, key) => {
-                              if (data == item.Facility) {
+                              if (data == item.facility) {
                                 checkinner = true;
                                 indinner = key;
                               }
                             });
                             if (checkinner == true) {
-                              let id = fac[indinner].F_ID;
+                              let id = fac[indinner].f_ID;
                               Axios.delete(
                                 url+`api/dorm/facdeleteDelete/${id}`
                               ).then((Response) => {
                                 setFac(
                                   fac.filter((item) => {
-                                    return item.F_ID != id;
+                                    return item.f_ID != id;
                                   })
                                 );
                               });
                               checkinner = false;
                             } else {
                               const facil = {
-                                Dorm_ID: dorm.user_id,
-                                Type_F: "ภายในห้องพัก",
-                                Facility: data,
+                                dorm_ID: dorm.dorm_ID,
+                                type_F: "ภายในห้องพัก",
+                                facility: data,
                               };
                               Axios.post(url+"api/dorm/addfacil", facil, {
                                 headers: authHeader(),
@@ -318,10 +318,10 @@ const Owner = () => {
                                 setFac([
                                   ...fac,
                                   {
-                                    F_ID: Response.data.insertId,
-                                    Dorm_ID: dorm.user_id,
-                                    Type_F: "ภายในห้องพัก",
-                                    Facility: data,
+                                    f_ID: Response.data.insertId,
+                                    dorm_ID: dorm.dorm_ID,
+                                    type_F: "ภายในห้องพัก",
+                                    facility: data,
                                   },
                                 ]);
                               });
@@ -339,7 +339,7 @@ const Owner = () => {
                   {facilitiescenter.map((data, key) => {
                     let state = false;
                     fac.map((item, k) => {
-                      if (data == item.Facility) {
+                      if (data == item.facility) {
                         state = true;
                       }
                     });
@@ -355,7 +355,7 @@ const Owner = () => {
                             let check = false;
                             let ind = 0;
                             fac.map((item, key) => {
-                              if (data == item.Facility) {
+                              if (data == item.facility) {
                                 console.log("fac ส่วนกลาง : ", item);
                                 check = true;
                                 ind = key;
@@ -363,13 +363,13 @@ const Owner = () => {
                             });
 
                             if (check == true) {
-                              let id = fac[ind].F_ID;
+                              let id = fac[ind].f_ID;
                               Axios.delete(
                                 url+`api/dorm/facdeleteDelete/${id}`
                               ).then((Response) => {
                                 setFac(
                                   fac.filter((item) => {
-                                    return item.F_ID != id;
+                                    return item.f_ID != id;
                                   })
                                 );
                                 console.log("after Delete2: ", fac);
@@ -377,9 +377,9 @@ const Owner = () => {
                               check = false;
                             } else {
                               const facil = {
-                                Dorm_ID: dorm.user_id,
-                                Type_F: "ส่วนกลาง",
-                                Facility: data,
+                                dorm_ID: dorm.dorm_ID,
+                                type_F: "ส่วนกลาง",
+                                facility: data,
                               };
                               Axios.post(url+"api/dorm/addfacil", facil, {
                                 headers: authHeader(),
@@ -388,10 +388,10 @@ const Owner = () => {
                                 setFac([
                                   ...fac,
                                   {
-                                    F_ID: Response.data.insertId,
-                                    Dorm_ID: dorm.user_id,
-                                    Type_F: "ส่วนกลาง",
-                                    Facility: data,
+                                    f_ID: Response.data.insertId,
+                                    dorm_ID: dorm.dorm_ID,
+                                    type_F: "ส่วนกลาง",
+                                    facility: data,
                                   },
                                 ]);
                                 console.log("after add fac: ", fac);
@@ -410,10 +410,10 @@ const Owner = () => {
               <h2>รายละเอียดหอพัก</h2>
               <textarea
                 className="chong-detail "
-                defaultValue={dorm.Information}
+                defaultValue={dorm.detail}
                 onChange={(e) => {
                   const info = { ...dorm };
-                  info.Information = e.target.value;
+                  info.detail = e.target.value;
                   setDorm(info);
                 }}
               ></textarea>
@@ -423,10 +423,10 @@ const Owner = () => {
                 <h4 className="space2">ชื่อผู้ดูแลหอพัก</h4>
                 <input
                   className="chong-three"
-                  defaultValue={dorm.L_name}
+                  defaultValue={dorm.ad_Name}
                   onChange={(e) => {
                     const lname = { ...dorm };
-                    lname.L_name = e.target.value;
+                    lname.ad_Name = e.target.value;
                     setDorm(lname);
                   }}
                 ></input>
@@ -434,10 +434,10 @@ const Owner = () => {
                 <h4 className="space2">เบอร์ติดต่อ</h4>
                 <input
                   className="chong-three"
-                  defaultValue={dorm.Contact_Number}
+                  defaultValue={dorm.contact_Number}
                   onChange={(e) => {
                     const cn = { ...dorm };
-                    cn.Contact_Number = e.target.value;
+                    cn.contact_Number = e.target.value;
                     setDorm(cn);
                   }}
                 ></input>
@@ -445,10 +445,10 @@ const Owner = () => {
                 <h4 className="space2">อีเมล</h4>
                 <input
                   className="chong-three"
-                  defaultValue={dorm.E_mail}
+                  defaultValue={dorm.e_Mail}
                   onChange={(e) => {
                     const email = { ...dorm };
-                    email.E_mail = e.target.value;
+                    email.e_Mail = e.target.value;
                     setDorm(email);
                   }}
                 ></input>
@@ -456,10 +456,10 @@ const Owner = () => {
                 <h4 className="space2">LineID</h4>
                 <input
                   className="chong-three"
-                  defaultValue={dorm.Line_ID}
+                  defaultValue={dorm.line_ID}
                   onChange={(e) => {
                     const line = { ...dorm };
-                    line.Line_ID = e.target.value;
+                    line.line_ID = e.target.value;
                     setDorm(line);
                   }}
                 ></input>
