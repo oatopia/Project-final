@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './LoginOwner.css';
-import img from './img/loginimg.jpg'
+import img from './img/back9.jpg'
 import Navbar from './component/Navbar/Navbar.js'
-import Axios from 'axios'
 import Auth from './service/authService.js'
 
 
@@ -17,43 +16,43 @@ const Loginowner = () => {
         e.preventDefault();
         Auth.loginowner(username, password)
             .then(Response => {
-                    history.push("/owner");
+                history.push("/owner");
             })
     }
     const currentUser = Auth.getCurrentUser();
     console.log("login page: ", currentUser);
     return (
-        <>
+        <div className="login-owner-page-container">
             <Navbar></Navbar>
             <div className="owner-login-container">
                 <div className="content-owner-login-container">
                     <form className="form-owner-login" onSubmit={handleLogin}>
                         <div>
-                        <p id="h1-login-owner">เข้าสู่ระบบสำหรับ</p>
-                        <p id="h1-login-owner">ผู้ประกอบการ</p>
+                            <p id="h-1" className="h1-login-owner">เข้าสู่ระบบสำหรับ</p>
+                            <p id="h-2" className="h1-login-owner">ผู้ประกอบการ</p>
                         </div>
-                        
-                        <div>
-                        <p>ชื่อผู้ใช้</p>
-                        <input className="text-input-owner-login" onChange={(e) => {
-                            setusername(e.target.value);
-                        }}></input>
+
+                        <div className="username-text-owner">
+                            <p className="username-head">ชื่อผู้ใช้</p>
+                            <input className="text-input-owner-login" onChange={(e) => {
+                                setusername(e.target.value);
+                            }}></input>
                         </div>
-                        <div>
-                        <p>รหัสผ่าน</p>
-                        <input type="password" className="text-input-owner-login" onChange={(e) => {
-                            setpassword(e.target.value);
-                        }}></input>
+                        <div className="password-text-owner">
+                            <p>รหัสผ่าน</p>
+                            <input type="password" className="text-input-owner-login" onChange={(e) => {
+                                setpassword(e.target.value);
+                            }}></input>
                         </div>
                         <br></br>
                         <button className="button-login-owner" type="submit">เข้าสู่ระบบ</button>
-                        <hr/>
+                        <hr />
                         <button className="button-register-owner" type="submit">สร้างบัญชีใหม่</button>
                     </form>
                     <img src={img} className="img" width="300" height="470"></img>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
