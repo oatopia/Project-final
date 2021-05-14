@@ -21,8 +21,6 @@ app.use(express.json());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(fileupload());
-app.use(multer())
 
 app.get( '/', ( req, res ) => {
     console.log("run server success")
