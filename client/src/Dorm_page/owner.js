@@ -13,6 +13,7 @@ const Owner = () => {
   const currentUser = Auth.getCurrentUser();
   const history = useHistory();
   useEffect(() => {
+    console.log("owner ID",currentUser.owner_ID)
     Axios.post(
       url + "api/dorm/getDorm",
       { owner_ID: currentUser.owner_ID },

@@ -46,7 +46,7 @@ export const loginmember = (req, res) => {
         expiresIn: 86400, // 24 hours
       });
       res.send({
-        user_id: data[0].member_ID,
+        member_ID: data[0].member_ID,
         username: data[0].username,
         authen: true,
         accessToken: token
@@ -77,7 +77,7 @@ export const loginowner = (req, res) => {
         expiresIn: 86400, // 24 hours
       });
       res.send({
-        user_id: data[0].owner_ID,
+        owner_ID: data[0].owner_ID,
         username: data[0].username,
         authen: true,
         accessToken: token

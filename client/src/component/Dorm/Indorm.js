@@ -62,6 +62,7 @@ export default function Indorm() {
   const history = useHistory();
 
   const saveinfordorm = () => {
+    console.log("owner id",currentUser.owner_ID)
     axios.post(url+'api/dorm/createDorm', {
       dorm_Name: name,
       type_D: type,
@@ -69,7 +70,7 @@ export default function Indorm() {
       deposit: deposit,
       electric_Bill: elec,
       water_Bill: water,
-      common_fee: common,
+      common_Fee: common,
       detail: des,
       ad_Name: nameOwn,
       contact_Number: phone,
