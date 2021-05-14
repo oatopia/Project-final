@@ -43,7 +43,8 @@ Dorminfo.createFac = (newfac,result)=>{
 }
 
 Dorminfo.createImg = (newImg,result)=>{
-    const img_name = newImg.Image_name
+    const img_name = newImg.image_Name
+    console.log("array image name",img_name)
     db.query("INSERT INTO image_dorm (dorm_ID,image) VALUES ?",[img_name.map(item=>[newImg.dorm_ID,item])],(err,res)=>{
         if(err){
             console.log("error: ",err);
