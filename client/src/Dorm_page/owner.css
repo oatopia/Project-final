@@ -16,7 +16,7 @@
 }
 .add-dorm{
     border: none;
-    width: 80%;
+    width: 220px;
     height: 80px;
     margin-left: 30px;
     margin-top: 20px;
@@ -35,14 +35,29 @@
 }
 
 .box-dorm{
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: tomato;
-    height: 50px;
+    margin-top: 20px;
+    width: 50%;
+    margin-left: 50px;
+    /* margin-right: auto; */
+    background-color: #eff7e1;
+    border-radius: 10px;
+    height: 100px;
+    vertical-align: middle;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
+/* .box-dorm:hover{
+    background-image: linear-gradient(#a2d0c1,#214151);
+    transition-duration: 0.5s;
+} */
+
 .contain-dorm{
-    background-color: slategray;
     width: 80%;
+    height: 100%;
+}
+
+.h3-dorm{
+    font-size: 38px;
+    color:#1655a7 ;
+    text-align: center;
 }

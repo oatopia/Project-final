@@ -19,7 +19,10 @@ export default function Navbar() {
     <div className="NavOwner-container">
       <img src={logoapp} className="logoapp" width="200" height="100"></img>
       <div className="NavOwner-container2">
-        <div className="profile-NavOwner" onClick={logout}>
+        <Link to="/owner">
+        <p className="home-menu">หน้าหลัก</p>
+        </Link>
+        <div className="profile-NavOwner">
           <img src={profilelogo} className="profilelogo" width="35" height="36" ></img>
           <p>{currentUser.username}</p>
         </div>

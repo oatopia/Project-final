@@ -1,17 +1,18 @@
 .dormdata-container{
     /* background-image: url("./img/operatorbackground.jpg"); */
-    background-color: wheat;
-    background-size: cover;
-    min-height: 200vh;
+    background-color: rgb(245, 226, 194);
+    padding-bottom: 20px;
     
 }
 
 .box-dorm-data{
     width: 90%;
-    background-color:lightblue;
+    background-color:rgb(204, 230, 240);
+    padding: 20px;
+    border-radius: 10px;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
+    text-align: left;
     margin-top: 20px;
 }
 
@@ -34,4 +35,27 @@
 .box-2-inner-data{
     margin-top: 10px;
     text-align: start;
+}
+
+.box-dorm-data p{
+    font-size: 22px;
+}
+
+.but-edit-dorm{
+    width: 200px;
+    height: 60px;
+    font-size: 24px;
+    border-radius: 10px;
+    border: none;
+    color: rgb(250, 244, 244);
+    background-color: #1655a7;
+}
+
+.save-edit-dorm{
+    height: 60px;
+    font-size: 24px;
+    border-radius: 10px;
+    border: none;
+    color: rgb(250, 244, 244);
+    background-color: #6b9cdd;
 }

@@ -10,7 +10,10 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-
+.home-menu{
+    font-size: 24px;
+    color: #1655a7;
+}
 .profile-NavOwner{
     /* background-color: #F1EDED; */
     width: 150px;
@@ -26,7 +29,7 @@
 
 .profile-NavOwner p{
     font-size: 25px;
-    color: #214151;
+    color: #1655a7;
 }
 
 
@@ -51,7 +54,7 @@ img.profilelogo{
 }
 
 .NavOwner-container2{
-    width: 250px;
+    width: 30%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;

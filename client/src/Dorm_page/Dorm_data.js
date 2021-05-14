@@ -126,13 +126,16 @@ const Owner = () => {
               );
             })}
             <div className="box-inner-data">
-              <p>ประเภทหอพัก {dorm.type_D}</p>
-              <p>ที่อยู่ {dorm.address}</p>
+              <div>
+              <p className="text-dorm-content"><label>ประเภทหอพัก</label> {dorm.type_D}</p>
+              </div>
+              
+              <p className="text-dorm-content"><label>ที่อยู่</label> {dorm.address}</p>
               <h2>รายละเอียดค่าใช้จ่าย</h2>
-              <p>ค่าส่วนกลาง {dorm.deposit}</p>
-              <p>ค่าไฟ {dorm.electric_Bill}</p>
-              <p>ค่าน้ำ {dorm.water_Bill}</p>
-              <p>ค่าประกัน {dorm.common_Fee}</p>
+              <p className="text-dorm-content"><h3>ค่าส่วนกลาง</h3> {dorm.deposit}</p>
+              <p className="text-dorm-content"><h3>ค่าไฟ </h3>{dorm.electric_Bill}</p>
+              <p className="text-dorm-content"><h3>ค่าน้ำ</h3> {dorm.water_Bill}</p>
+              <p className="text-dorm-content"><h3>ค่าประกัน</h3> {dorm.common_Fee}</p>
             </div>
             <h2>สิ่งอำนวยความสะดวก</h2>
             <div className="box-fac-data">
@@ -157,12 +160,12 @@ const Owner = () => {
               </div>
             </div>
             <div className="box-2-inner-data">
-              <p>รายละเอียดหอพัก {dorm.detail}</p>
+              <p className="text-dorm-content"><h3>รายละเอียดหอพัก</h3> {dorm.detail}</p>
               <h2>ข้อมูลติดต่อ</h2>
-              <p>ชื่อผู้ดูแลหอพัก {dorm.ad_Name}</p>
-              <p>เบอร์ติดต่อ {dorm.contact_Number}</p>
-              <p>อีเมล {dorm.e_Mail}</p>
-              <p>lineid {dorm.line_ID}</p>
+              <p className="text-dorm-content"><h3>ชื่อผู้ดูแลหอพัก</h3> {dorm.ad_Name}</p>
+              <p className="text-dorm-content"><h3>เบอร์ติดต่อ</h3> {dorm.contact_Number}</p>
+              <p className="text-dorm-content"><h3>อีเมล </h3>{dorm.e_Mail}</p>
+              <p className="text-dorm-content"><h3>lineid</h3> {dorm.line_ID}</p>
             </div>
           </div>
         ) : (
