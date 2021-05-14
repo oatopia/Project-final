@@ -80,10 +80,10 @@ export default function Indorm() {
     },{ headers: authHeader() }).then((Response) => {
       const ID = Response.data.insertId;
       console.log('ID',Response.data.insertId);
-      axios.post(url+"api/dorm/createFacilities",{dorm_ID: ID, Facilities: facilities},{ headers: authHeader() }).then((Response) => {
+      axios.post(url+"api/dorm/createFacilities",{dorm_ID: ID, facilities: facilities},{ headers: authHeader() }).then((Response) => {
         console.log(Response);
       });
-      formData.append("Image", "");
+      formData.append("Image","");
       formData.append("dorm_ID",ID);
       const config = {
         headers: {
@@ -94,7 +94,6 @@ export default function Indorm() {
         console.log(Response);
       });
       history.push("/owner");
-      window.location.reload()
     })
     
     

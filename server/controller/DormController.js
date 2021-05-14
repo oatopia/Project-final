@@ -28,11 +28,14 @@ export const createDorm = (req, res) => {
 };
 
 export const createFacilities = (req, res) => {
+
   const id = req.body.dorm_ID;
   const jsondata = req.body.facilities;
+  console.log("ID",id)
+  console.log("object",jsondata)
   const object = {
     dorm_ID: id,
-    Facilities: jsondata,
+    facilities: jsondata,
   };
   dormModel.createFac(object, (err, data) => {
     if (err) {
@@ -45,6 +48,7 @@ export const createFacilities = (req, res) => {
 
 export const createImage = (req, res) => {
   const id = req.body.dorm_ID;
+  console.log("ID:image:",id)
   var imagename = [];
   const file = req.files.Image;
   if (file.length === undefined) {
