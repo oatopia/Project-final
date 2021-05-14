@@ -133,8 +133,8 @@ const Owner = () => {
               <p className="text-dorm-content"><label>ที่อยู่</label> {dorm.address}</p>
               <h2>รายละเอียดค่าใช้จ่าย</h2>
               <p className="text-dorm-content"><h3>ค่าส่วนกลาง</h3> {dorm.deposit}</p>
-              <p className="text-dorm-content"><h3>ค่าไฟ </h3>{dorm.electric_Bill}</p>
-              <p className="text-dorm-content"><h3>ค่าน้ำ</h3> {dorm.water_Bill}</p>
+              <p className="text-dorm-content"><h3>ค่าไฟ </h3>{dorm.electric_Bill}บาทต่อยูนิต</p>
+              <p className="text-dorm-content"><h3>ค่าน้ำ</h3> {dorm.water_Bill}บาทต่อยูนิต</p>
               <p className="text-dorm-content"><h3>ค่าประกัน</h3> {dorm.common_Fee}</p>
             </div>
             <h2>สิ่งอำนวยความสะดวก</h2>
@@ -165,7 +165,7 @@ const Owner = () => {
               <p className="text-dorm-content"><h3>ชื่อผู้ดูแลหอพัก</h3> {dorm.ad_Name}</p>
               <p className="text-dorm-content"><h3>เบอร์ติดต่อ</h3> {dorm.contact_Number}</p>
               <p className="text-dorm-content"><h3>อีเมล </h3>{dorm.e_Mail}</p>
-              <p className="text-dorm-content"><h3>lineid</h3> {dorm.line_ID}</p>
+              <p className="text-dorm-content"><h3>Line ID</h3> {dorm.line_ID}</p>
             </div>
           </div>
         ) : (

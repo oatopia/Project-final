@@ -39,7 +39,7 @@ export default function Indorm() {
     "ร้านอาหาร",
     "ร้านสะดวกซื้อ",
     "ห้องอ่านหนังสือ",
-    "ฟิตเนท",
+    "ฟิตเนส",
     "ร้านเสริมสวย",
     "รถตู้รับส่ง",
   ];
@@ -151,7 +151,7 @@ export default function Indorm() {
               setWater(e.target.value);
             }}
           ></input>
-          <h4 className="baht">บาท</h4>
+          <h4 className="baht">บาทต่อยูนิต</h4>
           <br />
           <h4 className="pay" id="p3">
             อัตราค่าไฟ
@@ -162,7 +162,7 @@ export default function Indorm() {
               setElec(e.target.value);
             }}
           ></input>
-          <h4 className="baht">บาท</h4>
+          <h4 className="baht">บาทต่อยูนิต</h4>
           <br />
           <h4 className="pay" id="p4">
             ค่าส่วนกลาง
