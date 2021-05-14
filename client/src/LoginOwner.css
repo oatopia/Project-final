@@ -1,7 +1,5 @@
 
 .owner-login-container {
-  /* background-color: #0b3c9f; */
-  /* width: 100%; */
   margin-top: 10px;
   padding-bottom: 20px;
   
@@ -95,3 +93,7 @@
   box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
   font-weight: bold;
 } 
+
+.Navbar-login-owner-container{
+  box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
+}

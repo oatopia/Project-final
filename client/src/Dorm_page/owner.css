@@ -1,49 +1,53 @@
-
-.background-header{
-    width: 20%;
-    /* min-height: 30vh; */
-    /* text-align: end; */
+.background-header {
+  width: 20%;
+  /* min-height: 30vh; */
+  /* text-align: end; */
 }
 
-.content-owner-container{
-    display: flex;
+.content-owner-container {
+  display: flex;
+  /* background-image: url("../img/l4.jpg"); */
+  min-height: 100vh;
+  background-position: center;
+  background-size: cover;
 }
 
-.add-text{
-    margin-top: 20px;
-    font-weight: normal;
-    color: white;
+.add-text {
+  margin-top: 20px;
+  font-weight: normal;
+  color: white;
 }
-.add-dorm{
-    border: none;
-    width: 220px;
-    height: 80px;
-    margin-left: 30px;
-    margin-top: 20px;
-    background-color: #1655a7;
-    border-radius: 10px;
-    font-size: 18px;
-    text-align: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition-duration: 0.5s;
-
-}
-
-.add-dorm:hover{
-    background-color: #002a61;
-    transition-duration: 0.5s;
+.add-dorm {
+  border: none;
+  width: 220px;
+  height: 80px;
+  margin-left: 30px;
+  margin-top: 20px;
+  background-color: #1655a7;
+  border-radius: 10px;
+  font-size: 18px;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition-duration: 0.5s;
 }
 
-.box-dorm{
-    margin-top: 20px;
-    width: 50%;
-    margin-left: 50px;
-    /* margin-right: auto; */
-    background-color: #eff7e1;
-    border-radius: 10px;
-    height: 100px;
-    vertical-align: middle;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+.add-dorm:hover {
+  background-color: #002a61;
+  transition-duration: 0.5s;
+}
+
+.box-dorm {
+  margin-top: 20px;
+  width: 50%;
+  margin-left: 50px;
+  /* margin-right: auto; */
+  background-color: #eff7e1;
+  border-radius: 10px;
+  height: 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* .box-dorm:hover{
@@ -51,13 +55,12 @@
     transition-duration: 0.5s;
 } */
 
-.contain-dorm{
-    width: 80%;
-    height: 100%;
+.contain-dorm {
+  width: 80%;
+  height: 100%;
 }
 
-.h3-dorm{
-    font-size: 38px;
-    color:#1655a7 ;
-    text-align: center;
+.h3-dorm {
+  font-size: 38px;
+  color: #1655a7;
 }

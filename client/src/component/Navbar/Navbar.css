@@ -78,9 +78,20 @@ img{
 }
 
 .dropdown-option{
-    display: block;
+    /* background-color: white; */
+    /* display: inline-block; */
     color: #1655a7;
     font-weight: normal;
     font-size: 24px; 
     transition-duration:0.5s;
+   
+}
+
+.option-container{
+    /* padding: 10px; */
+    border-radius: 10px;
+    text-align: center;
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
 }

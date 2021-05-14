@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './LoginOwner.css';
-import img from './img/back9.jpg'
+import img from './img/loginown.jpg'
 import Navbar from './component/Navbar/Navbar.js'
 import Auth from './service/authService.js'
 
@@ -23,7 +23,9 @@ const Loginowner = () => {
     console.log("login page: ", currentUser);
     return (
         <div className="login-owner-page-container">
-            <Navbar></Navbar>
+            <div className="Navbar-login-owner-container">
+            <Navbar/>
+            </div>
             <div className="owner-login-container">
                 <div className="content-owner-login-container">
                     <form className="form-owner-login" onSubmit={handleLogin}>

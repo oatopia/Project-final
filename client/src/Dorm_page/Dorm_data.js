@@ -34,7 +34,7 @@ const Owner = () => {
     "ที่จอดรถ",
     "อินเตอร์เน็ตภายในอาคาร",
     "กล้องวงจรปิด",
-    "ระบบรักษาความปลอดภัยแบบkeycard",
+    "ระบบรักษาความปลอดภัยแบบ Keycard",
     "ระบบรักษาความปลอดภัยแบบแสกนลายนิ้วมือ",
     "สระว่ายน้ำ",
     "ร้านซักรีด",
@@ -73,7 +73,7 @@ const Owner = () => {
 
   useEffect(() => {
     Axios.post(
-      url+"api/dorm/getDormdatabyId",
+      url + "api/dorm/getDormdatabyId",
       { dorm_ID: dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
@@ -82,7 +82,7 @@ const Owner = () => {
     });
 
     Axios.post(
-      url+"api/dorm/getFac",
+      url + "api/dorm/getFac",
       { dorm_ID: dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
@@ -91,7 +91,7 @@ const Owner = () => {
     });
 
     Axios.post(
-      url+"api/dorm/getImg",
+      url + "api/dorm/getImg",
       { dorm_ID: dorm_ID },
       { headers: authHeader() }
     )
@@ -121,23 +121,23 @@ const Owner = () => {
                 <img
                   key={key}
                   className="img-dorm-data"
-                  src={url+"img_Dorm/" + pic.Image}
+                  src={url + "img_Dorm/" + pic.Image}
                 />
               );
             })}
             <div className="box-inner-data">
               <div>
-              <p className="text-dorm-content"><label>ประเภทหอพัก</label> {dorm.type_D}</p>
+                <p className="text-dorm-content"><label className="typedorm">ประเภทหอพัก</label> {dorm.type_D}</p>
               </div>
-              
-              <p className="text-dorm-content"><label>ที่อยู่</label> {dorm.address}</p>
+
+              <p className="text-dorm-content"><label className="typedorm">ที่อยู่</label> {dorm.address}</p>
               <h2>รายละเอียดค่าใช้จ่าย</h2>
-              <p className="text-dorm-content"><h3>ค่าส่วนกลาง</h3> {dorm.deposit}</p>
-              <p className="text-dorm-content"><h3>ค่าไฟ </h3>{dorm.electric_Bill}บาทต่อยูนิต</p>
-              <p className="text-dorm-content"><h3>ค่าน้ำ</h3> {dorm.water_Bill}บาทต่อยูนิต</p>
-              <p className="text-dorm-content"><h3>ค่าประกัน</h3> {dorm.common_Fee}</p>
+              <p className="text-dorm-content"><h3>ค่าส่วนกลาง</h3> {dorm.deposit} บาท</p>
+              <p className="text-dorm-content"><h3>ค่าไฟ </h3>{dorm.electric_Bill} บาทต่อยูนิต</p>
+              <p className="text-dorm-content"><h3>ค่าน้ำ</h3> {dorm.water_Bill} บาทต่อยูนิต</p>
+              <p className="text-dorm-content"><h3>ค่าประกัน</h3> {dorm.common_Fee} บาท</p>
             </div>
-            <h2>สิ่งอำนวยความสะดวก</h2>
+            <h2 id="faci">สิ่งอำนวยความสะดวก</h2>
             <div className="box-fac-data">
               <div className="fac-in-room">
                 <h3>ภายในห้องพัก</h3>
@@ -161,7 +161,7 @@ const Owner = () => {
             </div>
             <div className="box-2-inner-data">
               <p className="text-dorm-content"><h3>รายละเอียดหอพัก</h3> {dorm.detail}</p>
-              <h2>ข้อมูลติดต่อ</h2>
+              <h2 id="contact">ข้อมูลติดต่อ</h2>
               <p className="text-dorm-content"><h3>ชื่อผู้ดูแลหอพัก</h3> {dorm.ad_Name}</p>
               <p className="text-dorm-content"><h3>เบอร์ติดต่อ</h3> {dorm.contact_Number}</p>
               <p className="text-dorm-content"><h3>อีเมล </h3>{dorm.e_Mail}</p>
@@ -299,7 +299,7 @@ const Owner = () => {
                             if (checkinner == true) {
                               let id = fac[indinner].f_ID;
                               Axios.delete(
-                                url+`api/dorm/facdeleteDelete/${id}`
+                                url + `api/dorm/facdeleteDelete/${id}`
                               ).then((Response) => {
                                 setFac(
                                   fac.filter((item) => {
@@ -314,7 +314,7 @@ const Owner = () => {
                                 type_F: "ภายในห้องพัก",
                                 facility: data,
                               };
-                              Axios.post(url+"api/dorm/addfacil", facil, {
+                              Axios.post(url + "api/dorm/addfacil", facil, {
                                 headers: authHeader(),
                               }).then((Response) => {
                                 console.log("Response dorm: ", Response.data);
@@ -368,7 +368,7 @@ const Owner = () => {
                             if (check == true) {
                               let id = fac[ind].f_ID;
                               Axios.delete(
-                                url+`api/dorm/facdeleteDelete/${id}`
+                                url + `api/dorm/facdeleteDelete/${id}`
                               ).then((Response) => {
                                 setFac(
                                   fac.filter((item) => {
@@ -384,7 +384,7 @@ const Owner = () => {
                                 type_F: "ส่วนกลาง",
                                 facility: data,
                               };
-                              Axios.post(url+"api/dorm/addfacil", facil, {
+                              Axios.post(url + "api/dorm/addfacil", facil, {
                                 headers: authHeader(),
                               }).then((Response) => {
                                 console.log("Response ID: ", Response.data);

@@ -1,61 +1,86 @@
-.dormdata-container{
-    /* background-image: url("./img/operatorbackground.jpg"); */
-    background-color: rgb(245, 226, 194);
-    padding-bottom: 20px;
-    
+.dormdata-container {
+  /* background-image: url("./img/operatorbackground.jpg"); */
+  background-color: rgb(245, 226, 194);
+  padding-bottom: 20px;
 }
 
-.box-dorm-data{
-    width: 90%;
-    background-color:rgb(204, 230, 240);
-    padding: 20px;
-    border-radius: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-    margin-top: 20px;
+.box-dorm-data {
+  width: 90%;
+  background-color: rgb(204, 230, 240);
+  padding: 20px;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  margin-top: 20px;
 }
 
-.box-inner-data{
-    margin-top: 20px;
-    text-align: start;
-    /* font-size: 58px; */
+.box-inner-data {
+  margin-top: 20px;
+  text-align: start;
+  /* font-size: 58px; */
 }
 
-.img-dorm-data{
-    width: 500px;
-    height: 450px;
+.img-dorm-data {
+  width: 500px;
+  height: 450px;
 }
 
-.box-fac-data{
-    display: flex;
-    justify-content: space-around;
+.box-fac-data {
+  display: flex;
+  justify-content: space-around;
 }
 
-.box-2-inner-data{
-    margin-top: 10px;
-    text-align: start;
+.box-2-inner-data {
+  margin-top: 10px;
+  text-align: start;
 }
 
-.box-dorm-data p{
-    font-size: 22px;
+.box-dorm-data p {
+  font-size: 22px;
 }
 
-.but-edit-dorm{
-    width: 200px;
-    height: 60px;
+.but-edit-dorm {
+  width: 200px;
+  height: 60px;
+  font-size: 24px;
+  border-radius: 10px;
+  border: none;
+  color: rgb(250, 244, 244);
+  background-color: #1655a7;
+}
+
+.save-edit-dorm {
+  height: 60px;
+  font-size: 24px;
+  border-radius: 10px;
+  border: none;
+  color: rgb(250, 244, 244);
+  background-color: #6b9cdd;
+}
+
+.typedorm {
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.box-inner-data h2{
+    font-size: 28px;
+}
+
+.dormdata-container h3{
     font-size: 24px;
-    border-radius: 10px;
-    border: none;
-    color: rgb(250, 244, 244);
-    background-color: #1655a7;
+    color: rgb(75, 75, 75);
 }
 
-.save-edit-dorm{
-    height: 60px;
-    font-size: 24px;
-    border-radius: 10px;
-    border: none;
-    color: rgb(250, 244, 244);
-    background-color: #6b9cdd;
+#faci{
+    font-size: 28px;
+}
+
+#contact{
+    font-size: 28px;
+}
+
+.box-fac-data li{
+    color: rgb(75, 75, 75);
 }
