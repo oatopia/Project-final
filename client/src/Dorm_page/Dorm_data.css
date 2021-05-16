@@ -1,9 +1,14 @@
 .dormdata-container {
   /* background-image: url("./img/operatorbackground.jpg"); */
-  background-color: rgb(245, 226, 194);
+ 
   padding-bottom: 20px;
 }
 
+.content-dorm-container{
+  background-color: rgb(245, 226, 194);
+  padding-bottom: 20px;
+  padding-top: ;
+}
 .box-dorm-data {
   width: 90%;
   background-color: rgb(204, 230, 240);
@@ -12,7 +17,7 @@
   margin-left: auto;
   margin-right: auto;
   text-align: left;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 .box-inner-data {
@@ -40,6 +45,10 @@
   font-size: 22px;
 }
 
+.edit-button-container {
+  text-align: center;
+}
+
 .but-edit-dorm {
   width: 200px;
   height: 60px;
@@ -48,6 +57,7 @@
   border: none;
   color: rgb(250, 244, 244);
   background-color: #1655a7;
+  margin-top: 40px;
 }
 
 .save-edit-dorm {
@@ -64,23 +74,27 @@
   font-size: 28px;
 }
 
-.box-inner-data h2{
-    font-size: 28px;
+.box-inner-data h2 {
+  font-size: 28px;
 }
 
-.dormdata-container h3{
-    font-size: 24px;
-    color: rgb(75, 75, 75);
+.dormdata-container h3 {
+  font-size: 24px;
+  color: rgb(75, 75, 75);
 }
 
-#faci{
-    font-size: 28px;
+#faci {
+  font-size: 28px;
 }
 
-#contact{
-    font-size: 28px;
+#contact {
+  font-size: 28px;
 }
 
-.box-fac-data li{
-    color: rgb(75, 75, 75);
+.box-fac-data li {
+  color: rgb(75, 75, 75);
+}
+
+.dormdata-container h2{
+  margin-top: 15px;
 }

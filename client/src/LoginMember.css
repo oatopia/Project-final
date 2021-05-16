@@ -2,18 +2,18 @@ body {
   margin: 0;
 }
 
-.Navbar-container{
+.Navbar-container {
   margin-bottom: 25px;
   box-shadow: 2px 5px 6px 0 rgba(0, 0, 0, 0.2);
 }
 
 .content-login-member-container {
+  padding-bottom: 30px;
 }
 
 .content-login-container {
   display: flex;
   justify-content: center;
-
 }
 
 .form-login-member {
@@ -47,7 +47,7 @@ input.text-input {
   box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.2);
   width: 100%;
   margin-top: -20px;
-  font-size: 26px;
+  font-size: 18px;
 }
 
 .text-input:focus {

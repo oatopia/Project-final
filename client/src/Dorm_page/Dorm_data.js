@@ -111,6 +111,7 @@ const Owner = () => {
   return (
     <div className="dormdata-container">
       <Navbar />
+      <div className="content-dorm-container">
       <div className="box-dorm-data">
         {/* ---------------------------------------------------------------------- */}
         {showedit == false ? (
@@ -506,15 +507,20 @@ const Owner = () => {
             บันทึก{" "}
           </button>
         )}
-        <button
-          className="but-edit-dorm"
-          onClick={() => {
-            setShowedit(true);
-          }}
-        >
-          แก้ไขข้อมูลหอพัก
+        <div className="edit-button-container">
+          <button
+            className="but-edit-dorm"
+            onClick={() => {
+              setShowedit(true);
+            }}
+          >
+            แก้ไขข้อมูลหอพัก
         </button>
+        </div>
       </div>
+      </div>
+
+
     </div>
   );
 };

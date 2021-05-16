@@ -5,15 +5,15 @@
 .NavOwner-container{
     display: flex;
     justify-content: space-between;
-    background-color: white;
     padding: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .home-menu{
-    font-size: 24px;
+    font-size: 28px;
     color: #1655a7;
 }
+
 .profile-NavOwner{
     /* background-color: #F1EDED; */
     width: 150px;
@@ -28,10 +28,9 @@
 }
 
 .profile-NavOwner p{
-    font-size: 25px;
+    font-size: 28px;
     color: #1655a7;
 }
-
 
 img.profilelogo{
     margin-right: 10px;
@@ -54,9 +53,9 @@ img.profilelogo{
 }
 
 .NavOwner-container2{
-    width: 30%;
+    width: 50%;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-end;
 }
 

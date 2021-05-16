@@ -6,8 +6,9 @@
 
 .content-owner-container {
   display: flex;
+  background-color:#D0E5F5;
   /* background-image: url("../img/l4.jpg"); */
-  min-height: 100vh;
+  min-height: 80vh;
   background-position: center;
   background-size: cover;
 }
@@ -17,10 +18,11 @@
   font-weight: normal;
   color: white;
 }
+
 .add-dorm {
   border: none;
   width: 220px;
-  height: 80px;
+  height: 100px;
   margin-left: 30px;
   margin-top: 20px;
   background-color: #1655a7;
@@ -41,7 +43,8 @@
   width: 50%;
   margin-left: 50px;
   /* margin-right: auto; */
-  background-color: #eff7e1;
+  /* background-color: #eff7e1; */
+  background-color: beige;
   border-radius: 10px;
   height: 100px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
