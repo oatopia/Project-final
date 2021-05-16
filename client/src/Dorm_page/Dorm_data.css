@@ -1,3 +1,74 @@
+
+.dormdata-container {
+  /* background-image: url("./img/operatorbackground.jpg"); */
+ 
+  padding-bottom: 20px;
+}
+
+.content-dorm-container{
+  background-color: rgb(245, 226, 194);
+  padding-bottom: 20px;
+  padding-top: ;
+}
+.box-dorm-data {
+  width: 90%;
+  background-color: rgb(204, 230, 240);
+  padding: 20px;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  /* margin-top: 20px; */
+}
+
+.box-inner-data {
+  margin-top: 20px;
+  text-align: start;
+  /* font-size: 58px; */
+}
+
+.img-dorm-data {
+  width: 500px;
+  height: 450px;
+}
+
+.box-fac-data {
+  display: flex;
+  justify-content: space-around;
+}
+
+.box-2-inner-data {
+  margin-top: 10px;
+  text-align: start;
+}
+
+.box-dorm-data p {
+  font-size: 22px;
+}
+
+.edit-button-container {
+  text-align: center;
+}
+
+.but-edit-dorm {
+  width: 200px;
+  height: 60px;
+  font-size: 24px;
+  border-radius: 10px;
+  border: none;
+  color: rgb(250, 244, 244);
+  background-color: #1655a7;
+  margin-top: 40px;
+}
+
+.save-edit-dorm {
+  height: 60px;
+  font-size: 24px;
+  border-radius: 10px;
+  border: none;
+  color: rgb(250, 244, 244);
+  background-color: #6b9cdd;
+
 .dormdata-container{
     /* background-image: url("./img/operatorbackground.jpg"); */
     background-color: #fbeeac;
@@ -14,43 +85,42 @@
     margin-right: auto;
     text-align: left;
     margin-top: 20px;
+
 }
 
-.box-inner-data{
-    margin-top: 20px;
-    text-align: start;
-    /* font-size: 58px; */
+.typedorm {
+  font-weight: bold;
+  font-size: 28px;
 }
+
+
+.box-inner-data h2 {
+  font-size: 28px;
 
 .img-dorm-data{
     width: 150px;
     height: 100px;
+
 }
 
-.box-fac-data{
-    display: flex;
-    justify-content: space-around;
+.dormdata-container h3 {
+  font-size: 24px;
+  color: rgb(75, 75, 75);
 }
 
-.box-2-inner-data{
-    margin-top: 10px;
-    text-align: start;
+#faci {
+  font-size: 28px;
 }
 
-.box-dorm-data p{
-    font-size: 22px;
+#contact {
+  font-size: 28px;
 }
 
-.but-edit-dorm{
-    width: 200px;
-    height: 60px;
-    font-size: 24px;
-    border-radius: 10px;
-    border: none;
-    color: rgb(250, 244, 244);
-    background-color: #1655a7;
+.box-fac-data li {
+  color: rgb(75, 75, 75);
 }
-
+.dormdata-container h2{
+  margin-top: 15px;
 .save-edit-dorm{
     height: 60px;
     font-size: 24px;

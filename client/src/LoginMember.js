@@ -19,7 +19,7 @@ const Loginmember = () => {
         Auth.loginmember(username, password)
             .then(Response => {
                 console.log(Response);
-                    history.push("/member");
+                history.push("/member");
             })
     }
     const currentUser = Auth.getCurrentUser();

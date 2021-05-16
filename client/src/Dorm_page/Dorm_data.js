@@ -36,7 +36,7 @@ const Owner = () => {
     "ที่จอดรถ",
     "อินเตอร์เน็ตภายในอาคาร",
     "กล้องวงจรปิด",
-    "ระบบรักษาความปลอดภัยแบบkeycard",
+    "ระบบรักษาความปลอดภัยแบบ Keycard",
     "ระบบรักษาความปลอดภัยแบบแสกนลายนิ้วมือ",
     "สระว่ายน้ำ",
     "ร้านซักรีด",
@@ -214,11 +214,13 @@ const Owner = () => {
   return (
     <div className="dormdata-container">
       <Navbar />
+      <div className="content-dorm-container">
       <div className="box-dorm-data">
         {/* ---------------------------------------------------------------------- */}
         {showedit == false ? (
           <div className="box-info">
             <h1>{dorm.dorm_Name}</h1>
+
             <div className="image-container">
               {img.map((pic, key) => {
                 return (
@@ -237,12 +239,12 @@ const Owner = () => {
 
               <p className="text-dorm-content"><label>ที่อยู่</label> {dorm.address}</p>
               <h2>รายละเอียดค่าใช้จ่าย</h2>
-              <p className="text-dorm-content"><h3>ค่าส่วนกลาง</h3> {dorm.deposit}</p>
-              <p className="text-dorm-content"><h3>ค่าไฟ </h3>{dorm.electric_Bill}บาทต่อยูนิต</p>
-              <p className="text-dorm-content"><h3>ค่าน้ำ</h3> {dorm.water_Bill}บาทต่อยูนิต</p>
-              <p className="text-dorm-content"><h3>ค่าประกัน</h3> {dorm.common_Fee}</p>
+              <p className="text-dorm-content"><h3>ค่าส่วนกลาง</h3> {dorm.deposit} บาท</p>
+              <p className="text-dorm-content"><h3>ค่าไฟ </h3>{dorm.electric_Bill} บาทต่อยูนิต</p>
+              <p className="text-dorm-content"><h3>ค่าน้ำ</h3> {dorm.water_Bill} บาทต่อยูนิต</p>
+              <p className="text-dorm-content"><h3>ค่าประกัน</h3> {dorm.common_Fee} บาท</p>
             </div>
-            <h2>สิ่งอำนวยความสะดวก</h2>
+            <h2 id="faci">สิ่งอำนวยความสะดวก</h2>
             <div className="box-fac-data">
               <div className="fac-in-room">
                 <h3>ภายในห้องพัก</h3>
@@ -266,7 +268,7 @@ const Owner = () => {
             </div>
             <div className="box-2-inner-data">
               <p className="text-dorm-content"><h3>รายละเอียดหอพัก</h3> {dorm.detail}</p>
-              <h2>ข้อมูลติดต่อ</h2>
+              <h2 id="contact">ข้อมูลติดต่อ</h2>
               <p className="text-dorm-content"><h3>ชื่อผู้ดูแลหอพัก</h3> {dorm.ad_Name}</p>
               <p className="text-dorm-content"><h3>เบอร์ติดต่อ</h3> {dorm.contact_Number}</p>
               <p className="text-dorm-content"><h3>อีเมล </h3>{dorm.e_Mail}</p>
@@ -399,6 +401,7 @@ const Owner = () => {
                           id={key}
                           value={data}
                           defaultChecked={state == true ? true : false}
+
                           onChange={Onchangefac('ภายในห้องพัก')}
                         ></input>
                         <label htmlFor={key}>{data}</label>
@@ -530,8 +533,9 @@ const Owner = () => {
             บันทึก
           </button>
         )}
-
       </div>
+
+
     </div>
   );
 };

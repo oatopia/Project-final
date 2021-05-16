@@ -32,8 +32,6 @@ const Owner = () => {
   if (!currentUser) {
     return <Redirect to="/loginowner" />;
   }
-
-  console.log("fuck dorm: ", dorm);
   return (
     <div className="owner-container">
       <div className="navbar-owner-container">

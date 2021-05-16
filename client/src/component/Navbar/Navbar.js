@@ -8,10 +8,6 @@ const currentUser = Auth.getCurrentUser();
 
 const Unauthen = () => {
   const [click, setClick] = useState(false);
-  const options = [
-    'one', 'two', 'three'
-  ];
-  const defaultOption = options[0];
   const gotohome = () => {
     window.location.href = "/";
   };
@@ -33,8 +29,10 @@ const Unauthen = () => {
           เข้าสู่ระบบ
           </div>} */}
         <DropdownButton id="dropdown-basic-button" title="เข้าสู่ระบบ" >
+          <div className="option-container">
           <Dropdown.Item className="dropdown-option" href="/loginmember">สมาชิก</Dropdown.Item>
           <Dropdown.Item className="dropdown-option" href="/loginowner">ผู้ประกอบการ</Dropdown.Item>
+          </div>
         </DropdownButton>
 
         <button
