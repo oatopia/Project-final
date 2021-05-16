@@ -55,6 +55,7 @@ img.profilelogo{
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin-right: 40px;
 }
 
 .select-profile{
@@ -93,6 +94,7 @@ img.profilelogo{
 #dropdown-basic-button{
     color: white;
     margin-left: px;
+    text-align: center;
 }
 
 
