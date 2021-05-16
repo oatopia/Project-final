@@ -4,10 +4,10 @@ import "./Indorm.css";
 import addImgicon from "../../img/Group 86.png";
 import Auth from "../../service/authService.js";
 import authHeader from "../../service/auth-header.js";
-import { Redirect,useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 export default function Indorm() {
-  const url = "https://matching-dorm-tu-server.herokuapp.com/"
+  // const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const facilitiesinsidedorm = [
     "เครื่องปรับอากาศ",
     "เครื่องทำน้ำอุ่น",
@@ -57,13 +57,18 @@ export default function Indorm() {
   const [email, setEmail] = useState("");
   const [lineid, setLineid] = useState("");
   const [image, setImage] = useState([]);
+  const [addroom, setAddroom] = useState([]);
+  const [roomtype, setRoomtype] = useState("");
+  const [roomprice, setRoomprice] = useState("");
+  const [room,setRoom] = useState([]);
   const currentUser = Auth.getCurrentUser();
-  const formData = new FormData();
-  const history = useHistory();
+  const [count,setCount] = useState(1);
 
+  let arrayFile = [];
+  const history = useHistory();
   const saveinfordorm = () => {
-    console.log("owner id",currentUser.owner_ID)
-    axios.post(url+'api/dorm/createDorm', {
+    console.log("owner id", currentUser.owner_ID)
+    axios.post('api/dorm/createDorm', {
       dorm_Name: name,
       type_D: type,
       address: address,
@@ -77,27 +82,118 @@ export default function Indorm() {
       e_Mail: email,
       line_ID: lineid,
       owner_ID: currentUser.owner_ID
-    },{ headers: authHeader() }).then((Response) => {
+    }, { headers: authHeader() }).then((Response) => {
       const ID = Response.data.insertId;
-      console.log('ID',Response.data.insertId);
-      axios.post(url+"api/dorm/createFacilities",{dorm_ID: ID, facilities: facilities},{ headers: authHeader() }).then((Response) => {
+      console.log('ID', Response.data.insertId);
+      axios.post("api/dorm/createFacilities", { dorm_ID: ID, facilities: facilities }, { headers: authHeader() }).then((Response) => {
         console.log(Response);
       });
-      formData.append("Image","");
-      formData.append("dorm_ID",ID);
+
+      let formData = new FormData();
+      console.log("data in arrayFile: ", arrayFile);
+      for (let i = 0; i < arrayFile.length; i++) {
+        formData.append("Image", arrayFile[i]);
+      }
+      formData.append("dorm_ID", ID);
       const config = {
         headers: {
-          "content-type": "multipart/form-data",
+          "Content-Type": "multipart/form-data",
         },
       };
-      axios.post(url+"api/dorm/createImage", formData, config).then((Response) => {
+      // console.log("Data in formData",formData);
+      axios.post("api/dorm/createImage", formData, config).then((Response) => {
         console.log(Response);
       });
       history.push("/owner");
     })
-    
-    
   };
+
+  const OnchangeFac = (e) => {
+    let checkvalue = false;
+    let index = 0;
+    facilities.map((data, key) => {
+      if (data.facility == e.target.value) {
+        return checkvalue = true, index = key;
+      }
+
+    })
+    if (checkvalue == false) {
+      setfacilities([
+        ...facilities,
+        { type_F: "ภายในห้องพัก", facility: e.target.value },
+      ]);
+    } else {
+      setfacilities(facilities.filter(item => item.facility != e.target.value));
+    }
+
+  }
+
+  const createTD = (e) => {
+    setAddroom([...addroom,{order:count}])
+    setCount(prev=>prev+1);
+    console.log('count',count)
+  }
+
+  const addroomType=(order)=>(e)=>{
+    let checkvalue = false
+    let index = 0;
+    room.map((data,key)=>{
+      if(data.order == order){
+        return(
+          checkvalue = true,
+          index = key
+        )
+      }
+    })
+
+    if(checkvalue == true){
+      const oldroom = [...room]
+      oldroom[index].room_Type = e.target.value
+      setRoom(oldroom)
+    }else{
+      setRoom([
+        ...room,
+        {order:order,room_Type:e.target.value,room_Price:0}
+      ])
+    }
+    console.log("room from addtype: ",room)
+  }
+
+  const addroomPrice=(order)=>(e)=>{
+    let checkvalue = false
+    let index = 0;
+    room.map((data,key)=>{
+      if(data.order == order){
+        return(
+          checkvalue = true,
+          index = key
+        )
+      }
+    })
+
+    if(checkvalue == true){
+      const oldroom = [...room]
+      oldroom[index].room_Price = e.target.value
+      setRoom(oldroom)
+    }else{
+      setRoom([
+        ...room,
+        {order:order,room_Type:e.target.value,room_Price:0}
+      ])
+    }
+    console.log("room from add price: ",room)
+  }
+
+  const deleteroom = (order)=>(e)=>{
+    setRoom(room.filter((item) => {
+      return item.order != order;
+    }))
+    setAddroom(addroom.filter((item) => {
+      return item.order != order;
+    }))
+    
+  }
+
   return (
     <div className="containIn">
       <div className="Indorm">
@@ -110,6 +206,7 @@ export default function Indorm() {
         ></input>
         <br />
         <h2>ประเภทหอพัก</h2>
+
         <select
           className="type-dorm"
           defaultValue="หอพักแยกชาย-หญิง"
@@ -120,6 +217,49 @@ export default function Indorm() {
           <option value="หอพักแยกชาย-หญิง">หอพักแยกชาย-หญิง</option>
           <option value="หอพักรวม">หอพักรวม</option>
         </select>
+
+        <br />
+        <div className="room-container">
+          <h2>ประเภทห้องหัก</h2>
+          <table className="table-room-container">
+            <thead>
+            <tr className="heading-table">
+              <th>ประเภท</th>
+              <th>ราคาเช่ารายเดือน</th>
+              <th></th>
+            </tr>
+            <tr>
+              <td>
+                <input className='type-room-input' type="text" onChange={addroomType(0)}></input>
+              </td>
+              <td className="box-input-price">
+                <input className='price-room-input' type="text" onChange={addroomPrice(0)}></input>
+                <p>บาทต่อเดือน</p>
+              </td>
+              <td>
+              </td>
+            </tr>
+            {addroom.map((data, key) => {
+              return (
+                <tr key={key}>
+                  <td>
+                    <input className='type-room-input' type="text"  onChange={addroomType(data.order)}></input>
+                    {data.input}
+                  </td>
+                  <td className="box-input-price">
+                    <input className='price-room-input' type="text" onChange={addroomPrice(data.order)}></input>
+                    <p>บาทต่อเดือน</p>
+                  </td>
+                  <td>
+                    {data.order != addroom.length ? <></> :<p onClick={deleteroom(data.order)}>ลบ</p>}
+                  </td>
+                </tr>
+              )
+            })}
+            </thead>
+          </table>
+          <button className='add-room-button' onClick={createTD}>เพิ่มประเภทห้อง</button>
+        </div>
         <br />
         <h2>ที่อยู่หอพัก</h2>
         <textarea
@@ -187,12 +327,7 @@ export default function Indorm() {
                     type="checkbox"
                     id={key}
                     value={data}
-                    onChange={(e) => {
-                      setfacilities([
-                        ...facilities,
-                        { type_F: "ภายในห้องพัก", facility: e.target.value },
-                      ]);
-                    }}
+                    onChange={OnchangeFac}
                   ></input>
                   <label htmlFor={key}>{data}</label>
                 </div>
@@ -208,12 +343,7 @@ export default function Indorm() {
                     type="checkbox"
                     id={key}
                     value={data}
-                    onChange={(e) => {
-                      setfacilities([
-                        ...facilities,
-                        { type_F: "ส่วนกลาง", facility: e.target.value },
-                      ]);
-                    }}
+                    onChange={OnchangeFac}
                   ></input>
                   <label htmlFor={key}>{data}</label>
                 </div>
@@ -236,8 +366,9 @@ export default function Indorm() {
           <input
             className="chong-three"
             onChange={(e) => {
-              setNameown(e.target.value);
-            }}
+              setNameown(e.target.value)
+            }
+            }
           ></input>
           <br />
           <h4 className="space2">เบอร์ติดต่อ</h4>
@@ -275,7 +406,7 @@ export default function Indorm() {
             console.log("length file:", len);
             for (let i = 0; i < len; i++) {
               console.log("round ", i, " ", e.target.files[i]);
-              formData.append("Image", e.target.files[i]);
+              arrayFile.push(e.target.files[i]);
             }
           }}
         ></input>

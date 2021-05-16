@@ -36,9 +36,9 @@ export const createFactor = (req, res) => {
   const newFactor = req.body.new_factor;
   const file = req.files.ImageFactor;
   const image_name = file.name;
-  const array = {
-    Factor_name: newFactor,
-    Image_factor: image_name,
+  const  objectImage = {
+    factor_Name: newFactor,
+    image_Factor: image_name,
   };
   if (
     file.mimetype == "image/jpeg" ||
@@ -47,15 +47,15 @@ export const createFactor = (req, res) => {
   ) {
     file.mv("public/images/" + image_name, (err) => {
       if (err) return console.log(err);
-      adminModel.insertFactor(array, (err, data) => {
+      adminModel.insertFactor(objectImage, (err, data) => {
         if (err) {
           console.log(err);
         } else {
           console.log(array);
           const objectdata = {
-            Id: data.insertId,
-            Factor_name: newFactor,
-            Image_factor: image_name,
+            factor_ID: data.insertId,
+            factor_Name: newFactor,
+            image_factor: image_name,
           };
           res.send(objectdata);
         }

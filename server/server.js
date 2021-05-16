@@ -6,7 +6,6 @@ import matchRouter from './router/matchRouter.js'
 import dormRouter from './router/DormRouter.js'
 import adminRouter from './router/AdminRouter.js'
 import visitorRouter from './router/visitorRouter.js'
-const router = express.Router();
 import db from './util/database.js'
 import session from 'express-session'
 import path from 'path'
@@ -17,10 +16,10 @@ const app = express();
 
 
 app.use(cors());
-app.use(express.json());
 app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended: false}));
+app.use(bodyparser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(fileupload());
 
 app.get( '/', ( req, res ) => {
     console.log("run server success")

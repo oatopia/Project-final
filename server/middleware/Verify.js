@@ -4,7 +4,7 @@ import {jwtSecret} from '../config/Jwt-Config.js'
 export const verifyToken = (req, res, next) => {
     let token = req.headers["x-access-token"];
   
-    console.log("Token:",token);
+    // console.log("Token:",token);
     if (!token) {
       return res.status(403).send({
         message: "No token provided!"
@@ -19,7 +19,7 @@ export const verifyToken = (req, res, next) => {
         });
       }
     //   req.userId = decoded.id;
-      console.log("decoded: ",decoded);
+      // console.log("decoded: ",decoded);
       next();
     });
   };

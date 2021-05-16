@@ -10,7 +10,7 @@ const imageFilter= (req,file,cb)=>{
 }
 
 const storage = multer.diskStorage({
-    destination: "./public/img_Dorm/",
+    destination: "../public/img_Dorm/",
     filename: (req, file, cb)=>{
        cb(null,file.originalname);
     }

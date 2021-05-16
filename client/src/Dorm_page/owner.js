@@ -15,7 +15,7 @@ const Owner = () => {
   useEffect(() => {
     console.log("owner ID",currentUser.owner_ID)
     Axios.post(
-      url + "api/dorm/getDorm",
+      "api/dorm/getDorm",
       { owner_ID: currentUser.owner_ID },
       { headers: authHeader() }
     )

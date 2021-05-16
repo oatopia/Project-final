@@ -23,35 +23,34 @@ Dorminfo.createDorminfo = (newDorm,result) =>{
         result(err,null);
         return;
         }
-        console.log(res);
+        console.log("create dorm success this data from database: ",res);
         result(null,res);
     });
 };
 
 Dorminfo.createFac = (newfac,result)=>{
     const fac = newfac.facilities;
-    console.log("data come",newfac)
-    console.log("data in fac",fac)
+    console.log("data facilities from controller: ",fac)
     db.query("INSERT INTO facilities_dorm (dorm_ID,type_F,facility) VALUES ?",[fac.map(item=>[newfac.dorm_ID,item.type_F,item.facility])],(err,res)=>{
         if(err){
             console.log("error: ",err);
         result(err,null);
         return;
         }
-        console.log(res);
+        console.log("create facilities success this data from database: ",res);
     })
 }
 
 Dorminfo.createImg = (newImg,result)=>{
     const img_name = newImg.image_Name
-    console.log("array image name",img_name)
+    console.log("Array image name: ",img_name)
     db.query("INSERT INTO image_dorm (dorm_ID,image) VALUES ?",[img_name.map(item=>[newImg.dorm_ID,item])],(err,res)=>{
         if(err){
             console.log("error: ",err);
         result(err,null);
         return;
         }
-        console.log(res);
+        console.log("create image name success, this data get after success: ",res);
     })
 }
 
@@ -104,13 +103,13 @@ Dorminfo.getimagebyID = (id,result)=>{
 }
 
 Dorminfo.deleteFacbyId = (fid,result) =>{
-    db.query("DELETE FROM facilities_dorm WHERE f_ID = ?",fid,(err,res)=>{
+    db.query("DELETE FROM facilities_dorm WHERE factor_ID = ?",fid,(err,res)=>{
         if(err){
             console.log("error:",err);
             result(null,err);
             // return;
         }
-        console.log("delete fac: ",res)
+        console.log("Delete facilities success!!!")
         result(null,res);    
     });
 };
@@ -122,9 +121,36 @@ Dorminfo.addFac = (fac,result)=>{
         result(err,null);
         return;
         }
-        console.log("res insertID: ",res.insertId);
+        console.log("Add facilities success!!!,This is Facilities ID: ",res.insertId)
         result(null,res);
     })
 }
+
+Dorminfo.deleteImagebyID = (imageID,result) =>{
+    db.query("DELETE FROM image_dorm WHERE image_ID = ?",imageID,(err,res)=>{
+        if(err){
+            console.log("error:",err);
+            result(null,err);
+            // return;
+        }
+        console.log("Delete Image success!!!")
+        result(null,res);    
+    });
+};
+
+Dorminfo.updateDormbyID = (dorm,result)=>{
+    console.log("id dorm:",dorm.dorm_ID)
+    db.query("UPDATE dormitory SET dorm_Name = ?, type_D = ?, address = ?, deposit = ?, electric_Bill= ?, water_Bill = ?, common_Fee = ?, detail = ?, ad_Name = ?, contact_Number = ?, e_Mail = ?, line_ID = ? WHERE dorm_ID = ? ",
+    [dorm.dorm_Name,dorm.type_D,dorm.address,dorm.deposit,dorm.electric_Bill,dorm.water_Bill,dorm.common_Fee,dorm.detail,dorm.ad_Name,dorm.contact_Number,dorm.e_Mail,dorm.line_ID,dorm.dorm_ID],(err,res)=>{
+        if(err){
+            console.log("error: ",err);
+        result(err,null);
+        return;
+        }
+        console.log("Update dorm success!!!,response: ",res)
+        result(null,res);
+    })
+}
+
 
 export default Dorminfo;

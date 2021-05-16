@@ -1,13 +1,13 @@
 .dormdata-container{
     /* background-image: url("./img/operatorbackground.jpg"); */
-    background-color: rgb(245, 226, 194);
+    background-color: #fbeeac;
     padding-bottom: 20px;
     
 }
 
 .box-dorm-data{
     width: 90%;
-    background-color:rgb(204, 230, 240);
+    background-color: white;
     padding: 20px;
     border-radius: 10px;
     margin-left: auto;
@@ -23,8 +23,8 @@
 }
 
 .img-dorm-data{
-    width: 500px;
-    height: 450px;
+    width: 150px;
+    height: 100px;
 }
 
 .box-fac-data{
@@ -56,6 +56,50 @@
     font-size: 24px;
     border-radius: 10px;
     border: none;
-    color: rgb(250, 244, 244);
-    background-color: #6b9cdd;
+    font-weight: bold;
+    color: #28527a;
+    background-color: #8ac4d0;
+}
+
+.image-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Image-edit-dorm{
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.Image-edit-block{
+    width: 200px;
+    position: relative;
+    margin-right: 20px;
+}
+
+.Edit-heading{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#Delete-Icon{
+    position: absolute;
+    top: 10px;
+    left: 160px;
+    width: 30px;
+    height: 30px;
+}
+
+.edit-image-container{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.file-input-edit{
+    width: 500px;
+    /* height: 100px; */
+    margin-bottom: 20px;
 }
