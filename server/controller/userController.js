@@ -22,7 +22,7 @@ export const create = (req, res) => {
       res.send(data);
     }
   });
-  console.log(user);
+  // console.log(user);
 };
 
 export const loginmember = (req, res) => {

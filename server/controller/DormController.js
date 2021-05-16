@@ -1,4 +1,6 @@
 import dormModel from "../model/DormModel.js";
+import { upload } from '../middleware/upload.js'
+import fs from 'fs'
 
 export const createDorm = (req, res) => {
   const Dorm = new dormModel({
@@ -31,8 +33,7 @@ export const createFacilities = (req, res) => {
 
   const id = req.body.dorm_ID;
   const jsondata = req.body.facilities;
-  console.log("ID",id)
-  console.log("object",jsondata)
+  console.log("facilities: ", jsondata)
   const object = {
     dorm_ID: id,
     facilities: jsondata,
@@ -48,27 +49,28 @@ export const createFacilities = (req, res) => {
 
 export const createImage = (req, res) => {
   const id = req.body.dorm_ID;
-  console.log("ID:image:",id)
-  var imagename = [];
+  console.log("ID in body", id)
+  console.log("Image files: ", req.files)
   const file = req.files.Image;
+  var imagename = [];
+
   if (file.length === undefined) {
-      imagename.push(file.name);
+    imagename.push(file.name);
     if (
-        file.mimetype == "image/jpeg" ||
-        file.mimetype == "image/png" ||
-        file.mimetype == "image/gif"
-      ) {
-        file.mv("public/img_Dorm/" + file.name, (err) => {
-          if (err) return console.log(err);
-        });
-      }
+      file.mimetype == "image/jpeg" ||
+      file.mimetype == "image/png" ||
+      file.mimetype == "image/gif"
+    ) {
+      file.mv("public/img_Dorm/" + file.name, (err) => {
+        if (err) return console.log(err);
+      });
+    }
   } else {
     console.log("file: ", file);
     console.log("file length", req.files.Image.length);
 
     for (let i = 0; i < file.length; i++) {
       imagename.push(file[i].name);
-      console.log("file name: ", file[i].name);
       if (
         file[i].mimetype == "image/jpeg" ||
         file[i].mimetype == "image/png" ||
@@ -106,69 +108,95 @@ export const getDorm = (req, res) => {
 };
 
 export const getDormDataByID = (req, res) => {
-    const id = req.body.dorm_ID;
-    console.log("Dorm id: ",id);
-    dormModel.getdormdatabyID(id, (err, data) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send(data);
-      }
-    });
-  };
+  const id = req.body.dorm_ID;
+  console.log("Dorm id: ", id);
+  dormModel.getdormdatabyID(id, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
+};
 
 export const getFacilities = (req, res) => {
-    const id = req.body.dorm_ID;
-    console.log("Dorm id: ",id);
-    dormModel.getfacilitiesbyID(id, (err, data) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send(data);
-      }
-    });
-  };
+  const id = req.body.dorm_ID;
+  console.log("Dorm id: ", id);
+  dormModel.getfacilitiesbyID(id, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
+};
 
-  export const getImage = (req, res) => {
-    const id = req.body.dorm_ID;
-    console.log("Dorm id: ",id);
-    dormModel.getimagebyID(id, (err, data) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send(data);
-      }
-    });
-  };
+export const getImage = (req, res) => {
+  const id = req.body.dorm_ID;
+  console.log("Dorm id: ", id);
+  dormModel.getimagebyID(id, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
+};
 
-  export const deletefacbyID = (req, res) => {
-    const fid = req.params.id;
-    console.log("fac id: ",fid);
-    dormModel.deleteFacbyId(fid, (err, data) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send(data);
-      }
-    });
-  };
+export const deletefacbyID = (req, res) => {
+  const fid = req.params.id
+  console.log("fac id: ", fid);
+  dormModel.deleteFacbyId(fid, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
+};
 
-  export const addfac = (req, res) => {
-    const id = req.body.dorm_ID;
-    const typef = req.body.type_F;
-    const fac = req.body.facility;
-    const object = {
-      dorm_ID:id,
-      type_F:typef,
-      facility:fac
-    };
-    console.log(object)
-    dormModel.addFac(object, (err, data) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("data from add fac: ",data)
-        res.send(data);
-      }
-    });
-  };
+export const addfac = (req, res) => {
+  const object = req.body
+  console.log(object)
+  dormModel.addFac(object, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("data from add fac: ", data)
+      res.send(data);
+    }
+  });
+};
+
+
+export const deleteImage = (req, res) => {
+  const imageID = req.params.id;
+  const filename = req.body.image
+  fs.unlink("public/img_Dorm/"+filename,(err)=>{
+    if(err){
+      throw err
+    }else{
+      console.log("Delete file in folder success!")
+    }
+  })
+  dormModel.deleteImagebyID(imageID, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
+};
+
+export const updateDorm = (req, res) => {
+  const object = req.body
+  console.log("Object for update dorm: ",req.body)
+  console.log("ID dorm",object.dorm_ID)
+  dormModel.updateDormbyID(object, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
+};

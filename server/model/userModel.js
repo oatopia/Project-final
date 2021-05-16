@@ -15,6 +15,7 @@ Userinfo.create = (newUser, result) => {
                 result(err, null);
                 return;
             }
+            console.log("create member account complete! this is response: ",res)
             result(null, res);
         });
     } else {
@@ -24,6 +25,7 @@ Userinfo.create = (newUser, result) => {
                 result(err, null);
                 return;
             }
+            console.log("create owner account complete! this is response: ",res)
             result(null, res);
         });
     }

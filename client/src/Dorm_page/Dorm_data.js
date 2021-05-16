@@ -8,6 +8,8 @@ import { Redirect, useHistory } from "react-router-dom";
 import authHeader from "../service/auth-header.js";
 import { useLocation } from "react-router";
 import Dorminfo from "../component/Dorm/Dorm_info.js";
+import DeleteIcon from '../img/deleteicon.png'
+import axios from "axios";
 
 const Owner = () => {
   const url = "https://matching-dorm-tu-server.herokuapp.com/"
@@ -47,19 +49,6 @@ const Owner = () => {
     "ร้านเสริมสวย",
     "รถตู้รับส่ง",
   ];
-  const [name, setName] = useState("");
-  const [type, setType] = useState("หอพักแยกชาย-หญิง");
-  const [address, setAddress] = useState("");
-  const [deposit, setDeposit] = useState("");
-  const [water, setWater] = useState("");
-  const [elec, setElec] = useState("");
-  const [common, setCommon] = useState("");
-  const [facilities, setfacilities] = useState([]);
-  const [des, setDes] = useState("");
-  const [nameOwn, setNameown] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [lineid, setLineid] = useState("");
   // ---------------------------------------------------------------------
 
   const [dorm, setDorm] = useState([]);
@@ -70,10 +59,11 @@ const Owner = () => {
   const location = useLocation();
   const dorm_ID = location.state;
   const [showedit, setShowedit] = useState(false);
+  let arrayFile = [];
 
   useEffect(() => {
     Axios.post(
-      url + "api/dorm/getDormdatabyId",
+      "api/dorm/getDormdatabyId",
       { dorm_ID: dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
@@ -82,7 +72,7 @@ const Owner = () => {
     });
 
     Axios.post(
-      url + "api/dorm/getFac",
+      "api/dorm/getFac",
       { dorm_ID: dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
@@ -91,7 +81,7 @@ const Owner = () => {
     });
 
     Axios.post(
-      url + "api/dorm/getImg",
+      "api/dorm/getImg",
       { dorm_ID: dorm_ID },
       { headers: authHeader() }
     )
@@ -104,9 +94,122 @@ const Owner = () => {
       });
   }, []);
 
+
+  const Onchangefac = (type) => (e) => {
+    let checkvalue = false;
+    let id = 0
+    fac.map((item, key) => {
+      if (e.target.value == item.facility) {
+        checkvalue = true;
+        id = item.factor_ID
+      }
+    });
+    if (checkvalue == true) {
+      Axios.delete(
+        `api/dorm/facdeleteDelete/${id}`
+      ).then((Response) => {
+        setFac(
+          fac.filter((item) => {
+            return item.factor_ID != id;
+          })
+        );
+      });
+    } else {
+
+      if (type == "ภายในห้องพัก") {
+
+        const facil = {
+          dorm_ID: dorm.dorm_ID,
+          type_F: "ภายในห้องพัก",
+          facility: e.target.value,
+        };
+        Axios.post("api/dorm/addfacil", facil, {
+          headers: authHeader(),
+        }).then((Response) => {
+          setFac([
+            ...fac,
+            {
+              factor_ID: Response.data.insertId,
+              dorm_ID: dorm.dorm_ID,
+              type_F: "ภายในห้องพัก",
+              facility: e.target.value,
+            },
+          ]);
+        });
+
+      } else {
+
+        const facil = {
+          dorm_ID: dorm.dorm_ID,
+          type_F: "ส่วนกลาง",
+          facility: e.target.value,
+        };
+        Axios.post("api/dorm/addfacil", facil, {
+          headers: authHeader(),
+        }).then((Response) => {
+          setFac([
+            ...fac,
+            {
+              factor_ID: Response.data.insertId,
+              dorm_ID: dorm.dorm_ID,
+              type_F: "ส่วนกลาง",
+              facility: e.target.value,
+            },
+          ]);
+        });
+
+      }
+
+
+    }
+
+  }
+
+  const OnclickImage = (id, imagename) => (e) => {
+    Axios.delete(
+      `api/dorm/Imagedelete/${id}`, { data: { image: imagename } }
+    ).then((Response) => {
+      setImg(
+        img.filter((item) => {
+          return item.image_ID != id;
+        })
+      );
+    });
+  }
+
+
+  const OnchangeImage = (e) => {
+    let len = e.target.files.length;
+    let formdata = new FormData();
+    console.log("length file:", len);
+    for (let i = 0; i < len; i++) {
+      console.log("round ", i, " ", e.target.files[i]);
+      formdata.append("Image", e.target.files[i]);
+    }
+    formdata.append("dorm_ID", dorm.dorm_ID);
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    axios.post("api/dorm/createImage", formdata, config).then((Response) => {
+      console.log(Response);
+    });
+  }
+
   if (!currentUser) {
     return <Redirect to="/loginowner" />;
   }
+
+  const EditDorm = (e) => {
+    let id = dorm.dorm_ID;
+    axios.put(`api/dorm/UpdateDorm/${id}`, dorm)
+      .then((Response) => {
+        setShowedit(false);
+      })
+
+  }
+
 
   return (
     <div className="dormdata-container">
@@ -117,21 +220,24 @@ const Owner = () => {
         {showedit == false ? (
           <div className="box-info">
             <h1>{dorm.dorm_Name}</h1>
-            {img.map((pic, key) => {
-              return (
-                <img
-                  key={key}
-                  className="img-dorm-data"
-                  src={url + "img_Dorm/" + pic.Image}
-                />
-              );
-            })}
+
+            <div className="image-container">
+              {img.map((pic, key) => {
+                return (
+                  <img
+                    key={key}
+                    className="img-dorm-data"
+                    src={"img_Dorm/" + pic.image}
+                  />
+                );
+              })}
+            </div>
             <div className="box-inner-data">
               <div>
-                <p className="text-dorm-content"><label className="typedorm">ประเภทหอพัก</label> {dorm.type_D}</p>
+                <p className="text-dorm-content"><label>ประเภทหอพัก</label> {dorm.type_D}</p>
               </div>
 
-              <p className="text-dorm-content"><label className="typedorm">ที่อยู่</label> {dorm.address}</p>
+              <p className="text-dorm-content"><label>ที่อยู่</label> {dorm.address}</p>
               <h2>รายละเอียดค่าใช้จ่าย</h2>
               <p className="text-dorm-content"><h3>ค่าส่วนกลาง</h3> {dorm.deposit} บาท</p>
               <p className="text-dorm-content"><h3>ค่าไฟ </h3>{dorm.electric_Bill} บาทต่อยูนิต</p>
@@ -172,15 +278,16 @@ const Owner = () => {
         ) : (
           <div className="box-info">
             <form>
+              <h1 className="Edit-heading">แก้ไขข้อมูลหอพัก</h1>
               <h2>ชื่อหอพัก</h2>
               <input
                 className="chong-one"
                 defaultValue={dorm.dorm_Name}
                 onChange={(e) => {
-                  const name = { ...dorm };
-                  name.Dorm_Name = e.target.value;
-                  setDorm(name);
-                  console.log("onchange dormname", dorm);
+                  setDorm(prev=>({
+                    ...prev,
+                    dorm_Name:e.target.value
+                  }))
                 }}
               ></input>
               <br />
@@ -189,9 +296,10 @@ const Owner = () => {
                 className="type-dorm"
                 defaultValue={dorm.type_D}
                 onChange={(e) => {
-                  const type = { ...dorm };
-                  type.Type_D = e.target.value;
-                  setDorm(type);
+                  setDorm(prev=>({
+                    ...prev,
+                    type_D:e.target.value
+                  }))
                 }}
               >
                 <option value="หอพักแยกชาย-หญิง">หอพักแยกชาย-หญิง</option>
@@ -203,9 +311,10 @@ const Owner = () => {
                 className="chong-address"
                 defaultValue={dorm.address}
                 onChange={(e) => {
-                  const add = { ...dorm };
-                  add.address = e.target.value;
-                  setDorm(add);
+                  setDorm(prev=>({
+                    ...prev,
+                    address:e.target.value
+                  }))
                 }}
               ></textarea>
               <br />
@@ -218,9 +327,10 @@ const Owner = () => {
                   className="chong-pay"
                   defaultValue={dorm.deposit}
                   onChange={(e) => {
-                    const depo = { ...dorm };
-                    depo.deposit = e.target.value;
-                    setDorm(depo);
+                    setDorm(prev=>({
+                      ...prev,
+                      deposit:e.target.value
+                    }))
                   }}
                 ></input>
                 <h4 className="baht">บาท</h4>
@@ -232,9 +342,10 @@ const Owner = () => {
                   className="chong-pay"
                   defaultValue={dorm.water_Bill}
                   onChange={(e) => {
-                    const water = { ...dorm };
-                    water.water_Bill = e.target.value;
-                    setDorm(water);
+                    setDorm(prev=>({
+                      ...prev,
+                      electric_Bill:e.target.value
+                    }))
                   }}
                 ></input>
                 <h4 className="baht">บาท</h4>
@@ -246,9 +357,10 @@ const Owner = () => {
                   className="chong-pay"
                   defaultValue={dorm.electric_Bill}
                   onChange={(e) => {
-                    const eb = { ...dorm };
-                    eb.electric_Bill = e.target.value;
-                    setDorm(eb);
+                    setDorm(prev=>({
+                      ...prev,
+                      water_Bill:e.target.value
+                    }))
                   }}
                 ></input>
                 <h4 className="baht">บาท</h4>
@@ -260,9 +372,10 @@ const Owner = () => {
                   className="chong-pay"
                   defaultValue={dorm.common_Fee}
                   onChange={(e) => {
-                    const cf = { ...dorm };
-                    cf.common_Fee = e.target.value;
-                    setDorm(cf);
+                    setDorm(prev=>({
+                      ...prev,
+                      common_Fee:e.target.value
+                    }))
                   }}
                 ></input>
                 <h4 className="baht">บาท</h4>
@@ -288,50 +401,8 @@ const Owner = () => {
                           id={key}
                           value={data}
                           defaultChecked={state == true ? true : false}
-                          onChange={(e) => {
-                            let checkinner = false;
-                            let indinner = 0;
-                            fac.map((item, key) => {
-                              if (data == item.facility) {
-                                checkinner = true;
-                                indinner = key;
-                              }
-                            });
-                            if (checkinner == true) {
-                              let id = fac[indinner].f_ID;
-                              Axios.delete(
-                                url + `api/dorm/facdeleteDelete/${id}`
-                              ).then((Response) => {
-                                setFac(
-                                  fac.filter((item) => {
-                                    return item.f_ID != id;
-                                  })
-                                );
-                              });
-                              checkinner = false;
-                            } else {
-                              const facil = {
-                                dorm_ID: dorm.dorm_ID,
-                                type_F: "ภายในห้องพัก",
-                                facility: data,
-                              };
-                              Axios.post(url + "api/dorm/addfacil", facil, {
-                                headers: authHeader(),
-                              }).then((Response) => {
-                                console.log("Response dorm: ", Response.data);
-                                setFac([
-                                  ...fac,
-                                  {
-                                    f_ID: Response.data.insertId,
-                                    dorm_ID: dorm.dorm_ID,
-                                    type_F: "ภายในห้องพัก",
-                                    facility: data,
-                                  },
-                                ]);
-                              });
-                              checkinner = true;
-                            }
-                          }}
+
+                          onChange={Onchangefac('ภายในห้องพัก')}
                         ></input>
                         <label htmlFor={key}>{data}</label>
                       </div>
@@ -354,55 +425,7 @@ const Owner = () => {
                           id={key}
                           value={data}
                           defaultChecked={state == true ? true : false}
-                          onChange={(e) => {
-                            console.log("before Delete2: ", fac);
-                            let check = false;
-                            let ind = 0;
-                            fac.map((item, key) => {
-                              if (data == item.facility) {
-                                console.log("fac ส่วนกลาง : ", item);
-                                check = true;
-                                ind = key;
-                              }
-                            });
-
-                            if (check == true) {
-                              let id = fac[ind].f_ID;
-                              Axios.delete(
-                                url + `api/dorm/facdeleteDelete/${id}`
-                              ).then((Response) => {
-                                setFac(
-                                  fac.filter((item) => {
-                                    return item.f_ID != id;
-                                  })
-                                );
-                                console.log("after Delete2: ", fac);
-                              });
-                              check = false;
-                            } else {
-                              const facil = {
-                                dorm_ID: dorm.dorm_ID,
-                                type_F: "ส่วนกลาง",
-                                facility: data,
-                              };
-                              Axios.post(url + "api/dorm/addfacil", facil, {
-                                headers: authHeader(),
-                              }).then((Response) => {
-                                console.log("Response ID: ", Response.data);
-                                setFac([
-                                  ...fac,
-                                  {
-                                    f_ID: Response.data.insertId,
-                                    dorm_ID: dorm.dorm_ID,
-                                    type_F: "ส่วนกลาง",
-                                    facility: data,
-                                  },
-                                ]);
-                                console.log("after add fac: ", fac);
-                              });
-                              check = true;
-                            }
-                          }}
+                          onChange={Onchangefac('ส่วนกลาง')}
                         ></input>
                         <label htmlFor={key}>{data}</label>
                       </div>
@@ -416,9 +439,10 @@ const Owner = () => {
                 className="chong-detail "
                 defaultValue={dorm.detail}
                 onChange={(e) => {
-                  const info = { ...dorm };
-                  info.detail = e.target.value;
-                  setDorm(info);
+                  setDorm(prev=>({
+                    ...prev,
+                    detail:e.target.value
+                  }))
                 }}
               ></textarea>
               <br />
@@ -429,9 +453,10 @@ const Owner = () => {
                   className="chong-three"
                   defaultValue={dorm.ad_Name}
                   onChange={(e) => {
-                    const lname = { ...dorm };
-                    lname.ad_Name = e.target.value;
-                    setDorm(lname);
+                    setDorm(prev=>({
+                      ...prev,
+                      ad_Name:e.target.value
+                    }))
                   }}
                 ></input>
                 <br />
@@ -440,9 +465,10 @@ const Owner = () => {
                   className="chong-three"
                   defaultValue={dorm.contact_Number}
                   onChange={(e) => {
-                    const cn = { ...dorm };
-                    cn.contact_Number = e.target.value;
-                    setDorm(cn);
+                    setDorm(prev=>({
+                      ...prev,
+                      contact_Number:e.target.value
+                    }))
                   }}
                 ></input>
                 <br />
@@ -451,9 +477,10 @@ const Owner = () => {
                   className="chong-three"
                   defaultValue={dorm.e_Mail}
                   onChange={(e) => {
-                    const email = { ...dorm };
-                    email.e_Mail = e.target.value;
-                    setDorm(email);
+                    setDorm(prev=>({
+                      ...prev,
+                      e_Mail:e.target.value
+                    }))
                   }}
                 ></input>
                 <br />
@@ -462,52 +489,35 @@ const Owner = () => {
                   className="chong-three"
                   defaultValue={dorm.line_ID}
                   onChange={(e) => {
-                    const line = { ...dorm };
-                    line.line_ID = e.target.value;
-                    setDorm(line);
+                    setDorm(prev=>({
+                      ...prev,
+                      line_ID:e.target.value
+                    }))
                   }}
                 ></input>
               </ul>
               <br />
               <h2>อัลบั้มภาพหอพัก</h2>
-              <input type="file" className="file-input" multiple></input>
+              <div className="edit-image-container">
+                {img.map(data => {
+                  return (
+                    <div className="Image-edit-block">
+                      <img
+                        className="Image-edit-dorm"
+                        src={"img_Dorm/" + data.image}
+                      />
+                      <img src={DeleteIcon} id="Delete-Icon" onClick={OnclickImage(data.image_ID, data.image)} />
+                    </div>
+                  )
+                })}
+              </div>
+              <input type="file" className="file-input-edit" multiple onChange={OnchangeImage}></input>
             </form>
           </div>
         )}
         {/* ---------------------------------------------------------------------- */}
 
         {showedit == false ? (
-          <></>
-        ) : (
-          <button
-            className="save-edit-dorm"
-            onClick={() => {
-              // Axios.put(`/api/dorm/dormUpdate/${id}`, {
-              //   user_id: id,
-              //   username: editun,
-              //   type: editT,
-              // })
-              //   .then((Response) => {
-              //     setEditAC("");
-              //     setUser(
-              //       user.map((item) => {
-              //         return item.user_id == id
-              //           ? { user_id: id, username: editun, type: editT }
-              //           : item;
-              //       })
-              //     );
-              //   })
-              //   .catch((error) => {
-              //     console.log(error);
-              //   });
-              setShowedit(false);
-            }}
-          >
-            {" "}
-            บันทึก{" "}
-          </button>
-        )}
-        <div className="edit-button-container">
           <button
             className="but-edit-dorm"
             onClick={() => {
@@ -515,9 +525,14 @@ const Owner = () => {
             }}
           >
             แก้ไขข้อมูลหอพัก
-        </button>
-        </div>
-      </div>
+          </button>
+        ) : (
+          <button
+            className="save-edit-dorm"
+            onClick={EditDorm}>
+            บันทึก
+          </button>
+        )}
       </div>
 
 
