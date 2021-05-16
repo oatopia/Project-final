@@ -1,5 +1,5 @@
 import dormModel from "../model/DormModel.js";
-import { upload } from '../middleware/upload.js'
+// import { upload } from '../middleware/upload.js'
 import fs from 'fs'
 
 export const createDorm = (req, res) => {

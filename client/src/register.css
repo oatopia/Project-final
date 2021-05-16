@@ -53,7 +53,15 @@ p {
   width: 100%;
   margin-top: -25px;
   font-size: 18px;
+  outline: none;
+  transition-duration: 0.3s;
 }
+.input-text-register:focus{
+  border: 1px solid #0e57c5;
+  box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.2);
+  transition-duration: 0.3s;
+}
+
 
 .buttonregister-register {
   width: 100%;
@@ -65,12 +73,24 @@ p {
   border: none;
   border-radius: 5px;
   box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition-duration: 0.3s;
+}
+
+.buttonregister-register:hover{
+  cursor: pointer;
+  background-color: #002a61;
+  transition-duration: 0.3s;
 }
 
 .type {
   height: 40px;
   margin-top: -25px;
   font-size: 18px;
+  outline: none;
+}
+
+.type:focus{
+  border: 1px solid #0e57c5;
 }
 
 select {

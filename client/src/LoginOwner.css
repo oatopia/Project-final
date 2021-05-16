@@ -1,6 +1,7 @@
 
 .owner-login-container {
-  margin-top: 10px;
+  /* margin-top: 20px; */
+  padding-top: 20px;
   padding-bottom: 20px;
   
 }
@@ -32,13 +33,11 @@
 
 #h-1{
   color: #0e57c5;
-  font-weight: bold;
-  font-size: 28px;
+  font-size: 32px;
 }
 #h-2{
   color: #0e57c5;
-  font-weight: bold;
-  font-size: 22px;
+  font-size: 32px;
 }
 
 .username-head{
@@ -60,10 +59,13 @@
   width: 100%;
   margin-top: -25px;
   font-size: 18px;
+  outline: none;
+  transition-duration: 0.3s;
 }
 
 .text-input-owner-login:focus {
-  outline-color: #a2a2a2;
+  border: 1px solid #0e57c5;
+  transition-duration: 0.3s;
 }
 
 .button-login-owner {
@@ -77,6 +79,13 @@
   box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin-top: -25px;
   font-weight: bold;
+  transition-duration: 0.3s;
+}
+
+.button-login-owner:hover{
+  background-color: #002a61;
+  transition-duration: 0.3s;
+  cursor: pointer;
 }
 
 .button-register-owner {
@@ -93,6 +102,12 @@
   box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
   font-weight: bold;
 } 
+
+.button-register-owner:hover {
+  background-color: #246116;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
 
 .Navbar-login-owner-container{
   box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);

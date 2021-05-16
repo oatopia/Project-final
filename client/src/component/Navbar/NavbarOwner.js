@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NavbarOwner.css";
-import logoapp from "../../img/logoapp.png";
-import profilelogo from "../../img/profile-user.png";
-import add from '../../img/Add.png';
-import edit from '../../img/edit.png';
+import logoapp from "../../img/logo.png";
+import profilelogo from "../../img/user1.png";
 import { BrowserRouter, Route, Link, Router, Redirect, useHistory } from "react-router-dom";
 import Auth from '../../service/authService.js'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
 
 
 export default function Navbar() {
   const currentUser = Auth.getCurrentUser();
   const history = useHistory();
+  const [ischeck, setIscheck] = useState(false);
+  const [size,setSize] = useState('')
   const logout = () => {
     Auth.logout();
     history.push("/");
+  }
+
+  const adddiv = (e) => {
+    setSize('100px')
   }
   return (
     <div className="NavOwner-container">
@@ -22,11 +27,23 @@ export default function Navbar() {
         <Link to="/owner">
           <p className="home-menu">หน้าหลักผู้ประกอบการ</p>
         </Link>
-        <div className="profile-NavOwner">
-          <img src={profilelogo} className="profilelogo" width="35" height="36" ></img>
-          <p>{currentUser.username}</p>
+
+        <div className="profile-content">
+        <img src={profilelogo} className="profilelogo" width="35" height="36" ></img>
+          <DropdownButton  id="dropdown-basic-button" title={currentUser.username} >
+              <Dropdown.Item className="dropdown-option" href="/loginmember">ออกจากระบบ</Dropdown.Item>
+          </DropdownButton>
         </div>
-        <button id="but-owner" onClick={logout}>ออกจากระบบ</button>
+       
+        {/* <div className="profile-container" onClick={adddiv}>
+          <div className="profile-NavOwner" >
+            <img src={profilelogo} className="profilelogo" width="35" height="36" ></img>
+            <p>{currentUser.username}</p>
+          </div>
+           <div className="select-profile"  top={size} style={{top:{size}}}>
+            <p>ออกจากระบบ</p>
+          </div>
+        </div> */}
       </div>
     </div>
   );

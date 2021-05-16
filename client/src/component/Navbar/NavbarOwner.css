@@ -1,7 +1,4 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-}
+
 .NavOwner-container{
     display: flex;
     justify-content: space-between;
@@ -18,22 +15,23 @@
     /* background-color: #F1EDED; */
     width: 150px;
     height: 55px;
-    border-radius: 7px;
-    
-    
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 20px;
+    transition-duration: 0.5s;
+    background-color: #0e57c5;
 }
 
 .profile-NavOwner p{
     font-size: 28px;
-    color: #1655a7;
+    color: white;
+    
 }
 
 img.profilelogo{
-    margin-right: 10px;
+    margin-right: 0px;
 }
 
 #but-owner{
@@ -58,4 +56,43 @@ img.profilelogo{
     align-items: center;
     justify-content: flex-end;
 }
+
+.select-profile{
+    background-color:#0e57c5 ;
+    /* transition-duration: 0.5s; */
+    color: white;
+    /* position: relative; */
+    /* top: 10px; */
+    /* z-index: -1 */
+    transition: width;
+    transition-duration: 10s;
+}
+
+.select-profile p{
+    color: white;
+}
+
+.select-profile:hover{
+    width: 200px;
+}
+
+.profile-container{
+    position: relative;
+    transition-duration: 0.5s;
+}
+
+.profile-content{
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#0e57c5 ;
+}
+
+#dropdown-basic-button{
+    color: white;
+    margin-left: px;
+}
+
 

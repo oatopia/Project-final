@@ -30,8 +30,8 @@ const Loginowner = () => {
                 <div className="content-owner-login-container">
                     <form className="form-owner-login" onSubmit={handleLogin}>
                         <div>
-                            <p id="h-1" className="h1-login-owner">เข้าสู่ระบบสำหรับ</p>
-                            <p id="h-2" className="h1-login-owner">ผู้ประกอบการ</p>
+                            <h1 id="h-1" className="h1-login-owner">เข้าสู่ระบบสำหรับ</h1>
+                            <h1 id="h-2" className="h1-login-owner">ผู้ประกอบการ</h1>
                         </div>
 
                         <div className="username-text-owner">

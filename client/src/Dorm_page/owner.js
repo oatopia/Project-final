@@ -6,6 +6,7 @@ import backgroundimg from "../img/operatorbackground.jpg";
 import Auth from "../service/authService.js";
 import { Redirect, useHistory } from "react-router-dom";
 import authHeader from "../service/auth-header.js";
+import plus from '../img/plus 2.png'
 
 const Owner = () => {
   const url = "https://matching-dorm-tu-server.herokuapp.com/"
@@ -45,6 +46,7 @@ const Owner = () => {
               history.push("/addDorm");
             }}
           >
+            <img src={plus} width="35px" height="35px"></img>
             <h2 className="add-text">เพิ่มข้อมูลหอพัก</h2>
           </button>
         </div>

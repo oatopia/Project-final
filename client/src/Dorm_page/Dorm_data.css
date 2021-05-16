@@ -8,7 +8,6 @@
 .content-dorm-container{
   background-color: rgb(245, 226, 194);
   padding-bottom: 20px;
-  padding-top: ;
 }
 .box-dorm-data {
   width: 90%;
@@ -68,7 +67,7 @@
   border: none;
   color: rgb(250, 244, 244);
   background-color: #6b9cdd;
-
+}
 .dormdata-container{
     /* background-image: url("./img/operatorbackground.jpg"); */
     background-color: #fbeeac;
@@ -96,7 +95,7 @@
 
 .box-inner-data h2 {
   font-size: 28px;
-
+}
 .img-dorm-data{
     width: 150px;
     height: 100px;
@@ -121,6 +120,7 @@
 }
 .dormdata-container h2{
   margin-top: 15px;
+}
 .save-edit-dorm{
     height: 60px;
     font-size: 24px;

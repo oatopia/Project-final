@@ -17,20 +17,26 @@
   margin-top: 20px;
   font-weight: normal;
   color: white;
+  margin-left: 5px;
 }
 
 .add-dorm {
   border: none;
-  width: 220px;
+  width: 260px;
   height: 100px;
   margin-left: 30px;
   margin-top: 20px;
   background-color: #1655a7;
   border-radius: 10px;
   font-size: 18px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:10px ;
+  /* text-align: center; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition-duration: 0.5s;
+  cursor: pointer;
 }
 
 .add-dorm:hover {
@@ -51,12 +57,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
-/* .box-dorm:hover{
-    background-image: linear-gradient(#a2d0c1,#214151);
+.box-dorm:hover{
+  background-color: rgb(255, 255, 191);
     transition-duration: 0.5s;
-} */
+}
 
 .contain-dorm {
   width: 80%;
