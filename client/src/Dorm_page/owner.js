@@ -14,7 +14,7 @@ const Owner = () => {
   const currentUser = Auth.getCurrentUser();
   const history = useHistory();
   useEffect(() => {
-    console.log("owner ID",currentUser.owner_ID)
+    console.log("owner ID", currentUser.owner_ID)
     Axios.post(
       "api/dorm/getDorm",
       { owner_ID: currentUser.owner_ID },
@@ -46,7 +46,7 @@ const Owner = () => {
               history.push("/addDorm");
             }}
           >
-            <img src={plus} width="35px" height="35px"></img>
+            <img src={plus} width="30px" height="30px"></img>
             <h2 className="add-text">เพิ่มข้อมูลหอพัก</h2>
           </button>
         </div>

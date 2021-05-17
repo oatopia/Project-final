@@ -11,7 +11,7 @@ export default function Navbar() {
   const currentUser = Auth.getCurrentUser();
   const history = useHistory();
   const [ischeck, setIscheck] = useState(false);
-  const [size,setSize] = useState('')
+  const [size, setSize] = useState('')
   const logout = () => {
     Auth.logout();
     history.push("/");
@@ -29,21 +29,11 @@ export default function Navbar() {
         </Link>
 
         <div className="profile-content">
-        <img src={profilelogo} className="profilelogo" width="35" height="36" ></img>
+          <img src={profilelogo} className="profilelogo" width="25px" height="25px" ></img>
           <DropdownButton menuAlign="right" id="dropdown-owner-page" title={currentUser.username}  >
-              <Dropdown.Item className="dropdown-option-owner" onClick={logout}>ออกจากระบบ</Dropdown.Item>
+            <Dropdown.Item className="dropdown-option-owner" onClick={logout}>ออกจากระบบ</Dropdown.Item>
           </DropdownButton>
         </div>
-       
-        {/* <div className="profile-container" onClick={adddiv}>
-          <div className="profile-NavOwner" >
-            <img src={profilelogo} className="profilelogo" width="35" height="36" ></img>
-            <p>{currentUser.username}</p>
-          </div>
-           <div className="select-profile"  top={size} style={{top:{size}}}>
-            <p>ออกจากระบบ</p>
-          </div>
-        </div> */}
       </div>
     </div>
   );

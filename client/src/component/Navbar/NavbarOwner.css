@@ -7,7 +7,7 @@
 }
 
 .home-menu{
-    font-size: 28px;
+    font-size: 26px;
     color: #1655a7;
 }
 
@@ -31,7 +31,7 @@
 }
 
 img.profilelogo{
-    margin-right: 0px;
+    margin-right: -10px;
 }
 
 #but-owner{
@@ -58,16 +58,6 @@ img.profilelogo{
     margin-right: 40px;
 }
 
-.select-profile{
-    background-color:#0e57c5 ;
-    /* transition-duration: 0.5s; */
-    color: white;
-    /* position: relative; */
-    /* top: 10px; */
-    /* z-index: -1 */
-    transition: width;
-    transition-duration: 10s;
-}
 
 .select-profile p{
     color: white;
@@ -77,13 +67,11 @@ img.profilelogo{
     width: 200px;
 }
 
-.profile-container{
-    position: relative;
-    transition-duration: 0.5s;
-}
 
 .profile-content{
-    padding: 10px;
+    position: relative;
+    transition-duration: 0.5s;
+    padding: 5px;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -93,10 +81,8 @@ img.profilelogo{
 
 #dropdown-owner-page{
     color: white;
-    /* margin-left: px; */
-    /* text-align: center; */
     font-weight: normal;
-    font-size: 28px; 
+    font-size: 26px; 
     transition-duration:0.5s;
     background-color: transparent;
     border: none;
