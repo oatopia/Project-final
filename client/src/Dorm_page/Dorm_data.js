@@ -219,7 +219,12 @@ const Owner = () => {
           {/* ---------------------------------------------------------------------- */}
           {showedit == false ? (
             <div className="box-info">
-              <h1>{dorm.dorm_Name}</h1>
+              <h1> ข้อมูลหอพัก</h1>
+              <div className="line-dorm-data"></div>
+              <div className="block-detail">
+                <h2>ชื่อหอพัก</h2>
+                <h4 className="dorm-name-data">{dorm.dorm_Name}</h4>
+              </div>
 
               <div className="image-container">
                 {img.map((pic, key) => {
@@ -233,46 +238,139 @@ const Owner = () => {
                 })}
               </div>
               <div className="box-inner-data">
+                <div className="block-detail">
+                  <h2>ประเภทหอพัก</h2>
+                  <h4 className="text-dorm-content">{dorm.type_D}</h4>
+                </div>
+
+                <div className="block-detail">
+                  <h2>ที่อยู่</h2>
+                  <h4 className="text-dorm-content">{dorm.address}</h4>
+                </div>
+
                 <div>
-                  <p className="text-dorm-content"><label>ประเภทหอพัก</label> {dorm.type_D}</p>
+                  <h2>รายละเอียดค่าใช้จ่าย</h2>
+                  <table className="table-dorm-data">
+                    <thead>
+
+                      <tr>
+                        <td>
+                          <h3>เงินมัดจำ/ประกัน</h3>
+                        </td>
+                        <td>
+                          <h4 className="text-dorm-content">{dorm.deposit} บาท</h4>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h3>ค่าส่วนกลาง</h3>
+                        </td>
+                        <td>
+                          <h4 className="text-dorm-content">{dorm.common_Fee} บาท</h4>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h3>ค่าน้ำ</h3>
+                        </td>
+                        <td>
+                          <h4 className="text-dorm-content">{dorm.water_Bill} บาทต่อยูนิต</h4>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h3>ค่าไฟ</h3>
+                        </td>
+                        <td>
+                          <h4 className="text-dorm-content">{dorm.electric_Bill} บาทต่อยูนิต</h4>
+                        </td>
+                      </tr>
+
+                    </thead>
+                  </table>
                 </div>
 
-                <p className="text-dorm-content"><label>ที่อยู่</label> {dorm.address}</p>
-                <h2>รายละเอียดค่าใช้จ่าย</h2>
-                <p className="text-dorm-content"><h3>ค่าส่วนกลาง</h3> {dorm.deposit} บาท</p>
-                <p className="text-dorm-content"><h3>ค่าไฟ </h3>{dorm.electric_Bill} บาทต่อยูนิต</p>
-                <p className="text-dorm-content"><h3>ค่าน้ำ</h3> {dorm.water_Bill} บาทต่อยูนิต</p>
-                <p className="text-dorm-content"><h3>ค่าประกัน</h3> {dorm.common_Fee} บาท</p>
-              </div>
-              <h2 id="faci">สิ่งอำนวยความสะดวก</h2>
-              <div className="box-fac-data">
-                <div className="fac-in-room">
-                  <h3>ภายในห้องพัก</h3>
-                  <ul>
-                    {fac.map((fa, index) => {
-                      if (fa.type_F == "ภายในห้องพัก")
-                        return <li key={index}>{fa.facility}</li>;
-                    })}
-                  </ul>
-                </div>
 
-                <div className="fac-central">
-                  <h3>ส่วนกลาง</h3>
-                  <ul>
-                    {fac.map((fa, index) => {
-                      if (fa.type_F == "ส่วนกลาง")
-                        return <li key={index}>{fa.facility}</li>;
-                    })}
-                  </ul>
+                <h2 id="faci">สิ่งอำนวยความสะดวก</h2>
+                <div className="box-fac-data">
+                  <div className="fac-in-room">
+                    <h3>ภายในห้องพัก</h3>
+                    <ul>
+                      {fac.map((fa, index) => {
+                        if (fa.type_F == "ภายในห้องพัก")
+                          return <li key={index}>{fa.facility}</li>;
+                      })}
+                    </ul>
+                  </div>
+
+                  <div className="fac-central">
+                    <h3>ส่วนกลาง</h3>
+                    <ul>
+                      {fac.map((fa, index) => {
+                        if (fa.type_F == "ส่วนกลาง")
+                          return <li key={index}>{fa.facility}</li>;
+                      })}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-              <div className="box-2-inner-data">
-                <p className="text-dorm-content"><h3>รายละเอียดหอพัก</h3> {dorm.detail}</p>
+                <div className="detail-block">
+                  <h2>รายละเอียดหอพัก</h2>
+                  <h4 className="text-dorm-content">{dorm.detail}</h4>
+                </div>
                 <h2 id="contact">ข้อมูลติดต่อ</h2>
-                <p className="text-dorm-content"><h3>ชื่อผู้ดูแลหอพัก</h3> {dorm.ad_Name}</p>
-                <p className="text-dorm-content"><h3>เบอร์ติดต่อ</h3> {dorm.contact_Number}</p>
-                <p className="text-dorm-content"><h3>อีเมล </h3>{dorm.e_Mail}</p>
-                <p className="text-dorm-content"><h3>Line ID</h3> {dorm.line_ID}</p>
+                <div className="box-2-inner-data">
+                  <div >
+                    <table className="table-dorm-data">
+                      <thead>
+
+                        <tr>
+                          <td>
+                            <h3>ชื่อผู้ดูแลหอพัก</h3>
+                          </td>
+                          <td>
+                            <h4 className="text-dorm-content">{dorm.ad_Name}</h4>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h3>เบอร์ติดต่อ</h3>
+                          </td>
+                          <td>
+                            <h4 className="text-dorm-content">{dorm.contact_Number}</h4>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h3>อีเมล</h3>
+                          </td>
+                          <td>
+                            <h4 className="text-dorm-content">{dorm.e_Mail}</h4>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <h3>Lin ID</h3>
+                          </td>
+                          <td>
+                            <h4 className="text-dorm-content">{dorm.line_ID}</h4>
+                          </td>
+                        </tr>
+
+                      </thead>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+              <div className="button-edit-dormcontainer">
+                <button
+                  className="but-edit-dorm"
+                  onClick={() => {
+                    setShowedit(true);
+                  }}
+                >
+                  แก้ไขข้อมูลหอพัก
+            </button>
               </div>
             </div>
           ) : (
@@ -513,26 +611,14 @@ const Owner = () => {
                 </div>
                 <input type="file" className="file-input-edit" multiple onChange={OnchangeImage}></input>
               </form>
+              <button
+                className="save-edit-dorm"
+                onClick={EditDorm}>
+                บันทึก
+            </button>
             </div>
           )}
           {/* ---------------------------------------------------------------------- */}
-
-          {showedit == false ? (
-            <button
-              className="but-edit-dorm"
-              onClick={() => {
-                setShowedit(true);
-              }}
-            >
-              แก้ไขข้อมูลหอพัก
-            </button>
-          ) : (
-            <button
-              className="save-edit-dorm"
-              onClick={EditDorm}>
-              บันทึก
-            </button>
-          )}
         </div>
 
 
