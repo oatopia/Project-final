@@ -30,8 +30,8 @@ export default function Navbar() {
 
         <div className="profile-content">
         <img src={profilelogo} className="profilelogo" width="35" height="36" ></img>
-          <DropdownButton  id="dropdown-basic-button" title={currentUser.username} >
-              <Dropdown.Item className="dropdown-option" href="/loginmember">ออกจากระบบ</Dropdown.Item>
+          <DropdownButton menuAlign="right" id="dropdown-owner-page" title={currentUser.username}  >
+              <Dropdown.Item className="dropdown-option-owner" onClick={logout}>ออกจากระบบ</Dropdown.Item>
           </DropdownButton>
         </div>
        

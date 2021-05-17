@@ -91,10 +91,25 @@ img.profilelogo{
     background-color:#0e57c5 ;
 }
 
-#dropdown-basic-button{
+#dropdown-owner-page{
     color: white;
-    margin-left: px;
-    text-align: center;
+    /* margin-left: px; */
+    /* text-align: center; */
+    font-weight: normal;
+    font-size: 28px; 
+    transition-duration:0.5s;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    cursor: pointer;
 }
 
+.dropdown-option-owner{
+    background-color: #0e57c5 ;
+    color: white;
+    padding: 10px;
+    /* outline: none; */
+    /* overflow: hidden; */
+    border-radius: 0px 0px 10px 10px;
+}
 
