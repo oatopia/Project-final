@@ -153,4 +153,28 @@ Dorminfo.updateDormbyID = (dorm,result)=>{
 }
 
 
+Dorminfo.createroombyID = (newroom,result)=>{
+    db.query("INSERT INTO room (room_Type,room_Price,dorm_ID) VALUES ?",[newroom.room.map(item=>[item.room_Type,item.room_Price,newroom.dorm_ID])],(err,res)=>{
+        if(err){
+            console.log("error: ",err);
+        result(err,null);
+        return;
+        }
+        console.log("create room success this data from database: ",res);
+    })
+}
+
+
+Dorminfo.getroombyID = (id,result)=>{
+    db.query("SELECT * FROM room WHERE dorm_ID = ?",id,(err,res)=>{
+        if(err){
+            console.log("error: ",err);
+        result(err,null);
+        return;
+        }
+        console.log(res);
+        result(null,res)
+    })
+}
+
 export default Dorminfo;

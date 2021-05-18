@@ -73,7 +73,7 @@ Matching.getAllDorm = (result) =>{
 
 
 Matching.searchbyName = (name,result) =>{
-    db.query("SELECT * FROM dormitory WHERE Dorm_Name = ?",name,(err,res)=>{
+    db.query("SELECT * FROM dormitory WHERE dorm_Name = ?",name,(err,res)=>{
         if(err){
             console.log("error:",err);
             result(null,err);

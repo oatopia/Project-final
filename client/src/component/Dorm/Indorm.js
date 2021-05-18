@@ -66,6 +66,8 @@ export default function Indorm() {
 
   let arrayFile = [];
   const history = useHistory();
+
+
   const saveinfordorm = () => {
     console.log("owner id", currentUser.owner_ID);
     axios
@@ -115,6 +117,11 @@ export default function Indorm() {
         // console.log("Data in formData",formData);
         axios
           .post("api/dorm/createImage", formData, config)
+          .then((Response) => {
+            console.log(Response);
+          });
+          axios
+          .post("api/dorm/createRoom",{dorm_ID:ID,room:room}, { headers: authHeader() })
           .then((Response) => {
             console.log(Response);
           });

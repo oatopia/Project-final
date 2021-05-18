@@ -1,22 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NavbarMember.css";
-import logoapp from "../../img/logoapp.png";
-import homelogo from "../../img/Home.png";
-import savelogo from "../../img/savelogo.png";
-import profilelogo from "../../img/profile-user.png";
-import { BrowserRouter, Route, Link, Router, Redirect,useHistory } from "react-router-dom";
+import logoapp from "../../img/logo.png";
+import profilelogo from "../../img/user1.png";
+import { BrowserRouter, Route, Link, Router, Redirect, useHistory } from "react-router-dom";
 import Auth from '../../service/authService.js'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
 
 export default function Navbar() {
   const history = useHistory();
-  const currentUser = Auth.getCurrentUser();
+  const currentUser = Auth.getCurrentUser()
+  const [check, setCheck] = useState(false)
 
   const gotohome = () => {
     history.push("/member");
   };
 
-  
-  const logout =()=>{
+
+  const logout = () => {
     Auth.logout();
     history.push("/");
   }
@@ -30,24 +30,21 @@ export default function Navbar() {
         height="100"
         onClick={gotohome}
       ></img>
-    <div className="NavMember-container2">
-      <ul className="listmenu-Navbarmember">
-        <img
-          src={homelogo}
-          className="homelogo-Navbarmember"
-          width="40"
-          height="38"
-          onClick={gotohome
-          }></img>
-        <Link to="/">หน้าหลัก </Link>
-        <img src={savelogo} className="savelogo" width="38" height="39" ></img>
-        <Link to="/login">รายการหอพักที่บันทึก</Link>
-        </ul>
-        <div className="profile-Navbarmember">
-            <img src={profilelogo} className="profilelogo" width="35" height="36" ></img>
-          <p>{currentUser.username}</p>
-        </div>
-        <button onClick={logout}>ออกจากระบบ</button>
+      <div className="NavMember-container2">
+        <Link to="/">
+          <p className="menu-p">หน้าหลักสมาชิก</p>
+        </Link>
+        <Link to="/login">
+          <p className="menu-p">รายการหอพักที่บันทึก</p>
+        </Link>
+        <DropdownButton id="dropdown-member-page" title={
+          <div className='dropdown-btn-member'>
+            <img src={profilelogo} className="profilelogo" width="30" height="30"></img>
+            <p>{currentUser.username}</p>
+          </div>
+        } >
+          <Dropdown.Item className="dropdown-option-member" onClick={logout}>ออกจากระบบ</Dropdown.Item>
+        </DropdownButton>
       </div>
     </div>
   );

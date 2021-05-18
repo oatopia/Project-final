@@ -3,20 +3,64 @@ import Axios from "axios";
 import "./showfactor.css";
 import D1 from "../img/icon/D1.png";
 import { useHistory } from "react-router";
+import alert from '../img/alert.png'
 
 export default function Match() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/";
   const [factorlist, setFactorlist] = useState([]);
   const [weight, setWeight] = useState([]);
+  const [count, setCount] = useState(0);
+  const [arrayfactor, setArrayfactor] = useState([])
+  const [statepair, setStatepair] = useState([])
+  const [test, setTest] = useState('')
+  const [pair, setPair] = useState([]);
   var history = useHistory();
   useEffect(() => {
     Axios.get("api/visitor/getfactor").then((Response) => {
-      setFactorlist(Response.data);
-    });
+      let data = Response.data
+      let number = 0;
+      for (let i = 0; i < data.length; i++) {
+        for (let j = i + 1; j < data.length; j++) {
+          pair.push({
+            index: number, first: data[i].factor_ID, second: data[j].factor_ID
+            , image1: data[i].image_Factor, image2: data[j].image_Factor
+            , title1: data[i].factor_Title, title2: data[j].factor_Title
+          })
+        }
+        number++
+      }
+      setFactorlist(Response.data)
+    })
   }, []);
-
+  //   useEffect(() => {
+  //     setPair(factorlist.map(item=>{return item.factor_Title}))
+  //     for (let i = 0; i < 5; i++) {
+  //       for (let j = 0; j < 5; j++) {
+  //         console.log('i: ',i)
+  //         setPair(prev=>[...prev,{co:i,co2:j}])
+  //       }
+  //     }
+  // }, []);
+  // useEffect(() => {
+  //     let number = 0;
+  //     for (let i = 0; i < factorlist.length; i++) {
+  //       for (let j = i + 1; j < factorlist.length; j++) {
+  //         setPair(prev=>[...prev,{
+  //           index:number,first:factorlist[i].factor_ID,second:factorlist[j].factor_ID
+  //           ,image1:factorlist[i].image_Factor,image2:factorlist[j].image_Factor
+  //           ,title1:factorlist[i].factor_Title,title2:factorlist[j].factor_Title
+  //         }])
+  //       }
+  //       number++
+  //     }
+  // }, []);
+  console.log("Weight: ", weight)
+  console.log("pair: ", pair)
+  console.log("fac: ", factorlist)
+  // console.log("array: ",arrayfactorpair)
   // choose factor--------------------------------------------
-  const addImage = (index,factor)=>e=> {
+  const addfactor = (index) => e => {
+    e.preventDefault()
     if (weight.length > 0) {
       var check = false;
       var INDEX = 0;
@@ -29,22 +73,100 @@ export default function Match() {
       if (check == true) {
         const newWeight = [...weight];
         console.log("check true comparator: ", newWeight);
-        newWeight[INDEX].comparator = factor;
+        newWeight[INDEX].comparator = e.target.value;
         setWeight(newWeight);
+
+        statepair[INDEX] = e.target.value
+        setStatepair(statepair)
       } else {
         setWeight([
           ...weight,
-          { comparator: factor, weight: 1, index_compare: index },
+          { comparator: e.target.value, weight: 1, index_compare: index },
         ]);
+        // setStatepair([...statepair,{e.target.value}])
         console.log(weight);
       }
     } else {
       setWeight([
-        { comparator: factor, weight: 1, index_compare: index },
+        { comparator: e.target.value, weight: 1, index_compare: index },
       ]);
+      setStatepair([...statepair, e.target.value])
       console.log(weight);
     }
   };
+
+  const isSelect = (index, factor) => (e) => {
+    console.log('HIIIII')
+    let checkstate = false
+    weight.map(item => {
+      if (item.index_compare == index) {
+        if (item.comparator == factor) {
+          console.log("this is select")
+          checkstate = true
+        } else {
+          checkstate = false
+        }
+      } else {
+        checkstate = false
+      }
+    })
+    return checkstate
+  }
+
+  const showfactorpair = (num) => {
+    let arrayfactorpair = [];
+    let index = 0;
+    for (let i = 0; i < factorlist.length; i++) {
+      for (let j = i + 1; j < factorlist.length; j++) {
+        const factorI = factorlist[i].factor_ID;
+        const factorJ = factorlist[j].factor_ID
+        arrayfactorpair.push(
+          <div className="match-block-container" key={index}>
+            <div id="contain-match-display" key={index}>
+              <label className="radio-label" >
+                <input type='radio' name={index} value={factorI} onChange={addfactor(index)} />
+                <div className="box-match" id="box-match-1" >
+                  <img
+                    className="img-match-visitor"
+                    value={factorI}
+                    src={url + "images/" + factorlist[i].image_Factor}
+                    width="140px"
+                    height="140px"
+                  ></img>
+                  <h4>{factorlist[i].factor_Title}</h4>
+                </div>
+              </label>
+              <label className="radio-label">
+                <input type='radio' name={index} value={factorJ} onChange={addfactor(index)} />
+                <div className="box-match" id="box-match-2" >
+                  <img
+                    className="img-match-visitor"
+                    value={factorJ}
+                    src={url + "images/" + factorlist[j].image_Factor}
+                    width="140px"
+                    height="140px"
+                  ></img>
+                  <h4>{factorlist[j].factor_Title}</h4>
+                </div>
+              </label>
+            </div>
+            <div className="range-weight-container">
+              <h2 className="head-h2-match">โปรดให้คะแนนระดับความสำคัญของปัจจัยที่ท่านเลือก</h2>
+              <div className="input-range-container">
+                <p>น้อยที่สุด</p>
+                <input type="range" defaultValue='1' className="input-range-match" min="1" max="7" onChange={addWeight(index)} />
+                <p>มากที่สุด</p>
+              </div>
+
+            </div>
+          </div>
+
+        )
+        index++
+      }
+    }
+    return arrayfactorpair[num]
+  }
 
 
   // choose weight--------------------------------------------
@@ -78,61 +200,6 @@ export default function Match() {
       ]);
     }
   };
-  
-
-
-  const showimage = () => {
-    let index = 0;
-    let array = [];
-    for (let i = 0; i < factorlist.length; i++) {
-      for (let j = i + 1; j < factorlist.length; j++) {
-        const factorI = factorlist[i].Id;
-        const factorJ = factorlist[j].Id
-        array.push(
-          <div id="contain-match-display" key={index}>
-            <div className="box-match" id="box-match-1" onClick={addImage(index,factorI)}>
-              <img
-                className="img-match-visitor"
-                value={factorlist[i].image_Factor}
-                src={url + "images/" + factorlist[i].image_Factor}
-                width="40px"
-                height="40px"
-              ></img>
-              <h4>{factorlist[i].factor_Title}</h4>
-            </div>
-
-            <div className="box-match" id="box-match-2" onClick={addImage(index,factorJ)}>
-              <img
-                className="img-match-visitor"
-                value={factorlist[j].Image_factor}
-                src={url + "images/" + factorlist[j].image_Factor}
-                width="40px"
-                height="40px"
-              ></img>
-              <h4>{factorlist[j].factor_Title}</h4>
-            </div>
-            <div className="custom-select">
-              <select
-                className="select-score"
-                defaultValue="1"
-                onChange={addWeight(index)}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-              </select>
-            </div>
-          </div>
-        );
-        index++;
-      }
-    }
-    return array;
-  };
 
   const matchFac = () => {
     Axios.post(url + "api/visitor/matchDorm", weight)
@@ -148,26 +215,76 @@ export default function Match() {
       });
   };
 
+
+
+  const showpair = (n) => {
+    let content = null
+    pair.map((item, key) => {
+      if (n == key) {
+        return content = (
+          <div className="match-block-container" key={key}>
+            <div id="contain-match-display" >
+              
+              <label for='radio-btn1' >
+                <div className="box-match" id="box-match-1" >
+                  <img
+                    className="img-match-visitor"
+                    src={url + "images/" + item.image1}
+                    width="140px"
+                    height="140px"
+                  ></img>
+                  <h4>{item.title1}</h4>
+                </div>
+              </label>
+              <input id='radio-btn1' type='radio' name={item.index} value={item.first} onChange={addfactor(key)} />
+              
+              <label for='radio-btn'>
+                <div className="box-match" id="box-match-2" >
+                  <img
+                    className="img-match-visitor"
+                    src={url + "images/" + item.image2}
+                    width="140px"
+                    height="140px"
+                  ></img>
+                  <h4>{item.title2}</h4>
+                </div>
+              </label>
+              <input type='radio' id='radio-btn' name={item.index} value={item.second} onChange={addfactor(key)} />
+            </div>
+            <div className="range-weight-container">
+              <h2 className="head-h2-match">โปรดให้คะแนนระดับความสำคัญของปัจจัยที่ท่านเลือก</h2>
+              <div className="input-range-container">
+                <p>น้อยที่สุด</p>
+                <input type="range" defaultValue='1' className="input-range-match" min="1" max="7" onChange={addWeight(key)} />
+                <p>มากที่สุด</p>
+              </div>
+
+            </div>
+          </div>
+        )
+      }
+    }
+    )
+    return content
+  }
+
+
+
+
+
+
+
+
+
+
   return (
     <div className="container-visitor">
       <div className="contain-factor-visitor">
-        {/* <div className="contain-in-visitor"> */}
-          <div className="showfactor-left-box">
-            <h1>จับคู่หอพัก</h1>
-            <h2>วิธีการจับคู่หอพัก</h2>
-            <ol>
-              <li>
-                ให้ท่านเลือกปัจจัยที่ท่านคิดว่า
-              <span>มีความสำคัญมากที่สุดในแต่ละคู่</span>
-              </li>
-              <li>
-                จากนั้นเลือกคะแนนความสำคัญ
-              <span>ของปัจจัยให้ครบทุกคู่</span>
-              </li>
-              <li>สุดท้ายกดปุ่มจับคู่</li>
-            </ol>
-          </div>
-        {/* </div> */}
+        <div className="heading-box">
+          <h1>จับคู่หอพัก</h1>
+        </div>
+        <h1 className="head-h1-match">กรุณาทำแบบสอบถามเบื้องต้นเพื่อประเมินความสนใจของท่าน</h1>
+        <img src={alert} className="icon-alert"></img>
         <div className="showfactor-right-box">
           <h2>ความหมายของปัจจัยในการตัดสินใจเลือกหอพัก</h2>
           {factorlist.map((data, key) => {
@@ -191,11 +308,34 @@ export default function Match() {
       <div className="container-match-visitor">
         <div className="container-inner-match-visitor">
           <div className="containermatch2-visitor">
-            <p className="head-match">โปรดเลือกปัจจัยและให้คะแนนความสำคัญที่ท่านคิดว่ามีความสำคัญมากที่สุดในแต่ละคู่</p>
-            {showimage()}</div>
-          <button onClick={matchFac} className="button-match-visitor">
+            <h2 className="head-h2-match">ท่านคิดว่าปัจจัยในด้านใดจำเป็นต่อตัวท่านมากที่สุด</h2>
+            {/* {arrayfactor[count]} */}
+            {/* {showfactorpair(count)} */}
+            {/* {arrayfactor.map(item=>{return item})} */}
+            {/* {Arraypair.map(item=>{return item})} */}
+            {/* {Arraypair[0]}; */}
+            {showpair(count)}
+          </div>
+          {/* <button onClick={matchFac} className="button-match-visitor">
             จับคู่หอพัก
-          </button>
+          </button> */}
+          {/* <h4>rt{pair[1].index}</h4> */}
+
+          {/* {pair.map((item,key)=>{
+            if(count == key){
+              return <h4>{item.title1}</h4>
+            }
+          })} */}
+
+          <div className="button-match-container">
+            {count != 0 ? <button className="button-back" onClick={(e) => {
+              setCount(count - 1)
+            }}>ย้อนกลับ</button> : <></>}
+            {count != arrayfactor.length - 1 ? <button className="button-next" onClick={(e) => {
+              setCount(count + 1)
+            }}>ถัดไป</button> : <></>}
+          </div>
+          <div className="clear"></div>
         </div>
       </div>
     </div>

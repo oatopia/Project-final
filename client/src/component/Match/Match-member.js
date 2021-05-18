@@ -14,9 +14,10 @@ export default function Match() {
   const currentUser = Auth.getCurrentUser();
   const [GETResponse, setGETResponse] = useState(false);
   const [state, setState] = useState(false);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    Axios.get(url+"api/match/getfactor", { headers: authHeader() })
+    Axios.get(url + "api/match/getfactor", { headers: authHeader() })
       .then((Response) => {
         console.log(Response.data);
         setFactorlist(Response.data);
@@ -25,7 +26,7 @@ export default function Match() {
         console.log("Error from get Factor", error);
       });
     Axios.post(
-      url+"api/match/getWeight",
+      url + "api/match/getWeight",
       { user_id: currentUser.user_id },
       { headers: authHeader() }
     )
@@ -62,7 +63,7 @@ export default function Match() {
         user_id: currentUser.user_id,
         data: arrayweight,
       };
-      Axios.post(url+"api/match/createweight", payload, { headers: authHeader() })
+      Axios.post("api/match/createweight", payload, { headers: authHeader() })
         .then((Response) => {
           console.log(Response.data);
           setState(true);
@@ -76,7 +77,7 @@ export default function Match() {
         user_id: currentUser.user_id,
         data: weight,
       };
-      Axios.put(url+"api/match/editWeight", payload, { headers: authHeader() })
+      Axios.put("api/match/editWeight", payload, { headers: authHeader() })
         .then((Response) => {
           console.log(Response.data);
         })
@@ -147,58 +148,51 @@ export default function Match() {
     }
   };
 
-  const showimage = () => {
+  const showimage = (n) => {
     let index = 0;
     let array = [];
     for (let i = 0; i < factorlist.length; i++) {
       for (let j = i + 1; j < factorlist.length; j++) {
         array.push(
-          <div id="contain-match-display" key={index}>
-            <img
-              value={factorlist[i].Image_factor}
-              src={url+"images/" + factorlist[i].Image_factor}
-              width="70"
-              height="70"
-            ></img>
-            <input
-              value={factorlist[i].Id}
-              type="radio"
-              id="radio-1"
-              name={index}
-              onChange={addImage(index)}
-            ></input>
-            <img
-              value={factorlist[j].Image_factor}
-              src={url+"images/" + factorlist[j].Image_factor}
-              width="70"
-              height="70"
-            ></img>
-            <input
-              value={factorlist[j].Id}
-              type="radio"
-              id="radio-2"
-              name={index}
-              onChange={addImage(index)}
-            ></input>
-            <select
-              className="select-score"
-              defaultValue="1"
-              onChange={addWeight(index)}
-            >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-            </select>
+          <div>
+            <div id="contain-match-display" key={index}>
+              <img
+                value={factorlist[i].image_Factor}
+                src={"images/" + factorlist[i].image_Factor}
+                width="70"
+                height="70"
+              ></img>
+              <input
+                // value={factorlist[i].Id}
+                type="radio"
+                // id="radio-1"
+                name={index}
+                // onChange={addImage(index)}
+                // checked
+                />
+              <img
+                value={factorlist[j].image_Factor}
+                src={"images/" + factorlist[j].image_Factor}
+                width="70"
+                height="70"
+              ></img>
+              <input
+              // checked
+                // value={factorlist[j].Id}
+                type="radio"
+                // id="radio-2"
+                name={index}
+                // onChange={addImage(index)}
+              />
+
+            </div>
+            <input className="range-match-member" type='range' />
           </div>
         );
         index++;
       }
     }
-    return array;
+    return array[n];
   };
 
   const onChangeWeight = (index) => (e) => {
@@ -250,7 +244,7 @@ export default function Match() {
           <div id="contain-match-display" key={index}>
             <img
               value={factorlist[i].Image_factor}
-              src={url+"images/" + factorlist[i].Image_factor}
+              src={url + "images/" + factorlist[i].Image_factor}
               width="70"
               height="70"
             ></img>
@@ -284,7 +278,7 @@ export default function Match() {
 
             <img
               value={factorlist[j].Image_factor}
-              src={url+"images/" + factorlist[j].Image_factor}
+              src={url + "images/" + factorlist[j].Image_factor}
               width="70"
               height="70"
             ></img>
@@ -295,7 +289,7 @@ export default function Match() {
               id="radio-2"
               name={index}
               onChange={onChangeFactor(index)}
-              defaultChecked ={factorlist[j].Id == weight[index].comparator}
+              defaultChecked={factorlist[j].Id == weight[index].comparator}
             ></input>
             {/* {factorlist[j].Id == weight[index].comparator ? (
               <input
@@ -338,7 +332,7 @@ export default function Match() {
   };
 
   const matchFac = () => {
-    Axios.post(url+"api/match/matchDorm", weight,{ headers: authHeader() })
+    Axios.post(url + "api/match/matchDorm", weight, { headers: authHeader() })
       .then((Response) => {
         console.log(Response.data);
         history.push({
@@ -352,15 +346,17 @@ export default function Match() {
   };
 
   return (
-    <div className="containermatch">
-      <div>
-        <h1 id="header2">โปรดให้คะแนนระดับความสำคัญของปัจจัย ดังต่อไปนี้</h1>
-        <div className="containermatch-2">
-          {factorlist.map((data, key) => {
+    <div className='color-background-member'>
+      <div className="containermatch">
+        <h1 id="header2">จับคู่หอพัก</h1>
+        <h1 className="head-match-member">กรุณาทำแบบสอบถามเบื้องต้นเพื่อประเมินความสนใจของท่าน</h1>
+        <div>
+          <div className="containermatch-2">
+            {/* {factorlist.map((data, key) => {
             return (
               <div className="detail" key={key}>
                 <img
-                  src={url+"images/" + data.Image_factor}
+                  src={url + "images/" + data.Image_factor}
                   width="50"
                   height="50"
                   id={key}
@@ -368,17 +364,20 @@ export default function Match() {
                 <label>{data.Factor_name}</label>
               </div>
             );
-          })}
-        </div>
-        <h3 id="header3">
-          โปรดเลือกปัจจัยที่ท่านให้ความสำคัญมากที่สุดในแต่ละคู่
+          })} */}
+          </div>
+          <h3 id="header3">
+            ท่านคิดว่าปัจจัยในด้านใดจำเป็นต่อตัวท่านมากที่สุด
         </h3>
-        <div className="containermatch-3">
-          {GETResponse == false ? showimage() : showfacwithWeight()}
-        </div>
+          <div className="containermatch-3">
+            {GETResponse == false ? showimage(count) : showfacwithWeight(count)}
+          </div>
 
-        <button onClick={saveweight}>บันทึก</button>
-        <button onClick={matchFac}>จับคู่หอพัก</button>
+          <button className="btn-back-member">ย้อนกลับ</button>
+          <button className="btn-next-member">ถัดไป</button>
+          {/* <button onClick={saveweight}>บันทึก</button>
+          <button onClick={matchFac}>จับคู่หอพัก</button> */}
+        </div>
       </div>
     </div>
   );

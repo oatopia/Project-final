@@ -25,15 +25,16 @@ export default function Navbar() {
       <img src={logoapp} className="logoapp" width="200" height="100"></img>
       <div className="NavOwner-container2">
         <Link to="/owner">
-          <p className="home-menu">หน้าหลักผู้ประกอบการ</p>
+          <p className="menu-p-owner">หน้าแรก</p>
         </Link>
-
-        <div className="profile-content">
-          <img src={profilelogo} className="profilelogo" width="25px" height="25px" ></img>
-          <DropdownButton menuAlign="right" id="dropdown-owner-page" title={currentUser.username}  >
-            <Dropdown.Item className="dropdown-option-owner" onClick={logout}>ออกจากระบบ</Dropdown.Item>
-          </DropdownButton>
-        </div>
+        <DropdownButton menuAlign="right" id="dropdown-owner-page" title={
+          <div className="profile-content-owner">
+            <img src={profilelogo} className="profilelogo" width="25px" height="25px" ></img>
+            <p>{currentUser.username}</p>
+          </div>
+        }>
+          <Dropdown.Item className="dropdown-option-owner" onClick={logout}>ออกจากระบบ</Dropdown.Item>
+        </DropdownButton>
       </div>
     </div>
   );

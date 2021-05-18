@@ -200,3 +200,27 @@ export const updateDorm = (req, res) => {
     }
   });
 };
+
+export const createRoom = (req, res) => {
+  let room = req.body
+  console.log("room data: ", room)
+  dormModel.createroombyID(room, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
+};
+
+export const getRoom = (req, res) => {
+  const id = req.body.dorm_ID;
+  console.log("Dorm id for find room: ", id);
+  dormModel.getroombyID(id, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
+};

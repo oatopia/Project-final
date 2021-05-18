@@ -1,5 +1,7 @@
 import express from 'express'
-import {createDorm, createFacilities, createImage ,getDorm,getDormDataByID,getFacilities,getImage,deletefacbyID,addfac,deleteImage,updateDorm} from '../controller/DormController.js'
+import {createDorm, createFacilities, createImage 
+    ,getDorm,getDormDataByID,getFacilities,getImage,deletefacbyID
+    ,addfac,deleteImage,updateDorm,createRoom,getRoom} from '../controller/DormController.js'
 const router = express.Router();
 import {verifyToken} from '../middleware/Verify.js'
 // import {upload} from '../middleware/upload.js'
@@ -15,5 +17,8 @@ router.delete('/facdeleteDelete/:id',deletefacbyID);
 router.post('/addfacil',[verifyToken],addfac);
 router.delete('/Imagedelete/:id',deleteImage);
 router.put('/UpdateDorm/:id',updateDorm);
+
+router.post('/createRoom',[verifyToken],createRoom);
+router.post('/getRoom',[verifyToken],getRoom);
 
 export default router;

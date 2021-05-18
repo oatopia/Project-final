@@ -15,7 +15,7 @@ pool.getConnection((err,connection) => {
     console.log("Error in connection ", err);
   } else {
     console.log("sucsessfully");
-    pool.query("SELECT * FROM Scoring_Factors ", (error, res) => {
+    pool.query("SELECT * FROM dorm_factor ", (error, res) => {
       if (error) {
         console.log(error);
       } else {
