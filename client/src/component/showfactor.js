@@ -82,6 +82,7 @@ export default function Match() {
       if (weight[i].index_compare == index) {
         if (weight[i].comparator == factor) {
           checkstate = true
+          break
         } else {
           checkstate = false
         }
@@ -94,17 +95,15 @@ export default function Match() {
 
 
   const isWeight = (index) => {
-    let value = 4;
-    weight.forEach()
-    weight.map(item => {
-      if (item.index_compare == index) {
-        return value = item.weight
-      } else {
-        return value
+    let value = 1;
+    for (let i = 0; i < weight.length; i++) {
+      if (weight[i].index_compare == index) {
+        value = weight[i].weight
       }
-    })
-    return
+    }
+    return value
   }
+
 
 
 
@@ -140,8 +139,8 @@ export default function Match() {
     }
   };
 
-  const matchFac = () => {
-    Axios.post(url + "api/visitor/matchDorm", weight)
+  const matchFac = (e) => {
+    Axios.post("api/visitor/matchDorm", weight)
       .then((Response) => {
         console.log(Response.data);
         history.push({
@@ -180,7 +179,7 @@ export default function Match() {
     value.sort((a, b,) => b.value - a.value)
     console.log("value in showpriority ", value)
     return (
-      <div>
+      <div className="result-cal-container">
         <h1 className='result-cal-priority-label'>ผลการวิเคราะห์คุณลักษณะส่วนบุคคลของท่าน</h1>
         <div className='result-cal-priority-container'>
         <table className='table-cal-priority'>
@@ -203,7 +202,7 @@ export default function Match() {
           })}
           </table>
         </div>
-        <button className="btn-match-dorm">จับคู่หอพัก</button>
+        <button className="btn-match-dorm" onClick={matchFac}>จับคู่หอพัก</button>
       </div>
     )
   }
@@ -265,7 +264,7 @@ export default function Match() {
         <h2 className="head-h2-match">ท่านคิดว่าปัจจัยที่ท่านเลือกมีความสำคัญกว่าอีกปัจจัยเท่าใด</h2>
         <div className="input-range-container">
           <p>เท่ากัน</p>
-          <input type="range" defaultValue='1' className="input-range-match" min="1" max="9" onChange={addWeight(key)} />
+          <input type="range" defaultValue={isWeight(key)} className="input-range-match" min="1" max="9" onChange={addWeight(key)} />
           <p>มากที่สุด</p>
         </div>
       </div>

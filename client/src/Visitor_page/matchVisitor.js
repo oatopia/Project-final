@@ -24,7 +24,7 @@ function MatchVisitor(){
                         }
                             
                         }>
-                            <h1>{data.Dorm_Name}</h1>
+                            <h1>{data.dorm_Name}</h1>
                         </div>
                     )
                 })}

@@ -164,13 +164,13 @@ color: #103670;
   padding-left: 10px;
   padding-right: 10px;
   /* padding-bottom: 10px; */
-  transition-duration: 0.5s;
+  /* transition-duration: 0.5s; */
 }
 
 .box-match h4 {
   margin-top: 0px;
   font-size: 24px;
-  color: #002a61;
+  color: #2668be;
   /* padding: 10px; */
 }
 
@@ -227,32 +227,19 @@ color: #103670;
 
 #box-match-1:hover{
     box-shadow: 6px 4px 8px 0px rgba(0, 0, 0, 0.2);
-    transition-duration: 0.5s;
+    /* transition-duration: 0.5s; */
     cursor: pointer;
 }
 
 #box-match-2:hover{
     box-shadow: 6px 4px 8px 0px rgba(0, 0, 0, 0.2);
-    transition-duration: 0.5s;
     cursor: pointer;
 }
-/* 
-#box-match-1:focus{
-  background-color:#abcbe2;
-  transition-duration: 0.5s;
-}
-
-#box-match-2:focus{
-  background-color:#abcbe2;
-  transition-duration: 0.5s;
-} */
 
 .head-h1-match{
   color: #134383;
   font-size: 40px;
-  /* margin-bottom: 20px; */
   display: inline-block;
-  /* padding: 10px; */
   margin-right: auto;
   margin-left: auto;
   margin-top: -30px;
@@ -262,15 +249,12 @@ color: #103670;
   font-size: 32px;
   text-align: start;
   margin-left: 30px;
-  /* margin-bottom: 50px; */
 }
 
 .containermatch2-visitor{
   padding-top: 20px;
 }
 .contain-in-visitor{
-  /* margin-top: auto; */
-  /* margin-bottom: auto; */
   width: 75%;
 }
 
@@ -336,13 +320,11 @@ label.radio-container input{
     top: 0px;
     left: 0px;
     visibility: hidden;
-    /* pointer-events: none */
+    pointer-events: none
 }
 
 label.radio-container input:checked+div{
-  transition-duration: 0.3s;
-  background-color: #0050b9;
-  color: white;
+  border: 5px solid #0050b9;
 }
 
 .head-match-dorm{
@@ -351,12 +333,7 @@ label.radio-container input:checked+div{
 }
 
 .result-cal-priority-label{
-  padding: 10px;
-  border: 2px solid #0050b9;
-  background-color: white;
   color: #0050b9;
-  border-radius: 10px;
-  display: inline;
 }
 
 .result-text{
@@ -367,7 +344,6 @@ label.radio-container input:checked+div{
 
 .result-cal-priority-container{
   text-align: start;
-  /* background-color: #077949; */
   margin-top: 20px;
   display: flex;
   justify-content: center;
@@ -401,4 +377,15 @@ label.radio-container input:checked+div{
 .btn-match-dorm:hover{
   background-color: #002a61;
   transition-duration: 0.3s;
+}
+
+.result-cal-container{
+  border: 3px solid #0050b9;
+  border-radius: 10px;
+  /* padding-top: 10px; */
+  padding-bottom: 20px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+/* background-color: teal; */
 }

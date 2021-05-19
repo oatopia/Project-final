@@ -104,11 +104,11 @@ export const magDorm = (data,Mlength) =>{
       let obj = {};
       let scoreA = [];
       
-        obj['Dorm_ID'] = data[i].Dorm_ID;
+        obj['dorm_ID'] = data[i].dorm_ID;
         for (let j = i; j < i+Mlength; j++) {
           let scorejson = {};
-          scorejson['Feature_ID'] = data[j].Feature_ID;
-          scorejson['Score'] = data[j].Score;
+          scorejson['factor_ID'] = data[j].factor_ID;
+          scorejson['score'] = data[j].score;
           scoreA.push(scorejson);
           
           }
