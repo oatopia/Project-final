@@ -3,6 +3,26 @@
   padding-bottom: 20px;
 }
 
+.table-room-data-detail-container,.table-room-data-detail-container tr, .table-room-data-detail-container td{
+  padding-left: 10px;
+  padding-right: 10px;
+  border-collapse: collapse;
+  border: 1px solid rgb(187, 187, 187);
+  text-align: center;
+}
+.table-room-data-detail-container p{
+  font-size: 20px;
+}
+
+.box-input-price-data-detail{
+  font-size: 20px;
+}
+
+.box-input-price-data-detail p{
+  display: inline-block;
+  font-size: 20px;
+  margin-left: 10px;
+}
 .content-dorm-container{
   padding-bottom: 20px;
 }
@@ -117,19 +137,40 @@
 /* -------------------------------------------------show dorm detail-------------------------------------------------- */
 
 
+table.table-edit-dorm-data,.table-dorm-data td, .table-dorm-data tr{
+  padding: 10px;
+}
 
+.table-dorm-data input{
+  margin-right: 10px;
+}
 
+.save-edit-btn-container{
+  text-align: center;
+}
 
 .save-edit-dorm {
+  width: 200px;
   height: 60px;
   font-size: 24px;
   border-radius: 10px;
   border: none;
   color: rgb(250, 244, 244);
-  background-color: #6b9cdd;
+  background-color: #1655a7;
+  margin-top: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+.but-edit-dorm:hover{
+  transition-duration: 0.3s;
+  background-color:#002a61;  
 }
 
 
+.delete-btn-room-table-edit{
+  color: rgb(231, 5, 5);
+}
 
 
 .dormdata-container{
@@ -171,15 +212,6 @@
 }
 .dormdata-container h2{
   margin-top: 15px;
-}
-.save-edit-dorm{
-    height: 60px;
-    font-size: 24px;
-    border-radius: 10px;
-    border: none;
-    font-weight: bold;
-    color: #28527a;
-    background-color: #8ac4d0;
 }
 
 .image-container{

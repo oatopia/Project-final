@@ -3,12 +3,32 @@
 *{
     box-sizing: border-box;
     font-family: 'Prompt', sans-serif;
+    scroll-behavior: smooth;
   }
 
   body{
     margin: 0;
     background-color: rgb(245, 245, 245);
     
+  }
+
+  .text-match-scroll{
+    font-size: 26px;
+    font-weight: bold;
+    color: rgb(223, 223, 223);
+    border: 3px solid rgb(223, 223, 223);
+    border-radius: 10px;
+    padding: 10px;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 0px;
+    transition-duration: 0.3s;
+  }
+ 
+  .text-match-scroll:hover{
+    color: #1655a7;
+    border: 3px solid #1655a7;
+    transition-duration: 0.3s;
   }
 
   .appcontainer{
@@ -81,7 +101,7 @@
   }
 
   .header-contain{
-    margin-top: 80px;
+    margin-top: 70px;
     margin-left: 50px;
   }
 
@@ -95,7 +115,7 @@
 
   .header-contain h2{
     font-size: 0.73cm;
-    color: rgb(223, 223, 223);
+    color: rgb(241, 241, 241);
   }
 
   /* .image-match-container{

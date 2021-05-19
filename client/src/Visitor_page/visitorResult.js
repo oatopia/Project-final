@@ -12,7 +12,7 @@ function VisitorResult() {
   let location = useLocation();
   let state = location.state;
   console.log("sate match:", state);
-  const [srcimg, setSrcimg] = useState(state ? state.image[0].Image: "");
+  const [srcimg, setSrcimg] = useState([]);
 
   return (
     <div className="contain-visitor-result">
@@ -20,7 +20,7 @@ function VisitorResult() {
       {state == "" ? <h1>ไม่พบหอพักที่ท่านค้นหา</h1> :
         <div className="visitor-dorm-block">
           <div className="dorm-data-container">
-            <label className="dormname">{state.information.Dorm_Name}</label>
+            <label className="dormname">{state.information.dorm_Name}</label>
             <div className="image-container">
               <img className="image-big" src={url + "img_Dorm/" + srcimg}></img>
               <div className="image-mini-container">
@@ -38,12 +38,12 @@ function VisitorResult() {
             <div className="container-block-2">
               <div className="type-dorm-container">
                 <h3>ประเภทหอพัก</h3>
-                <p>{state.information.Type_D}</p>
+                <p>{state.information.type_D}</p>
               </div>
 
               <div className="address-container">
                 <h3>ที่อยู่</h3>
-                <p>{state.information.Address}</p>
+                <p>{state.information.address}</p>
               </div>
             </div>
 
@@ -51,13 +51,13 @@ function VisitorResult() {
               <div className="fee-container">
                 <h2>รายละเอียดค่าใช้จ่าย</h2>
                 <h3>เงินมัดจำ/ประกัน</h3>
-                <p>{state.information.Deposit}</p>
+                <p>{state.information.deposit}</p>
                 <h3>อัตราค่าน้ำ</h3>
-                <p>{state.information.Water_bill}</p>
+                <p>{state.information.water_Bill}</p>
                 <h3>อัตราค่าไฟ</h3>
-                <p>{state.information.Electric_bill}</p>
+                <p>{state.information.electric_Bill}</p>
                 <h3>ค่าส่วนกลาง</h3>
-                <p>{state.information.common_fee}</p>
+                <p>{state.information.common_Fee}</p>
               </div>
 
               <div className="facilities-container">
@@ -65,8 +65,8 @@ function VisitorResult() {
                 <div className="faciliites-content">
                   <div className="fac-inner">
                     <h3>ภายในห้องพัก</h3>
-                    {state.facilities.map(data => {
-                      if (data.Type_F == 'ภายในห้องพัก') {
+                    {state.facilities_dorm.map(data => {
+                      if (data.type_F == 'ภายในห้องพัก') {
                         return (<li>{data.Facility}</li>)
                       }
                     })}
@@ -74,9 +74,9 @@ function VisitorResult() {
 
                   <div className="fac-center">
                     <h3>ส่วนกลาง</h3>
-                    {state.facilities.map(data => {
-                      if (data.Type_F == 'ส่วนกลาง') {
-                        return (<li>{data.Facility}</li>)
+                    {state.facilities_dorm.map(data => {
+                      if (data.type_F == 'ส่วนกลาง') {
+                        return (<li>{data.facility}</li>)
                       }
                     })}
                   </div>
@@ -88,19 +88,19 @@ function VisitorResult() {
             <div className="container-block-4">
               <div className="infor-container">
                 <h3>รายละเอียดหอพัก</h3>
-                <p>{state.information.Information}</p>
+                <p>{state.information.detail}</p>
               </div>
 
               <div className="contact-container">
                 <h2>ข้อมูลติดต่อ</h2>
                 <h3>ชื่อผู้ดูแลหอพัก</h3>
-                <p>{state.information.L_name}</p>
+                <p>{state.information.ad_Name}</p>
                 <h3>เบอร์ติดต่อ</h3>
-                <p>{state.information.Contact_Number}</p>
+                <p>{state.information.contact_Number}</p>
                 <h3>อีเมล</h3>
-                <p>{state.information.E_mail}</p>
+                <p>{state.information.e_Mail}</p>
                 <h3>Line ID</h3>
-                <p>{state.information.Line_ID}</p>
+                <p>{state.information.line_ID}</p>
               </div>
             </div>
 

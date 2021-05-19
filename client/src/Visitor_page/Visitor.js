@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Visitor.css";
 import Navbar from "../component/Navbar/Navbar.js";
 import Showfactor from '../component/showfactor.js'
@@ -19,6 +19,7 @@ function Visitor() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/";
   const [search,setSearch] = useState("");
   const history = useHistory();
+  const myref  = useRef(null)
 
   const onClickforSerach = (e) => {
     console.log(search)
@@ -44,6 +45,7 @@ function Visitor() {
           <div className="header-contain">
             <h1>Dorm Matching TU</h1>
             <h2>เว็บจับคู่หอพักที่จะช่วยให้คุณตัดสินใจเลือกหอพักได้ง่ายขึ้น</h2>
+            <p className='text-match-scroll' onClick={()=>{myref.current.scrollIntoView()}}>เริ่มต้นใช้งาน</p>
           </div>
         </div>
       </div>
@@ -51,7 +53,7 @@ function Visitor() {
           <input className="searchinput-Visitor" placeholder="ค้นหาหอพัก..." onChange={e=>{setSearch(e.target.value)}}></input>
           <button className="searchbutton-Visitor" onClick={()=>{onClickforSerach()}}>ค้นหา</button>
       </div>
-      <div className="match-container">
+      <div className="match-container" ref={myref}>
         {/* <Match /> */}
         <Showfactor />
         {/* <div className="image-match-container"></div> */}

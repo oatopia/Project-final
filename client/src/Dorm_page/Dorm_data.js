@@ -307,9 +307,9 @@ const Owner = () => {
                   <h4 className="text-dorm-content">{dorm.type_D}</h4>
                 </div>
 
-                <div className="room-dorm-data-container">
+                <div className="room-dorm-data-detail-container">
                   <h2>ประเภทห้องพัก</h2>
-                  <table className="table-room-container">
+                  <table className="table-room-data-detail-container">
                     <thead>
                       <tr className="heading-table">
                         <th>ประเภท</th>
@@ -319,7 +319,7 @@ const Owner = () => {
                         return (
                           <tr key={key}>
                             <td>{data.room_Type}</td>
-                            <td className="box-input-price">
+                            <td className="box-input-price-data-detail">
                               {data.room_Price}
                               <p>บาทต่อเดือน</p>
                             </td>
@@ -469,6 +469,7 @@ const Owner = () => {
               </div>
             </div>
           ) : (
+            //------------------------------------------UPDATE data----------------------------------------------------------
             <div className="box-info">
               <form>
                 <h1 className="Edit-heading">แก้ไขข้อมูลหอพัก</h1>
@@ -528,9 +529,16 @@ const Owner = () => {
                               ></input>
                               <p>บาทต่อเดือน</p>
                             </td>
-                            <td></td>
+                            <td>
+                              <p
+                                className="delete-btn-room-table-edit"
+                                onClick={deleteroom()}
+                              >
+                                ลบ
+                              </p>
+                            </td>
                           </tr>
-                        )
+                        );
                       })}
 
                       {addroom.map((data, key) => {
@@ -583,67 +591,90 @@ const Owner = () => {
                 ></textarea>
                 <br />
                 <h2>รายละเอียดค่าใช้จ่าย</h2>
-                <ul>
-                  <h4 className="pay" id="p1">
-                    เงินมัดจำ/ประกัน
-                  </h4>
-                  <input
-                    className="chong-pay"
-                    defaultValue={dorm.deposit}
-                    onChange={(e) => {
-                      setDorm((prev) => ({
-                        ...prev,
-                        deposit: e.target.value,
-                      }));
-                    }}
-                  ></input>
-                  <h4 className="baht">บาท</h4>
-                  <br />
-                  <h4 className="pay" id="p2">
-                    อัตราค่าน้ำ
-                  </h4>
-                  <input
-                    className="chong-pay"
-                    defaultValue={dorm.water_Bill}
-                    onChange={(e) => {
-                      setDorm((prev) => ({
-                        ...prev,
-                        electric_Bill: e.target.value,
-                      }));
-                    }}
-                  ></input>
-                  <h4 className="baht">บาท</h4>
-                  <br />
-                  <h4 className="pay" id="p3">
-                    อัตราค่าไฟ
-                  </h4>
-                  <input
-                    className="chong-pay"
-                    defaultValue={dorm.electric_Bill}
-                    onChange={(e) => {
-                      setDorm((prev) => ({
-                        ...prev,
-                        water_Bill: e.target.value,
-                      }));
-                    }}
-                  ></input>
-                  <h4 className="baht">บาท</h4>
-                  <br />
-                  <h4 className="pay" id="p4">
-                    ค่าส่วนกลาง
-                  </h4>
-                  <input
-                    className="chong-pay"
-                    defaultValue={dorm.common_Fee}
-                    onChange={(e) => {
-                      setDorm((prev) => ({
-                        ...prev,
-                        common_Fee: e.target.value,
-                      }));
-                    }}
-                  ></input>
-                  <h4 className="baht">บาท</h4>
-                </ul>
+                <table className='table-edit-dorm-data'>
+                  <thead>
+                    <tr>
+                      <td>
+                        <h4 >
+                          เงินมัดจำ/ประกัน
+                        </h4>
+                      </td>
+                      <td>
+                        <input
+                          defaultValue={dorm.deposit}
+                          onChange={(e) => {
+                            setDorm((prev) => ({
+                              ...prev,
+                              deposit: e.target.value,
+                            }));
+                          }}
+                        />
+                        บาท
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <h4>
+                          ค่าส่วนกลาง
+                        </h4>
+                      </td>
+                      <td>
+                        <input
+                          defaultValue={dorm.common_Fee}
+                          onChange={(e) => {
+                            setDorm((prev) => ({
+                              ...prev,
+                              common_Fee: e.target.value,
+                            }));
+                          }}
+                        />
+                        บาท
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <h4>
+                          อัตราค่าน้ำ
+                        </h4>
+                      </td>
+                      <td>
+                        <input
+                          defaultValue={dorm.water_Bill}
+                          onChange={(e) => {
+                            setDorm((prev) => ({
+                              ...prev,
+                              electric_Bill: e.target.value,
+                            }));
+                          }}
+                        />
+                        บาทต่อยูนิต
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <h4>
+                          อัตราค่าไฟ
+                        </h4>
+                      </td>
+                      <td>
+                        <input
+                          defaultValue={dorm.electric_Bill}
+                          onChange={(e) => {
+                            setDorm((prev) => ({
+                              ...prev,
+                              water_Bill: e.target.value,
+                            }));
+                          }}
+                        />
+                        บาทต่อยูนิต
+                      </td>
+                    </tr>
+                  </thead>
+                </table>
+
                 <br />
                 <h2>สิ่งอำนวยความสะดวก</h2>
                 <div className="facilities">
@@ -785,9 +816,11 @@ const Owner = () => {
                   onChange={OnchangeImage}
                 ></input>
               </form>
-              <button className="save-edit-dorm" onClick={EditDorm}>
-                บันทึก
-              </button>
+              <div className="save-edit-btn-container">
+                <button className="save-edit-dorm" onClick={EditDorm}>
+                  บันทึก
+                </button>
+              </div>
             </div>
           )}
           {/* ---------------------------------------------------------------------- */}

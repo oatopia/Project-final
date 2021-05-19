@@ -1,6 +1,5 @@
 
 .owner-login-container {
-  /* margin-top: 20px; */
   padding-top: 20px;
   padding-bottom: 20px;
   
@@ -8,21 +7,20 @@
 
 .content-owner-login-container {
   display: flex;
-  width: fit-content;
+  /* width: fit-content; */
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
 }
 
 .form-owner-login {
-  padding: 20px;
-  width: 350px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  width: 300px;
   border-radius: 10px 0 0 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   background-color: white;
   box-shadow: 2px 10px 10px 0 rgba(0, 0, 0, 0.2);
+  /* padding-bottom: 20px; */
 }
 
 .img {
@@ -32,12 +30,13 @@
 
 #h-1{
   color: #0e57c5;
-  font-size: 32px;
-  background-color: tomato;
+  font-size: 30px;
+  margin-bottom: 0px;
 }
 #h-2{
   color: #0e57c5;
-  font-size: 32px;
+  font-size: 30px;
+  margin-top: 0px;
 }
 
 .username-head{
@@ -77,7 +76,7 @@
   border: none;
   border-radius: 5px;
   box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
-  margin-top: -25px;
+  margin-top: 0px;
   font-weight: bold;
   transition-duration: 0.3s;
 }
@@ -91,8 +90,8 @@
 .button-register-owner {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5px;
-  width: 50%;
+  /* margin-top: 5px; */
+  width: 100%;
   height: 50px;
   background-color: #3dae25;
   color: white;
@@ -104,7 +103,7 @@
 } 
 
 .button-register-owner:hover {
-  background-color: #246116;
+  background-color: #1f830b;
   transition-duration: 0.3s;
   cursor: pointer;
 }

@@ -26,6 +26,20 @@ export const searchdorm = (req, res) => {
 };
 
 
+export const calPriority = (req, res) => {
+  const priority = req.body;
+  console.log("priority data: ",priority);
+  let Matrixlength = calMatLength(priority.length);
+  console.log('Matrixlength:',Matrixlength);
+  let Matrixcal = calmatrix(priority)
+  console.log("Matrixcal", Matrixcal);
+  res.send(Matrixcal)
+};
+
+
+
+
+
 
 export const matchDorm = (req, res) => {
   let jsondata = req.body;

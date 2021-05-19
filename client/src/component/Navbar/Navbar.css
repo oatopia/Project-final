@@ -70,6 +70,7 @@ img{
     border: none;
     width: 100%;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 #dropdown-basic-button:hover{
