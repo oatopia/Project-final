@@ -32,7 +32,7 @@ export default function Navbar() {
       ></img>
       <div className="NavMember-container2">
         <Link to="/">
-          <p className="menu-p">หน้าหลักสมาชิก</p>
+          <p className="menu-p">หน้าแรก</p>
         </Link>
         <Link to="/login">
           <p className="menu-p">รายการหอพักที่บันทึก</p>

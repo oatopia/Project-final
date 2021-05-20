@@ -179,7 +179,7 @@ export default function Match() {
     console.log("value in showpriority ", value)
     return (
       <div className="result-cal-container">
-        <h1 className='result-cal-priority-label'>ผลการวิเคราะห์คุณลักษณะส่วนบุคคลของท่าน</h1>
+        <h1 className='result-cal-priority-label'>ผลการวิเคราะห์คุณลักษณะส่วนบุคคลของคุณ</h1>
         <div className='result-cal-priority-container'>
         <table className='table-cal-priority'>
           {value.map(item => {
@@ -187,7 +187,7 @@ export default function Match() {
               
                 <tr>
                   <td>
-                    <h3 className='result-text'> ท่านให้ความสำคัญกับ <span className="factor-result-cal">{item.factor.factor_Title}</span> </h3>
+                    <h3 className='result-text'> คุณให้ความสำคัญกับ <span className="factor-result-cal">{item.factor.factor_Title}</span> </h3>
                   </td>
                   <td>
                     <h3 className='factor-result-cal'>{Math.round(parseInt(item.value * 100))}%</h3>
@@ -211,7 +211,7 @@ export default function Match() {
 
   const showArray = pair.map((item, key) =>
     <div className="match-block-container" key={key}>
-      <h1 className="head-h1-match">กรุณาทำแบบสอบถามเบื้องต้นเพื่อประเมินความสนใจของท่าน</h1>
+      <h1 className="head-h1-match">กรุณาทำแบบสอบถามเบื้องต้นเพื่อประเมินความสนใจของคุณ</h1>
       <div className="showfactor-right-box">
         <h2>ความหมายของปัจจัยในการตัดสินใจเลือกหอพัก</h2>
         {factorlist.map((data, key) => {
@@ -229,7 +229,7 @@ export default function Match() {
         })}
       </div>
       <div className="containermatch2-visitor">
-        <h2 className="head-h2-match">ท่านคิดว่าปัจจัยในด้านใดจำเป็นต่อตัวท่านมากที่สุด</h2>
+        <h2 className="head-h2-match">คุณคิดว่าปัจจัยในด้านใดจำเป็นต่อตัวคุณมากที่สุด</h2>
       </div>
       <div id="contain-match-display" >
         <label className='radio-container'>
@@ -260,7 +260,7 @@ export default function Match() {
 
       </div>
       <div className="range-weight-container">
-        <h2 className="head-h2-match">ท่านคิดว่าปัจจัยที่ท่านเลือกมีความสำคัญกว่าอีกปัจจัยเท่าใด</h2>
+        <h2 className="head-h2-match">คุณคิดว่าปัจจัยที่ท่านเลือกมีความสำคัญกว่าอีกปัจจัยเท่าใด</h2>
         <div className="input-range-container">
           <p>เท่ากัน</p>
           <input type="range" defaultValue={isWeight(key)} className="input-range-match" min="1" max="9" onChange={addWeight(key)} />

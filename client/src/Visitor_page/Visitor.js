@@ -44,7 +44,8 @@ function Visitor() {
           <Navbar></Navbar>
           <div className="header-contain">
             <h1>Dorm Matching TU</h1>
-            <h2>เว็บจับคู่หอพักที่จะช่วยให้คุณตัดสินใจเลือกหอพักได้ง่ายขึ้น</h2>
+            <h2>เว็บจับคู่หอพักที่จะช่วยคุณตัดสินใจเลือกหอพักได้ง่ายขึ้น </h2>
+            <h2>คุณสามารถค้นหา และจับคู่หอพัก</h2>
             <p className='text-match-scroll' onClick={()=>{myref.current.scrollIntoView()}}>เริ่มต้นใช้งาน</p>
           </div>
         </div>
