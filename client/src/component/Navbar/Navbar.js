@@ -22,7 +22,7 @@ const Unauthen = () => {
       </div>
       <ul className="listmenu">
         <Link to="/" className="linkhead">
-          <p>หน้าหลัก</p>
+          <p>หน้าแรก</p>
         </Link>
         {/* {click ? <div onClick={() => { setClick(true); }}><p>เข้าสู่ระบบ</p></div> 
         : <div onClick={() => { setClick(true); }}>

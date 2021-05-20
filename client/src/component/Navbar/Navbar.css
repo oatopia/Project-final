@@ -9,9 +9,7 @@
 }
 
 
-img{
-    margin-right:4px ;
-}
+
 
 .homelogo{
     margin-bottom: 2px;
@@ -26,12 +24,11 @@ img{
 
 .sign{
     background-color: #1655a7;
-    /* border: 2px solid #1655a7; */
     border: none;
-    width: 130px;
+    width: 160px;
     height: 50px;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 23px;
     font-weight: normal;
     color: white;
     transition-duration:0.8s;
@@ -47,7 +44,7 @@ img{
 
 .linkhead p{
     color: #1655a7;
-    font-weight: normal;
+    font-weight: bold;
     font-size: 28px; 
     transition-duration:0.5s;
 }
@@ -63,7 +60,7 @@ img{
 
 #dropdown-basic-button{
     color: #1655a7;
-    font-weight: normal;
+    font-weight: bold;
     font-size: 28px; 
     transition-duration:0.5s;
     background-color: transparent;
