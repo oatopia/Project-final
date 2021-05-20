@@ -68,7 +68,9 @@ img.profilelogo{
     background-color: #0e57c5;
     border: none;
     border-radius: 10px;
-    width: 120px;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
     cursor: pointer;
     transition-duration: 0.3s;
     display: flex;
@@ -80,6 +82,7 @@ img.profilelogo{
 .profile-content-owner p{
     color: white;
     margin-left: 20px;
+    
 }
 
 #dropdown-owner-page{

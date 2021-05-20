@@ -5,7 +5,6 @@ import D1 from "../img/icon/D1.png";
 import { useHistory } from "react-router";
 import alert from '../img/alert.png'
 import Slider from 'react-slick'
-import axios from "axios";
 
 export default function Match() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/";
@@ -274,7 +273,7 @@ export default function Match() {
         }}>ย้อนกลับ</button> : <></>}
         {count != pair.length - 1 ? <button className="button-next" onClick={(e) => {
           setCount(count + 1)
-        }}>ถัดไป</button> : <button className='btn-cal' onClick={calPriority}>ผลลัพธ์</button>}
+        }}>ถัดไป</button> : <button className='btn-cal' onClick={calPriority}>แสดงผลลัพธ์</button>}
       </div>
       <div className="clear"></div>
     </div>

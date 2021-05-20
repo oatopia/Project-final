@@ -1,14 +1,34 @@
 .dorm-container{
-    width: 80%;
-    background-color: #decebe;
-    height: 100px;
-    margin-bottom: 20px;
+    width: 60%;
+    background-color: #d0e5f5;
+    height: 200px;
+    margin-bottom: 30px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
     box-shadow: 4px 4px 4px 0px  rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dorm-container:hover{
+    border: 2px solid #0050b9;
+    /* transition-duration: 1s; */
+}
+
+.dorm-container h1{
+    font-size: 50px;
+    color: #0050b9;
 }
 
 .result-container{
     margin-top: 20px;
+}
+
+.img-dorm-box{
+    border-radius: 10px 0px 0px 10px;
+    width: 25%;
+    height: 100%;
+    margin-right: 20px;
 }

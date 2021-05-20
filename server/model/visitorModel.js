@@ -71,5 +71,20 @@ Visitormodel.getAllDorm = (result) =>{
     });
 };
 
+Visitormodel.getalldetail = (result) =>{
+    db.query("SELECT * FROM image_dorm ; SELECT * FROM room ; SELECT * FROM facilities_dorm",(err,res)=>{
+        if(err){
+            console.log("error:",err);
+            result(err,null);
+            return;
+        }
+        result(null,res);    
+    });
+};
+
+
+
+
+
 export default Visitormodel;
 

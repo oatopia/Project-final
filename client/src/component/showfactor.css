@@ -290,8 +290,9 @@ color: #103670;
   color: white;
   font-size: 24px;
   border-radius: 10px;
-  width: 130px;
-  height: 50px;
+  padding: 10px;
+  width: 160px;
+  height: 100%;
   float: right;
   cursor: pointer;
 }
@@ -380,11 +381,13 @@ label.radio-container input:checked+div{
 }
 
 .result-cal-container{
-  border: 3px solid #0050b9;
+  /* border: 3px solid #0050b9; */
   border-radius: 10px;
+  box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.2);
+  background-color: #d0e5f5;
   /* padding-top: 10px; */
   padding-bottom: 20px;
-  width: 80%;
+  width: 75%;
   margin-left: auto;
   margin-right: auto;
 /* background-color: teal; */

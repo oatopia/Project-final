@@ -20,7 +20,7 @@ function DormVisitor() {
 
         <div className="visitor-dorm-block">
           <div className="dorm-data-container">
-            <label className="dormname">{state.Dorm_Name}</label>
+            <label className="dormname">{state.dorm_Name}</label>
             <div className="image-container">
               {/* <img className="image-big" src={url + "img_Dorm/" + srcimg}></img> */}
               {/* <div className="image-mini-container">
@@ -38,12 +38,12 @@ function DormVisitor() {
             <div className="container-block-2">
               <div className="type-dorm-container">
                 <h3>ประเภทหอพัก</h3>
-                <p>{state.Type_D}</p>
+                <p>{state.type_D}</p>
               </div>
 
               <div className="address-container">
                 <h3>ที่อยู่</h3>
-                <p>{state.Address}</p>
+                <p>{state.address}</p>
               </div>
             </div>
 

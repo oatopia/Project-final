@@ -8,6 +8,7 @@ const pool = mysql.createPool({
   password: config.password,
   database: config.database,
   connectionLimit: 15,
+  multipleStatements:true
 });
 
 pool.getConnection((err,connection) => {

@@ -105,5 +105,27 @@ export const matchDorm = (req, res) => {
       console.log('result:',DormArray);
       res.send(DormArray);
     }
+  })
+}
+
+export const getDorm = (req, res) => {
+  visitormodel.getAllDorm((err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('get dorm data',data)
+      res.send(data);
+    }
+  });
+};
+
+export const getdetail = (req, res) => {
+  visitormodel.getalldetail((err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('get image from database success: ',data)
+      res.send(data);
+    }
   });
 };
