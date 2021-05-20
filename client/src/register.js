@@ -48,11 +48,11 @@ function Register() {
                 <div className="container1-register">
                     <form className="form1" onSubmit={handleRegister}>
                         <h1 id="head-register">สมัครสมาชิก</h1>
-                        <p>ชื่อผู้ใช้</p>
+                        <p>ชื่อผู้ใช้*</p>
                         <input className="input-text-register" onChange={(e) => {
                             setusername(e.target.value);
                         }} ></input>
-                        <p>รหัสผ่าน</p>
+                        <p>รหัสผ่าน*</p>
                         <input type="password" className="input-text-register" onChange={(e) => {
                             setpassword(e.target.value);
                         }}></input>
@@ -65,7 +65,7 @@ function Register() {
                         </select>
                         <button className="buttonregister-register" type="submit">สมัครสมาชิก</button>
                     </form>
-                    <img src={img} className="img" width="300" height="500"></img>
+                    <img src={img} className="img" width="300" height="450"></img>
                 </div>
 
             </div>
