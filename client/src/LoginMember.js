@@ -34,20 +34,24 @@ const Loginmember = () => {
                 <div className="content-login-container">
                     <form className="form-login-member" onSubmit={handleLogin}>
                         <h1 id="head-login">เข้าสู่ระบบสำหรับสมาชิก</h1>
-                        <p>ชื่อผู้ใช้</p>
-                        <input className="text-input" onChange={(e) => {
-                            setusername(e.target.value);
-                        }}></input>
-                        <p>รหัสผ่าน</p>
-                        <input type="password" className="text-input" onChange={(e) => {
-                            setpassword(e.target.value);
-                        }}></input>
+                        <div>
+                            <p className='p-text'>ชื่อผู้ใช้*</p>
+                            <input className="text-input-username-loginmember" onChange={(e) => {
+                                setusername(e.target.value);
+                            }}></input>
+                        </div>
+                        <div>
+                            <p className='p-text'>รหัสผ่าน*</p>
+                            <input type="password" className="text-input-username-loginmember" onChange={(e) => {
+                                setpassword(e.target.value);
+                            }}></input>
+                        </div>
                         <br></br>
-                        <button className="buttonregister" type="submit">เข้าสู่ระบบ</button>
+                        <button className="button-login-member" type="submit">เข้าสู่ระบบ</button>
                         <hr />
-                        <button className="buttonregister2" type="submit">สร้างบัญชีใหม่</button>
+                        <button className="buttonnew-member" type="submit">สร้างบัญชีใหม่</button>
                     </form>
-                    <img src={img} className="img" width="300" height="470"></img>
+                    <img src={img} className="img" width="300" height="430"></img>
                 </div>
             </div>
         </div>

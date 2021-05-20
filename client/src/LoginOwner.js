@@ -35,13 +35,13 @@ const Loginowner = () => {
                         </div>
 
                         <div className="username-text-owner">
-                            <p className="username-head">ชื่อผู้ใช้</p>
+                            <p className="username-head">ชื่อผู้ใช้*</p>
                             <input className="text-input-owner-login" onChange={(e) => {
                                 setusername(e.target.value);
                             }}></input>
                         </div>
                         <div className="password-text-owner">
-                            <p>รหัสผ่าน</p>
+                            <p>รหัสผ่าน*</p>
                             <input type="password" className="text-input-owner-login" onChange={(e) => {
                                 setpassword(e.target.value);
                             }}></input>
@@ -51,7 +51,7 @@ const Loginowner = () => {
                         <hr />
                         <button className="button-register-owner" type="submit">สร้างบัญชีใหม่</button>
                     </form>
-                    <img src={img} className="img" width="300" height="470"></img>
+                    <img src={img} className="img" width="300" height="430"></img>
                 </div>
             </div>
         </div>
