@@ -31,7 +31,9 @@ function MatchVisitor() {
 
     return (
         <div>
+            <div className='Navbar-shadow-box'>
             <Navbar />
+            </div>
             <div className="result-container">
                 {dorm.map((data, key) => {
                     return (

@@ -16,7 +16,7 @@ function DormVisitor() {
 
   return (
     <div className="dormVisitor-container">
-      <div>
+      <div className='Navbar-shadow-box'>
         <Navbar></Navbar>
       </div>
       <div className="dormVisitor-block">

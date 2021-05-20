@@ -181,10 +181,10 @@ export default function Match() {
       <div className="result-cal-container">
         <h1 className='result-cal-priority-label'>ผลการวิเคราะห์คุณลักษณะส่วนบุคคลของคุณ</h1>
         <div className='result-cal-priority-container'>
-        <table className='table-cal-priority'>
-          {value.map(item => {
-            return (
-              
+          <table className='table-cal-priority'>
+            {value.map(item => {
+              return (
+
                 <tr>
                   <td>
                     <h3 className='result-text'> คุณให้ความสำคัญกับ <span className="factor-result-cal">{item.factor.factor_Title}</span> </h3>
@@ -196,9 +196,9 @@ export default function Match() {
                     <img className="icon-factor-result" src={"images/" + item.factor.image_Factor} />
                   </td>
                 </tr>
-              
-            )
-          })}
+
+              )
+            })}
           </table>
         </div>
         <button className="btn-match-dorm" onClick={matchFac}>จับคู่หอพัก</button>
@@ -260,7 +260,7 @@ export default function Match() {
 
       </div>
       <div className="range-weight-container">
-        <h2 className="head-h2-match">คุณคิดว่าปัจจัยที่ท่านเลือกมีความสำคัญกว่าอีกปัจจัยเท่าใด</h2>
+        <h2 className="head-h2-match">คุณคิดว่าปัจจัยที่คุณเลือกมีความสำคัญกว่าอีกปัจจัยเท่าใด</h2>
         <div className="input-range-container">
           <p>เท่ากัน</p>
           <input type="range" defaultValue={isWeight(key)} className="input-range-match" min="1" max="9" onChange={addWeight(key)} />

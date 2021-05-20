@@ -41,7 +41,9 @@ function Register() {
     }
     return (
         <>
+            <div className='navbar-register-container'>
             <Navbar></Navbar>
+            </div>
             <div className="container-register">
                 <div className="container1-register">
                     <form className="form1" onSubmit={handleRegister}>

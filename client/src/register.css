@@ -1,13 +1,14 @@
-body {
-  margin: 0;
-  height: 100%;
+.navbar-register-container{
+  box-shadow: 0px 4px 6px 0 rgba(0, 0, 0, 0.2);
 }
+
+
 
 .container-register {
   /* background-image: url("./img/baregister.png");
       background-size: cover;
       background-attachment: fixed; */
-  background-color: #e9eaec;
+  /* background-color: #e9eaec; */
   width: 100%;
   box-sizing: border-box;
   display: flex;

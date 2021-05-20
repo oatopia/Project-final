@@ -12,6 +12,9 @@
     align-items: center;
     cursor: pointer;
 }
+.Navbar-shadow-box{
+    box-shadow: 0px 4px 6px 0px  rgba(0, 0, 0, 0.2);
+}
 
 .dorm-container:hover{
     border: 2px solid #0050b9;
@@ -19,7 +22,7 @@
 }
 
 .dorm-container h1{
-    font-size: 42px;
+    font-size: 36px;
     color: #0050b9;
 }
 
