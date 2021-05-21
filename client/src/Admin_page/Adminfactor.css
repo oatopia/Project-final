@@ -44,7 +44,7 @@
     /* width: 200px; */
     /* height: 100px; */
     margin-left: 50px;
-    padding: 20px;
+    padding: 10px;
     background-color: #1655a7;
     border-radius: 10px;
     border: none;
@@ -124,4 +124,8 @@
     background-color: #1655a7;
     margin-right: 10px;
 
+}
+
+.add-btn-adminfac{
+    margin-right: 10px
 }
