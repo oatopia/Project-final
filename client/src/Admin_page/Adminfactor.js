@@ -146,19 +146,20 @@ function Adminfactor() {
                   </h1>
                 )}
 
-                {textinput == data.Id ? (
+                {textinput == data.factor_ID ? (
                   <div className="edit-mini-box">
                     <input type="file"
                       className="edit-image"
                       onChange={(e) => { setEditimg(e.target.files[0]) }}
                     ></input>
+                    
                     <button
                       className="save-edit-button"
                       onClick={() => {
                         updatebyId(data.Id);
                       }}
                     >
-                      save
+                      บันทึกการแก้ไข
                     </button>
                   </div>
                 ) : (
@@ -176,7 +177,7 @@ function Adminfactor() {
                   width="40px"
                   height="40px"
                   onClick={() => {
-                    setTextinput(data.Id);
+                    setTextinput(data.factor_ID);
                   }}
                 ></img>
                 <img
@@ -185,7 +186,7 @@ function Adminfactor() {
                   width="40px"
                   height="40px"
                   onClick={() => {
-                    deleteFactor(data.Id);
+                    deleteFactor(data.factor_ID);
                   }}
                 ></img>
               </div>

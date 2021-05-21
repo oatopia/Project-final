@@ -105,13 +105,32 @@ export const searchDorm = (req, res) => {
 };
 
 export const getWeight = (req, res) => {
-  const user_id = req.body.user_id
-  matchmodel.getweightbyID(user_id,(err, data) => {
+  const member_ID = req.body.member_ID
+  matchmodel.getweightbyID(member_ID,(err, data) => {
     if (err) {
       console.log(err);
     } else {
       console.log("data from get weight: ",data)
-      res.send(data);
+      let payload = []
+      let arraypair=[]
+      let factor = data[1]
+      let number = 0;
+      for (let i = 0; i < factor.length; i++) {
+        for (let j = i + 1; j < factor.length; j++) {
+          arraypair.push({
+            index: number, factor_ID1: factor[i].factor_ID, factor_ID2: factor[j].factor_ID
+            , image_Factor1: factor[i].image_Factor, image_Factor2: factor[j].image_Factor
+            , factor_Title1: factor[i].factor_Title, factor_Title2: factor[j].factor_Title
+            , factor_Name1: factor[i].factor_Name, factor_Name2: factor[j].factor_Name
+          })
+          number++
+        }
+      }
+      payload.push(data[0])
+      payload.push(data[1])
+      payload.push(arraypair)
+      console.log("payload",payload)
+      res.send(payload);
     }
   });
 };

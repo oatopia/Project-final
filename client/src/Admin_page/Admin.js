@@ -76,13 +76,6 @@ function Admin() {
               </div>
               <div >
                 <img
-                  src={editicon}
-                  // onClick={() => {
-                  //   setEditAC(data.user_id);
-                  // }}
-                  className="icon-user"
-                ></img>
-                <img
                   src={deleteicon}
                   onClick={() => {
                     deletetMember(data.member_ID);

@@ -84,8 +84,9 @@ Matching.searchbyName = (name,result) =>{
 };
 
 
-Matching.getweightbyID = (user_id,result) =>{
-    db.query("SELECT * FROM weight WHERE user_id = ? ",user_id,(err,res)=>{
+Matching.getweightbyID = (member_ID,result) =>{
+    console.log('member_ID',member_ID)
+    db.query("SELECT * FROM weight WHERE member_ID = ?;SELECT * FROM factor",member_ID,(err,res)=>{
         if(err){
             console.log("error:",err);
             result(null,err);
