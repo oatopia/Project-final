@@ -40,6 +40,7 @@ function App() {
         <Route path="/Adminfactor" component={adminfactor} />
         <Route path="/addDorm" component={addDorm} />
         <Route path="/dormdata" component={dormdata} />
+        
       </Switch>
     </BrowserRouter>
   );

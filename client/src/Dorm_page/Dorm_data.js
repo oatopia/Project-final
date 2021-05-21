@@ -287,7 +287,7 @@ const Owner = () => {
               <div className="line-dorm-data"></div>
               <div className="block-detail">
                 <h2>ชื่อหอพัก</h2>
-                <h4 className="dorm-name-data">{dorm.dorm_Name}</h4>
+                <h4 id="dorm-name-data">{dorm.dorm_Name}</h4>
               </div>
 
               <div className="image-container">

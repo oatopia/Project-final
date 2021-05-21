@@ -17,6 +17,10 @@
 .box-input-price-data-detail{
   font-size: 20px;
 }
+#dorm-name-data{
+  font-size: 32px;
+  color: rgb(66, 66, 66);
+}
 
 .box-input-price-data-detail p{
   display: inline-block;
@@ -36,6 +40,7 @@
 
 .box-info span{
   font-weight: bold;
+  color: #18365e;
 }
 
 .line-dorm-data{
@@ -72,9 +77,6 @@
 
 }
 
-.table-dorm-data h3{
-  color: #18365e;
-}
 
 .table-dorm-data h4{
   color: rgb(29, 29, 29);
@@ -110,6 +112,8 @@
 
 .box-fac-data h3{
   color: #18365e;
+  font-size: 26px;
+  margin-bottom: -15px;
 }
 
 .table-contact-dorm-data td{
