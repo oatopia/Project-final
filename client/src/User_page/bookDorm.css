@@ -4,27 +4,15 @@
   font-size: 48px;
 }
 
-.bookdorm-box {
-  background-color: #8ac4d0;
-  width: 50%;
-  height: 150px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 10px;
-  color: white;
-  text-align: center;
-  font-size: 32px;
-  cursor: pointer;
-  border: none;
-}
 
-.bookdorm-box:hover{
-    background-color: #1655a7;
-}
 
 .book-icon{
   margin-top: 10px;
   margin-right: 10px;
   width:30px; 
   height:40px;
+}
+
+.navbar-container-bookdorm{
+  
 }

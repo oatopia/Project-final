@@ -89,7 +89,7 @@ function ResultMatch() {
 
   return (
     <div className="book-conatiner-bookDorm">
-      <div className='navbar-container-bookdorm'>
+      <div className='Navbar-shadow-box'>
         <NavbarMember />
       </div>
 
