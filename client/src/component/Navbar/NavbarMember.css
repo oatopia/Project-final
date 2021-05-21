@@ -73,6 +73,7 @@ img.profilelogo {
     justify-content: center;
     align-items: center;
     transition-duration: 0.3s;
+    padding: 10px;
 }
 
 .dropdown-btn-member p{

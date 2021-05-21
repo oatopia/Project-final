@@ -12,7 +12,7 @@ function Admin() {
   const [editAC, setEditAC] = useState("");
   const [editun, setEditUN] = useState("");
   const [editT, setEditT] = useState("");
-  const [state,setState] = useState(true)
+  const [state, setState] = useState(true)
 
 
   // const deleteAccount = (id) => {
@@ -34,7 +34,7 @@ function Admin() {
   //       return item.user_id == id ? {user_id:id,username:editun,type:editT} 
   //       : item ;
   //     }))
-      
+
   //   }).catch((error) => {
   //     console.log(error);
   //   });
@@ -52,55 +52,69 @@ function Admin() {
       });
   }, []);
 
-const Showmember = ()=>{
-  return(
-    <table>
-      <thead>
-      <tr>
-        <th>
-          username
-        </th>
-        <th>
-        </th>
-      </tr>
-      {member.map(data=>{
-        return(
-          <tr>
-            <td>
-              {data.username}
-            </td>
-          </tr>
-        )
-      })}
-      </thead>
-      </table>
-  )
-}
+  const Showmember = () => {
+    return (
+      <>
+        {member.map(data => {
+          return (
+            <div className='account-box'>
+              <div>
+                <h1>{data.username}</h1>
+              </div>
+              <div>
+              <img
+                  src={editicon}
+                  // onClick={() => {
+                  //   setEditAC(data.user_id);
+                  // }}
+                  className="icon-user"
+                ></img>
+                <img
+                  src={deleteicon}
+                  // onClick={() => {
+                  //   deleteAccount(data.user_id);
+                  // }}
+                  className="icon-user"
+                ></img>
+              </div>
+            </div>
+          )
+        })}
+        </>
+    )
+  }
 
-const Showowner = ()=>{
-  return(
-    <table>
-      <thead>
-      <tr>
-        <th>
-          username
-        </th>
-        <th>
-        </th>
-      </tr>
-      {owner.map(data=>{
-        return(
-          <tr>
-            <td>
-              {data.username}
-            </td>
-          </tr>
-        )
-      })}
-      </thead>
-      </table>
-  )
-}
+  const Showowner = () => {
+    return (
+      <>
+        {owner.map(data => {
+          return (
+            <div className='account-box'>
+              <div>
+                <h1>{data.username}</h1>
+              </div>
+              <div>
+              <img
+                  src={editicon}
+                  // onClick={() => {
+                  //   setEditAC(data.user_id);
+                  // }}
+                  className="icon-user"
+                ></img>
+                <img
+                  src={deleteicon}
+                  // onClick={() => {
+                  //   deleteAccount(data.user_id);
+                  // }}
+                  className="icon-user"
+                ></img>
+              </div>
+            </div>
+          )
+        })}
+      </>
+    )
+  }
 
 
 
@@ -109,17 +123,19 @@ const Showowner = ()=>{
     <div className="contnet-user-Admin">
       <NavbarAdmin></NavbarAdmin>
       <h1 className="h1-user-Admin">บัญชีผู้ใช้งาน</h1>
+
       <div className="content2-user-admin">
+
         <div className='head-text-admin'>
-          <h3 onClick={()=>{setState(true)}}>
+          <h3 onClick={() => { setState(true) }}>
             บัญชีผู้ใช้งานของสมาชิก
           </h3>
-          <h3 onClick={()=>{setState(false)}}>
-          บัญชีผู้ใช้งานของผู้ประกอบการ
+          <h3 onClick={() => { setState(false) }}>
+            บัญชีผู้ใช้งานของผู้ประกอบการ
           </h3>
         </div>
-        <div>
-          {  state == true ?  <Showmember/> : <Showowner/>}
+        <div className='content-account-admin'>
+          {state == true ? <Showmember /> : <Showowner />}
         </div>
         {/* {user.map((data) => {
           return (

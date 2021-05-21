@@ -72,9 +72,31 @@
 
 .content2-user-admin{
     color: #0475AD;
-    cursor: pointer;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .head-text-admin{
-    margin-left: 50px;
+}
+
+.content-account-admin{
+    width: 100%;
+}
+
+.content2-user-admin{
+    display: flex;
+    justify-content: center;
+}
+
+.account-box{
+    background-color: #d0e5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 10px;
 }
