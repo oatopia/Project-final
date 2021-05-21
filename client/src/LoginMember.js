@@ -51,7 +51,9 @@ const Loginmember = () => {
                         <hr />
                         <button className="buttonnew-member" type="submit">สร้างบัญชีใหม่</button>
                     </form>
-                    <img src={img} className="img" width="300" height="430"></img>
+                    <div className='image-container-loginmember'>
+                        <img src={img} className="img-loginmember"></img>
+                    </div>
                 </div>
             </div>
         </div>

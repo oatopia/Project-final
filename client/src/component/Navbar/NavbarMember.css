@@ -16,6 +16,12 @@ a {
   font-size: 26px;
   color: #1655a7;
   margin-right: 30px;
+  font-weight: bold;
+}
+
+.menu-p:hover{
+  color: #002a61;
+  transition-duration: 0.3s;
 }
 
 .NavMember-container2 {
