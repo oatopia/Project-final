@@ -493,7 +493,6 @@ const Owner = () => {
                       <tr className="heading-table">
                         <th>ประเภท</th>
                         <th>ราคาเช่ารายเดือน</th>
-                        <th>แก้ไขข้อมูล</th>
                       </tr>
                       {room.map((item, key) => {
                         return (
@@ -514,14 +513,6 @@ const Owner = () => {
                                 onChange={addroomPrice(key)}
                               ></input>
                               <p>บาทต่อเดือน</p>
-                            </td>
-                            <td>
-                              <p
-                                className="delete-btn-room-table-edit"
-                                onClick={deleteroom()}
-                              >
-                                ลบ
-                              </p>
                             </td>
                           </tr>
                         );
@@ -558,9 +549,6 @@ const Owner = () => {
                       })}
                     </thead>
                   </table>
-                  <button className="add-room-button" onClick={createTD}>
-                    เพิ่มประเภทห้อง
-                  </button>
                 </div>
 
                 <br />

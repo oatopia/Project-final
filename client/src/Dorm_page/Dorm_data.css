@@ -226,6 +226,7 @@ table.table-edit-dorm-data,.table-dorm-data td, .table-dorm-data tr{
 
 .box-fac-data li {
   color: rgb(75, 75, 75);
+  font-size: 20px;
 }
 .dormdata-container h2{
   margin-top: 15px;
