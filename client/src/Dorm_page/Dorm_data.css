@@ -34,6 +34,10 @@
   color: #1655a7;
 }
 
+.box-info span{
+  font-weight: bold;
+}
+
 .line-dorm-data{
   width: 98%;
   height: 1.5px;
@@ -53,7 +57,7 @@
 }
 .block-detail h4{
   display: inline-block;
-  font-size: 26px;
+  font-size: 20px;
   font-weight: normal;
   color: rgb(29, 29, 29);
 }
@@ -83,7 +87,7 @@
   color: #1655a7;
 }
 .detail-block h4{
-  font-size: 26px;
+  font-size: 20px;
   color: rgb(29, 29, 29);
   font-weight: normal;
 }

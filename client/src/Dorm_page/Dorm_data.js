@@ -332,7 +332,7 @@ const Owner = () => {
 
                 <div className="block-detail">
                   <h2>ที่อยู่</h2>
-                  <h4 className="text-dorm-content">{dorm.address}</h4>
+                  <h4>{dorm.address}</h4>
                 </div>
 
                 <div>
@@ -341,23 +341,23 @@ const Owner = () => {
                     <thead>
                       <tr>
                         <td>
-                          เงินมัดจำ/ประกัน
+                          <span>เงินมัดจำ/ประกัน</span>
                         </td>
                         <td>
-                            {dorm.deposit} บาท
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          ค่าส่วนกลาง
-                        </td>
-                        <td>
-                            {dorm.common_Fee} บาท
+                          {dorm.deposit} บาท
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          อัตราค่าน้ำ
+                          <span>ค่าส่วนกลาง</span>
+                        </td>
+                        <td>
+                          {dorm.common_Fee} บาท
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span>อัตราค่าน้ำ</span>
                         </td>
                         <td>
                           {dorm.water_Bill} บาทต่อยูนิต
@@ -365,10 +365,10 @@ const Owner = () => {
                       </tr>
                       <tr>
                         <td>
-                          อัตราค่าไฟ
+                          <span>อัตราค่าไฟ</span>
                         </td>
                         <td>
-                            {dorm.electric_Bill} บาทต่อยูนิต
+                          {dorm.electric_Bill} บาทต่อยูนิต
                         </td>
                       </tr>
                     </thead>
@@ -399,7 +399,7 @@ const Owner = () => {
                 </div>
                 <div className="detail-block">
                   <h2>รายละเอียดหอพัก</h2>
-                  <h4 className="text-dorm-content">{dorm.detail}</h4>
+                  <h4>{dorm.detail}</h4>
                 </div>
                 <h2 id="contact">ข้อมูลติดต่อ</h2>
                 <div className="box-2-inner-data">
@@ -408,23 +408,23 @@ const Owner = () => {
                       <thead>
                         <tr>
                           <td>
-                            ชื่อผู้ดูแลหอพัก
+                            <span>ชื่อผู้ดูแลหอพัก</span>
                           </td>
                           <td>
-                              {dorm.ad_Name}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            เบอร์ติดต่อ
-                          </td>
-                          <td>
-                              {dorm.contact_Number}
+                            {dorm.ad_Name}
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            อีเมล
+                            <span> เบอร์ติดต่อ</span>
+                          </td>
+                          <td>
+                            {dorm.contact_Number}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <span> อีเมล </span>
                           </td>
                           <td>
                             {dorm.e_Mail}
@@ -432,10 +432,10 @@ const Owner = () => {
                         </tr>
                         <tr>
                           <td>
-                            Line ID
+                            <span> Line ID </span>
                           </td>
                           <td>
-                              {dorm.line_ID}
+                            {dorm.line_ID}
                           </td>
                         </tr>
                       </thead>

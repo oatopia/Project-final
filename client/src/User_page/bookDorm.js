@@ -37,20 +37,6 @@ function ResultMatch() {
         console.log("Error from get Bookmark", error);
       });
   }, []);
-  //   const [search,setSearch] = useState("");
-
-  //   const searchFac = (e) => {
-  //     e.preventDefault();
-  //     console.log(search)
-  //     Axios.post('/api/match/searchDorm',{
-  //       Search:search
-  //     })
-  //     .then(Response => {
-  //         console.log(Response);
-  //     }).catch(error=>{
-  //         console.log(error);
-  //     })
-  //   }
 
   const handleonclick = (e,data) => {
     let stateinside = false;
@@ -109,30 +95,8 @@ function ResultMatch() {
   return (
     <div className="book-conatiner-bookDorm">
       <NavbarMember></NavbarMember>
+
       <div className="content-resultmatchpage">
-        {state.map((data, key) => {
-          var checkstate = false;
-          console.log("Index", key);
-          if (mark.length > 0) {
-            mark.map((item) => {
-              if (item.Dorm_ID == data.Dorm_ID) {
-                checkstate = true;
-                console.log("checkstate", checkstate);
-              }
-            });
-          }
-          return (
-            <div className="Dorm-block" key={key}>
-              <label>{data.Dorm_Name}</label>
-              <img
-                src={checkstate ? bookon : bookoff}
-                width="50px"
-                height="50px"
-                onClick={(e)=>{handleonclick(e,data)}}
-              ></img>
-            </div>
-          );
-        })}
       </div>
     </div>
   );
