@@ -115,7 +115,7 @@ Matching.updateweightbyID = (data,result) =>{
 
 Matching.getbookmarkbyID = (id,result) =>{
     console.log("user ID for getbook",id)
-    db.query("SELECT dorm_Name,(SELECT GROUP_CONCAT(image) FROM image_dorm WHERE image_dorm.dorm_ID = save.dorm_ID) AS Image,(SELECT GROUP_CONCAT(facility) FROM facilities_dorm WHERE facilities_dorm.dorm_ID = save.dorm_ID) AS ROOM FROM save JOIN dormitory ON dormitory.dorm_ID=save.dorm_ID  WHERE save.member_ID = ? ",id,(err,res)=>{
+    db.query("SELECT * FROM save JOIN dormitory ON dormitory.dorm_ID=save.dorm_ID  WHERE save.member_ID = ? ; SELECT * FROM image_dorm ; SELECT * FROM room ; SELECT * FROM facilities_dorm",id,(err,res)=>{
         if(err){
             console.log("error:",err);
             result(null,err);

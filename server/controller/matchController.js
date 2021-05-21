@@ -167,8 +167,22 @@ export const getBookmark = (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log("data from get bookmark: ",data)
-      res.send(data);
+      // console.log("data from get bookmark: ",data)
+      let payload = []
+      let arraydorm = data[0]
+      arraydorm.forEach(element => {
+        let getimg = data[1].filter(item => item.dorm_ID == element.dorm_ID)
+        let getroom = data[2].filter(item => item.dorm_ID == element.dorm_ID)
+        let getfacility = data[3].filter(item => item.dorm_ID == element.dorm_ID)
+       payload.push({
+            Image: getimg,
+            Room: getroom,
+            Facility: getfacility,
+            Dorm: element
+        })
+      })
+      console.log('Payload',payload)
+      res.send(payload);
     }
   });
 };
