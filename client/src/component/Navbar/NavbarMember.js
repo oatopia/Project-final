@@ -31,10 +31,10 @@ export default function Navbar() {
         onClick={gotohome}
       ></img>
       <div className="NavMember-container2">
-        <Link to="/">
+        <Link to="/member">
           <p className="menu-p">หน้าแรก</p>
         </Link>
-        <Link to="/login">
+        <Link to="/bookdorm">
           <p className="menu-p">รายการหอพักที่บันทึก</p>
         </Link>
         <DropdownButton id="dropdown-member-page" title={

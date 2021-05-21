@@ -7,52 +7,121 @@ import editicon from "../img/edit.png";
 
 function Admin() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/"
-  const [user, setUser] = useState([]);
+  const [member, setMember] = useState([]);
+  const [owner, setOwner] = useState([]);
   const [editAC, setEditAC] = useState("");
   const [editun, setEditUN] = useState("");
   const [editT, setEditT] = useState("");
+  const [state,setState] = useState(true)
 
-  const deleteAccount = (id) => {
-    console.log("ID:", id);
-    Axios.delete(url+`api/Admin/userDelete/${id}`).then((Response) => {
-      setUser(
-        user.filter((val) => {
-          return val.user_id != id;
-        })
-      );
-    });
-  };
 
-  const updateAccount = (id) => {
-    console.log("ID:", id);
-    Axios.put(url+`api/Admin/userUpdate/${id}`,{user_id: id, username: editun, type: editT}).then((Response) => {
-      setEditAC("");
-      setUser(user.map((item)=>{
-        return item.user_id == id ? {user_id:id,username:editun,type:editT} 
-        : item ;
-      }))
+  // const deleteAccount = (id) => {
+  //   console.log("ID:", id);
+  //   Axios.delete(`api/Admin/userDelete/${id}`).then((Response) => {
+  //     setUser(
+  //       user.filter((val) => {
+  //         return val.user_id != id;
+  //       })
+  //     );
+  //   });
+  // };
+
+  // const updateAccount = (id) => {
+  //   console.log("ID:", id);
+  //   Axios.put(url+`api/Admin/userUpdate/${id}`,{user_id: id, username: editun, type: editT}).then((Response) => {
+  //     setEditAC("");
+  //     setUser(user.map((item)=>{
+  //       return item.user_id == id ? {user_id:id,username:editun,type:editT} 
+  //       : item ;
+  //     }))
       
-    }).catch((error) => {
-      console.log(error);
-    });
-  };
+  //   }).catch((error) => {
+  //     console.log(error);
+  //   });
+  // };
 
   useEffect(() => {
-    Axios.get(url+"api/Admin/user", {})
+    Axios.get("api/Admin/user")
       .then((Response) => {
-        setUser(Response.data);
+        let data = Response.data
+        setMember(data[0])
+        setOwner(data[1])
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
+const Showmember = ()=>{
+  return(
+    <table>
+      <thead>
+      <tr>
+        <th>
+          username
+        </th>
+        <th>
+        </th>
+      </tr>
+      {member.map(data=>{
+        return(
+          <tr>
+            <td>
+              {data.username}
+            </td>
+          </tr>
+        )
+      })}
+      </thead>
+      </table>
+  )
+}
+
+const Showowner = ()=>{
+  return(
+    <table>
+      <thead>
+      <tr>
+        <th>
+          username
+        </th>
+        <th>
+        </th>
+      </tr>
+      {owner.map(data=>{
+        return(
+          <tr>
+            <td>
+              {data.username}
+            </td>
+          </tr>
+        )
+      })}
+      </thead>
+      </table>
+  )
+}
+
+
+
+
   return (
     <div className="contnet-user-Admin">
       <NavbarAdmin></NavbarAdmin>
       <h1 className="h1-user-Admin">บัญชีผู้ใช้งาน</h1>
       <div className="content2-user-admin">
-        {user.map((data) => {
+        <div className='head-text-admin'>
+          <h3 onClick={()=>{setState(true)}}>
+            บัญชีผู้ใช้งานของสมาชิก
+          </h3>
+          <h3 onClick={()=>{setState(false)}}>
+          บัญชีผู้ใช้งานของผู้ประกอบการ
+          </h3>
+        </div>
+        <div>
+          {  state == true ?  <Showmember/> : <Showowner/>}
+        </div>
+        {/* {user.map((data) => {
           return (
             <div className="user-box-Admin">
               <div className="edit-box">
@@ -111,7 +180,7 @@ function Admin() {
               </div>
             </div>
           );
-        })}
+        })} */}
       </div>
       <div className="clear-user-Admin"></div>
     </div>

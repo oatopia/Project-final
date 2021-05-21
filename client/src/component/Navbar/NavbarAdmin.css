@@ -7,9 +7,6 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.homehomelogo-Admin{
-
-}
 
 .profile-NavAdmin{
     background-color: #F1EDED;
@@ -34,8 +31,15 @@ img.profilelogo-Admin{
 }
 
 .NavAdmin-container2{
+    width: 40%;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    
 }
 
+.Admin-func{
+    font-size: 26px;
+    font-weight: bold;
+    color: #1655a7;
+}

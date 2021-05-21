@@ -1,7 +1,7 @@
 import db from '../util/database.js'
 const Admin = function(e){}
 Admin.getallUser = result =>{
-    db.query("SELECT * FROM userinformation ",(err,res)=>{
+    db.query("SELECT * FROM member ; SELECT * FROM owner ",(err,res)=>{
         if(err){
             console.log("error:",err);
             result(null,err);

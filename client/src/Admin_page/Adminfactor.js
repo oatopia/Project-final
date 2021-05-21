@@ -45,24 +45,29 @@ function Adminfactor() {
       });
   };
 
-  const comAdd = () => {
+  const ComAdd = () => {
     return (
       <div className="add-box">
-        <h2>เพิ่มปัจจัยในการตัดสินใจเลือกหอพัก</h2>
-        <input
-          type="text"
-          onChange={(e) => {
-            setAddfactor(e.target.value);
-          }}
-        ></input>
-        <input
-          type="file"
-          onChange={(e) => {
-            setImage(e.target.files[0]);
-            console.log(e.target.files[0]);
-          }}
-        ></input>
+        <div>
+          <input
+            className='text-factor-name'
+            type="text"
+            onChange={(e) => {
+              setAddfactor(e.target.value);
+            }}
+          ></input>
+          <input
+            type="file"
+            className='file-factor-image'
+            onChange={(e) => {
+              setImage(e.target.files[0]);
+              console.log(e.target.files[0]);
+            }}
+          ></input>
+        </div>
+
         <button
+        className='btn-save-factor'
           onClick={() => {
             saveFactor();
           }}
@@ -85,7 +90,7 @@ function Adminfactor() {
   };
 
   const updatebyId = (id) => {
-    
+
     const formData = new FormData();
     formData.append("EditImage", editimg);
     formData.append("EditName", editname);
@@ -94,15 +99,15 @@ function Adminfactor() {
         "content-type": "multipart/form-data",
       },
     };
-    Axios.put(`api/Admin/updateFactor/${id}`,formData,config)
-    .then((Response) => {
-      setFactor(
-      factor.map((item)=>{
-          return item.Id == id ? {Id:id,Factor_name:Response.data.Factor_name ,Image_factor:Response.data.Image_factor}
-          : item ;
-      }));
-      setTextinput("");
-    });
+    Axios.put(`api/Admin/updateFactor/${id}`, formData, config)
+      .then((Response) => {
+        setFactor(
+          factor.map((item) => {
+            return item.Id == id ? { Id: id, Factor_name: Response.data.Factor_name, Image_factor: Response.data.Image_factor }
+              : item;
+          }));
+        setTextinput("");
+      });
   };
 
   return (
@@ -118,7 +123,7 @@ function Adminfactor() {
         >
           เพิ่มปัจจัย
         </button>
-        {showadd ? comAdd() : null}
+        {showadd ? <ComAdd /> : null}
         {factor.map((data) => {
           return (
             <div className="factor-box-Admin">
@@ -141,9 +146,9 @@ function Adminfactor() {
 
                 {textinput == data.Id ? (
                   <div className="edit-mini-box">
-                    <input type="file" 
-                    className="edit-image"
-                    onChange={(e)=>{setEditimg(e.target.files[0])}}
+                    <input type="file"
+                      className="edit-image"
+                      onChange={(e) => { setEditimg(e.target.files[0]) }}
                     ></input>
                     <button
                       className="save-edit-button"

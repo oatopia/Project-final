@@ -1,8 +1,7 @@
 import { React, useEffect, useState } from "react";
-import "./resultmatch.css";
+import "./bookDorm.css";
 import NavbarMember from "../component/Navbar/NavbarMember.js";
 import Axios from "axios";
-import { useLocation } from "react-router";
 import bookon from "../img/bookon.png";
 import bookoff from "../img/bookoff.png";
 import Auth from "../service/authService.js";
@@ -12,25 +11,19 @@ function ResultMatch() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const currentUser = Auth.getCurrentUser();
   const [mark, setMark] = useState([]);
-  const [bookstate, setBookState] = useState([]);
+  const [checkdata,setCheckdata] = useState(false)
   useEffect(() => {
     Axios.post(
-      url+"/api/match/getBookmark",
-      { user_id: currentUser.user_id },
+      "/api/match/getBookmark",
+      { member_ID: currentUser.member_ID },
       { headers: authHeader() }
     )
       .then((Response) => {
         console.log("Book mark dorm: ", Response.data);
         let res = Response.data;
         if (res.length > 0) {
+          setCheckdata(true)
           setMark(res);
-          for (let i = 0; i < res.length; i++) {
-            setBookState([
-              ...bookstate,
-              { Dorm_ID: res[i].Dorm_ID, status: true },
-            ]);
-            console.log("data in bookstate:", bookstate);
-          }
         }
       })
       .catch((error) => {
@@ -94,9 +87,21 @@ function ResultMatch() {
 
   return (
     <div className="book-conatiner-bookDorm">
-      <NavbarMember></NavbarMember>
+      <div className='navbar-container-bookdorm'>
+      <NavbarMember/>
+      </div>
 
-      <div className="content-resultmatchpage">
+      <div>
+          <h1 className='h1-bookdorm'>รายการหอพักที่คุณสนใจ</h1>
+        
+        {mark.map(item=>{
+              return(
+                <div className='bookdorm-box'>
+                  <h1>{item.dorm_Name}</h1>
+                  <h1>{item.Image}</h1>
+                </div>
+              )
+          })}
       </div>
     </div>
   );

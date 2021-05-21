@@ -1,5 +1,5 @@
 .content-factor-Admin{
-    background-color: lightcoral;
+    
 }
 
 .content-factor-Admin h1{
@@ -10,7 +10,7 @@
 .factor-box-Admin{
     width: 80%;
     height: 100px;
-    background-color: deepskyblue;
+    background-color: #d0e5f5;
     margin-top: 10px;
     margin-left:auto ;
     margin-right: auto;
@@ -23,7 +23,7 @@
 
 .factor-info{
     margin-left: 30px;
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .content2-factor-Admin{
@@ -41,27 +41,34 @@
 }
 
 .add-factor-Admin{
-    width: 200px;
-    height: 100px;
-    background-color: darkorange;
+    /* width: 200px; */
+    /* height: 100px; */
+    margin-left: 50px;
+    padding: 20px;
+    background-color: #1655a7;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 28px;
 }
 
 .add-box{
     /* position: absolute; */
-    width: 70%;
+    width: 80%;
     height: 120px;
-    background-color: crimson;
-    /* left: 30px; */
-    /* top: 190px; */
+    background-color: #8ac4d0;
+    border-radius: 10px;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.add-box input{
-    width: 200px;
-}
+
 
 .factor-inner-box-Admin{
     display: flex;
@@ -90,4 +97,31 @@
 .edit-mini-box{
     display: flex;
     align-items: center;
+}
+.h1-factor-Admin{
+    margin-left: 50px;
+}
+
+.text-factor-name{
+    height: 50px;
+    width: 300px;
+    margin-right: 50px;
+    margin-left: 20px;
+    border-radius: 10px;
+    border: none;
+}
+
+.file-factor-image{
+    height: 30px;
+}
+
+.btn-save-factor{
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 24px;
+    color: white;
+    background-color: #1655a7;
+    margin-right: 10px;
+
 }

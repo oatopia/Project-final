@@ -1,5 +1,4 @@
 .contnet-user-Admin{
-    background-color: lightcoral;
 }
 
 .contnet-user-Admin h1{
@@ -65,4 +64,17 @@
 .edit-box{
     display: flex;
     align-items: center;
+}
+
+.h1-user-Admin{
+    margin-left: 50px;
+}
+
+.content2-user-admin{
+    color: #0475AD;
+    cursor: pointer;
+}
+
+.head-text-admin{
+    margin-left: 50px;
 }

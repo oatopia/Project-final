@@ -143,7 +143,7 @@ export const createBook = (req, res) => {
 };
 
 export const getBookmark = (req, res) => {
-  const id = req.body.user_id
+  const id = req.body.member_ID
   matchmodel.getbookmarkbyID(id,(err, data) => {
     if (err) {
       console.log(err);

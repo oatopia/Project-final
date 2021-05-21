@@ -15,7 +15,7 @@ import loginowner from "./LoginOwner.js";
 import member from "./User_page/member.js";
 import owner from "./Dorm_page/owner.js";
 import resultmatch from "./User_page/resultmatch.js";
-import book from "./User_page/bookDorm";
+import book from "./User_page/bookDorm.js";
 import searchvisitor from "./Visitor_page/visitorResult.js";
 import matchvisitor from "./Visitor_page/matchVisitor.js";
 import dormvisitor from "./Visitor_page/dormVisitor.js";
@@ -33,6 +33,7 @@ function App() {
         <Route exact path="/loginowner" component={loginowner} />
         <Route path="/member" component={member} />
         <Route path="/owner" component={owner} />
+        <Route path="/bookdorm" component={book} />
         <Route path="/resultmatch" component={resultmatch} />
         <Route path="/searchvisitor" component={searchvisitor} />
         <Route path="/matchvisitor" component={matchvisitor} />
