@@ -341,42 +341,34 @@ const Owner = () => {
                     <thead>
                       <tr>
                         <td>
-                          <h3>เงินมัดจำ/ประกัน</h3>
+                          เงินมัดจำ/ประกัน
                         </td>
                         <td>
-                          <h4 className="text-dorm-content">
                             {dorm.deposit} บาท
-                          </h4>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <h3>ค่าส่วนกลาง</h3>
+                          ค่าส่วนกลาง
                         </td>
                         <td>
-                          <h4 className="text-dorm-content">
                             {dorm.common_Fee} บาท
-                          </h4>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <h3>ค่าน้ำ</h3>
+                          อัตราค่าน้ำ
                         </td>
                         <td>
-                          <h4 className="text-dorm-content">
-                            {dorm.water_Bill} บาทต่อยูนิต
-                          </h4>
+                          {dorm.water_Bill} บาทต่อยูนิต
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <h3>ค่าไฟ</h3>
+                          อัตราค่าไฟ
                         </td>
                         <td>
-                          <h4 className="text-dorm-content">
                             {dorm.electric_Bill} บาทต่อยูนิต
-                          </h4>
                         </td>
                       </tr>
                     </thead>
@@ -412,44 +404,38 @@ const Owner = () => {
                 <h2 id="contact">ข้อมูลติดต่อ</h2>
                 <div className="box-2-inner-data">
                   <div>
-                    <table className="table-dorm-data">
+                    <table className="table-contact-dorm-data">
                       <thead>
                         <tr>
                           <td>
-                            <h3>ชื่อผู้ดูแลหอพัก</h3>
+                            ชื่อผู้ดูแลหอพัก
                           </td>
                           <td>
-                            <h4 className="text-dorm-content">
                               {dorm.ad_Name}
-                            </h4>
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            <h3>เบอร์ติดต่อ</h3>
+                            เบอร์ติดต่อ
                           </td>
                           <td>
-                            <h4 className="text-dorm-content">
                               {dorm.contact_Number}
-                            </h4>
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            <h3>อีเมล</h3>
+                            อีเมล
                           </td>
                           <td>
-                            <h4 className="text-dorm-content">{dorm.e_Mail}</h4>
+                            {dorm.e_Mail}
                           </td>
                         </tr>
                         <tr>
                           <td>
-                            <h3>Line ID</h3>
+                            Line ID
                           </td>
                           <td>
-                            <h4 className="text-dorm-content">
                               {dorm.line_ID}
-                            </h4>
                           </td>
                         </tr>
                       </thead>

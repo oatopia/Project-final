@@ -10,10 +10,7 @@ import authHeader from "../service/auth-header.js";
 
 function ResultMatch() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/"
-  var location = useLocation();
-  const state = location.state;
   const currentUser = Auth.getCurrentUser();
-  console.log("hi", state);
   const [mark, setMark] = useState([]);
   const [bookstate, setBookState] = useState([]);
   useEffect(() => {
@@ -110,7 +107,7 @@ function ResultMatch() {
   };
 
   return (
-    <div className="contain-match">
+    <div className="book-conatiner-bookDorm">
       <NavbarMember></NavbarMember>
       <div className="content-resultmatchpage">
         {state.map((data, key) => {
