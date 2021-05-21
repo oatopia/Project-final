@@ -35,11 +35,7 @@ export default function Match() {
       setFactorlist(Response.data)
     })
   }, []);
-  // console.log("Weight: ", weight)
-  // console.log("pair: ", pair)
-  // console.log("fac: ", factorlist)
-  // console.log("array: ",arrayfactorpair)
-  // choose factor--------------------------------------------
+  
   const addfactor = (index) => e => {
     if (weight.length > 0) {
       var check = false;

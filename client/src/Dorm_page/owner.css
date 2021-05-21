@@ -16,11 +16,13 @@
 .add-text {
   font-weight: normal;
   color: white;
+  margin-left: 10px;
+  white-space: nowrap;
 }
 
 .add-dorm {
   border: none;
-  width: 230px;
+  /* width: 230px; */
   height: 100px;
   margin-left: 30px;
   margin-top: 20px;
@@ -32,6 +34,8 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition-duration: 0.5s;
   cursor: pointer;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 
