@@ -39,7 +39,7 @@ export default function Navbar() {
         </Link>
         <DropdownButton id="dropdown-member-page" title={
           <div className='dropdown-btn-member'>
-            <img src={profilelogo} className="profilelogo" width="30" height="30"></img>
+            <img src={profilelogo} className="profilelogo" width="25" height="25"></img>
             <p>{currentUser.username}</p>
           </div>
         } >

@@ -49,23 +49,20 @@ a {
   position: relative;
 }
 
-img.profilelogo {
-  margin-right: 20spx;
-}
-
 #dropdown-member-page{
     background-color: #0e57c5;
     border: none;
     border-radius: 10px;
-    width: 100px;
+    /* width: 100px; */
     cursor: pointer;
     transition-duration: 0.3s;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #dropdown-member-page:hover{
     transition-duration: 0.3s;
     background-color: #002a61;
-    padding: 10px;
 }
 
 .dropdown-btn-member{
@@ -74,6 +71,7 @@ img.profilelogo {
     justify-content: center;
     align-items: center;
     transition-duration: 0.3s;
+    
 }
 
 .dropdown-btn-member p{
