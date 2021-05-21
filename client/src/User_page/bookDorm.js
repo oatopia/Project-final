@@ -109,7 +109,7 @@ function ResultMatch() {
                 <h1>หอพัก{data.Dorm.dorm_Name}</h1>
               </div>
               <div className="end-result-box">
-                <img className="book-icon" src={bookon} width='30px' height='40px'/>
+                <img className="book-icon" src={bookon}/>
                 <div className="line-end-box"></div>
                 <div className="price-box">
                   <p className="price-text-head"> ราคาเริ่มต้น</p>
