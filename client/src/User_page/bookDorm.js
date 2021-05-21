@@ -100,7 +100,7 @@ function ResultMatch() {
           return (
             <div className="dorm-container" key={key} onClick={() => {
               history.push({
-                pathname: "/dormvisitor",
+                pathname: "/dormdetail",
                 state: data,
               })
             }}>
