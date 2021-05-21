@@ -93,9 +93,9 @@ select {
   justify-content: space-around;
 }
 
-input {
+/* input {
   display: inline-block;
-}
+} */
 
 .chong-one {
   width: 250px;

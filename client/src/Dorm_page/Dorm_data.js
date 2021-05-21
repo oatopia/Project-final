@@ -45,7 +45,7 @@ const Owner = () => {
     "ร้านอาหาร",
     "ร้านสะดวกซื้อ",
     "ห้องอ่านหนังสือ",
-    "ฟิตเนท",
+    "ฟิตเนส",
     "ร้านเสริมสวย",
     "รถตู้รับส่ง",
   ];
@@ -337,7 +337,7 @@ const Owner = () => {
 
                 <div>
                   <h2>รายละเอียดค่าใช้จ่าย</h2>
-                  <table className="table-dorm-data">
+                  <table className="table-cost-dorm-data">
                     <thead>
                       <tr>
                         <td>
@@ -444,7 +444,7 @@ const Owner = () => {
                         </tr>
                         <tr>
                           <td>
-                            <h3>Lin ID</h3>
+                            <h3>Line ID</h3>
                           </td>
                           <td>
                             <h4 className="text-dorm-content">
