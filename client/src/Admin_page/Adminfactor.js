@@ -4,6 +4,7 @@ import Axios from "axios";
 import NavbarAdmin from "../component/Navbar/NavbarAdmin.js";
 import deleteicon from "../img/deleteicon.png";
 import editicon from "../img/edit.png";
+import addicon from "../img/plus 2.png";
 
 function Adminfactor() {
   // const url = "https://matching-dorm-tu-server.herokuapp.com/"
@@ -121,6 +122,7 @@ function Adminfactor() {
             setShowadd(true);
           }}
         >
+          <img className='add-btn-adminfac' src={addicon} width='30px' height='30px'></img>
           เพิ่มปัจจัย
         </button>
         {showadd ? <ComAdd /> : null}
@@ -128,7 +130,7 @@ function Adminfactor() {
           return (
             <div className="factor-box-Admin">
               <div className="factor-inner-box-Admin">
-                <label className="factor-info">{data.factor_ID}</label>
+                <h1 className="factor-info">{data.factor_ID}</h1>
                 {textinput == data.factor_ID ? (
                   <input
                     type="text"
@@ -139,9 +141,9 @@ function Adminfactor() {
                     }}
                   ></input>
                 ) : (
-                  <label className="factor-info" id="fname">
+                  <h1 className="factor-info" id="fname">
                     {data.factor_Name}
-                  </label>
+                  </h1>
                 )}
 
                 {textinput == data.Id ? (

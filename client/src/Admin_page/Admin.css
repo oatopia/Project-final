@@ -1,9 +1,9 @@
-.contnet-user-Admin{
-}
+
 
 .contnet-user-Admin h1{
     margin-top: 20px;
     color: #0475AD;
+    text-align: center;
 }
 
 .user-box-Admin{
@@ -34,13 +34,7 @@
     margin-bottom: 20px;
 }
 
-.clear-user-Admin{
-    clear: both;
-}
 
-.user-box-Admin img:active{
-    background-color: darkred;
-}
 
 .use-icon-box{
     display: flex;
@@ -66,17 +60,10 @@
     align-items: center;
 }
 
-.h1-user-Admin{
-    margin-left: 50px;
-}
-
 .content2-user-admin{
     color: #0475AD;
     padding-left: 30px;
     padding-right: 30px;
-}
-
-.head-text-admin{
 }
 
 .content-account-admin{
@@ -98,5 +85,22 @@
     margin-right: auto;
     margin-bottom: 20px;
     border-radius: 10px;
-    padding: 10px;
+    padding: 10px 10px 10px 20px;
+}
+
+.h3-text-admin{
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 26px;
+    white-space: nowrap;
+}
+
+.icon-username{
+    display: flex;
+    align-items: center;
+}
+
+.icon-username img{
+    margin-right: 20px;
 }

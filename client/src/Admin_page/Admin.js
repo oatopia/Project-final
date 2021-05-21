@@ -4,6 +4,7 @@ import Axios from "axios";
 import NavbarAdmin from "../component/Navbar/NavbarAdmin.js";
 import deleteicon from "../img/deleteicon.png";
 import editicon from "../img/edit.png";
+import user from "../img/user 2.png";
 
 function Admin() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/"
@@ -15,16 +16,27 @@ function Admin() {
   const [state, setState] = useState(true)
 
 
-  // const deleteAccount = (id) => {
-  //   console.log("ID:", id);
-  //   Axios.delete(`api/Admin/userDelete/${id}`).then((Response) => {
-  //     setUser(
-  //       user.filter((val) => {
-  //         return val.user_id != id;
-  //       })
-  //     );
-  //   });
-  // };
+  const deletetMember = (id) => {
+    console.log("ID:", id);
+    Axios.delete(`api/Admin/userDelete/${id}`).then((Response) => {
+      setMember(
+        member.filter((val) => {
+          return val.member_ID != id;
+        })
+      );
+    });
+  };
+
+  const deleteOwner = (id) => {
+    console.log("ID:", id);
+    Axios.delete(`api/Admin/userDelete/${id}`).then((Response) => {
+      setMember(
+        member.filter((val) => {
+          return val.member_ID != id;
+        })
+      );
+    });
+  };
 
   // const updateAccount = (id) => {
   //   console.log("ID:", id);
@@ -58,11 +70,12 @@ function Admin() {
         {member.map(data => {
           return (
             <div className='account-box'>
-              <div>
+              <div className='icon-username'>
+                <img src={user} width='40px' height='40px'/>
                 <h1>{data.username}</h1>
               </div>
-              <div>
-              <img
+              <div >
+                <img
                   src={editicon}
                   // onClick={() => {
                   //   setEditAC(data.user_id);
@@ -71,16 +84,16 @@ function Admin() {
                 ></img>
                 <img
                   src={deleteicon}
-                  // onClick={() => {
-                  //   deleteAccount(data.user_id);
-                  // }}
+                  onClick={() => {
+                    deletetMember(data.member_ID);
+                  }}
                   className="icon-user"
                 ></img>
               </div>
             </div>
           )
         })}
-        </>
+      </>
     )
   }
 
@@ -90,11 +103,12 @@ function Admin() {
         {owner.map(data => {
           return (
             <div className='account-box'>
-              <div>
+              <div className='icon-username'>
+              <img src={user} width='40px' height='40px'/>
                 <h1>{data.username}</h1>
               </div>
               <div>
-              <img
+                <img
                   src={editicon}
                   // onClick={() => {
                   //   setEditAC(data.user_id);
@@ -103,9 +117,9 @@ function Admin() {
                 ></img>
                 <img
                   src={deleteicon}
-                  // onClick={() => {
-                  //   deleteAccount(data.user_id);
-                  // }}
+                  onClick={() => {
+                    deleteOwner(data.owner_ID);
+                  }}
                   className="icon-user"
                 ></img>
               </div>
@@ -122,16 +136,16 @@ function Admin() {
   return (
     <div className="contnet-user-Admin">
       <NavbarAdmin></NavbarAdmin>
-      <h1 className="h1-user-Admin">บัญชีผู้ใช้งาน</h1>
+      <h1 className="h1-user-Admin">บัญชีผู้ใช้งานทั้งหมด</h1>
 
       <div className="content2-user-admin">
 
         <div className='head-text-admin'>
-          <h3 onClick={() => { setState(true) }}>
-            บัญชีผู้ใช้งานของสมาชิก
+          <h3 className='h3-text-admin' onClick={() => { setState(true) }} style={state == true ? { border: '2px solid #28527a'} : { color: '#0475AD' }}>
+            สมาชิก
           </h3>
-          <h3 onClick={() => { setState(false) }}>
-            บัญชีผู้ใช้งานของผู้ประกอบการ
+          <h3 className='h3-text-admin' onClick={() => { setState(false) }} style={state == false ? { border: '2px solid #28527a' } : { color: '#0475AD' }}>
+            ผู้ประกอบการ
           </h3>
         </div>
         <div className='content-account-admin'>
