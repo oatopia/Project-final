@@ -37,7 +37,7 @@ export default function Match() {
         console.log("Respone from get weight", Response.data);
         if (Response.data.length > 0) {
           console.log("Get!!!!");
-          console.log("Response ",Response.data);
+          console.log("Response ", Response.data);
           setWeight(Response.data[0])
           setFactorlist(Response.data[1])
           setPair(Response.data[2])
@@ -52,7 +52,7 @@ export default function Match() {
           //     })
           //     number++
           //   }
-    
+
           // }
           // setGETResponse(true);
           // setState(true);
@@ -206,9 +206,9 @@ export default function Match() {
                 type="radio"
                 // id="radio-1"
                 name={index}
-                // onChange={addImage(index)}
-                // checked
-                />
+              // onChange={addImage(index)}
+              // checked
+              />
               <img
                 value={factorlist[j].image_Factor}
                 src={"images/" + factorlist[j].image_Factor}
@@ -216,12 +216,12 @@ export default function Match() {
                 height="70"
               ></img>
               <input
-              // checked
+                // checked
                 // value={factorlist[j].Id}
                 type="radio"
                 // id="radio-2"
                 name={index}
-                // onChange={addImage(index)}
+              // onChange={addImage(index)}
               />
 
             </div>
@@ -426,7 +426,7 @@ export default function Match() {
       } else {
         setWeight([
           ...weight,
-          { factor_ID: "", weight: e.target.value, index:index },
+          { factor_ID: "", weight: e.target.value, index: index },
         ]);
         console.log(weight);
       }
@@ -483,80 +483,89 @@ export default function Match() {
       });
   };
 
-  
-  let obj = pair.map(item=>{return item})
-  
-  
-  
-  const Showpair = ()=>{
-    return(
-    <div className="match-block-container">
-      <h1 className="head-h1-match">กรุณาทำแบบสอบถามเบื้องต้นเพื่อประเมินความสนใจของคุณ</h1>
-      <div className="showfactor-right-box">
-        <h2>ความหมายของปัจจัยในการตัดสินใจเลือกหอพัก</h2>
-        {factorlist.map((data, key) => {
-          return (
-            <div key={key} className="detail-factor-visitor">
-              <img
-                src={"images/" + data.image_Factor}
-                width="50"
-                height="50"
-              ></img>
-              <h3>{data.factor_Title} :</h3>
-              <p className="Fn-visitor">{data.factor_Name}</p>
+
+
+
+
+
+  const Showpair = () => {
+
+    let paring = pair.map((obj,key) => {
+      return (
+        <div>
+          <div id="contain-match-display" >
+            <label className='radio-container'>
+              <input id='radio-btn1' type='radio' defaultChecked={isSelect(key, obj.factor_ID1)} name={obj.index} value={obj.factor_ID1} onChange={addfactor(key)} />
+              <div className="box-match" id="box-match-1" >
+                <img
+                  className="img-match-visitor"
+                  src={"images/" + obj.image_Factor1}
+                  width="140px"
+                  height="140px"
+                ></img>
+                <h4>{obj.factor_Title1}</h4>
+              </div>
+            </label>
+
+            <label className='radio-container' >
+              <input type='radio' id='radio-btn' defaultChecked={isSelect(key, obj.factor_ID2)} name={obj.index} value={obj.factor_ID2} onChange={addfactor(key)} />
+              <div className="box-match" id="box-match-2" >
+                <img
+                  className="img-match-visitor"
+                  src={"images/" + obj.image_Factor2}
+                  width="140px"
+                  height="140px"
+                ></img>
+                <h4>{obj.factor_Title2}</h4>
+              </div>
+            </label>
+
+          </div>
+          <div className="range-weight-container">
+            <h2 className="head-h2-match">คุณคิดว่าปัจจัยที่คุณเลือกมีความสำคัญกว่าอีกปัจจัยเท่าใด</h2>
+            <div className="input-range-container">
+              <p>เท่ากัน</p>
+              <input type="range" defaultValue={isWeight(key)} className="input-range-match" min="1" max="9" onChange={addWeight(key)} />
+              <p>มากที่สุด</p>
             </div>
-          );
-        })}
-      </div>
-      <div className="containermatch2-visitor">
-        <h2 className="head-h2-match">คุณคิดว่าปัจจัยในด้านใดจำเป็นต่อตัวคุณมากที่สุด</h2>
-      </div>
-      <div id="contain-match-display" >
-        <label className='radio-container'>
-          <input id='radio-btn1' type='radio' defaultChecked={isSelect(count, obj[count].factor_ID1)} name={obj[count].index} value={obj[count].factor_ID1} onChange={addfactor(count)} />
-          <div className="box-match" id="box-match-1" >
-            <img
-              className="img-match-visitor"
-              src={"images/" + obj[count].image_Factor1}
-              width="140px"
-              height="140px"
-            ></img>
-            <h4>{obj[count].factor_Title1}</h4>
           </div>
-        </label>
-
-        <label className='radio-container' >
-          <input type='radio' id='radio-btn' defaultChecked={isSelect(count, obj[count].factor_ID2)} name={obj[count].index} value={obj[count].factor_ID2} onChange={addfactor(count)} />
-          <div className="box-match" id="box-match-2" >
-            <img
-              className="img-match-visitor"
-              src={"images/" + obj[count].image_Factor2}
-              width="140px"
-              height="140px"
-            ></img>
-            <h4>{obj[count].factor_Title2}</h4>
-          </div>
-        </label>
-
-      </div>
-      <div className="range-weight-container">
-        <h2 className="head-h2-match">คุณคิดว่าปัจจัยที่คุณเลือกมีความสำคัญกว่าอีกปัจจัยเท่าใด</h2>
-        <div className="input-range-container">
-          <p>เท่ากัน</p>
-          <input type="range" defaultValue={isWeight(count)} className="input-range-match" min="1" max="9" onChange={addWeight(count)} />
-          <p>มากที่สุด</p>
         </div>
+      )
+    })
+
+    return (
+      <div className="match-block-container">
+        <h1 className="head-h1-match">กรุณาทำแบบสอบถามเบื้องต้นเพื่อประเมินความสนใจของคุณ</h1>
+        <div className="showfactor-right-box">
+          <h2>ความหมายของปัจจัยในการตัดสินใจเลือกหอพัก</h2>
+          {factorlist.map((data, key) => {
+            return (
+              <div key={key} className="detail-factor-visitor">
+                <img
+                  src={"images/" + data.image_Factor}
+                  width="50"
+                  height="50"
+                ></img>
+                <h3>{data.factor_Title} :</h3>
+                <p className="Fn-visitor">{data.factor_Name}</p>
+              </div>
+            );
+          })}
+        </div>
+        <div className="containermatch2-visitor">
+          <h2 className="head-h2-match">คุณคิดว่าปัจจัยในด้านใดจำเป็นต่อตัวคุณมากที่สุด</h2>
+        </div>
+          {paring[count]}
+        <div className="button-match-container">
+          {count != 0 ? <button className="button-back" onClick={(e) => {
+            setCount(count - 1)
+          }}>ย้อนกลับ</button> : <></>}
+          {count != pair.length - 1 ? <button className="button-next" onClick={(e) => {
+            setCount(count + 1)
+          }}>ถัดไป</button> : <button className='btn-cal' >แสดงผลลัพธ์</button>}
+        </div>
+        <div className="clear"></div>
       </div>
-      <div className="button-match-container">
-        {count != 0 ? <button className="button-back" onClick={(e) => {
-          setCount(count - 1)
-        }}>ย้อนกลับ</button> : <></>}
-        {count != pair.length - 1 ? <button className="button-next" onClick={(e) => {
-          setCount(count + 1)
-        }}>ถัดไป</button> : <button className='btn-cal' >แสดงผลลัพธ์</button>}
-      </div>
-      <div className="clear"></div>
-    </div>
     )
   }
 
@@ -602,17 +611,12 @@ export default function Match() {
       <div className="container-match-visitor">
         <div className="container-inner-match-visitor">
           <h1 className="head-match-dorm">จับคู่หอพัก</h1>
-          {pair.map(item=>{
-            return(
-              <h1>{item.factor_Title1}</h1>
-            )
-          })}
-          {/* {statecal == false ? <Showpair/> : <p>NOOOOOO</p>} */}
+          {statecal == false ? <Showpair/> : <p>NOOOOOO</p>}
         </div>
       </div>
     </div>
 
-    
+
     // <div className='color-background-member'>
     //   <div className="containermatch">
     //     <h1 id="header2">จับคู่หอพัก</h1>
