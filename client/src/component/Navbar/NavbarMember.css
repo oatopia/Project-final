@@ -65,6 +65,7 @@ img.profilelogo {
 #dropdown-member-page:hover{
     transition-duration: 0.3s;
     background-color: #002a61;
+    padding: 10px;
 }
 
 .dropdown-btn-member{
@@ -73,7 +74,6 @@ img.profilelogo {
     justify-content: center;
     align-items: center;
     transition-duration: 0.3s;
-    padding: 10px;
 }
 
 .dropdown-btn-member p{
