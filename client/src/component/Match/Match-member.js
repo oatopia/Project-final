@@ -18,6 +18,7 @@ export default function Match() {
   const [count, setCount] = useState(0);
   const [statecal, setStatecal] = useState(false)
   const [priority, setPriority] = useState([])
+  const [checkweight, setCheckweight] = useState(false)
 
   useEffect(() => {
     // Axios.get(url + "api/match/getfactor", { headers: authHeader() })
@@ -38,28 +39,16 @@ export default function Match() {
         if (Response.data.length > 0) {
           console.log("Get!!!!");
           console.log("Response ", Response.data);
+          if (Response.data[0].length > 0) {
+            setCheckweight(true)
+          } else {
+            setCheckweight(false)
+          }
           setWeight(Response.data[0])
           setFactorlist(Response.data[1])
           setPair(Response.data[2])
-          // let data = Response.data[1]
-          // for (let i = 0; i < data.length; i++) {
-          //   for (let j = i + 1; j < data.length; j++) {
-          //     pair.push({
-          //       index: number, first: data[i].factor_ID, second: data[j].factor_ID
-          //       , image1: data[i].image_Factor, image2: data[j].image_Factor
-          //       , title1: data[i].factor_Title, title2: data[j].factor_Title
-          //       , name1: data[i].factor_Name, name2: data[j].factor_Name
-          //     })
-          //     number++
-          //   }
-
-          // }
-          // setGETResponse(true);
-          // setState(true);
         } else {
           console.log("not get!!!");
-          // setGETResponse(false);
-          // setState(false);
         }
       })
       .catch((err) => {
@@ -379,7 +368,7 @@ export default function Match() {
       var check = false;
       var INDEX = 0;
       for (let i = 0; i < weight.length; i++) {
-        if (weight[i].index == index) {
+        if (weight[i].index_Check == index) {
           check = true;
           INDEX = i;
         }
@@ -387,19 +376,18 @@ export default function Match() {
       if (check == true) {
         const newWeight = [...weight];
         console.log("check true comparator: ", newWeight);
-        newWeight[INDEX].factor_ID = e.target.value;
+        newWeight[INDEX].factor_ID = parseInt(e.target.value);
         setWeight(newWeight);
       } else {
         setWeight([
           ...weight,
-          { factor_ID: e.target.value, weight: 1, index: index },
+          { factor_ID: parseInt(e.target.value), weight: 1, index_Check: index },
         ]);
-        // setStatepair([...statepair,{e.target.value}])
         console.log(weight);
       }
     } else {
       setWeight([
-        { factor_ID: e.target.value, weight: 1, index: index },
+        { factor_ID: parseInt(e.target.value), weight: 1, index_Check: index },
       ]);
       console.log(weight);
     }
@@ -412,7 +400,7 @@ export default function Match() {
       var INDEX = 0;
 
       for (let i = 0; i < weight.length; i++) {
-        if (weight[i].index == index) {
+        if (weight[i].index_Check == index) {
           check = true;
           INDEX = i;
         }
@@ -421,18 +409,18 @@ export default function Match() {
       if (check == true) {
         const newWeight = [...weight];
         console.log("check true weight: ", newWeight);
-        newWeight[INDEX].weight = e.target.value;
+        newWeight[INDEX].weight = parseInt(e.target.value);
         setWeight(newWeight);
       } else {
         setWeight([
           ...weight,
-          { factor_ID: "", weight: e.target.value, index: index },
+          { factor_ID: null, weight: parseInt(e.target.value), index_Check: index },
         ]);
         console.log(weight);
       }
     } else {
       setWeight([
-        { factor_ID: "", weight: e.target.value, index: index },
+        { factor_ID: null, weight: parseInt(e.target.value), index_Check: index },
       ]);
     }
   };
@@ -441,7 +429,7 @@ export default function Match() {
   const isSelect = (number, factor) => {
     let checkstate = false
     for (let i = 0; i < weight.length; i++) {
-      if (weight[i].index == number) {
+      if (weight[i].index_Check == number) {
         if (weight[i].factor_ID == factor) {
           checkstate = true
           break
@@ -459,7 +447,7 @@ export default function Match() {
   const isWeight = (number) => {
     let value = 1;
     for (let i = 0; i < weight.length; i++) {
-      if (weight[i].index == number) {
+      if (weight[i].index_Check == number) {
         value = weight[i].weight
       }
     }
@@ -468,20 +456,74 @@ export default function Match() {
 
 
 
+  const calPriority = (e) => {
 
-  const matchFac = () => {
-    Axios.post(url + "api/match/matchDorm", weight, { headers: authHeader() })
+    if (checkweight == true) {
+      const payload = {
+        member_ID: currentUser.member_ID,
+        data: weight
+      };
+      Axios.put("api/match/editWeight", payload, { headers: authHeader() })
+      Axios.post("api/match/calPriority", weight, { headers: authHeader() })
       .then((Response) => {
-        console.log(Response.data);
-        history.push({
-          pathname: "/resultmatch",
-          state: Response.data,
-        });
+        let value = Response.data
+        console.log("calPriority value",value)
+        for (let i = 0; i < value.length; i++) {
+          setPriority(prev => [...prev, { factor: factorlist[i], value: value[i] }])
+        }
+        setStatecal(true)
       })
       .catch((error) => {
         console.log(error);
       });
-  };
+
+    } else {
+
+      const arrayweight = [];
+      for (let i = 0; i < weight.length; i++) {
+        weight.map((data) => {
+          if (data.index_Check == i) {
+            arrayweight.push(data);
+          }
+        });
+      }
+      console.log("save weight: ", arrayweight);
+      const payload = {
+        member_ID: currentUser.member_ID,
+        data: arrayweight,
+      };
+      Axios.post("api/match/createweight", payload, { headers: authHeader() })
+      Axios.post("api/match/calPriority", weight, { headers: authHeader() })
+      .then((Response) => {
+        let value = Response.data
+        console.log("calPriority value",value)
+        for (let i = 0; i < value.length; i++) {
+          setPriority(prev => [...prev, { factor: factorlist[i], value: value[i] }])
+        }
+        setStatecal(true)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+    
+  }
+
+
+
+  const matchFac = () => {
+      Axios.post("api/match/matchDorm", weight, { headers: authHeader() })
+        .then((Response) => {
+          console.log(Response.data);
+          history.push({
+            pathname: "/resultmatch",
+            state: Response.data,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  }
 
 
 
@@ -490,7 +532,7 @@ export default function Match() {
 
   const Showpair = () => {
 
-    let paring = pair.map((obj,key) => {
+    let paring = pair.map((obj, key) => {
       return (
         <div>
           <div id="contain-match-display" >
@@ -555,21 +597,53 @@ export default function Match() {
         <div className="containermatch2-visitor">
           <h2 className="head-h2-match">คุณคิดว่าปัจจัยในด้านใดจำเป็นต่อตัวคุณมากที่สุด</h2>
         </div>
-          {paring[count]}
+        {paring[count]}
         <div className="button-match-container">
           {count != 0 ? <button className="button-back" onClick={(e) => {
             setCount(count - 1)
           }}>ย้อนกลับ</button> : <></>}
           {count != pair.length - 1 ? <button className="button-next" onClick={(e) => {
             setCount(count + 1)
-          }}>ถัดไป</button> : <button className='btn-cal' >แสดงผลลัพธ์</button>}
+          }}>ถัดไป</button> : <button className='btn-cal' onClick={calPriority} >แสดงผลลัพธ์</button>}
         </div>
         <div className="clear"></div>
       </div>
     )
   }
 
+  const Showpriority = () => {
+    let value = [...priority]
+    value.sort((a, b,) => b.value - a.value)
+    console.log("value in showpriority ", value)
+    return (
+      <div className="result-cal-container">
+        <h1 className='result-cal-priority-label'>ผลการวิเคราะห์คุณลักษณะส่วนบุคคลของคุณ</h1>
+        <div className='result-cal-priority-container'>
+          <table className='table-cal-priority'>
+            <thead>
+            {value.map((item,key) => {
+              return (
+                <tr key={key}>
+                  <td>
+                    <h3 className='result-text'> คุณให้ความสำคัญกับ <span className="factor-result-cal">{item.factor.factor_Title}</span> </h3>
+                  </td>
+                  <td>
+                    <h3 className='factor-result-cal'>{Math.round(parseInt(item.value * 100))}%</h3>
+                  </td>
+                  <td>
+                    <img className="icon-factor-result" src={"images/" + item.factor.image_Factor} />
+                  </td>
+                </tr>
 
+              )
+            })}
+            </thead>
+          </table>
+        </div>
+        <button className="btn-match-dorm" onClick={matchFac}>จับคู่หอพัก</button>
+      </div>
+    )
+  }
 
 
   // const Showresult = () => {
@@ -611,7 +685,7 @@ export default function Match() {
       <div className="container-match-visitor">
         <div className="container-inner-match-visitor">
           <h1 className="head-match-dorm">จับคู่หอพัก</h1>
-          {statecal == false ? <Showpair/> : <p>NOOOOOO</p>}
+          {statecal == false ? <Showpair /> : <Showpriority/>}
         </div>
       </div>
     </div>

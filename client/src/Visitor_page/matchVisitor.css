@@ -7,18 +7,20 @@
     margin-right: auto;
     border-radius: 10px;
     box-shadow: 4px 4px 4px 0px  rgba(0, 0, 0, 0.2);
+    border: 2px solid #d0e5f5;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    transition-duration: 0.5s; 
 }
 .Navbar-shadow-box{
     box-shadow: 0px 4px 6px 0px  rgba(0, 0, 0, 0.2);
 }
 
 .dorm-container:hover{
-    border: 2px solid #0050b9;
-    /* transition-duration: 1s; */
+    border: 2px solid #0050b9; 
+    transition-duration: 0.5s; 
 }
 
 .dorm-container h1{

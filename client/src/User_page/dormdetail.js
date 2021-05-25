@@ -1,8 +1,12 @@
 import { React, useEffect, useState } from 'react';
 import Navbar from '../component/Navbar/NavbarMember.js';
+import './dormdetail.css'
 import { useHistory, useLocation } from 'react-router';
-
-
+import Axios from "axios";
+import bookon from "../img/bookon.png";
+import bookoff from "../img/bookoff.png";
+import Auth from "../service/authService.js";
+import authHeader from "../service/auth-header.js";
 
 function DormVisitor() {
   const history = useHistory();
@@ -10,6 +14,87 @@ function DormVisitor() {
   let location = useLocation();
   let state = location.state;
   console.log("sate match:", state);
+  const [bookmark,setBookmark] = useState({}) 
+  const currentUser = Auth.getCurrentUser();
+  useEffect(()=>{
+    let payload = {
+      member_ID: currentUser.member_ID,
+      dorm_ID: state.Dorm.dorm_ID
+    }
+    Axios.post(
+      "api/match/checkbookmark",payload,
+      { headers: authHeader() }
+    ).then((Response) => {
+        if(Response.data == ""){
+          console.log("This dorm has not bookmark!")
+        }else{
+          console.log("This dorm has bookmark!")
+          setBookmark(Response.data)
+        }
+      })
+      .catch((error) => {
+        console.log("Error from get dorm", error);
+      });
+  },[])
+
+
+  const checkBook = (dormid) =>{
+    let check = false
+    if (bookmark.dorm_ID == dormid) {
+      check = true;
+      
+    }
+    return check
+  }
+
+  const handleonclick = (dormid)=>(e) => {
+    let stateinside = false;
+    let saveid = 0;
+    if (bookmark.dorm_ID == dormid) {
+        stateinside = true;
+        saveid = bookmark.save_ID;
+      }
+    if (stateinside == true) {
+      e.target.setAttribute("src", bookoff)
+      let id = saveid;
+      Axios.delete(`/api/match/deletebook/${id}`, {
+        headers: authHeader(),
+      })
+        .then((Response) => {
+          console.log("data from delete Book mark dorm: ", Response.data)
+          setBookmark(
+            bookmark.filter((item) => {
+              return item.save_ID != id
+            })
+          )
+        })
+        .catch((error) => {
+          console.log("Error from save bookmark", error)
+        })
+
+    } else {
+      e.target.setAttribute("src", bookon);
+      const payload = {
+        member_ID: currentUser.member_ID,
+        dorm_ID: dormid,
+      };
+      Axios.post("api/match/createbook", payload, {
+        headers: authHeader(),
+      })
+        .then((Response) => {
+          console.log("Book mark dorm: ", Response.data);
+          setBookmark(
+            {
+              member_ID: currentUser.member_ID,
+              dorm_ID: dormid,
+              save_ID: Response.data.insertId
+            });
+        })
+        .catch((error) => {
+          console.log("Error from save bookmark", error);
+        });
+    }
+  };
 
   return (
     <div className="dormVisitor-container">
@@ -19,6 +104,7 @@ function DormVisitor() {
       <div className="dormVisitor-block">
         <div className="dorm-data-container">
           <label className="name-dormVisitor">หอพัก{state.Dorm.dorm_Name}</label>
+          <img className="book-icon book-icon-in-detail-page" src={checkBook(state.Dorm.dorm_ID) == true ? bookon : bookoff} onClick={handleonclick(state.Dorm.dorm_ID)}/>
           <div className="image-dormVisitor-container">
             {state.Image.map(img => {
               return <img className='img-box-dormVisitor' src={"img_Dorm/" + img.image}></img>

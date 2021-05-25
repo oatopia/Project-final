@@ -37,7 +37,7 @@ export const calmatrix = (jsondata) => {
         matrix[i][j] = 1;
       } else {
         if (j > i) {
-          let id = jsondata[index].comparator - 1;
+          let id = jsondata[index].factor_ID - 1;
           if (i == id) {
             matrix[i][j] = parseInt(jsondata[index].weight);
 

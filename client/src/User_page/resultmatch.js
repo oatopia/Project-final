@@ -2,143 +2,141 @@ import { React, useEffect, useState } from "react";
 import "./resultmatch.css";
 import NavbarMember from "../component/Navbar/NavbarMember.js";
 import Axios from "axios";
-import { useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import bookon from "../img/bookon.png";
 import bookoff from "../img/bookoff.png";
 import Auth from "../service/authService.js";
 import authHeader from "../service/auth-header.js";
 
 function ResultMatch() {
+  const history = useHistory()
   const url = "https://matching-dorm-tu-server.herokuapp.com/"
   var location = useLocation();
   const state = location.state;
   const currentUser = Auth.getCurrentUser();
-  console.log("hi", state);
-  const [mark, setMark] = useState([]);
   const [bookstate, setBookState] = useState([]);
+  const [dorm,setDorm] = useState([])
+  const [bookmark,setBookmark] = useState([])
   useEffect(() => {
+    let payload = {
+      member_ID: currentUser.member_ID , 
+      Dorm:state
+    }
     Axios.post(
-      url+"/api/match/getBookmark",
-      { user_id: currentUser.user_id },
+      "api/match/getdorm",payload,
       { headers: authHeader() }
-    )
-      .then((Response) => {
-        console.log("Book mark dorm: ", Response.data);
-        let res = Response.data;
-        if (res.length > 0) {
-          setMark(res);
-          for (let i = 0; i < res.length; i++) {
-            setBookState([
-              ...bookstate,
-              { Dorm_ID: res[i].Dorm_ID, status: true },
-            ]);
-            console.log("data in bookstate:", bookstate);
-          }
+    ).then((Response) => {
+        if(Response.data.Dormlist.length > 0){
+          console.log('Response from get Dorm',Response.data)
+          setDorm(Response.data.Dormlist)
+          setBookmark(Response.data.Bookmark)
         }
       })
       .catch((error) => {
-        console.log("Error from get Bookmark", error);
+        console.log("Error from get dorm", error);
       });
   }, []);
-  //   const [search,setSearch] = useState("");
 
-  //   const searchFac = (e) => {
-  //     e.preventDefault();
-  //     console.log(search)
-  //     Axios.post('/api/match/searchDorm',{
-  //       Search:search
-  //     })
-  //     .then(Response => {
-  //         console.log(Response);
-  //     }).catch(error=>{
-  //         console.log(error);
-  //     })
-  //   }
-
-  const handleonclick = (e,data) => {
+  const handleonclick = (dormid)=>(e) => {
+    e.stopPropagation()
     let stateinside = false;
-    let mid = 0;
-    mark.map((item) => {
-      if (item.Dorm_ID == data.Dorm_ID) {
+    let saveid = 0;
+    bookmark.map((item) => {
+      if (item.dorm_ID == dormid) {
         stateinside = true;
-        mid = item.M_ID;
+        saveid = item.save_ID;
       }
     });
     if (stateinside == true) {
-      e.target.setAttribute("src", bookoff);
-      let id = mid;
-      Axios.delete(url+`/api/match/deletebook/${id}`, {
+      e.target.setAttribute("src", bookoff)
+      let id = saveid;
+      Axios.delete(`/api/match/deletebook/${id}`, {
         headers: authHeader(),
       })
         .then((Response) => {
-          console.log("data from delete Book mark dorm: ", Response.data);
-          setMark(
-            mark.filter((item) => {
-              return item.M_ID != id;
+          console.log("data from delete Book mark dorm: ", Response.data)
+          setBookmark(
+            bookmark.filter((item) => {
+              return item.save_ID != id
             })
-          );
+          )
         })
         .catch((error) => {
-          console.log("Error from save bookmark", error);
-        });
-      stateinside = false;
+          console.log("Error from save bookmark", error)
+        })
+
     } else {
       e.target.setAttribute("src", bookon);
       const payload = {
-        user_id: currentUser.user_id,
-        Dorm_ID: data.Dorm_ID,
+        member_ID: currentUser.member_ID,
+        dorm_ID: dormid,
       };
-      Axios.post(url+"api/match/createbook", payload, {
+      Axios.post("api/match/createbook", payload, {
         headers: authHeader(),
       })
         .then((Response) => {
           console.log("Book mark dorm: ", Response.data);
-          setMark([
-            ...mark,
+          setBookmark([
+            ...bookmark,
             {
-              M_ID: Response.data.insertId,
-              user_id: currentUser.user_id,
-              Dorm_ID: data.Dorm_ID,
-            },
+              member_ID: currentUser.member_ID,
+              dorm_ID: dormid,
+              save_ID: Response.data.insertId
+            }
           ]);
         })
         .catch((error) => {
           console.log("Error from save bookmark", error);
         });
-      stateinside = true;
     }
   };
 
+  const checkBook = (dormid) =>{
+    let check = false
+    console.log("Bookmark data",bookmark)
+    for (let i = 0; i < bookmark.length; i++) {
+      if(dormid == bookmark[i].dorm_ID){
+        check = true
+        break
+      }
+    }
+    return check
+  }
+
   return (
-    <div className="contain-match">
-      <NavbarMember></NavbarMember>
-      <div className="content-resultmatchpage">
-        {state.map((data, key) => {
-          var checkstate = false;
-          console.log("Index", key);
-          if (mark.length > 0) {
-            mark.map((item) => {
-              if (item.Dorm_ID == data.Dorm_ID) {
-                checkstate = true;
-                console.log("checkstate", checkstate);
-              }
-            });
-          }
+    <div className="book-conatiner-bookDorm">
+      <div className='Navbar-shadow-box'>
+        <NavbarMember />
+      </div>
+
+      <div >
+        {dorm.map((data, key) => {
           return (
-            <div className="Dorm-block" key={key}>
-              <label>{data.Dorm_Name}</label>
-              <img
-                src={checkstate ? bookon : bookoff}
-                width="50px"
-                height="50px"
-                onClick={(e)=>{handleonclick(e,data)}}
-              ></img>
+            <div className="dorm-container" key={key} onClick={() => {
+              history.push({
+                pathname: "/dormdetail",
+                state: data,
+              })
+            }}>
+              <div className="start-result-box">
+                <img className='img-dorm-box' src={"img_Dorm/" + data.Image[0].image}  ></img>
+                <h1>หอพัก{data.Dorm.dorm_Name}</h1>
+              </div>
+              <div className="end-result-box">
+                <img className="book-icon" src={checkBook(data.Dorm.dorm_ID) == true ? bookon : bookoff} onClick={handleonclick(data.Dorm.dorm_ID)}/>
+                <div className="line-end-box"></div>
+                <div className="price-box">
+                  <p className="price-text-head"> ราคาเริ่มต้น</p>
+                  <p className="price-text-value">{data.Room[0].room_Price} บาท</p>
+                </div>
+              </div>
+
             </div>
-          );
+          )
         })}
       </div>
     </div>
-  );
+  )
 }
 
 export default ResultMatch;

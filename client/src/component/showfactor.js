@@ -49,24 +49,22 @@ export default function Match() {
       if (check == true) {
         const newWeight = [...weight];
         console.log("check true comparator: ", newWeight);
-        newWeight[INDEX].comparator = e.target.value;
+        newWeight[INDEX].factor_ID = e.target.value;
         setWeight(newWeight);
 
         statepair[INDEX] = e.target.value
-        setStatepair(statepair)
       } else {
         setWeight([
           ...weight,
-          { comparator: e.target.value, weight: 1, index_compare: index },
+          { factor_ID: e.target.value, weight: 1, index_Check: index },
         ]);
         // setStatepair([...statepair,{e.target.value}])
         console.log(weight);
       }
     } else {
       setWeight([
-        { comparator: e.target.value, weight: 1, index_compare: index },
+        { factor_ID: e.target.value, weight: 1, index_Check: index },
       ]);
-      setStatepair([...statepair, e.target.value])
       console.log(weight);
     }
   };
@@ -74,8 +72,8 @@ export default function Match() {
   const isSelect = (index, factor) => {
     let checkstate = false
     for (let i = 0; i < weight.length; i++) {
-      if (weight[i].index_compare == index) {
-        if (weight[i].comparator == factor) {
+      if (weight[i].index_Check == index) {
+        if (weight[i].factor_ID == factor) {
           checkstate = true
           break
         } else {
@@ -92,7 +90,7 @@ export default function Match() {
   const isWeight = (index) => {
     let value = 1;
     for (let i = 0; i < weight.length; i++) {
-      if (weight[i].index_compare == index) {
+      if (weight[i].index_Check == index) {
         value = weight[i].weight
       }
     }
@@ -109,7 +107,7 @@ export default function Match() {
       var INDEX = 0;
 
       for (let i = 0; i < weight.length; i++) {
-        if (weight[i].index_compare == index) {
+        if (weight[i].index_Check == index) {
           check = true;
           INDEX = i;
         }
@@ -123,13 +121,13 @@ export default function Match() {
       } else {
         setWeight([
           ...weight,
-          { comparator: "", weight: e.target.value, index_compare: index },
+          { factor_ID: "", weight: e.target.value, index_Check: index },
         ]);
         console.log(weight);
       }
     } else {
       setWeight([
-        { comparator: "", weight: e.target.value, index_compare: index },
+        { factor_ID: "", weight: e.target.value, index_Check: index },
       ]);
     }
   };
@@ -178,10 +176,10 @@ export default function Match() {
         <h1 className='result-cal-priority-label'>ผลการวิเคราะห์คุณลักษณะส่วนบุคคลของคุณ</h1>
         <div className='result-cal-priority-container'>
           <table className='table-cal-priority'>
-            {value.map(item => {
+            <thead>
+            {value.map((item,key) => {
               return (
-
-                <tr>
+                <tr key={key}>
                   <td>
                     <h3 className='result-text'> คุณให้ความสำคัญกับ <span className="factor-result-cal">{item.factor.factor_Title}</span> </h3>
                   </td>
@@ -192,9 +190,9 @@ export default function Match() {
                     <img className="icon-factor-result" src={"images/" + item.factor.image_Factor} />
                   </td>
                 </tr>
-
               )
             })}
+            </thead>
           </table>
         </div>
         <button className="btn-match-dorm" onClick={matchFac}>จับคู่หอพัก</button>

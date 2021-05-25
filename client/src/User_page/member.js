@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import './member.css';
 import NavbarMember from '../component/Navbar/NavbarMember.js';
 import Match_member from '../component/Match/Match-member';
@@ -8,18 +8,24 @@ import Auth from '../service/authService.js'
 import authHeader from '../service/auth-header.js';
 
 function Member() {
+  const history = useHistory()
   const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const [search, setSearch] = useState("");
   const currentUser = Auth.getCurrentUser();
 
   const searchFac = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     console.log(search)
     Axios.post('api/match/searchDorm', {
       Search: search
     }, { headers: authHeader() })
       .then(Response => {
         console.log("Respone serach: ", Response.data);
+        let data = Response.data
+        history.push({
+          pathname: "/dormdetail",
+          state: data,
+        })
       }).catch(error => {
         console.log(error);
       })

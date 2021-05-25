@@ -1,151 +1,199 @@
 import con from '../config/config.js';
 import db from '../util/database.js'
 
-const Matching = function(e){
+const Matching = function (e) {
     this.id = e.id;
     this.factorname = e.id;
     this.weight = e.weight;
 }
 
 
-Matching.getallfactor = result =>{
-    db.query("SELECT * FROM factor ",(err,res)=>{
-        if(err){
-            console.log("error:",err);
-            result(null,err);
+Matching.getallfactor = result => {
+    db.query("SELECT * FROM factor ", (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
             return;
         }
         console.log(res);
-        result(null,res);    
+        result(null, res);
     });
 };
 
 
-Matching.createWeight = (newWeight,result) =>{
-    db.query("INSERT INTO weight (comparator, weight, user_id, index_compare) VALUES ?",[newWeight.data.map(item=>[item.comparator,item.weight,newWeight.user_id,item.index_compare])],(err,res)=>{
-        if(err){
-            console.log("error: ",err);
-        result(err,null);
-        return;
+Matching.createWeight = (newWeight, result) => {
+    let nw = newWeight.data
+    console.log('newWeight',newWeight)
+    db.query("INSERT INTO weight (factor_ID,weight,index_Check,member_ID) VALUES ?", [nw.map(item => [item.factor_ID,item.weight,item.index_Check,newWeight.member_ID])], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
         }
-        
-        result(null,res);
+        console.log("create weight success")
     });
 }
 
 
-Matching.getallDormScore = result =>{
-    db.query("SELECT * FROM Scoring_Factors ",(err,res)=>{
-        if(err){
-            console.log("error:",err);
-            result(null,err);
+Matching.getallDormScore = result => {
+    db.query("SELECT * FROM Scoring_Factors ", (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
             return;
         }
-        result(null,res);    
+        result(null, res);
     });
 };
 
 
-Matching.getDormbyID = (Array_ID,result) =>{
-    console.log("in MatchModel:",Array_ID);
-    db.query("SELECT * FROM dormitory WHERE Dorm_ID IN ("+db.escape(Array_ID)+")",(err,res)=>{
-        if(err){
-            console.log("error:",err);
-            result(err,null);
-            return;
-        }
-        console.log(res);
-        result(null,res);    
-    });
-};
-
-Matching.getAllDorm = (result) =>{
-    db.query("SELECT * FROM dormitory ",(err,res)=>{
-        if(err){
-            console.log("error:",err);
-            result(err,null);
+Matching.getDormbyID = (Array_ID, result) => {
+    console.log("in MatchModel:", Array_ID);
+    db.query("SELECT * FROM dormitory WHERE Dorm_ID IN (" + db.escape(Array_ID) + ")", (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(err, null);
             return;
         }
         console.log(res);
-        result(null,res);    
+        result(null, res);
     });
 };
 
-
-Matching.searchbyName = (name,result) =>{
-    db.query("SELECT * FROM dormitory WHERE dorm_Name = ?",name,(err,res)=>{
-        if(err){
-            console.log("error:",err);
-            result(null,err);
+Matching.getAllDorm = (result) => {
+    db.query("SELECT * FROM dormitory ", (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(err, null);
             return;
         }
-        result(null,res);    
+        console.log(res);
+        result(null, res);
     });
 };
 
 
-Matching.getweightbyID = (member_ID,result) =>{
-    console.log('member_ID',member_ID)
-    db.query("SELECT * FROM weight WHERE member_ID = ?;SELECT * FROM factor",member_ID,(err,res)=>{
-        if(err){
-            console.log("error:",err);
-            result(null,err);
+Matching.searchbyName = (name, result) => {
+    db.query("SELECT * FROM dormitory WHERE dorm_Name = ?", name, (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
             return;
-        }
-        result(null,res);    
-    });
-};
-
-Matching.updateweightbyID = (data,result) =>{
-    console.log(data);
-    let lengthDATA = data.data.length
-    for (let i = 0; i < lengthDATA; i++) {
-        db.query("UPDATE weight SET comparator = ?, weight = ? WHERE user_id = ? AND index_compare = ? ",[data.data[i].comparator,data.data[i].weight,data.user_id,data.data[i].index_compare],(err,res)=>{
-            if(err){
-                console.log("error:",err);
-                result(null,err);
+        } else {
+            if (res.length > 0) {
+               let dormid = res[0].dorm_ID
+                db.query("SELECT * FROM image_dorm WHERE dorm_ID = ?;SELECT * FROM room WHERE dorm_ID = ?;SELECT * FROM facilities_dorm WHERE dorm_ID = ?", [dormid, dormid, dormid], (err, resall) => {
+                    if (err) {
+                        console.log("error:", err);
+                        result(null, err);
+                        return;
+                    }
+                    console.log("data from get all ", resall)
+                    let payload = {
+                        Dorm: res[0],
+                        Image: resall[0],
+                        Room: resall[1],
+                        Facility: resall[2]
+                    }
+                    result(null, payload)
+                })
+            }else{
+                result(null,"")
             }
-            console.log("update complete at index_compare: ",data.data[i].index_compare)
-        });
-        
-    }
-    
-};
-
-
-Matching.getbookmarkbyID = (id,result) =>{
-    console.log("user ID for getbook",id)
-    db.query("SELECT * FROM save JOIN dormitory ON dormitory.dorm_ID=save.dorm_ID  WHERE save.member_ID = ? ; SELECT * FROM image_dorm ; SELECT * FROM room ; SELECT * FROM facilities_dorm",id,(err,res)=>{
-        if(err){
-            console.log("error:",err);
-            result(null,err);
-            return;
         }
-        result(null,res);    
     });
 };
 
-Matching.createbookbyID = (newbook,result) =>{
-    db.query("INSERT INTO bookmark SET user_id = ?, Dorm_ID = ?",[newbook.user_id,newbook.Dorm_ID],(err,res)=>{
-        if(err){
-            console.log("error: ",err);
-        result(err,null);
-        return;
+
+Matching.getweightbyID = (member_ID, result) => {
+    console.log('member_ID', member_ID)
+    db.query("SELECT * FROM weight WHERE member_ID = ?;SELECT * FROM factor", member_ID, (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
         }
-        
-        result(null,res);
+        result(null, res);
+    });
+};
+
+Matching.updateweightbyID = (data, result) => {
+    console.log("data for update",data);
+    let update = data.data
+    for (let i = 0; i < update.length; i++) {
+        db.query("UPDATE weight SET factor_ID = ?, weight = ? WHERE weight_ID = ? AND index_Check = ? AND member_ID = ? ", [update[i].factor_ID, update[i].weight,update[i].weight_ID,update[i].index_Check, data.member_ID], (err, res) => {
+            if (err) {
+                console.log("error:", err);
+                result(null, err);
+            }
+            console.log("update complete at index_Check: ", update[i].index_Check)
+        });
+    }
+    result("","update success")
+};
+
+
+Matching.getbookmarkbyID = (id, result) => {
+    console.log("user ID for getbook", id)
+    db.query("SELECT * FROM save JOIN dormitory ON dormitory.dorm_ID=save.dorm_ID  WHERE save.member_ID = ? ; SELECT * FROM image_dorm ; SELECT * FROM room ; SELECT * FROM facilities_dorm", id, (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        }
+        result(null, res);
+    });
+};
+
+Matching.createbookbyID = (newbook, result) => {
+    db.query("INSERT INTO save SET member_ID = ?, dorm_ID = ?", [newbook.member_ID, newbook.dorm_ID], (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        result(null, res);
     });
 }
 
-Matching.deletebookmarkbyID = (id,result) =>{
-    db.query("DELETE FROM bookmark WHERE M_ID = ?",id,(err,res)=>{
-        if(err){
-            console.log("error:",err);
-            result(null,err);
+Matching.deletebookmarkbyID = (id, result) => {
+    db.query("DELETE FROM save WHERE save_ID = ?", id, (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
             // return;
         }
-        console.log("delete bookmark: ",res)
-        result(null,res);    
+        console.log("delete bookmark: ", res)
+        result(null, res);
+    });
+};
+
+Matching.getdormdata = (data,result) => {
+    db.query("SELECT * FROM image_dorm ;SELECT * FROM room ;SELECT * FROM facilities_dorm; SELECT dorm_ID,save_ID FROM save WHERE member_ID = ?", data.member_ID,(err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(err, null);
+            return;
+        }
+        let payload = {
+            dorm: data.Dorm,
+            res:res
+        }
+        result(null, payload);
+    });
+};
+
+
+Matching.checkdormbyID = (data,result) => {
+    db.query("SELECT save_ID,dorm_ID FROM save WHERE member_ID = ? AND dorm_ID = ?",[data.member_ID,data.dorm_ID],(err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(err, null);
+            return;
+        }
+        console.log("Get data from select save by ID: ",res)
+        result(null, res);
     });
 };
 
