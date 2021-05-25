@@ -180,9 +180,10 @@ export const getBookmark = (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      // console.log("data from get bookmark: ",data)
+      console.log("data from get bookmark: ",data)
       let payload = []
       let arraydorm = data[0]
+      console.log("arraydorm",arraydorm)
       arraydorm.forEach(element => {
         let getimg = data[1].filter(item => item.dorm_ID == element.dorm_ID)
         let getroom = data[2].filter(item => item.dorm_ID == element.dorm_ID)
@@ -194,7 +195,7 @@ export const getBookmark = (req, res) => {
           Dorm: element
         })
       })
-      console.log('Payload', payload)
+      // console.log('Payload', payload)
       res.send(payload);
     }
   });
