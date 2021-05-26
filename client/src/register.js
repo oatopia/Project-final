@@ -1,81 +1,96 @@
-import './register.css';
-import img from './img/registerimg.png'
-import Navbar from './component/Navbar/Navbar.js'
-import Axios from 'axios'
-import React, { useState } from 'react';
-import Auth from './service/authService.js'
-import { useHistory } from 'react-router-dom';
-// import History from './utils/authUtils/History.js'
-
+import "./register.css";
+import img from "./img/registerimg.png";
+import Navbar from "./component/Navbar/Navbar.js";
+import Axios from "axios";
+import React, { useState } from "react";
+import Auth from "./service/authService.js";
+import { useHistory } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup"
+import Swal from 'sweetalert2'
+import axios from "axios";
 
 function Register() {
-    const url = "https://matching-dorm-tu-server.herokuapp.com/"
+    const url = "https://matching-dorm-tu-server.herokuapp.com/";
     const history = useHistory();
-    const [username, setusername] = useState("");
-    const [password, setpassword] = useState("");
-    const [type, settype] = useState("สมาชิก");
 
-    const addinfo = (e) => {
-        e.preventDefault();
-        Axios.post(url + 'api/user/register', {
-            username: username,
-            password: password,
-            type: type
-        }).then(() => {
-            console.log("sucess");
-        })
-    }
+    const validate = Yup.object({
+        username: Yup.string().required("กรุณากรอกชื่อผู้ใช้"),
+        password: Yup.string().required("กรุณากรอกรหัสผ่าน"),
+    });
 
-    const handleRegister = (e) => {
-        // e.preventDefault();
-        Auth.register(username, password, type)
-            .then(Response => {
-                if(type=="สมาชิก"){
-                    history.push("/loginmember");
-                }else{
-                    history.push("/loginowner");
-                }
-                console.log(Response.data);
-
-            })
-    }
     return (
         <>
-            <div className='navbar-register-container'>
-            <Navbar></Navbar>
+            <div className="navbar-register-container">
+                <Navbar></Navbar>
             </div>
             <div className="container-register">
                 <div className="container1-register">
-                    <form className="form1" onSubmit={handleRegister}>
-                        <h1 id="head-register">สมัครสมาชิก</h1>
-                        <p>ชื่อผู้ใช้*</p>
-                        <input className="input-text-register" onChange={(e) => {
-                            setusername(e.target.value);
-                        }} ></input>
-                        <p>รหัสผ่าน*</p>
-                        <input type="password" className="input-text-register" onChange={(e) => {
-                            setpassword(e.target.value);
-                        }}></input>
-                        <p>ประเภทผู้ใช้งาน</p>
-                        <select className="type" onChange={(e) => {
-                            settype(e.target.value);
-                        }} defaultValue="สมาชิก">
-                            <option value="สมาชิก">สมาชิก</option>
-                            <option value="ผู้ประกอบการ">ผู้ประกอบการ</option>
-                        </select>
-                        <button className="buttonregister-register" type="submit">สมัครสมาชิก</button>
-                    </form>
-                    <img src={img} className="img" width="300" height="450"></img>
+                    <Formik
+                        initialValues={{
+                            username: "",
+                            password: "",
+                            type:"สมาชิก"
+                        }}
+                        validationSchema={validate}
+                        onSubmit={values=>{
+                            console.log("values",values)
+                            Auth.register(values.username, values.password, values.type).then((Response) => {
+                                if (Response.data.message) {
+                                    Swal.fire({
+                                        title: Response.data.message,
+                                        icon: 'error',
+                                        confirmButtonText: 'ตกลง'
+                                      })
+                                } else {
+                                    if (values.type == "สมาชิก") {
+                                        history.push("/loginmember");
+                                    } else {
+                                        history.push("/loginowner");
+                                    }
+                                }
+                            })
+                        }}
+                    >
+                        {({errors}) => (
+                            <Form className="form1">
+                                <h1 id="head-register">สมัครสมาชิก</h1>
+                                <p>ชื่อผู้ใช้*</p>
+                                <Field
+                                    className="input-text-register"
+                                    name="username"
+                                    style={errors.username && {border:'1px solid red'}}
+                                />
+                                <ErrorMessage component='div' name="username" className='error-text'/>
+                                <p>รหัสผ่าน*</p>
+                                <Field
+                                    type="password"
+                                    name="password"
+                                    className="input-text-register"
+                                    style={errors.password && {border:'1px solid red'}}
+                                ></Field>
+                                <ErrorMessage component='div' name="password" className='error-text'/>
+                                <p>ประเภทผู้ใช้งาน</p>
+                                <Field
+                                    as="select"
+                                    className="type"
+                                    name="type"
+                                >
+                                    <option value="สมาชิก">สมาชิก</option>
+                                    <option value="ผู้ประกอบการ">ผู้ประกอบการ</option>
+                                </Field>
+                                <button className="buttonregister-register" type="submit">
+                                    สมัครสมาชิก
+                                </button>
+                            </Form>
+                        )}
+                    </Formik>
+                    <img src={img} className="img"></img>
                 </div>
-
             </div>
         </>
     );
 }
 
-
-
-
-
-
 export default Register;
+

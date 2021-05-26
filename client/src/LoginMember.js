@@ -5,6 +5,9 @@ import img from './img/loginimg.jpg'
 import Navbar from './component/Navbar/Navbar.js'
 import Axios from 'axios'
 import Auth from './service/authService.js'
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup"
+import Swal from 'sweetalert2'
 
 
 const Loginmember = () => {
@@ -14,16 +17,10 @@ const Loginmember = () => {
     const [password, setpassword] = useState("");
     const type = "สมาชิก";
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        Auth.loginmember(username, password)
-            .then(Response => {
-                console.log(Response);
-                history.push("/member");
-            })
-    }
-    const currentUser = Auth.getCurrentUser();
-    console.log("login page: ", currentUser);
+    const validate = Yup.object({
+        username: Yup.string().required("กรุณากรอกชื่อผู้ใช้"),
+        password: Yup.string().required("กรุณากรอกรหัสผ่าน"),
+    });
     return (
         <div className="login-member-container">
             <div className="Navbar-container">
@@ -32,25 +29,52 @@ const Loginmember = () => {
 
             <div className="content-login-member-container">
                 <div className="content-login-container">
-                    <form className="form-login-member" onSubmit={handleLogin}>
+                    <Formik
+                    initialValues={{
+                        username: "",
+                        password: ""
+                    }}
+                    validationSchema={validate}
+                    onSubmit={values=>{
+                        Auth.loginmember(values.username, values.password)
+                        .then(Response => {
+                            console.log("Response ",Response)
+                            if(Response.message){
+                                Swal.fire({
+                                    title: Response.message,
+                                    icon: 'error',
+                                    confirmButtonText: 'ตกลง'
+                                  })
+                            }else{
+                                history.push("/member");
+                            }
+                            
+                        })
+                    }}
+                    >
+                    {({errors})=>(
+                    <Form className="form-login-member">
                         <h1 id="head-login">เข้าสู่ระบบสำหรับสมาชิก</h1>
                         <div>
                             <p className='p-text'>ชื่อผู้ใช้*</p>
-                            <input className="text-input-username-loginmember" onChange={(e) => {
-                                setusername(e.target.value);
-                            }}></input>
+                            <Field type='text' className="text-input-username-loginmember" name='username'
+                            style={errors.username && {border:'1px solid red'}}
+                            ></Field>
+                            <ErrorMessage component='div' name="username" className='error-text'/>
                         </div>
                         <div>
                             <p className='p-text'>รหัสผ่าน*</p>
-                            <input type="password" className="text-input-username-loginmember" onChange={(e) => {
-                                setpassword(e.target.value);
-                            }}></input>
+                            <Field type="password" className="text-input-username-loginmember" name='password'
+                            style={errors.password && {border:'1px solid red'}}
+                            ></Field>
+                            <ErrorMessage component='div' name="password" className='error-text'/>
                         </div>
-                        <br></br>
                         <button className="button-login-member" type="submit">เข้าสู่ระบบ</button>
                         <hr />
                         <button className="buttonnew-member" type="submit">สร้างบัญชีใหม่</button>
-                    </form>
+                    </Form>
+                    )}
+                    </Formik>
                     <div className='image-container-loginmember'>
                         <img src={img} className="img-loginmember"></img>
                     </div>

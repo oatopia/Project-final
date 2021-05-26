@@ -7,6 +7,29 @@ const Userinfo = function (e) {
     this.type = e.type;
 }
 
+Userinfo.getmember = (member, result) => {
+    db.query("SELECT username FROM member WHERE username = ? ", member, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        result(null, res);
+    });
+};
+
+Userinfo.getowner = (owner, result) => {
+    db.query("SELECT username FROM owner WHERE username = ? ", owner, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        result(null, res);
+    });
+};
+
+
 Userinfo.create = (newUser, result) => {
     if (newUser.type == "สมาชิก") {
         db.query("INSERT INTO member SET username = ? ,password = ?", [newUser.username, newUser.password], (err, res) => {
@@ -39,7 +62,7 @@ Userinfo.loginmember = (username, result) => {
             result(err, null);
             return;
         }
-        console.log(res);
+        console.log(res)
         result(null, res);
     });
 };

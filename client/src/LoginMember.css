@@ -30,7 +30,7 @@ body {
 }
 
 .p-text{
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 #head-login {
@@ -45,7 +45,6 @@ body {
   height: autos;
   box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.2);
   width: 100%;
-  margin-top: -25px;
   font-size: 18px;
   outline: none;
   transition-duration: 0.3s;
@@ -65,7 +64,7 @@ body {
   border: none;
   border-radius: 5px;
   box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
-  margin-top: 0px;
+  margin-top: 20px;
   font-weight: bold;
   transition-duration: 0.3s;
 }
