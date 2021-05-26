@@ -27,7 +27,7 @@ function Register() {
     }
 
     const handleRegister = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         Auth.register(username, password, type)
             .then(Response => {
                 if(type=="สมาชิก"){

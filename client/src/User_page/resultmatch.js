@@ -109,7 +109,7 @@ function ResultMatch() {
         <NavbarMember />
       </div>
 
-      <div >
+      <div className="dorm-list-contain">
         {dorm.map((data, key) => {
           return (
             <div className="dorm-container" key={key} onClick={() => {

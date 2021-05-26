@@ -218,13 +218,13 @@ function Adminfactor() {
                   />
                   </div>
                 ) : (
-                  <div>
-                    <h1 className="factor-info" id="fname">
+                  <div className='factor-name-title'>
+                    <h2 className="factor-title" id="fname">
                       {data.factor_Title}
-                    </h1>
-                    <h2 className="factor-info" id="fname">
-                      {data.factor_Name}
                     </h2>
+                    <h4 className="factor-name" id="fname">
+                      {data.factor_Name}
+                    </h4>
                   </div>
                 )}
 

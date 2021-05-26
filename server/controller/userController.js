@@ -11,6 +11,7 @@ export const create = (req, res) => {
     password: req.body.password,
     type: req.body.type,
   });
+  
   const salt = bcrypt.genSaltSync(10);
   user.password = bcrypt.hashSync(user.password, salt);
   userModel.create(user, (err, data) => {

@@ -1,3 +1,8 @@
+/* .logoapp{
+    width: 100px;
+    height: 100px;
+} */
+
 
 .Nav{
     height: 120px;
@@ -8,13 +13,9 @@
     /* position: fixed; */
 }
 
-
-
-
 .homelogo{
     margin-bottom: 2px;
 }
-
 
 .listmenu{
     display: flex;
