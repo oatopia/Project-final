@@ -20,10 +20,20 @@ export const getFactor = (req, res) => {
   });
 };
 
-export const deleteUser = (req, res) => {
-  let uID = req.params.id;
-  console.log(uID);
-  adminModel.deleteUserbyId(uID, (err, data) => {
+export const deleteMember = (req, res) => {
+  let member_ID = req.params.id;
+  adminModel.deleteMemberbyId(member_ID, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data);
+    }
+  });
+};
+
+export const deleteOwner = (req, res) => {
+  let owner_ID = req.params.id;
+  adminModel.deleteOwnerbyId(owner_ID, (err, data) => {
     if (err) {
       console.log(err);
     } else {
@@ -33,10 +43,12 @@ export const deleteUser = (req, res) => {
 };
 
 export const createFactor = (req, res) => {
+  const newFactorTitle = req.body.new_factortitle
   const newFactor = req.body.new_factor;
   const file = req.files.ImageFactor;
   const image_name = file.name;
   const  objectImage = {
+    factor_Title: newFactorTitle,
     factor_Name: newFactor,
     image_Factor: image_name,
   };
@@ -51,11 +63,11 @@ export const createFactor = (req, res) => {
         if (err) {
           console.log(err);
         } else {
-          console.log(array);
           const objectdata = {
             factor_ID: data.insertId,
+            factor_Title: newFactorTitle,
             factor_Name: newFactor,
-            image_factor: image_name,
+            image_Factor: image_name,
           };
           res.send(objectdata);
         }
@@ -76,31 +88,18 @@ export const deleteFactor = (req,res)=>{
     });
 };
 
-export const updateUser = (req,res)=>{
-  const obj = {
-    user_id : req.body.user_id,
-    username: req.body.username,
-    type: req.body.type,
-  };
-  adminModel.updateUserbyId(obj, (err, data) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("update user: ",data)
-          res.send(obj);
-        }
-      });
-    };
 
 export const updateFactor = (req,res)=>{
   let fID = req.params.id;
   const newFactor = req.body.EditName;
+  const newFactorTitle = req.body.EditTitle;
   const file = req.files.EditImage;
   const image_name = file.name;
   const obj = {
-    Id : fID,
-    Factor_name: newFactor,
-    Image_factor: image_name,
+    factor_ID : fID,
+    factor_Title: newFactorTitle,
+    factor_Name: newFactor,
+    image_Factor: image_name,
   };
   if (
     file.mimetype == "image/jpeg" ||

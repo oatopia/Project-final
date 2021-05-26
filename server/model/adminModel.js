@@ -24,8 +24,19 @@ Admin.getallfactor = result =>{
     });
 };
 
-Admin.deleteUserbyId = (data,result) =>{
-    db.query("DELETE FROM userinformation WHERE user_id = ?",data,(err,res)=>{
+Admin.deleteMemberbyId = (data,result) =>{
+    db.query("DELETE FROM member WHERE member_ID = ?",data,(err,res)=>{
+        if(err){
+            console.log("error:",err);
+            result(null,err);
+            // return;
+        }
+        result(null,res);    
+    });
+};
+
+Admin.deleteOwnerbyId = (data,result) =>{
+    db.query("DELETE FROM owner WHERE owner_ID = ?",data,(err,res)=>{
         if(err){
             console.log("error:",err);
             result(null,err);
@@ -42,8 +53,8 @@ Admin.insertFactor = (newfactor,result) =>{
         result(err,null);
         return;
         }
+        console.log("Create factor success!!",res);
         result(null,res);  
-        // console.log("create factor:",res);
     });
 };
 
@@ -70,7 +81,7 @@ Admin.updateUserbyId = (data,result) =>{
 };
 
 Admin.updateFactorbyId = (data,result) =>{
-    db.query("UPDATE factor SET factor_Name = ?, image_Factor = ? WHERE factor_ID = ? ",[data.Factor_name,data.Image_factor,data.Id],(err,res)=>{
+    db.query("UPDATE factor SET factor_Title = ?, factor_Name = ?, image_Factor = ? WHERE factor_ID = ? ",[data.factor_Title,data.factor_Name,data.image_Factor,data.factor_ID],(err,res)=>{
         if(err){
             console.log("error:",err);
             result(null,err);

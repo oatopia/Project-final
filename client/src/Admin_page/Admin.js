@@ -17,8 +17,7 @@ function Admin() {
 
 
   const deletetMember = (id) => {
-    console.log("ID:", id);
-    Axios.delete(`api/Admin/userDelete/${id}`).then((Response) => {
+    Axios.delete(`api/Admin/memberDelete/${id}`).then((Response) => {
       setMember(
         member.filter((val) => {
           return val.member_ID != id;
@@ -28,8 +27,7 @@ function Admin() {
   };
 
   const deleteOwner = (id) => {
-    console.log("ID:", id);
-    Axios.delete(`api/Admin/userDelete/${id}`).then((Response) => {
+    Axios.delete(`api/Admin/ownerDelete/${id}`).then((Response) => {
       setMember(
         member.filter((val) => {
           return val.member_ID != id;
@@ -37,20 +35,6 @@ function Admin() {
       );
     });
   };
-
-  // const updateAccount = (id) => {
-  //   console.log("ID:", id);
-  //   Axios.put(url+`api/Admin/userUpdate/${id}`,{user_id: id, username: editun, type: editT}).then((Response) => {
-  //     setEditAC("");
-  //     setUser(user.map((item)=>{
-  //       return item.user_id == id ? {user_id:id,username:editun,type:editT} 
-  //       : item ;
-  //     }))
-
-  //   }).catch((error) => {
-  //     console.log(error);
-  //   });
-  // };
 
   useEffect(() => {
     Axios.get("api/Admin/user")
@@ -71,7 +55,7 @@ function Admin() {
           return (
             <div className='account-box'>
               <div className='icon-username'>
-                <img src={user} width='40px' height='40px'/>
+                <img src={user} width='40px' height='40px' />
                 <h1>{data.username}</h1>
               </div>
               <div >
@@ -97,17 +81,10 @@ function Admin() {
           return (
             <div className='account-box'>
               <div className='icon-username'>
-              <img src={user} width='40px' height='40px'/>
+                <img src={user} width='40px' height='40px' />
                 <h1>{data.username}</h1>
               </div>
               <div>
-                <img
-                  src={editicon}
-                  // onClick={() => {
-                  //   setEditAC(data.user_id);
-                  // }}
-                  className="icon-user"
-                ></img>
                 <img
                   src={deleteicon}
                   onClick={() => {
@@ -134,7 +111,7 @@ function Admin() {
       <div className="content2-user-admin">
 
         <div className='head-text-admin'>
-          <h3 className='h3-text-admin' onClick={() => { setState(true) }} style={state == true ? { border: '2px solid #28527a'} : { color: '#0475AD' }}>
+          <h3 className='h3-text-admin' onClick={() => { setState(true) }} style={state == true ? { border: '2px solid #28527a' } : { color: '#0475AD' }}>
             สมาชิก
           </h3>
           <h3 className='h3-text-admin' onClick={() => { setState(false) }} style={state == false ? { border: '2px solid #28527a' } : { color: '#0475AD' }}>
@@ -144,66 +121,6 @@ function Admin() {
         <div className='content-account-admin'>
           {state == true ? <Showmember /> : <Showowner />}
         </div>
-        {/* {user.map((data) => {
-          return (
-            <div className="user-box-Admin">
-              <div className="edit-box">
-                <label className="user-info">{data.user_id}</label>
-                {editAC == data.user_id ? (
-                  <input
-                    type="text"
-                    className="user-info"
-                    id="edit-input-user"
-                    onChange={(e) => {
-                      setEditUN(e.target.value);
-                    }}
-                  ></input>
-                ) : (
-                  <label className="user-info">{data.username}</label>
-                )}
-
-                {editAC == data.user_id ? (
-                  <div className="edit-box-input">
-                    <input
-                      type="text"
-                      className="user-info"
-                      id="edit-input-user"
-                      onChange={(e) => {
-                        setEditT(e.target.value);
-                      }}
-                    ></input>
-                    <button
-                      className="save-edit-but-user"
-                      onClick={() => {
-                        updateAccount(data.user_id);
-                      }}
-                    >
-                      บันทึก
-                    </button>
-                  </div>
-                ) : (
-                  <label className="user-info">{data.type}</label>
-                )}
-              </div>
-              <div className="use-icon-box">
-                <img
-                  src={editicon}
-                  onClick={() => {
-                    setEditAC(data.user_id);
-                  }}
-                  className="icon-user"
-                ></img>
-                <img
-                  src={deleteicon}
-                  onClick={() => {
-                    deleteAccount(data.user_id);
-                  }}
-                  className="icon-user"
-                ></img>
-              </div>
-            </div>
-          );
-        })} */}
       </div>
       <div className="clear-user-Admin"></div>
     </div>

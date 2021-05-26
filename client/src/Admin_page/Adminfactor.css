@@ -5,7 +5,7 @@
 
 .factor-box-Admin{
     width: 80%;
-    height: 100px;
+    /* height: 100px; */
     background-color: #d0e5f5;
     margin-top: 10px;
     margin-left:auto ;
@@ -14,6 +14,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 10px;
 }
 
 input.factor-info{
@@ -27,6 +28,7 @@ input.factor-info:focus{
 .factor-info{
     margin-left: 30px;
     font-size: 26px;
+    color: #0e4fa3;
 }
 
 .content2-factor-Admin{
@@ -36,7 +38,6 @@ input.factor-info:focus{
 
 .clear-factor-Admin{
     clear:both;
-    background-color: darkorange;
 }
 
 #fname{
@@ -107,13 +108,16 @@ input.factor-info:focus{
 }
 
 .text-factor-name{
-    height: 50px;
-    width: 300px;
+    height: 30px;
+    /* width: 300px; */
     margin-right: 50px;
     margin-left: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: none;
+    margin-bottom: 10px;
 }
+
+
 
 .file-factor-image{
     height: 30px;
@@ -142,4 +146,19 @@ input.factor-info:focus{
     background-color: #0050b9;
     border: none;
     cursor: pointer;
+}
+
+.box-text-add-factor{
+    display: flex;
+    flex-direction: column;
+}
+
+.text-add-factor{
+    display: flex;
+    align-items: center;
+}
+
+.text-factor-box{
+    display: flex;
+    align-items: center;
 }
