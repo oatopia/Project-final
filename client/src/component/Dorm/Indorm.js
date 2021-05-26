@@ -72,66 +72,76 @@ export default function Indorm() {
 
 
   const saveinfordorm = () => {
-    
-    console.log("owner id", currentUser.owner_ID);
-    axios
-      .post(
-        "api/dorm/createDorm",
-        {
-          dorm_Name: name,
-          type_D: type,
-          address: address,
-          deposit: deposit,
-          electric_Bill: elec,
-          water_Bill: water,
-          common_Fee: common,
-          detail: des,
-          ad_Name: nameOwn,
-          contact_Number: phone,
-          e_Mail: email,
-          line_ID: lineid,
-          owner_ID: currentUser.owner_ID,
-        },
-        { headers: authHeader() }
-      )
-      .then((Response) => {
-        const ID = Response.data.insertId;
-        console.log("ID", Response.data.insertId);
-        axios
-          .post(
-            "api/dorm/createFacilities",
-            { dorm_ID: ID, facilities: facilities },
-            { headers: authHeader() }
-          )
-          .then((Response) => {
-            console.log(Response);
-          });
-
-        let formData = new FormData();
-        console.log("data in arrayFile: ", arrayFile);
-        for (let i = 0; i < arrayFile.length; i++) {
-          formData.append("Image", arrayFile[i]);
-        }
-        formData.append("dorm_ID", ID);
-        const config = {
-          headers: {
-            "Content-Type": "multipart/form-data",
+    if (name && type && address && deposit && elec && water && common && des && nameOwn && phone && email && lineid) {
+      console.log("owner id", currentUser.owner_ID);
+      axios
+        .post(
+          "api/dorm/createDorm",
+          {
+            dorm_Name: name,
+            type_D: type,
+            address: address,
+            deposit: deposit,
+            electric_Bill: elec,
+            water_Bill: water,
+            common_Fee: common,
+            detail: des,
+            ad_Name: nameOwn,
+            contact_Number: phone,
+            e_Mail: email,
+            line_ID: lineid,
+            owner_ID: currentUser.owner_ID,
           },
-        };
-        // console.log("Data in formData",formData);
-        axios
-          .post("api/dorm/createImage", formData, config)
-          .then((Response) => {
-            console.log(Response);
-          });
+          { headers: authHeader() }
+        )
+        .then((Response) => {
+          const ID = Response.data.insertId;
+          console.log("ID", Response.data.insertId);
           axios
-          .post("api/dorm/createRoom",{dorm_ID:ID,room:room}, { headers: authHeader() })
-          .then((Response) => {
-            console.log(Response);
-          });
-        history.push("/owner");
-      });
+            .post(
+              "api/dorm/createFacilities",
+              { dorm_ID: ID, facilities: facilities },
+              { headers: authHeader() }
+            )
+            .then((Response) => {
+              console.log(Response);
+            });
+
+          let formData = new FormData();
+          console.log("data in arrayFile: ", arrayFile);
+          for (let i = 0; i < arrayFile.length; i++) {
+            formData.append("Image", arrayFile[i]);
+          }
+          formData.append("dorm_ID", ID);
+          const config = {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          };
+          // console.log("Data in formData",formData);
+          axios
+            .post("api/dorm/createImage", formData, config)
+            .then((Response) => {
+              console.log(Response);
+            });
+          axios
+            .post("api/dorm/createRoom", { dorm_ID: ID, room: room }, { headers: authHeader() })
+            .then((Response) => {
+              console.log(Response);
+            });
+          history.push("/owner");
+        });
+    }else{
+      Swal.fire({
+        title: "ช้อมูลไม่ครบถ้วน",
+        icon: 'warning',
+        confirmButtonText: 'ตกลง'
+      })
+    }
+
   };
+
+
 
   const OnchangeFac = (e) => {
     let checkvalue = false;
@@ -219,27 +229,27 @@ export default function Indorm() {
     dorm_Name: Yup.string().required("กรุณากรอกชื่อหอพัก"),
     address: Yup.string().required("กรุณากรอกที่อยู่หอพัก"),
     deposit: Yup.string().required("กรุณากรอกที่อยู่หอพัก"),
-});
+  });
   return (
     <div className="containIn">
       <div className="Indorm">
         <h1>ข้อมูลหอพัก</h1>
         <div className="line-head"></div>
         <Formik
-        initialValues={{
-          dorm_Name: "",
-          type_D: "",
-          address:"",
-          deposit:"",
-          common_Fee:"",
-          electric_Bill:"",
-          water_Bill:"",
-          detail:"",
-          ad_Name:"",
-          contact_Number:"",
-          e_Mail:"",
-          line_ID:""
-      }}
+          initialValues={{
+            dorm_Name: "",
+            type_D: "",
+            address: "",
+            deposit: "",
+            common_Fee: "",
+            electric_Bill: "",
+            water_Bill: "",
+            detail: "",
+            ad_Name: "",
+            contact_Number: "",
+            e_Mail: "",
+            line_ID: ""
+          }}
         >
 
         </Formik>
