@@ -14,7 +14,9 @@ function VisitorResult() {
   let state = location.state;
   console.log("sate match:", state);
   const [srcimg, setSrcimg] = useState([]);
-
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
 
   const Showresult = () => {

@@ -12,6 +12,7 @@ function MatchVisitor() {
     let payload = location.state;
     const [dorm, setDorm] = useState([])
     useEffect(() => {
+        window.scrollTo(0, 0)
         Axios.get("api/visitor/getdetail").then((Response) => {
             let data = Response.data
             console.log(data)

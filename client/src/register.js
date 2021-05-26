@@ -1,14 +1,12 @@
 import "./register.css";
 import img from "./img/registerimg.png";
 import Navbar from "./component/Navbar/Navbar.js";
-import Axios from "axios";
 import React, { useState } from "react";
 import Auth from "./service/authService.js";
 import { useHistory } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup"
 import Swal from 'sweetalert2'
-import axios from "axios";
 
 function Register() {
     const url = "https://matching-dorm-tu-server.herokuapp.com/";

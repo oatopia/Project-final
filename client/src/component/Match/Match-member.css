@@ -86,3 +86,8 @@
 .range-match-member{
   width: 100%;
 }
+
+.btn-contain{
+  display: flex;
+  justify-content: space-around;
+}

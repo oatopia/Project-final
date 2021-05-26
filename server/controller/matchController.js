@@ -27,11 +27,11 @@ export const createweight = (req, res) => {
 
 export const calPriority = (req, res) => {
   const priority = req.body;
-  console.log("priority information", priority);
-  let Matrixlength = calMatLength(priority.length);
-  console.log('Matrixlength:', Matrixlength);
+  // console.log("priority information", priority);
+  // let Matrixlength = calMatLength(priority.length);
+  // console.log('Matrixlength:', Matrixlength);
   let Matrixcal = calmatrix(priority)
-  console.log("Matrixcal", Matrixcal);
+  // console.log("Matrixcal", Matrixcal);
   res.send(Matrixcal)
 };
 
@@ -123,7 +123,7 @@ export const getWeight = (req, res) => {
       console.log(err);
     } else {
       console.log("data from get weight: ", data)
-      let payload = []
+      
       let arraypair = []
       let factor = data[1]
       let number = 0;
@@ -138,9 +138,18 @@ export const getWeight = (req, res) => {
           number++
         }
       }
-      payload.push(data[0])
-      payload.push(data[1])
-      payload.push(arraypair)
+      
+      let att = calmatrix(data[0])
+      let arrayAtt = []
+      for (let i = 0; i < att.length; i++) {
+        arrayAtt.push({factor:factor[i],value:att[i]})
+      }
+      let payload = {
+        weight:data[0],
+        factor:data[1],
+        pair:arraypair,
+        attribute:arrayAtt
+      }
       console.log("payload", payload)
       res.send(payload);
     }

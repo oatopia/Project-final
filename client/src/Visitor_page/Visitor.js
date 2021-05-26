@@ -1,41 +1,42 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState,useEffect } from "react";
 import "./Visitor.css";
 import Navbar from "../component/Navbar/Navbar.js";
 import Showfactor from '../component/showfactor.js'
 import { useHistory } from "react-router";
 import Axios from "axios";
 
-// const required = value => {
-//   if (!value) {
-//     return (
-//       <div className="alert alert-danger" role="alert">
-//         This field is required!
-//       </div>
-//     );
-//   }
-// };
+
 
 function Visitor() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/";
-  const [search,setSearch] = useState("");
+  const [search,setSearch] = useState()
+  const [error,setError] = useState()
   const history = useHistory();
   const myref  = useRef(null)
 
-  const onClickforSerach = (e) => {
-    console.log(search)
-    Axios.post('api/visitor/searchDorm',{
-      dormname:search
-    },)
-    .then(Response => {
-        console.log("Respone search: ",Response.data);
-          history.push({
-            pathname: "/searchvisitor",
-            state: Response.data,
-          });
-        
-    }).catch(error=>{
-        console.log(error);
-    })
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  const onClickforSerach = () => {
+    if(search){
+      Axios.post('api/visitor/searchDorm',{
+        dormname:search
+      },)
+      .then(Response => {
+          console.log("Respone search: ",Response.data);
+            history.push({
+              pathname: "/searchvisitor",
+              state: Response.data,
+            });
+          
+      }).catch(error=>{
+          console.log(error);
+      })
+    }else{
+      setError("กรุณากรอกชื่อหอพัก")
+    }
+    
   }
   return (
     <div className="parrent-contain">
@@ -53,13 +54,11 @@ function Visitor() {
         </div>
       </div>
       <div className="searchbar-Visitor">
-          <input className="searchinput-Visitor" placeholder="ค้นหาหอพัก..." onChange={e=>{setSearch(e.target.value)}}></input>
-          <button className="searchbutton-Visitor" onClick={()=>{onClickforSerach()}}>ค้นหา</button>
+          <input className="searchinput-Visitor" placeholder={error ? error :"ค้นหาหอพัก..."}  style={error && { border: '2px solid red' }} onChange={e=>{setSearch(e.target.value)}}></input>
+          <button className="searchbutton-Visitor" onClick={onClickforSerach}>ค้นหา</button>
       </div>
       <div className="match-container" ref={myref}>
-        {/* <Match /> */}
         <Showfactor />
-        {/* <div className="image-match-container"></div> */}
       </div>
     </div>
   );

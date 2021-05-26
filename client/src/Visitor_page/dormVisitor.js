@@ -13,6 +13,9 @@ function DormVisitor() {
   let location = useLocation();
   let state = location.state;
   console.log("sate match:", state);
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className="dormVisitor-container">

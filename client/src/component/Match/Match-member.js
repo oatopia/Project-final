@@ -4,6 +4,7 @@ import "./Match-member.css";
 import { useHistory } from "react-router-dom";
 import authHeader from "../../service/auth-header.js";
 import Auth from "../../service/authService.js";
+import Swal from 'sweetalert2'
 
 export default function Match() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/"
@@ -19,34 +20,32 @@ export default function Match() {
   const [statecal, setStatecal] = useState(false)
   const [priority, setPriority] = useState([])
   const [checkweight, setCheckweight] = useState(false)
+  const [checkpair, setCheckpair] = useState(false)
+  const [checkpriority, setCheckpriority] = useState(false)
 
   useEffect(() => {
-    // Axios.get(url + "api/match/getfactor", { headers: authHeader() })
-    //   .then((Response) => {
-    //     console.log(Response.data);
-    //     setFactorlist(Response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error from get Factor", error);
-    //   });
     Axios.post(
       "api/match/getWeight",
       { member_ID: currentUser.member_ID },
       { headers: authHeader() }
     )
       .then((Response) => {
+        let obj = Response.data
         console.log("Respone from get weight", Response.data);
-        if (Response.data.length > 0) {
+        if (obj) {
           console.log("Get!!!!");
-          console.log("Response ", Response.data);
-          if (Response.data[0].length > 0) {
+          console.log("Response ", obj);
+          if (obj.weight.length > 0) {
             setCheckweight(true)
+            setCheckpriority(true)
           } else {
             setCheckweight(false)
+            setCheckpair(true)
           }
-          setWeight(Response.data[0])
-          setFactorlist(Response.data[1])
-          setPair(Response.data[2])
+          setWeight(obj.weight)
+          setFactorlist(obj.factor)
+          setPair(obj.pair)
+          setPriority(obj.attribute)
         } else {
           console.log("not get!!!");
         }
@@ -57,310 +56,6 @@ export default function Match() {
   }, []);
 
 
-
-
-
-
-
-
-  const saveweight = () => {
-    if (state == false) {
-      const arrayweight = [];
-      for (let i = 0; i < weight.length; i++) {
-        weight.map((data) => {
-          if (data.index_compare == i) {
-            arrayweight.push(data);
-          }
-        });
-      }
-      console.log("save weight: ", arrayweight);
-      const payload = {
-        user_id: currentUser.user_id,
-        data: arrayweight,
-      };
-      Axios.post("api/match/createweight", payload, { headers: authHeader() })
-        .then((Response) => {
-          console.log(Response.data);
-          setState(true);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      console.log("edit getweight save: ", weight);
-      const payload = {
-        user_id: currentUser.user_id,
-        data: weight,
-      };
-      Axios.put("api/match/editWeight", payload, { headers: authHeader() })
-        .then((Response) => {
-          console.log(Response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
-
-
-
-
-
-  // const addImage = (index) => (e) => {
-  //   if (weight.length > 0) {
-  //     var check = false;
-  //     var INDEX = 0;
-  //     for (let i = 0; i < weight.length; i++) {
-  //       if (weight[i].index_compare == index) {
-  //         check = true;
-  //         INDEX = i;
-  //       }
-  //     }
-  //     if (check == true) {
-  //       const newWeight = [...weight];
-  //       console.log("check true comparator: ", newWeight);
-  //       newWeight[INDEX].comparator = e.target.value;
-  //       setWeight(newWeight);
-  //     } else {
-  //       setWeight([
-  //         ...weight,
-  //         { comparator: e.target.value, weight: "1", index_compare: index },
-  //       ]);
-  //       console.log(weight);
-  //     }
-  //   } else {
-  //     setWeight([
-  //       { comparator: e.target.value, weight: "1", index_compare: index },
-  //     ]);
-  //     console.log(weight);
-  //   }
-  // };
-
-
-
-
-
-  // const addWeight = (index) => (e) => {
-  //   if (weight.length > 0) {
-  //     var check = false;
-  //     var INDEX = 0;
-
-  //     for (let i = 0; i < weight.length; i++) {
-  //       if (weight[i].index_compare == index) {
-  //         check = true;
-  //         INDEX = i;
-  //       }
-  //     }
-
-  //     if (check == true) {
-  //       const newWeight = [...weight];
-  //       console.log("check true weight: ", newWeight);
-  //       newWeight[INDEX].weight = e.target.value;
-  //       setWeight(newWeight);
-  //     } else {
-  //       setWeight([
-  //         ...weight,
-  //         { comparator: "", weight: e.target.value, index_compare: index },
-  //       ]);
-  //       console.log(weight);
-  //     }
-  //   } else {
-  //     setWeight([
-  //       { comparator: "", weight: e.target.value, index_compare: index },
-  //     ]);
-  //   }
-  // };
-
-
-
-
-
-
-  const showimage = (n) => {
-    let index = 0;
-    let array = [];
-    for (let i = 0; i < factorlist.length; i++) {
-      for (let j = i + 1; j < factorlist.length; j++) {
-        array.push(
-          <div>
-            <div id="contain-match-display" key={index}>
-              <img
-                value={factorlist[i].image_Factor}
-                src={"images/" + factorlist[i].image_Factor}
-                width="70"
-                height="70"
-              ></img>
-              <input
-                // value={factorlist[i].Id}
-                type="radio"
-                // id="radio-1"
-                name={index}
-              // onChange={addImage(index)}
-              // checked
-              />
-              <img
-                value={factorlist[j].image_Factor}
-                src={"images/" + factorlist[j].image_Factor}
-                width="70"
-                height="70"
-              ></img>
-              <input
-                // checked
-                // value={factorlist[j].Id}
-                type="radio"
-                // id="radio-2"
-                name={index}
-              // onChange={addImage(index)}
-              />
-
-            </div>
-            <input className="range-match-member" type='range' />
-          </div>
-        );
-        index++;
-      }
-    }
-    return array[n];
-  };
-
-
-
-
-  const onChangeWeight = (index) => (e) => {
-    console.log(weight);
-    let INDEX = 0;
-    for (let i = 0; i < weight.length; i++) {
-      if (weight[i].index_compare == index) {
-        INDEX = i;
-      }
-    }
-    const newWeight = [...weight];
-    newWeight[INDEX].weight = e.target.value;
-    setWeight(newWeight);
-
-    // setWeight(
-    //   weight.map((data) => {
-    //     if (data.index_compare == index) {
-    //       return { ...data, weight: e.target.value };
-    //     }
-    //   })
-    // );
-  };
-
-  const onChangeFactor = (index) => (e) => {
-    let INDEX = 0;
-    for (let i = 0; i < weight.length; i++) {
-      if (weight[i].index_compare == index) {
-        INDEX = i;
-      }
-    }
-    const newWeight = [...weight];
-    newWeight[INDEX].comparator = e.target.value;
-    setWeight(newWeight);
-    // setWeight(
-    //   weight.map((data) => {
-    //     if (data.index_compare == index) {
-    //       return { ...data, comparator: e.target.value };
-    //     }
-    //   })
-    // );
-  };
-
-  const showfacwithWeight = () => {
-    let index = 0;
-    let array = [];
-    for (let i = 0; i < factorlist.length; i++) {
-      for (let j = i + 1; j < factorlist.length; j++) {
-        array.push(
-          <div id="contain-match-display" key={index}>
-            <img
-              value={factorlist[i].Image_factor}
-              src={url + "images/" + factorlist[i].Image_factor}
-              width="70"
-              height="70"
-            ></img>
-
-            <input
-              value={factorlist[i].Id}
-              type="radio"
-              id="radio-1"
-              name={index}
-              onChange={onChangeFactor(index)}
-              defaultChecked={factorlist[i].Id == weight[index].comparator}
-            ></input>
-            {/* {factorlist[i].Id == weight[index].comparator ? (
-              <input
-                value={factorlist[i].Id}
-                type="radio"
-                id="radio-1"
-                name={index}
-                onChange={onChangeFactor(index)}
-                checked={}
-              ></input>
-            ) : (
-              <input
-                value={factorlist[i].Id}
-                type="radio"
-                id="radio-1"
-                name={index}
-                onChange={onChangeFactor(index)}
-              ></input>
-            )} */}
-
-            <img
-              value={factorlist[j].Image_factor}
-              src={url + "images/" + factorlist[j].Image_factor}
-              width="70"
-              height="70"
-            ></img>
-
-            <input
-              value={factorlist[j].Id}
-              type="radio"
-              id="radio-2"
-              name={index}
-              onChange={onChangeFactor(index)}
-              defaultChecked={factorlist[j].Id == weight[index].comparator}
-            ></input>
-            {/* {factorlist[j].Id == weight[index].comparator ? (
-              <input
-                value={factorlist[j].Id}
-                type="radio"
-                id="radio-2"
-                name={index}
-                onChange={onChangeFactor(index)}
-                checked
-              ></input>
-            ) : (
-              <input
-                value={factorlist[j].Id}
-                type="radio"
-                id="radio-2"
-                name={index}
-                onChange={onChangeFactor(index)}
-              ></input>
-            )} */}
-
-            <select
-              className="select-score"
-              defaultValue={weight[index].weight}
-              onChange={onChangeWeight(index)}
-            >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-            </select>
-          </div>
-        );
-        index++;
-      }
-    }
-    return array;
-  };
 
 
   const addfactor = (index) => e => {
@@ -457,75 +152,96 @@ export default function Match() {
 
 
   const calPriority = (e) => {
+    let ischeck = validate(count)
+    if (ischeck == true) {
+      if (checkweight == true) {
+        const payload = {
+          member_ID: currentUser.member_ID,
+          data: weight
+        };
+        Axios.put("api/match/editWeight", payload, { headers: authHeader() })
+        Axios.post("api/match/calPriority", weight, { headers: authHeader() })
+          .then((Response) => {
+            let value = Response.data
+            console.log("calPriority value", value)
+            for (let i = 0; i < value.length; i++) {
+              setPriority(prev => [...prev, { factor: factorlist[i], value: value[i] }])
+            }
+            setCheckpair(false)
+            setStatecal(true)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
 
-    if (checkweight == true) {
-      const payload = {
-        member_ID: currentUser.member_ID,
-        data: weight
-      };
-      Axios.put("api/match/editWeight", payload, { headers: authHeader() })
-      Axios.post("api/match/calPriority", weight, { headers: authHeader() })
-      .then((Response) => {
-        let value = Response.data
-        console.log("calPriority value",value)
-        for (let i = 0; i < value.length; i++) {
-          setPriority(prev => [...prev, { factor: factorlist[i], value: value[i] }])
+      } else {
+
+        const arrayweight = [];
+        for (let i = 0; i < weight.length; i++) {
+          weight.map((data) => {
+            if (data.index_Check == i) {
+              arrayweight.push(data);
+            }
+          });
         }
-        setStatecal(true)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    } else {
-
-      const arrayweight = [];
-      for (let i = 0; i < weight.length; i++) {
-        weight.map((data) => {
-          if (data.index_Check == i) {
-            arrayweight.push(data);
-          }
-        });
+        console.log("save weight: ", arrayweight);
+        const payload = {
+          member_ID: currentUser.member_ID,
+          data: arrayweight,
+        };
+        Axios.post("api/match/createweight", payload, { headers: authHeader() })
+        Axios.post("api/match/calPriority", weight, { headers: authHeader() })
+          .then((Response) => {
+            let value = Response.data
+            console.log("calPriority value", value)
+            for (let i = 0; i < value.length; i++) {
+              setPriority(prev => [...prev, { factor: factorlist[i], value: value[i] }])
+            }
+            setCheckpair(false)
+            setStatecal(true)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
-      console.log("save weight: ", arrayweight);
-      const payload = {
-        member_ID: currentUser.member_ID,
-        data: arrayweight,
-      };
-      Axios.post("api/match/createweight", payload, { headers: authHeader() })
-      Axios.post("api/match/calPriority", weight, { headers: authHeader() })
-      .then((Response) => {
-        let value = Response.data
-        console.log("calPriority value",value)
-        for (let i = 0; i < value.length; i++) {
-          setPriority(prev => [...prev, { factor: factorlist[i], value: value[i] }])
-        }
-        setStatecal(true)
+    } else {
+      Swal.fire({
+        title: 'กรุณากรอกข้อมูลให้ครบ',
+        icon: 'warning',
+        confirmButtonText: 'ตกลง'
       })
-      .catch((error) => {
-        console.log(error);
-      });
     }
-    
+
   }
 
+  const validate = (index) => {
+    let check = false
+    weight.map(data => {
+      if (data.index_Check == index) {
+        if (data.factor_ID) {
+          return check = true
+        } else {
+          return check = false
+        }
+      }
+    })
+    return check
+  }
 
 
   const matchFac = () => {
-      Axios.post("api/match/matchDorm", weight, { headers: authHeader() })
-        .then((Response) => {
-          console.log(Response.data);
-          history.push({
-            pathname: "/resultmatch",
-            state: Response.data,
-          });
-        })
-        .catch((error) => {
-          console.log(error);
+    Axios.post("api/match/matchDorm", weight, { headers: authHeader() })
+      .then((Response) => {
+        console.log(Response.data);
+        history.push({
+          pathname: "/resultmatch",
+          state: Response.data,
         });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
-
-
 
 
 
@@ -574,7 +290,6 @@ export default function Match() {
         </div>
       )
     })
-
     return (
       <div className="match-block-container">
         <h1 className="head-h1-match">กรุณาทำแบบสอบถามเบื้องต้นเพื่อประเมินความสนใจของคุณ</h1>
@@ -603,7 +318,16 @@ export default function Match() {
             setCount(count - 1)
           }}>ย้อนกลับ</button> : <></>}
           {count != pair.length - 1 ? <button className="button-next" onClick={(e) => {
-            setCount(count + 1)
+            let ischeck = validate(count)
+            if (ischeck == true) {
+              setCount(count + 1)
+            } else {
+              Swal.fire({
+                title: 'กรุณากรอกข้อมูลให้ครบ',
+                icon: 'warning',
+                confirmButtonText: 'ตกลง'
+              })
+            }
           }}>ถัดไป</button> : <button className='btn-cal' onClick={calPriority} >แสดงผลลัพธ์</button>}
         </div>
         <div className="clear"></div>
@@ -621,22 +345,22 @@ export default function Match() {
         <div className='result-cal-priority-container'>
           <table className='table-cal-priority'>
             <thead>
-            {value.map((item,key) => {
-              return (
-                <tr key={key}>
-                  <td>
-                    <h3 className='result-text'> คุณให้ความสำคัญกับ <span className="factor-result-cal">{item.factor.factor_Title}</span> </h3>
-                  </td>
-                  <td>
-                    <h3 className='factor-result-cal'>{Math.round(parseInt(item.value * 100))}%</h3>
-                  </td>
-                  <td>
-                    <img className="icon-factor-result" src={"images/" + item.factor.image_Factor} />
-                  </td>
-                </tr>
+              {value.map((item, key) => {
+                return (
+                  <tr key={key}>
+                    <td>
+                      <h3 className='result-text'> คุณให้ความสำคัญกับ <span className="factor-result-cal">{item.factor.factor_Title}</span> </h3>
+                    </td>
+                    <td>
+                      <h3 className='factor-result-cal'>{Math.round(parseInt(item.value * 100))}%</h3>
+                    </td>
+                    <td>
+                      <img className="icon-factor-result" src={"images/" + item.factor.image_Factor} />
+                    </td>
+                  </tr>
 
-              )
-            })}
+                )
+              })}
             </thead>
           </table>
         </div>
@@ -646,38 +370,48 @@ export default function Match() {
   }
 
 
-  // const Showresult = () => {
-  //   let value = [...priority]
-  //   value.sort((a, b,) => b.value - a.value)
-  //   console.log("value in showpriority ", value)
-  //   return (
-  //     <div className="result-cal-container">
-  //       <h1 className='result-cal-priority-label'>ผลการวิเคราะห์คุณลักษณะส่วนบุคคลของคุณ</h1>
-  //       <div className='result-cal-priority-container'>
-  //         <table className='table-cal-priority'>
-  //           {value.map(item => {
-  //             return (
+  const ShowResult = () => {
+    let value = [...priority]
+    value.sort((a, b,) => b.value - a.value)
+    console.log("value in showpriority ", value)
+    return (
+      <div className="result-cal-container">
+        <h1 className='result-cal-priority-label'>ผลการวิเคราะห์คุณลักษณะส่วนบุคคลของคุณ</h1>
+        <div className='result-cal-priority-container'>
+          <table className='table-cal-priority'>
+            <thead>
+              {value.map((item, key) => {
+                return (
+                  <tr key={key}>
+                    <td>
+                      <h3 className='result-text'> คุณให้ความสำคัญกับ <span className="factor-result-cal">{item.factor.factor_Title}</span> </h3>
+                    </td>
+                    <td>
+                      <h3 className='factor-result-cal'>{Math.round(parseInt(item.value * 100))}%</h3>
+                    </td>
+                    <td>
+                      <img className="icon-factor-result" src={"images/" + item.factor.image_Factor} />
+                    </td>
+                  </tr>
 
-  //               <tr>
-  //                 <td>
-  //                   <h3 className='result-text'> คุณให้ความสำคัญกับ <span className="factor-result-cal">{item.factor.factor_Title}</span> </h3>
-  //                 </td>
-  //                 <td>
-  //                   <h3 className='factor-result-cal'>{Math.round(parseInt(item.value * 100))}%</h3>
-  //                 </td>
-  //                 <td>
-  //                   <img className="icon-factor-result" src={"images/" + item.factor.image_Factor} />
-  //                 </td>
-  //               </tr>
+                )
+              })}
+            </thead>
+          </table>
+        </div>
+        <div className="btn-contain">
+          <button className="btn-match-dorm btn-edit-dorm" onClick={(e) => {
+            setCheckpriority(false)
+            setCheckpair(true)
+          }}>แก้ไขคุณลักษณะ</button>
+          <button className="btn-match-dorm" onClick={matchFac}>จับคู่หอพัก</button>
+        </div>
 
-  //             )
-  //           })}
-  //         </table>
-  //       </div>
-  //       <button className="btn-match-dorm" onClick={matchFac}>จับคู่หอพัก</button>
-  //     </div>
-  //   )
-  // }
+      </div>
+    )
+  }
+
+
 
   return (
 
@@ -685,45 +419,12 @@ export default function Match() {
       <div className="container-match-visitor">
         <div className="container-inner-match-visitor">
           <h1 className="head-match-dorm">จับคู่หอพัก</h1>
-          {statecal == false ? <Showpair /> : <Showpriority/>}
+          {checkpriority == true && <ShowResult />}
+          {checkpair == true && <Showpair />}
+          {statecal == true && <Showpriority />}
         </div>
       </div>
     </div>
 
-
-    // <div className='color-background-member'>
-    //   <div className="containermatch">
-    //     <h1 id="header2">จับคู่หอพัก</h1>
-    //     <h1 className="head-match-member">กรุณาทำแบบสอบถามเบื้องต้นเพื่อประเมินความสนใจของท่าน</h1>
-    //     <div>
-    //       <div className="containermatch-2">
-    //         {factorlist.map((data, key) => {
-    //         return (
-    //           <div className="detail" key={key}>
-    //             <img
-    //               src={url + "images/" + data.Image_factor}
-    //               width="50"
-    //               height="50"
-    //               id={key}
-    //             ></img>
-    //             <label>{data.Factor_name}</label>
-    //           </div>
-    //         );
-    //       })}
-    //       </div>
-    //       <h3 id="header3">
-    //         ท่านคิดว่าปัจจัยในด้านใดจำเป็นต่อตัวท่านมากที่สุด
-    //     </h3>
-    //       <div className="containermatch-3">
-    //         {GETResponse == false ? showimage(count) : showfacwithWeight(count)}
-    //       </div>
-
-    //       <button className="btn-back-member">ย้อนกลับ</button>
-    //       <button className="btn-next-member">ถัดไป</button>
-    //       <button onClick={saveweight}>บันทึก</button>
-    //       <button onClick={matchFac}>จับคู่หอพัก</button>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }

@@ -92,12 +92,6 @@
 
   .match-container{
     text-align: center;
-    /* background-image: url("./img/b2.jpg");
-    background-position: center;
-    background-size: contain;
-    background-repeat:no-repeat ;
-    background-attachment: fixed; */
-    /* padding-bottom: 30px; */
   }
 
   .header-contain{
@@ -124,13 +118,3 @@
     color: rgb(241, 241, 241);
     margin-top: -20px;
   }
-  /* .image-match-container{
-    background-image: url("./img/b4.jpg");
-    width: 200vh;
-    height: 100vh;
-    background-position: center;
-    background-size: cover;
-    background-repeat:no-repeat ;
-    position: relative;
-    bottom: 300px;
-  } */

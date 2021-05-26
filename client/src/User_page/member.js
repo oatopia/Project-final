@@ -12,23 +12,26 @@ function Member() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const [search, setSearch] = useState("");
   const currentUser = Auth.getCurrentUser();
+  const [error,setError] = useState()
 
-  const searchFac = (e) => {
-    // e.preventDefault();
-    console.log(search)
-    Axios.post('api/match/searchDorm', {
-      Search: search
-    }, { headers: authHeader() })
-      .then(Response => {
-        console.log("Respone serach: ", Response.data);
-        let data = Response.data
-        history.push({
-          pathname: "/dormdetail",
-          state: data,
+  const searchFac = () => {
+    if (search) {
+      Axios.post('api/match/searchDorm', {
+        Search: search
+      }, { headers: authHeader() })
+        .then(Response => {
+          console.log("Respone serach: ", Response.data);
+          let data = Response.data
+          history.push({
+            pathname: "/dormdetail",
+            state: data,
+          })
+        }).catch(error => {
+          console.log(error);
         })
-      }).catch(error => {
-        console.log(error);
-      })
+    } else {
+      setError("กรุณากรอกชื่อหอพัก")
+    }
   }
 
   if (!currentUser) {
@@ -43,7 +46,7 @@ function Member() {
         <h1 className='head-member-page'>ยินดีต้อนรับคุณ {currentUser.username}</h1>
       </div>
       <div className="searchbar-member">
-        <input className="searchinput-member" placeholder='ชื่อหอพัก...' onChange={(e) => {
+        <input className="searchinput-member" placeholder={error ? error : "ค้นหาหอพัก..."} style={error && { border: '2px solid red' }} onChange={(e) => {
           setSearch(e.target.value);
         }}></input>
         <button className="searchbutton-member" onClick={searchFac}>ค้นหา</button>

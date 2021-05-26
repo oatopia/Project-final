@@ -5,6 +5,7 @@ import D1 from "../img/icon/D1.png";
 import { useHistory } from "react-router";
 import alert from '../img/alert.png'
 import Slider from 'react-slick'
+import Swal from 'sweetalert2'
 
 export default function Match() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/";
@@ -35,13 +36,13 @@ export default function Match() {
       setFactorlist(Response.data)
     })
   }, []);
-  
+
   const addfactor = (index) => e => {
     if (weight.length > 0) {
       var check = false;
       var INDEX = 0;
       for (let i = 0; i < weight.length; i++) {
-        if (weight[i].index_compare == index) {
+        if (weight[i].index_Check == index) {
           check = true;
           INDEX = i;
         }
@@ -152,20 +153,52 @@ export default function Match() {
 
 
   const calPriority = (e) => {
-    Axios.post("api/visitor/calPriority", weight)
-      .then((Response) => {
-        let value = Response.data
-        for (let i = 0; i < value.length; i++) {
-          setPriority(prev => [...prev, { factor: factorlist[i], value: value[i] }])
-          console.log("value: ", value[i])
-        }
-        setStatecal(true)
+    if (weight.length == pair.length) {
+      let ischeck = validate(count)
+      if (ischeck == true) {
+        Axios.post("api/visitor/calPriority", weight)
+          .then((Response) => {
+            let value = Response.data
+            for (let i = 0; i < value.length; i++) {
+              setPriority(prev => [...prev, { factor: factorlist[i], value: value[i] }])
+              console.log("value: ", value[i])
+            }
+            setStatecal(true)
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      } else {
+        Swal.fire({
+          title: 'กรุณากรอกข้อมูลให้ครบ',
+          icon: 'warning',
+          confirmButtonText: 'ตกลง'
+        })
+      }
+    } else {
+      Swal.fire({
+        title: 'กรุณากรอกข้อมูลให้ครบ',
+        icon: 'warning',
+        confirmButtonText: 'ตกลง'
       })
-      .catch((error) => {
-        console.log(error);
-      });
+    }
+
   }
 
+
+  const validate = (index) => {
+    let check = false
+    weight.map(data => {
+      if (data.index_Check == index) {
+        if (data.factor_ID) {
+          return check = true
+        } else {
+          return check = false
+        }
+      }
+    })
+    return check
+  }
 
   const showpriority = () => {
     let value = [...priority]
@@ -177,21 +210,21 @@ export default function Match() {
         <div className='result-cal-priority-container'>
           <table className='table-cal-priority'>
             <thead>
-            {value.map((item,key) => {
-              return (
-                <tr key={key}>
-                  <td>
-                    <h3 className='result-text'> คุณให้ความสำคัญกับ <span className="factor-result-cal">{item.factor.factor_Title}</span> </h3>
-                  </td>
-                  <td>
-                    <h3 className='factor-result-cal'>{Math.round(parseInt(item.value * 100))}%</h3>
-                  </td>
-                  <td>
-                    <img className="icon-factor-result" src={"images/" + item.factor.image_Factor} />
-                  </td>
-                </tr>
-              )
-            })}
+              {value.map((item, key) => {
+                return (
+                  <tr key={key}>
+                    <td>
+                      <h3 className='result-text'> คุณให้ความสำคัญกับ <span className="factor-result-cal">{item.factor.factor_Title}</span> </h3>
+                    </td>
+                    <td>
+                      <h3 className='factor-result-cal'>{Math.round(parseInt(item.value * 100))}%</h3>
+                    </td>
+                    <td>
+                      <img className="icon-factor-result" src={"images/" + item.factor.image_Factor} />
+                    </td>
+                  </tr>
+                )
+              })}
             </thead>
           </table>
         </div>
@@ -266,12 +299,22 @@ export default function Match() {
           setCount(count - 1)
         }}>ย้อนกลับ</button> : <></>}
         {count != pair.length - 1 ? <button className="button-next" onClick={(e) => {
-          setCount(count + 1)
+          let ischeck = validate(count)
+          if (ischeck == true) {
+            setCount(count + 1)
+          } else {
+            Swal.fire({
+              title: 'กรุณากรอกข้อมูลให้ครบ',
+              icon: 'warning',
+              confirmButtonText: 'ตกลง'
+            })
+          }
         }}>ถัดไป</button> : <button className='btn-cal' onClick={calPriority}>แสดงผลลัพธ์</button>}
       </div>
       <div className="clear"></div>
     </div>
   )
+
 
 
 

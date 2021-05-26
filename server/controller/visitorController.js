@@ -19,7 +19,6 @@ export const searchdorm = (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(data);
       res.send(data);
     }
   });
@@ -28,11 +27,10 @@ export const searchdorm = (req, res) => {
 
 export const calPriority = (req, res) => {
   const priority = req.body;
-  console.log("priority data: ",priority);
-  let Matrixlength = calMatLength(priority.length);
-  console.log('Matrixlength:',Matrixlength);
+  // console.log("priority data: ",priority);
+  // console.log('Matrixlength:',Matrixlength);
   let Matrixcal = calmatrix(priority)
-  console.log("Matrixcal", Matrixcal);
+  // console.log("Matrixcal", Matrixcal);
   res.send(Matrixcal)
 };
 
@@ -43,13 +41,8 @@ export const calPriority = (req, res) => {
 
 export const matchDorm = (req, res) => {
   let jsondata = req.body;
-  // console.log(jsondata);
-  // let matrix = [];
   let Matrixlength = calMatLength(jsondata.length);
-  // console.log(Matrixlength);
-
   let Matrixcal = calmatrix(jsondata);
-  // console.log("data", Matrixcal);
 
 
   let DormData = [];
@@ -59,7 +52,6 @@ export const matchDorm = (req, res) => {
     console.log(err);
   }
 
-  // console.log("Dorm data:" + DormData);
   let ArrayDorm = magDorm(DormData, Matrixlength);
   console.log("Array Dorm", ArrayDorm);
   const ArrayDormlength = ArrayDorm.length;
@@ -75,15 +67,8 @@ export const matchDorm = (req, res) => {
     suiValue = 0;
   }
 
-  // console.log("Suitable Value: ", ArrayDorm);
-
-
   ArrayDorm.sort((a, b) => b.Sui_Value - a.Sui_Value);
-  // console.log("Array sort:", ArrayDorm);
-
   let MatchArray = [];
-  // let index = 0;
-
   for (let i = 0; i < 10; i++) {
     MatchArray.push(ArrayDorm[i].dorm_ID);
   }
