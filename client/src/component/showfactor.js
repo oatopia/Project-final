@@ -18,7 +18,7 @@ export default function Match() {
   const [pair, setPair] = useState([])
   var history = useHistory();
   useEffect(() => {
-    Axios.get("api/visitor/getfactor").then((Response) => {
+    Axios.get(url+"api/visitor/getfactor").then((Response) => {
       let data = Response.data
       let number = 0;
       for (let i = 0; i < data.length; i++) {
@@ -134,7 +134,7 @@ export default function Match() {
   };
 
   const matchFac = (e) => {
-    Axios.post("api/visitor/matchDorm", weight)
+    Axios.post(url+"api/visitor/matchDorm", weight)
       .then((Response) => {
         console.log(Response.data);
         history.push({
@@ -156,7 +156,7 @@ export default function Match() {
     if (weight.length == pair.length) {
       let ischeck = validate(count)
       if (ischeck == true) {
-        Axios.post("api/visitor/calPriority", weight)
+        Axios.post(url+"api/visitor/calPriority", weight)
           .then((Response) => {
             let value = Response.data
             for (let i = 0; i < value.length; i++) {

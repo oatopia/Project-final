@@ -25,7 +25,7 @@ export default function Match() {
 
   useEffect(() => {
     Axios.post(
-      "api/match/getWeight",
+      url+"api/match/getWeight",
       { member_ID: currentUser.member_ID },
       { headers: authHeader() }
     )
@@ -159,8 +159,8 @@ export default function Match() {
           member_ID: currentUser.member_ID,
           data: weight
         };
-        Axios.put("api/match/editWeight", payload, { headers: authHeader() })
-        Axios.post("api/match/calPriority", weight, { headers: authHeader() })
+        Axios.put(url+"api/match/editWeight", payload, { headers: authHeader() })
+        Axios.post(url+"api/match/calPriority", weight, { headers: authHeader() })
           .then((Response) => {
             let value = Response.data
             console.log("calPriority value", value)
@@ -189,8 +189,8 @@ export default function Match() {
           member_ID: currentUser.member_ID,
           data: arrayweight,
         };
-        Axios.post("api/match/createweight", payload, { headers: authHeader() })
-        Axios.post("api/match/calPriority", weight, { headers: authHeader() })
+        Axios.post(url+"api/match/createweight", payload, { headers: authHeader() })
+        Axios.post(url+"api/match/calPriority", weight, { headers: authHeader() })
           .then((Response) => {
             let value = Response.data
             console.log("calPriority value", value)
@@ -230,7 +230,7 @@ export default function Match() {
 
 
   const matchFac = () => {
-    Axios.post("api/match/matchDorm", weight, { headers: authHeader() })
+    Axios.post(url+"api/match/matchDorm", weight, { headers: authHeader() })
       .then((Response) => {
         console.log(Response.data);
         history.push({

@@ -17,7 +17,7 @@ function Admin() {
 
 
   const deletetMember = (id) => {
-    Axios.delete(`api/Admin/memberDelete/${id}`).then((Response) => {
+    Axios.delete(url+`api/Admin/memberDelete/${id}`).then((Response) => {
       setMember(
         member.filter((val) => {
           return val.member_ID != id;
@@ -27,7 +27,7 @@ function Admin() {
   };
 
   const deleteOwner = (id) => {
-    Axios.delete(`api/Admin/ownerDelete/${id}`).then((Response) => {
+    Axios.delete(url+`api/Admin/ownerDelete/${id}`).then((Response) => {
       setMember(
         member.filter((val) => {
           return val.member_ID != id;
@@ -37,7 +37,7 @@ function Admin() {
   };
 
   useEffect(() => {
-    Axios.get("api/Admin/user")
+    Axios.get(url+"api/Admin/user")
       .then((Response) => {
         let data = Response.data
         setMember(data[0])

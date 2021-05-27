@@ -9,7 +9,6 @@ import * as Yup from "yup"
 import Swal from 'sweetalert2'
 
 function Register() {
-    const url = "https://matching-dorm-tu-server.herokuapp.com/";
     const history = useHistory();
 
     const validate = Yup.object({

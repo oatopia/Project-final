@@ -17,7 +17,7 @@ function ResultMatch() {
   useEffect(() => {
     window.scrollTo(0, 0)
     Axios.post(
-      "/api/match/getBookmark",
+      url+"/api/match/getBookmark",
       { member_ID: currentUser.member_ID },
       { headers: authHeader() }
     )
@@ -42,7 +42,7 @@ function ResultMatch() {
   const handleonclick = (saveid) => (e) => {
     e.stopPropagation()
     let id = saveid
-    Axios.delete(`/api/match/deletebook/${id}`, {
+    Axios.delete(url+`/api/match/deletebook/${id}`, {
       headers: authHeader(),
     })
       .then((Response) => {

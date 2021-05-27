@@ -19,7 +19,7 @@ function Member() {
   }, [])
   const searchFac = () => {
     if (search) {
-      Axios.post('api/match/searchDorm', {
+      Axios.post(url+'api/match/searchDorm', {
         Search: search
       }, { headers: authHeader() })
         .then(Response => {
