@@ -276,7 +276,7 @@ function Adminfactor() {
                         </div>
                       ) : (
                         <img
-                          src={"images/" + data.image_Factor}
+                          src={url+"images/" + data.image_Factor}
                           width="60px"
                           height="60px"
                         ></img>

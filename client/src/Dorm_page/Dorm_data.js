@@ -269,7 +269,7 @@ const Owner = () => {
                     <img
                       key={key}
                       className="img-dorm-data"
-                      src={"img_Dorm/" + pic.image}
+                      src={url+"img_Dorm/" + pic.image}
                     />
                   );
                 })}
@@ -756,7 +756,7 @@ const Owner = () => {
                       <div className="Image-edit-block">
                         <img
                           className="Image-edit-dorm"
-                          src={"img_Dorm/" + data.image}
+                          src={url+"img_Dorm/" + data.image}
                         />
                         <img
                           src={DeleteIcon}

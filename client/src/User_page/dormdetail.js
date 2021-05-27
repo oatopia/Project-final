@@ -116,7 +116,7 @@ function DormVisitor() {
           <img className="book-icon book-icon-in-detail-page" src={checkBook(state.Dorm.dorm_ID) == true ? bookon : bookoff} onClick={handleonclick(state.Dorm.dorm_ID)}/>
           <div className="image-dormVisitor-container">
             {state.Image.map(img => {
-              return <img className='img-box-dormVisitor' src={"img_Dorm/" + img.image}></img>
+              return <img className='img-box-dormVisitor' src={url+"img_Dorm/" + img.image}></img>
             })}
           </div>
 
