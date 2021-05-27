@@ -7,9 +7,9 @@ import Auth from "../service/authService.js";
 import { Redirect, useHistory } from "react-router-dom";
 import authHeader from "../service/auth-header.js";
 import { useLocation } from "react-router";
-import Dorminfo from "../component/Dorm/Dorm_info.js";
 import DeleteIcon from "../img/deleteicon.png";
-import axios from "axios";
+import axios from "axios"
+import Swal from 'sweetalert2'
 
 const Owner = () => {
   const url = "https://matching-dorm-tu-server.herokuapp.com/";
@@ -207,9 +207,21 @@ const Owner = () => {
 
   const EditDorm = (e) => {
     let id = dorm.dorm_ID;
-    axios.put(`api/dorm/UpdateDorm/${id}`, dorm).then((Response) => {
-      setShowedit(false);
-    });
+    if(dorm.dorm_Name && dorm.type_D && dorm.address && dorm.deposit
+      && dorm.common_Fee && dorm.water_Bill && dorm.electric_Bill 
+      && dorm.detail && dorm.ad_Name && dorm.contact_Number 
+      && dorm.e_Mail && dorm.line_ID){
+        axios.put(`api/dorm/UpdateDorm/${id}`, dorm).then((Response) => {
+          setShowedit(false);
+        });
+      }else{
+        Swal.fire({
+          title: "กรุณากรอกข้อมูลให้ครบถ้วน",
+          icon: 'warning',
+          confirmButtonText: 'ตกลง'
+        })
+      }
+    
   };
 
   const addroomType = (order) => (e) => {
@@ -805,3 +817,4 @@ const Owner = () => {
 };
 
 export default Owner;
+

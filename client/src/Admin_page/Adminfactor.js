@@ -5,6 +5,9 @@ import NavbarAdmin from "../component/Navbar/NavbarAdmin.js";
 import deleteicon from "../img/deleteicon.png";
 import editicon from "../img/edit.png";
 import addicon from "../img/plus 2.png";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup"
+import Swal from 'sweetalert2'
 
 function Adminfactor() {
   // const url = "https://matching-dorm-tu-server.herokuapp.com/"
@@ -28,6 +31,8 @@ function Adminfactor() {
       });
   }, []);
 
+
+  // บันทึกปัจจัยในการตัดสินใจ--------------------------------------------------------------------------------
   const saveFactor = () => {
     const formData = new FormData();
     formData.append("ImageFactor", image);
@@ -49,57 +54,9 @@ function Adminfactor() {
       });
   };
 
-  const ComAdd = () => {
-    return (
-      <div className="add-box">
-        <div className="text-add-factor">
-          <div className="text-factor-box">
-            <h4>ชื่อปัจจัย</h4>
-            <input
-              className='text-factor-name'
-              type="text"
-              onChange={(e) => {
-                setAddfactortitle(e.target.value);
-              }}
-            />
-          </div>
 
-          <div className="text-factor-box">
-            <h4>รายละเอียด</h4>
-            <input
-              className='text-factor-name'
-              type="text"
-              onChange={(e) => {
-                setAddfactor(e.target.value);
-              }}
-            // onChange={(e) => {
-            //   setAddfactor(e.target.value);
-            // }}
-            />
-          </div>
 
-          <input
-            type="file"
-            className='file-factor-image'
-            onChange={(e) => {
-              setImage(e.target.files[0]);
-              // console.log(e.target.files[0]);
-            }}
-          ></input>
-        </div>
-
-        <button
-          className='btn-save-factor'
-          onClick={() => {
-            saveFactor();
-          }}
-        >
-          บันทึกปัจจัย
-        </button>
-      </div>
-    );
-  };
-
+  //--------------------------------------ลบปัจจัย-------------------------------------------------------------------
   const deleteFactor = (id) => {
     console.log("ID:", id);
     Axios.delete(`api/Admin/factorDelete/${id}`).then((Response) => {
@@ -111,6 +68,8 @@ function Adminfactor() {
     });
   };
 
+
+  //--------------------------------------อัพเดทปัจจัย-------------------------------------------------------------------
   const updatebyId = (id) => {
 
     const formData = new FormData();
@@ -134,6 +93,15 @@ function Adminfactor() {
       });
   };
 
+
+  const validate = Yup.object({
+    factor_title: Yup.string().required("กรุณากรอกข้อมูลให้ครบถ้วน"),
+    factor_name: Yup.string().required("กรุณากรอกข้อมูลให้ครบถ้วน"),
+  })
+  const validateedit = Yup.object({
+    factor_title_edit: Yup.string().required("กรุณากรอกข้อมูลให้ครบถ้วน"),
+    factor_name_edit: Yup.string().required("กรุณากรอกข้อมูลให้ครบถ้วน"),
+  })
   return (
     <div className="content-factor-Admin">
       <NavbarAdmin />
@@ -143,115 +111,181 @@ function Adminfactor() {
           className="add-factor-Admin"
           onClick={() => {
             setShowadd(true);
-          }}
-        >
+          }}>
           <img className='add-btn-adminfac' src={addicon} width='30px' height='30px'></img>
           เพิ่มปัจจัย
         </button>
+        {/* //--------------------------------------แสดงส่วนบันทึกปัจจัย------------------------------------------------------------------- */}
         {showadd &&
-          <div className="add-box">
-            <div className="text-add-factor">
-              <div className="text-factor-box">
-                <h4>ชื่อปัจจัย</h4>
-                <input
-                  className='text-factor-name'
-                  type="text"
-                  onChange={(e) => {
-                    setAddfactortitle(e.target.value);
-                  }}
-                />
-              </div>
+          <Formik
+            initialValues={{
+              factor_title: "",
+              factor_name: ""
+            }}
+            validationSchema={validate}
+            onSubmit={value => {
+              console.log(value)
+              const formData = new FormData();
+              formData.append("ImageFactor", image);
+              formData.append("new_factortitle", value.factor_title);
+              formData.append("new_factor", value.factor_name);
+              const config = {
+                headers: {
+                  "content-type": "multipart/form-data",
+                },
+              };
+              Axios.post("api/Admin/saveFactor", formData, config)
+                .then((Response) => {
+                  console.log(Response);
+                  setShowadd(false);
+                  setFactor([...factor, Response.data]);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            }}
+          >
+            {({ errors }) => (
+              <Form className="add-box">
+                <div className="text-add-factor">
+                  <div className="text-factor-box">
+                    <h4>ชื่อปัจจัย</h4>
+                    <Field
+                      className='text-factor-name'
+                      type="text"
+                      name='factor_title'
+                      style={errors.factor_title && { border: '1px solid red' }}
+                    />
+                    <ErrorMessage component='div' name="factor_title" className='error-text' />
+                  </div>
 
-              <div className="text-factor-box">
-                <h4>รายละเอียด</h4>
-                <input
-                  className='text-factor-name'
-                  type="text"
-                  onChange={(e) => {
-                    setAddfactor(e.target.value);
-                  }}
-                />
-              </div>
+                  <div className="text-factor-box">
+                    <h4>รายละเอียด</h4>
+                    <Field
+                      className='text-factor-name'
+                      type="text"
+                      name='factor_name'
+                      style={errors.factor_name && { border: '1px solid red' }}
+                    />
+                    <ErrorMessage component='div' name="factor_name" className='error-text' />
+                  </div>
 
-              <input
-                type="file"
-                className='file-factor-image'
-                onChange={(e) => {
-                  setImage(e.target.files[0]);
-                }}
-              ></input>
-            </div>
+                  <input
+                    type="file"
+                    className='file-factor-image'
+                    onChange={(e) => {
+                      setImage(e.target.files[0]);
+                    }}
+                  ></input>
+                </div>
 
-            <button
-              className='btn-save-factor'
-              onClick={() => {
-                saveFactor();
-              }}
-            >
-              บันทึกปัจจัย
+                <button
+                  className='btn-save-factor'
+                  type='submit'
+                >
+                  บันทึกปัจจัย
             </button>
-          </div>}
+              </Form>
+
+            )}
+          </Formik>
+        }
+
+        {/* //--------------------------------------แสดงปัจจัย------------------------------------------------------------------- */}
         {factor.map((data) => {
           return (
             <div className="factor-box-Admin">
-              <div className="factor-inner-box-Admin">
-                <h1 className="factor-info">{data.factor_ID}</h1>
-                {textinput == data.factor_ID ? (
-                  <div>
-                    <input
-                    type="text"
-                    className="factor-info"
-                    id="edit-input"
-                    defaultValue={data.factor_Title}
-                    onChange={(e) => {
-                      setEditTitle(e.target.value);
-                    }}
-                  />
-                  <input
-                    type="text"
-                    className="factor-info"
-                    id="edit-input"
-                    defaultValue={data.factor_Name}
-                    onChange={(e) => {
-                      setEditname(e.target.value);
-                    }}
-                  />
-                  </div>
-                ) : (
-                  <div className='factor-name-title'>
-                    <h2 className="factor-title" id="fname">
-                      {data.factor_Title}
-                    </h2>
-                    <h4 className="factor-name" id="fname">
-                      {data.factor_Name}
-                    </h4>
-                  </div>
-                )}
+              <div >
 
-                {textinput == data.factor_ID ? (
-                  <div className="edit-mini-box">
-                    <input type="file"
-                      className="edit-image"
-                      onChange={(e) => { setEditimg(e.target.files[0]) }}
-                    ></input>
+                <Formik
+                  initialValues={{
+                    factor_title_edit: "",
+                    factor_name_edit: ""
+                  }}
+                  validationSchema={validateedit}
+                  onSubmit={value => {
+                    let id = data.factor_ID
+                    console.log(value)
+                    const formData = new FormData();
+                    formData.append("EditImage", editimg);
+                    formData.append("EditName", value.factor_name_edit);
+                    formData.append("EditTitle", value.factor_title_edit);
+                    const config = {
+                      headers: {
+                        "content-type": "multipart/form-data",
+                      },
+                    };
+                    Axios.put(`api/Admin/updateFactor/${id}`, formData, config)
+                      .then((Response) => {
+                        let Data = Response.data
+                        setFactor(
+                          factor.map((item) => {
+                            return item.factor_ID == id ? { factor_ID: id, factor_Title: Data.factor_Title, factor_Name: Data.factor_Name, image_Factor: Data.image_Factor }
+                              : item;
+                          }));
+                        setTextinput("");
+                      });
+                  }}
+                >
+                  {({ errors }) => (
+                    <Form className="factor-inner-box-Admin">
+                      <h1 className="factor-info">{data.factor_ID}</h1>
+                      {textinput == data.factor_ID ? (
+                        <div className="input-text-edit-contain">
+                          <Field
+                            type="text"
+                            className="factor-info"
+                            id="edit-input-title"
+                            name="factor_title_edit"
+                            style={errors.factor_title_edit && { border: '1px solid red' }}
+                          />
+                          <Field
+                            type="text"
+                            className="factor-info"
+                            id="edit-input-name"
+                            name="factor_name_edit"
+                            style={errors.factor_name_edit && { border: '1px solid red' }}
+                          />
+                          <ErrorMessage component='div' name="factor_name_edit" className='error-text' />
+                        </div>
+                      ) : (
+                        <div className='factor-name-title'>
+                          <h2 className="factor-title" id="fname">
+                            {data.factor_Title}
+                          </h2>
+                          <h4 className="factor-name" id="fname">
+                            {data.factor_Name}
+                          </h4>
+                        </div>
+                      )}
 
-                    <button
-                      className="save-edit-button"
-                      onClick={() => {
-                        updatebyId(data.factor_ID);
-                      }}
-                    >
-                      บันทึกการแก้ไข
-                    </button>
-                  </div>
-                ) : (
-                  <img
-                    src={"images/" + data.image_Factor}
-                    width="60px"
-                    height="60px"
-                  ></img>
-                )}
+                      {textinput == data.factor_ID ? (
+                        <div className="edit-mini-box">
+                          <input type="file"
+                            className="edit-image"
+                            onChange={(e) => { setEditimg(e.target.files[0]) }}
+                          ></input>
+
+                          <button
+                            className="save-edit-button"
+                            type="submit"
+                          >
+                            บันทึกการแก้ไข
+                      </button>
+
+                        </div>
+                      ) : (
+                        <img
+                          src={"images/" + data.image_Factor}
+                          width="60px"
+                          height="60px"
+                        ></img>
+                      )}
+                    </Form>
+                  )}
+                </Formik>
               </div>
+
               <div className="factor-icon-box-Admin">
                 <img
                   src={editicon}

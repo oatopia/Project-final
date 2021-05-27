@@ -206,7 +206,7 @@ export default function Match() {
       }
     } else {
       Swal.fire({
-        title: 'กรุณากรอกข้อมูลให้ครบ',
+        title: 'กรุณากดเลือกปัจจัย',
         icon: 'warning',
         confirmButtonText: 'ตกลง'
       })
@@ -323,7 +323,7 @@ export default function Match() {
               setCount(count + 1)
             } else {
               Swal.fire({
-                title: 'กรุณากรอกข้อมูลให้ครบ',
+                title: 'กรุณากดเลือกปัจจัย',
                 icon: 'warning',
                 confirmButtonText: 'ตกลง'
               })
@@ -400,11 +400,12 @@ export default function Match() {
           </table>
         </div>
         <div className="btn-contain">
-          <button className="btn-match-dorm btn-edit-dorm" onClick={(e) => {
+          <button className="btn-edit-dorm" onClick={(e) => {
             setCheckpriority(false)
             setCheckpair(true)
+            setPriority([])
           }}>แก้ไขคุณลักษณะ</button>
-          <button className="btn-match-dorm" onClick={matchFac}>จับคู่หอพัก</button>
+          <button style={{marginRight:"20px"}} className="btn-match-dorm" onClick={matchFac}>จับคู่หอพัก</button>
         </div>
 
       </div>

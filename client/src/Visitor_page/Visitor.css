@@ -62,12 +62,18 @@
     height: 50px;
     font-size: 22px;
     border-radius: 10px;
-    border: none;
+    border: 1px solid white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin-right: 20px;
     font-family: 'Prompt', sans-serif;
     margin-left: 20px;
-    outline-color:#1655a7;
+    outline:none;
+    transition-duration: 0.3s;
+  }
+
+  .searchinput-Visitor:focus{
+    border: 1px solid #1655a7;
+    transition-duration: 0.3s;
   }
   
 

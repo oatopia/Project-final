@@ -18,6 +18,7 @@ function ResultMatch() {
   const [dorm,setDorm] = useState([])
   const [bookmark,setBookmark] = useState([])
   useEffect(() => {
+    window.scrollTo(0, 0)
     let payload = {
       member_ID: currentUser.member_ID , 
       Dorm:state

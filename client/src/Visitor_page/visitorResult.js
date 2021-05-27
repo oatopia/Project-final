@@ -197,8 +197,10 @@ function VisitorResult() {
 
   return (
     <div className="contain-visitor-result">
+      <div className="navbar-contain-result">
       <Navbar />
-      {state == "" ? <h1>ไม่พบหอพักที่ท่านค้นหา</h1> : <Showresult/>}
+      </div>
+      {state == "" ? <h1 className='text-not-found-dorm'>ไม่พบหอพักที่ท่านค้นหา</h1> : <Showresult/>}
     </div>
   );
 }

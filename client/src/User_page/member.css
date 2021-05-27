@@ -18,15 +18,6 @@
   color: #8ac4d0;
   text-shadow: 2px 2px #28527a;
 }
-/* .appcontainer-member {
-  background-image: url("../img/background.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  min-height: 220vh;
-} */
-
 .searchbar-member {
   display: flex;
   justify-content: space-between;
@@ -75,4 +66,24 @@
 .searchbutton-member:hover{
   transition-duration: 0.5s;
     background-color: #002a61;
+}
+
+.text-match-scroll-page{
+    font-size: 26px;
+    font-weight: bold;
+    color: #8ac4d0;
+    border: 3px solid #8ac4d0;
+    border-radius: 10px;
+    padding: 10px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 50px;
+    transition-duration: 0.3s;
+    margin-top: -50px;
+}
+
+.text-match-scroll-page:hover{
+    color: #1655a7;
+    border: 3px solid #1655a7;
+    transition-duration: 0.3s;
 }

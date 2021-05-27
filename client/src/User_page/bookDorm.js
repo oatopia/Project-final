@@ -13,8 +13,9 @@ function ResultMatch() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const currentUser = Auth.getCurrentUser();
   const [book, setBook] = useState([]);
-  const [checkdata, setCheckdata] = useState(false)
+  const [checkdata, setCheckdata] = useState()
   useEffect(() => {
+    window.scrollTo(0, 0)
     Axios.post(
       "/api/match/getBookmark",
       { member_ID: currentUser.member_ID },
@@ -26,6 +27,8 @@ function ResultMatch() {
         if (res.length > 0) {
           setCheckdata(true)
           setBook(res);
+        }else{
+          setCheckdata(false)
         }
       })
       .catch((error) => {
@@ -49,6 +52,9 @@ function ResultMatch() {
             return item.Dorm.save_ID != id
           })
         )
+        if(!book){
+          setCheckdata(false)
+        }
       })
       .catch((error) => {
         console.log("Error from delete bookmark", error)
@@ -62,9 +68,10 @@ function ResultMatch() {
         <NavbarMember />
       </div>
 
+      {checkdata == false && <h1 className="text-no-dorm-save">ไม่มีรายการหอพักที่บันทึก</h1>}
+      {checkdata == true &&    
       <div>
         <h1 className='h1-bookdorm'>รายการหอพักที่บันทึก</h1>
-
         {book.map((data, key) => {
           return (
             <div className="dorm-container" key={key} onClick={() => {
@@ -90,6 +97,7 @@ function ResultMatch() {
           )
         })}
       </div>
+      }
     </div>
   );
 }

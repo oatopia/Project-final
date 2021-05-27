@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect, useState, useRef } from 'react';
 import { Redirect, useHistory } from 'react-router-dom'
 import './member.css';
 import NavbarMember from '../component/Navbar/NavbarMember.js';
@@ -12,8 +12,11 @@ function Member() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const [search, setSearch] = useState("");
   const currentUser = Auth.getCurrentUser();
-  const [error,setError] = useState()
-
+  const [error, setError] = useState()
+  const myref = useRef(null)
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   const searchFac = () => {
     if (search) {
       Axios.post('api/match/searchDorm', {
@@ -44,14 +47,17 @@ function Member() {
           <NavbarMember></NavbarMember>
         </div>
         <h1 className='head-member-page'>ยินดีต้อนรับคุณ {currentUser.username}</h1>
+        <p className='text-match-scroll-page' onClick={() => { myref.current.scrollIntoView() }}>เริ่มต้นใช้งาน</p>
       </div>
       <div className="searchbar-member">
         <input className="searchinput-member" placeholder={error ? error : "ค้นหาหอพัก..."} style={error && { border: '2px solid red' }} onChange={(e) => {
           setSearch(e.target.value);
         }}></input>
         <button className="searchbutton-member" onClick={searchFac}>ค้นหา</button>
+      </div >
+      <div ref={myref}>
+        <Match_member />
       </div>
-      <Match_member />
     </div>
   );
 }

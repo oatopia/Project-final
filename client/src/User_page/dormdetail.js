@@ -17,24 +17,31 @@ function DormVisitor() {
   const [bookmark,setBookmark] = useState({}) 
   const currentUser = Auth.getCurrentUser();
   useEffect(()=>{
-    let payload = {
-      member_ID: currentUser.member_ID,
-      dorm_ID: state.Dorm.dorm_ID
+
+    window.scrollTo(0, 0)
+    if(state){
+      let payload = {
+        member_ID: currentUser.member_ID,
+        dorm_ID: state.Dorm.dorm_ID
+      }
+      Axios.post(
+        "api/match/checkbookmark",payload,
+        { headers: authHeader() }
+      ).then((Response) => {
+          if(Response.data == ""){
+            console.log("This dorm has not bookmark!")
+          }else{
+            console.log("This dorm has bookmark!")
+            setBookmark(Response.data)
+          }
+        })
+        .catch((error) => {
+          console.log("Error from get dorm", error);
+        });
+    }else{
+      
     }
-    Axios.post(
-      "api/match/checkbookmark",payload,
-      { headers: authHeader() }
-    ).then((Response) => {
-        if(Response.data == ""){
-          console.log("This dorm has not bookmark!")
-        }else{
-          console.log("This dorm has bookmark!")
-          setBookmark(Response.data)
-        }
-      })
-      .catch((error) => {
-        console.log("Error from get dorm", error);
-      });
+    
   },[])
 
 
@@ -101,6 +108,8 @@ function DormVisitor() {
       <div className='Navbar-shadow-box'>
         <Navbar></Navbar>
       </div>
+
+      {state == "" ? <h1 className='text-not-found-dorm'>ไม่พบหอพักที่ท่านค้นหา</h1> :
       <div className="dormVisitor-block">
         <div className="dorm-data-container">
           <label className="name-dormVisitor">หอพัก{state.Dorm.dorm_Name}</label>
@@ -270,8 +279,9 @@ function DormVisitor() {
             </div>
             <button className='btn-back-dormVisitor' onClick={()=>{ history.goBack()}}>ย้อนกลับ</button>
           </div>
-        </div>
+        </div>   
       </div>
+       }
     </div>
   );
 }

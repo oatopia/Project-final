@@ -5,8 +5,6 @@ import addImgicon from "../../img/Group 86.png";
 import Auth from "../../service/authService.js";
 import authHeader from "../../service/auth-header.js";
 import { Redirect, useHistory } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup"
 import Swal from 'sweetalert2'
 
 export default function Indorm() {
@@ -131,9 +129,9 @@ export default function Indorm() {
             });
           history.push("/owner");
         });
-    }else{
+    } else {
       Swal.fire({
-        title: "ช้อมูลไม่ครบถ้วน",
+        title: "กรุณากรอกข้อมูลให้ครบถ้วน",
         icon: 'warning',
         confirmButtonText: 'ตกลง'
       })
@@ -225,34 +223,11 @@ export default function Indorm() {
       })
     );
   };
-  const validate = Yup.object({
-    dorm_Name: Yup.string().required("กรุณากรอกชื่อหอพัก"),
-    address: Yup.string().required("กรุณากรอกที่อยู่หอพัก"),
-    deposit: Yup.string().required("กรุณากรอกที่อยู่หอพัก"),
-  });
   return (
     <div className="containIn">
       <div className="Indorm">
         <h1>ข้อมูลหอพัก</h1>
         <div className="line-head"></div>
-        <Formik
-          initialValues={{
-            dorm_Name: "",
-            type_D: "",
-            address: "",
-            deposit: "",
-            common_Fee: "",
-            electric_Bill: "",
-            water_Bill: "",
-            detail: "",
-            ad_Name: "",
-            contact_Number: "",
-            e_Mail: "",
-            line_ID: ""
-          }}
-        >
-
-        </Formik>
         <h2>ชื่อหอพัก</h2>
         <input
           className="chong-one"
@@ -415,7 +390,7 @@ export default function Indorm() {
                 <input
                   className="chong-pay"
                   onChange={(e) => {
-                    setWater(e.target.value);
+                    setElec(e.target.value);
                   }}
                 ></input>
               </td>

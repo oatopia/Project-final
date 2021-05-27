@@ -18,9 +18,11 @@
 }
 
 input.factor-info{
+    width: 100%;
     outline: none;
     border-radius: 5px;
     border: none;
+    font-size: 22px;
 }
 input.factor-info:focus{
     border: 2px solid #1655a7;
@@ -28,6 +30,7 @@ input.factor-info:focus{
 
 .factor-name-title{
     margin-left: 20px;
+    
 }
 
 .factor-title{
@@ -65,6 +68,13 @@ input.factor-info:focus{
     border: none;
     color: white;
     font-size: 28px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.add-factor-Admin:hover{
+   background-color:#083774;
+   transition-duration: 0.3s;
 }
 
 .add-box{
@@ -178,3 +188,11 @@ input.factor-info:focus{
     color: #0e4fa3;
 }
 
+.input-text-edit-contain{
+    margin-left: 20px;
+    width: 40%;
+}
+
+#edit-input-title{
+    margin-bottom: 20px;
+}

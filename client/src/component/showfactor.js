@@ -170,14 +170,14 @@ export default function Match() {
           })
       } else {
         Swal.fire({
-          title: 'กรุณากรอกข้อมูลให้ครบ',
+          title: 'กรุณากดเลือกปัจจัย',
           icon: 'warning',
           confirmButtonText: 'ตกลง'
         })
       }
     } else {
       Swal.fire({
-        title: 'กรุณากรอกข้อมูลให้ครบ',
+        title: 'กรุณากดเลือกปัจจัย',
         icon: 'warning',
         confirmButtonText: 'ตกลง'
       })
@@ -304,7 +304,7 @@ export default function Match() {
             setCount(count + 1)
           } else {
             Swal.fire({
-              title: 'กรุณากรอกข้อมูลให้ครบ',
+              title: 'กรุณากดเลือกปัจจัย',
               icon: 'warning',
               confirmButtonText: 'ตกลง'
             })
