@@ -8,7 +8,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import Swal from 'sweetalert2'
 
 export default function Indorm() {
-  // const url = "https://matching-dorm-tu-server.herokuapp.com/"
+  const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const facilitiesinsidedorm = [
     "เครื่องปรับอากาศ",
     "เครื่องทำน้ำอุ่น",

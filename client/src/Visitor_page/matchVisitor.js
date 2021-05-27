@@ -7,6 +7,7 @@ import imagetest from '../img/livingroom1.jpg'
 import { Prev } from 'react-bootstrap/esm/PageItem';
 
 function MatchVisitor() {
+    const url = "https://matching-dorm-tu-server.herokuapp.com/"
     let history = useHistory();
     let location = useLocation();
     let payload = location.state;

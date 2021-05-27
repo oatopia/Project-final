@@ -10,7 +10,7 @@ import * as Yup from "yup"
 import Swal from 'sweetalert2'
 
 function Adminfactor() {
-  // const url = "https://matching-dorm-tu-server.herokuapp.com/"
+  const url = "https://matching-dorm-tu-server.herokuapp.com/"
   const [factor, setFactor] = useState([]);
   const [showadd, setShowadd] = useState(false);
   const [textinput, setTextinput] = useState("");
