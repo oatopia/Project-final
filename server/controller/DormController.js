@@ -33,7 +33,7 @@ export const createFacilities = (req, res) => {
 
   const id = req.body.dorm_ID;
   const jsondata = req.body.facilities;
-  console.log("facilities: ", jsondata)
+  // console.log("facilities: ", jsondata)
   const object = {
     dorm_ID: id,
     facilities: jsondata,
@@ -49,8 +49,8 @@ export const createFacilities = (req, res) => {
 
 export const createImage = (req, res) => {
   const id = req.body.dorm_ID;
-  console.log("ID in body", id)
-  console.log("Image files: ", req.files)
+  // console.log("ID in body", id)
+  // console.log("Image files: ", req.files)
   const file = req.files.Image;
   var imagename = [];
 
@@ -86,7 +86,7 @@ export const createImage = (req, res) => {
     dorm_ID: id,
     image_Name: imagename,
   };
-  console.log("object: ", object);
+  // console.log("object: ", object);
   dormModel.createImg(object, (err, data) => {
     if (err) {
       console.log(err);
@@ -109,7 +109,7 @@ export const getDorm = (req, res) => {
 
 export const getDormDataByID = (req, res) => {
   const id = req.body.dorm_ID;
-  console.log("Dorm id: ", id);
+  // console.log("Dorm id: ", id);
   dormModel.getdormdatabyID(id, (err, data) => {
     if (err) {
       console.log(err);
@@ -121,7 +121,7 @@ export const getDormDataByID = (req, res) => {
 
 export const getFacilities = (req, res) => {
   const id = req.body.dorm_ID;
-  console.log("Dorm id: ", id);
+  // console.log("Dorm id: ", id);
   dormModel.getfacilitiesbyID(id, (err, data) => {
     if (err) {
       console.log(err);
@@ -133,7 +133,7 @@ export const getFacilities = (req, res) => {
 
 export const getImage = (req, res) => {
   const id = req.body.dorm_ID;
-  console.log("Dorm id: ", id);
+  // console.log("Dorm id: ", id);
   dormModel.getimagebyID(id, (err, data) => {
     if (err) {
       console.log(err);
@@ -157,7 +157,7 @@ export const deletefacbyID = (req, res) => {
 
 export const addfac = (req, res) => {
   const object = req.body
-  console.log(object)
+  // console.log(object)
   dormModel.addFac(object, (err, data) => {
     if (err) {
       console.log(err);
@@ -190,8 +190,8 @@ export const deleteImage = (req, res) => {
 
 export const updateDorm = (req, res) => {
   const object = req.body
-  console.log("Object for update dorm: ",req.body)
-  console.log("ID dorm",object.dorm_ID)
+  // console.log("Object for update dorm: ",req.body)
+  // console.log("ID dorm",object.dorm_ID)
   dormModel.updateDormbyID(object, (err, data) => {
     if (err) {
       console.log(err);
@@ -203,7 +203,7 @@ export const updateDorm = (req, res) => {
 
 export const createRoom = (req, res) => {
   let room = req.body
-  console.log("room data: ", room)
+  // console.log("room data: ", room)
   dormModel.createroombyID(room, (err, data) => {
     if (err) {
       console.log(err);
@@ -215,7 +215,7 @@ export const createRoom = (req, res) => {
 
 export const getRoom = (req, res) => {
   const id = req.body.dorm_ID;
-  console.log("Dorm id for find room: ", id);
+  // console.log("Dorm id for find room: ", id);
   dormModel.getroombyID(id, (err, data) => {
     if (err) {
       console.log(err);

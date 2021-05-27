@@ -65,6 +65,7 @@ const Owner = () => {
   let arrayFile = [];
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     Axios.post(
       "api/dorm/getDormdatabyId",
       { dorm_ID: dorm_ID },
@@ -113,12 +114,14 @@ const Owner = () => {
   const Onchangefac = (type) => (e) => {
     let checkvalue = false;
     let id = 0;
-    fac.map((item, key) => {
-      if (e.target.value == item.facility) {
-        checkvalue = true;
-        id = item.factor_ID;
+    for (let i = 0; i < fac.length; i++) {
+      if (e.target.value == fac[i].facility) {
+        checkvalue = true
+        id = fac[i].f_ID
+        break
       }
-    });
+    }
+
     if (checkvalue == true) {
       Axios.delete(`api/dorm/facdeleteDelete/${id}`).then((Response) => {
         setFac(
@@ -207,21 +210,23 @@ const Owner = () => {
 
   const EditDorm = (e) => {
     let id = dorm.dorm_ID;
-    if(dorm.dorm_Name && dorm.type_D && dorm.address && dorm.deposit
-      && dorm.common_Fee && dorm.water_Bill && dorm.electric_Bill 
-      && dorm.detail && dorm.ad_Name && dorm.contact_Number 
-      && dorm.e_Mail && dorm.line_ID){
-        axios.put(`api/dorm/UpdateDorm/${id}`, dorm).then((Response) => {
-          setShowedit(false);
-        });
-      }else{
-        Swal.fire({
-          title: "กรุณากรอกข้อมูลให้ครบถ้วน",
-          icon: 'warning',
-          confirmButtonText: 'ตกลง'
-        })
-      }
-    
+    if (dorm.dorm_Name && dorm.type_D && dorm.address && dorm.deposit
+      && dorm.common_Fee && dorm.water_Bill && dorm.electric_Bill
+      && dorm.detail && dorm.ad_Name && dorm.contact_Number
+      && dorm.e_Mail && dorm.line_ID) {
+      axios.put(`api/dorm/UpdateDorm/${id}`, dorm).then((Response) => {
+        window.location.reload();
+        // setShowedit(false);
+
+      });
+    } else {
+      Swal.fire({
+        title: "กรุณากรอกข้อมูลให้ครบถ้วน",
+        icon: 'warning',
+        confirmButtonText: 'ตกลง'
+      })
+    }
+
   };
 
   const addroomType = (order) => (e) => {
@@ -631,7 +636,7 @@ const Owner = () => {
                           onChange={(e) => {
                             setDorm((prev) => ({
                               ...prev,
-                              electric_Bill: e.target.value,
+                              water_Bill: e.target.value,
                             }));
                           }}
                         />
@@ -651,7 +656,7 @@ const Owner = () => {
                           onChange={(e) => {
                             setDorm((prev) => ({
                               ...prev,
-                              water_Bill: e.target.value,
+                              electric_Bill: e.target.value,
                             }));
                           }}
                         />

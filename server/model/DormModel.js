@@ -61,7 +61,7 @@ Dorminfo.getdormbyID = (id,result)=>{
         result(err,null);
         return;
         }
-        console.log(res);
+        console.log("get dorm by ID success");
         result(null,res)
     })
 }
@@ -73,7 +73,7 @@ Dorminfo.getdormdatabyID = (id,result)=>{
         result(err,null);
         return;
         }
-        console.log(res);
+        console.log("get dorm by ID success");
         result(null,res)
     })
 }
@@ -85,7 +85,8 @@ Dorminfo.getfacilitiesbyID = (id,result)=>{
         result(err,null);
         return;
         }
-        console.log(res);
+        // console.log(res);
+        console.log("get facilities by ID success");
         result(null,res)
     })
 }
@@ -97,20 +98,23 @@ Dorminfo.getimagebyID = (id,result)=>{
         result(err,null);
         return;
         }
-        console.log(res);
+        // console.log(res);
+        console.log("get image by ID success");
         result(null,res)
     })
 }
 
 Dorminfo.deleteFacbyId = (fid,result) =>{
-    db.query("DELETE FROM facilities_dorm WHERE factor_ID = ?",fid,(err,res)=>{
+    db.query("DELETE FROM facilities_dorm WHERE f_ID = ?",fid,(err,res)=>{
         if(err){
             console.log("error:",err);
             result(null,err);
             // return;
+        }else{
+            console.log("Delete facilities success!!!")
+            result(null,res);
         }
-        console.log("Delete facilities success!!!")
-        result(null,res);    
+            
     });
 };
 
@@ -147,7 +151,7 @@ Dorminfo.updateDormbyID = (dorm,result)=>{
         result(err,null);
         return;
         }
-        console.log("Update dorm success!!!,response: ",res)
+        console.log("Update dorm success!!!,response: ")
         result(null,res);
     })
 }
@@ -160,7 +164,7 @@ Dorminfo.createroombyID = (newroom,result)=>{
         result(err,null);
         return;
         }
-        console.log("create room success this data from database: ",res);
+        console.log("create room success this data from database: ");
     })
 }
 
@@ -172,7 +176,8 @@ Dorminfo.getroombyID = (id,result)=>{
         result(err,null);
         return;
         }
-        console.log(res);
+        // console.log(res);
+        console.log("get room by ID success");
         result(null,res)
     })
 }
