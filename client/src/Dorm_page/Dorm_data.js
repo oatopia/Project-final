@@ -62,7 +62,6 @@ const Owner = () => {
   const [showedit, setShowedit] = useState(false);
   const [count, setCount] = useState(1);
   const [addroom, setAddroom] = useState([]);
-  let arrayFile = [];
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -71,7 +70,7 @@ const Owner = () => {
       { dorm_ID: dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
-      console.log("Response dorm: ", Response.data);
+      // console.log("Response dorm: ", Response.data);
       setDorm(Response.data[0]);
     });
 
@@ -80,7 +79,7 @@ const Owner = () => {
       { dorm_ID: dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
-      console.log("Response fac: ", Response.data);
+      // console.log("Response fac: ", Response.data);
       setFac(Response.data);
     });
 
@@ -90,7 +89,7 @@ const Owner = () => {
       { headers: authHeader() }
     )
       .then((Response) => {
-        console.log("Response image: ", Response.data);
+        // console.log("Response image: ", Response.data);
         setImg(Response.data);
       })
       .catch((error) => {
@@ -214,10 +213,13 @@ const Owner = () => {
       && dorm.common_Fee && dorm.water_Bill && dorm.electric_Bill
       && dorm.detail && dorm.ad_Name && dorm.contact_Number
       && dorm.e_Mail && dorm.line_ID) {
-      axios.put(`api/dorm/UpdateDorm/${id}`, dorm).then((Response) => {
-        window.location.reload();
-        // setShowedit(false);
-
+        let payload = {
+          Dorm:dorm,
+          Room:room
+        }
+      axios.put(`api/dorm/UpdateDorm/${id}`, payload).then((Response) => {
+        window.location.reload()
+        // setShowedit(false)
       });
     } else {
       Swal.fire({
@@ -229,55 +231,9 @@ const Owner = () => {
 
   };
 
-  const addroomType = (order) => (e) => {
-    let checkvalue = false;
-    let index = 0;
-    room.map((data, key) => {
-      if (data.order == order) {
-        return (checkvalue = true), (index = key);
-      }
-    });
+ 
 
-    if (checkvalue == true) {
-      const oldroom = [...room];
-      oldroom[index].room_Type = e.target.value;
-      setRoom(oldroom);
-    } else {
-      setRoom([
-        ...room,
-        { order: order, room_Type: e.target.value, room_Price: 0 },
-      ]);
-    }
-    console.log("room from addtype: ", room);
-  };
 
-  const addroomPrice = (order) => (e) => {
-    let checkvalue = false;
-    let index = 0;
-    room.map((data, key) => {
-      if (data.order == order) {
-        return (checkvalue = true), (index = key);
-      }
-    });
-
-    if (checkvalue == true) {
-      const oldroom = [...room];
-      oldroom[index].room_Price = e.target.value;
-      setRoom(oldroom);
-    } else {
-      setRoom([
-        ...room,
-        { order: order, room_Type: e.target.value, room_Price: 0 },
-      ]);
-    }
-    console.log("room from add price: ", room);
-  };
-
-  const createTD = (e) => {
-    setAddroom([...addroom, { order: count }]);
-    setCount((prev) => prev + 1);
-    console.log("count", count);
-  };
 
   const deleteroom = (order) => (e) => {
     setRoom(
@@ -472,6 +428,7 @@ const Owner = () => {
               </div>
             </div>
           ) : (
+
             //------------------------------------------UPDATE data----------------------------------------------------------
             <div className="box-info">
               <form>
@@ -519,7 +476,12 @@ const Owner = () => {
                                 className="type-room-input"
                                 type="text"
                                 defaultValue={item.room_Type}
-                                onChange={addroomType(key)}
+                                onChange={(e)=>{
+                                  let data = [...room]
+                                  data[key].room_Type = e.target.value
+                                  setRoom(data)
+                                  console.log('type',room)
+                                }}
                               ></input>
                             </td>
                             <td className="box-input-price">
@@ -527,7 +489,12 @@ const Owner = () => {
                                 className="price-room-input"
                                 type="text"
                                 defaultValue={item.room_Price}
-                                onChange={addroomPrice(key)}
+                                onChange={(e)=>{
+                                  let data = [...room]
+                                  data[key].room_Price = e.target.value
+                                  setRoom(data)
+                                  console.log(room)
+                                }}
                               ></input>
                               <p>บาทต่อเดือน</p>
                             </td>
@@ -542,7 +509,7 @@ const Owner = () => {
                               <input
                                 className="type-room-input"
                                 type="text"
-                                onChange={addroomType(data.order)}
+                                // onChange={}
                               ></input>
                               {data.input}
                             </td>
@@ -550,7 +517,7 @@ const Owner = () => {
                               <input
                                 className="price-room-input"
                                 type="text"
-                                onChange={addroomPrice(data.order)}
+                                // onChange={}
                               ></input>
                               <p>บาทต่อเดือน</p>
                             </td>

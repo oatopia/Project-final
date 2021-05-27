@@ -190,15 +190,21 @@ export const deleteImage = (req, res) => {
 
 export const updateDorm = (req, res) => {
   const object = req.body
+  const dorm = object.Dorm
+  const room = object.Room
   // console.log("Object for update dorm: ",req.body)
   // console.log("ID dorm",object.dorm_ID)
-  dormModel.updateDormbyID(object, (err, data) => {
+  dormModel.updateroom(room,(err,data)=>{
     if (err) {
       console.log(err);
-    } else {
-      res.send(data);
-    }
+    } 
+  })
+  dormModel.updateDormbyID(dorm, (err, data) => {
+    if (err) {
+      console.log(err);
+    } 
   });
+  res.send("update done")
 };
 
 export const createRoom = (req, res) => {
