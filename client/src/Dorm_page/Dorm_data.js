@@ -63,6 +63,9 @@ const Owner = () => {
   const [count, setCount] = useState(1);
   const [addroom, setAddroom] = useState([]);
 
+  if (!currentUser) {
+    return <Redirect to="/loginowner" />;
+  }
   useEffect(() => {
     window.scrollTo(0, 0)
     Axios.post(

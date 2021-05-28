@@ -38,8 +38,9 @@ function Member() {
   }
 
   if (!currentUser) {
-    return <Redirect to="/login" />
+    return <Redirect to="/loginmember" />
   }
+
   return (
     <div className="appcontainer-member">
       <div className='background-member'>

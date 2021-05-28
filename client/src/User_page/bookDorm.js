@@ -14,6 +14,9 @@ function ResultMatch() {
   const currentUser = Auth.getCurrentUser();
   const [book, setBook] = useState([]);
   const [checkdata, setCheckdata] = useState()
+  if (!currentUser) {
+    return <Redirect to="/loginmember" />
+  }
   useEffect(() => {
     window.scrollTo(0, 0)
     Axios.post(

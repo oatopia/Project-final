@@ -17,6 +17,9 @@ function ResultMatch() {
   const [bookstate, setBookState] = useState([]);
   const [dorm,setDorm] = useState([])
   const [bookmark,setBookmark] = useState([])
+  if (!currentUser) {
+    return <Redirect to="/loginmember" />
+  }
   useEffect(() => {
     window.scrollTo(0, 0)
     let payload = {

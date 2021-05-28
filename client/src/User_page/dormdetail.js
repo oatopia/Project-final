@@ -16,6 +16,10 @@ function DormVisitor() {
   console.log("sate match:", state);
   const [bookmark,setBookmark] = useState({}) 
   const currentUser = Auth.getCurrentUser();
+
+  if (!currentUser) {
+    return <Redirect to="/loginmember" />
+  }
   useEffect(()=>{
 
     window.scrollTo(0, 0)
