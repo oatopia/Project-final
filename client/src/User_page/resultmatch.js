@@ -40,9 +40,7 @@ function ResultMatch() {
       });
   }, []);
 
-  if (!currentUser) {
-    return <Redirect to="/loginmember" />
-  }
+
   const handleonclick = (dormid)=>(e) => {
     e.stopPropagation()
     let stateinside = false;

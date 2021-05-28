@@ -38,10 +38,6 @@ function ResultMatch() {
       });
   }, []);
 
-  if (!currentUser) {
-    return <Redirect to="/loginmember" />
-  }
-
 
   const handleonclick = (saveid) => (e) => {
     e.stopPropagation()
