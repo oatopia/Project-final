@@ -21,7 +21,7 @@ export const create = (req, res) => {
       } else {
         if (data.length > 0) {
           console.log("check")
-          res.json({ message: 'มีชื่อผู้ใช้งานแล้ว' })
+          res.send({ message: 'มีชื่อผู้ใช้งานแล้ว' })
         } else {
           const salt = bcrypt.genSaltSync(10);
           user.password = bcrypt.hashSync(user.password, salt);
@@ -45,7 +45,7 @@ export const create = (req, res) => {
           message: err.message,
         });
       } else {
-        if (data[0].length > 0) {
+        if (data.length > 0) {
           res.send({ message: 'มีชื่อผู้ใช้งานแล้ว' })
         } else {
           const salt = bcrypt.genSaltSync(10);
