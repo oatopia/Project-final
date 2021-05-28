@@ -46,9 +46,7 @@ function DormVisitor() {
     
   },[])
 
-  if (!currentUser) {
-    return <Redirect to="/loginmember" />
-  }
+
 
   const checkBook = (dormid) =>{
     let check = false
