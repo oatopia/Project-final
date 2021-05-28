@@ -7,6 +7,7 @@ import bookon from "../img/bookon.png";
 import bookoff from "../img/bookoff.png";
 import Auth from "../service/authService.js";
 import authHeader from "../service/auth-header.js";
+import { Redirect} from "react-router-dom";
 
 function ResultMatch() {
   const history = useHistory()
@@ -17,9 +18,7 @@ function ResultMatch() {
   const [bookstate, setBookState] = useState([]);
   const [dorm,setDorm] = useState([])
   const [bookmark,setBookmark] = useState([])
-  if (!currentUser) {
-    return <Redirect to="/loginmember" />
-  }
+  
   useEffect(() => {
     window.scrollTo(0, 0)
     let payload = {
@@ -41,6 +40,9 @@ function ResultMatch() {
       });
   }, []);
 
+  if (!currentUser) {
+    return <Redirect to="/loginmember" />
+  }
   const handleonclick = (dormid)=>(e) => {
     e.stopPropagation()
     let stateinside = false;

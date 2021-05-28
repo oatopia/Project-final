@@ -5,6 +5,7 @@ import Axios from "axios";
 import bookon from "../img/bookon.png";
 import bookoff from "../img/bookoff.png";
 import Auth from "../service/authService.js";
+import { Redirect} from "react-router-dom";
 import authHeader from "../service/auth-header.js";
 import { useHistory } from "react-router";
 
@@ -14,9 +15,7 @@ function ResultMatch() {
   const currentUser = Auth.getCurrentUser();
   const [book, setBook] = useState([]);
   const [checkdata, setCheckdata] = useState()
-  if (!currentUser) {
-    return <Redirect to="/loginmember" />
-  }
+  
   useEffect(() => {
     window.scrollTo(0, 0)
     Axios.post(
@@ -39,7 +38,9 @@ function ResultMatch() {
       });
   }, []);
 
-
+  if (!currentUser) {
+    return <Redirect to="/loginmember" />
+  }
 
 
   const handleonclick = (saveid) => (e) => {

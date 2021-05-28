@@ -7,6 +7,7 @@ import bookon from "../img/bookon.png";
 import bookoff from "../img/bookoff.png";
 import Auth from "../service/authService.js";
 import authHeader from "../service/auth-header.js";
+import { Redirect} from "react-router-dom";
 
 function DormVisitor() {
   const history = useHistory();
@@ -17,9 +18,6 @@ function DormVisitor() {
   const [bookmark,setBookmark] = useState({}) 
   const currentUser = Auth.getCurrentUser();
 
-  if (!currentUser) {
-    return <Redirect to="/loginmember" />
-  }
   useEffect(()=>{
 
     window.scrollTo(0, 0)
@@ -48,6 +46,9 @@ function DormVisitor() {
     
   },[])
 
+  if (!currentUser) {
+    return <Redirect to="/loginmember" />
+  }
 
   const checkBook = (dormid) =>{
     let check = false

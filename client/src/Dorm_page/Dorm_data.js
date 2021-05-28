@@ -63,9 +63,7 @@ const Owner = () => {
   const [count, setCount] = useState(1);
   const [addroom, setAddroom] = useState([]);
 
-  if (!currentUser) {
-    return <Redirect to="/loginowner" />;
-  }
+  
   useEffect(() => {
     window.scrollTo(0, 0)
     Axios.post(
@@ -76,7 +74,6 @@ const Owner = () => {
       // console.log("Response dorm: ", Response.data);
       setDorm(Response.data[0]);
     });
-
     Axios.post(
       url+"api/dorm/getFac",
       { dorm_ID: dorm_ID },
@@ -86,6 +83,10 @@ const Owner = () => {
       setFac(Response.data);
     });
 
+    if (!currentUser) {
+      return <Redirect to="/loginowner" />;
+    }
+    
     Axios.post(
       url+"api/dorm/getImg",
       { dorm_ID: dorm_ID },
