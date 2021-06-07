@@ -1,9 +1,7 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect} from 'react';
 import './visitorResult.css';
 import Navbar from '../component/Navbar/Navbar.js';
-import Axios from 'axios'
 import { useHistory, useLocation } from 'react-router';
-import imagetest from '../img/livingroom1.jpg'
 
 
 
@@ -12,8 +10,6 @@ function VisitorResult() {
   const url = "https://matching-dorm-tu-server.herokuapp.com/";
   let location = useLocation();
   let state = location.state;
-  console.log("sate match:", state);
-  const [srcimg, setSrcimg] = useState([]);
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -26,7 +22,7 @@ function VisitorResult() {
           <label className="name-dormVisitor">หอพัก{state.Dorm.dorm_Name}</label>
           <div className="image-dormVisitor-container">
             {state.Image.map(img => {
-              return <img className='img-box-dormVisitor' src={"img_Dorm/" + img.image}></img>
+              return <img className='img-box-dormVisitor' src={url+"img_Dorm/" + img.image}></img>
             })}
           </div>
 

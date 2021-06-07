@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import Axios from "axios";
 import "./showfactor.css";
-import D1 from "../img/icon/D1.png";
 import { useHistory } from "react-router";
 import Swal from 'sweetalert2'
 
@@ -16,7 +15,7 @@ export default function Match() {
   const [pair, setPair] = useState([])
   var history = useHistory();
   useEffect(() => {
-    Axios.get("api/visitor/getfactor").then((Response) => {
+    Axios.get(url+"api/visitor/getfactor").then((Response) => {
       let data = Response.data
       let number = 0;
       for (let i = 0; i < data.length; i++) {
@@ -132,7 +131,7 @@ export default function Match() {
   };
 
   const matchFac = (e) => {
-    Axios.post("api/visitor/matchDorm", weight)
+    Axios.post(url+"api/visitor/matchDorm", weight)
       .then((Response) => {
         console.log(Response.data);
         history.push({
@@ -154,7 +153,7 @@ export default function Match() {
     if (weight.length == pair.length) {
       let ischeck = validate(count)
       if (ischeck == true) {
-        Axios.post("api/visitor/calPriority", weight)
+        Axios.post(url+"api/visitor/calPriority", weight)
           .then((Response) => {
             let value = Response.data
             for (let i = 0; i < value.length; i++) {
@@ -218,7 +217,7 @@ export default function Match() {
                       <h3 className='factor-result-cal'>{Math.round(parseInt(item.value * 100))}%</h3>
                     </td>
                     <td>
-                      <img className="icon-factor-result" src={"images/" + item.factor.image_Factor} />
+                      <img className="icon-factor-result" src={url+"images/" + item.factor.image_Factor} />
                     </td>
                   </tr>
                 )
@@ -243,7 +242,7 @@ export default function Match() {
           return (
             <div key={key} className="detail-factor-visitor">
               <img
-                src={"images/" + data.image_Factor}
+                src={url+"images/" + data.image_Factor}
                 width="50"
                 height="50"
               ></img>
@@ -262,7 +261,7 @@ export default function Match() {
           <div className="box-match" id="box-match-1" >
             <img
               className="img-match-visitor"
-              src={"images/" + item.image1}
+              src={url+"images/" + item.image1}
               width="140px"
               height="140px"
             ></img>
@@ -275,7 +274,7 @@ export default function Match() {
           <div className="box-match" id="box-match-2" >
             <img
               className="img-match-visitor"
-              src={"images/" + item.image2}
+              src={url+"images/" + item.image2}
               width="140px"
               height="140px"
             ></img>

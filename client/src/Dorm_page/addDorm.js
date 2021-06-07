@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./addDorm.css";
 import Navbar from "../component/Navbar/NavbarOwner.js";
-import Axios from "axios";
 import Auth from "../service/authService.js";
-import { Redirect,useHistory } from "react-router-dom";
-import authHeader from "../service/auth-header.js";
+import { Redirect} from "react-router-dom";
 import Indorm from "../component/Dorm/Indorm.js";
 
 const Adddorm = () => {

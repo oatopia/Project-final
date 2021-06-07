@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./owner.css";
 import Navbar from "../component/Navbar/NavbarOwner.js";
 import Axios from "axios";
-import backgroundimg from "../img/operatorbackground.jpg";
 import Auth from "../service/authService.js";
 import { Redirect, useHistory } from "react-router-dom";
 import authHeader from "../service/auth-header.js";
@@ -16,7 +15,7 @@ const Owner = () => {
   useEffect(() => {
     console.log("owner ID", currentUser.owner_ID)
     Axios.post(
-      "api/dorm/getDorm",
+      url+"api/dorm/getDorm",
       { owner_ID: currentUser.owner_ID },
       { headers: authHeader() }
     )

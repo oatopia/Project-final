@@ -26,7 +26,7 @@ function ResultMatch() {
       Dorm:state
     }
     Axios.post(
-      "api/match/getdorm",payload,
+      url+"api/match/getdorm",payload,
       { headers: authHeader() }
     ).then((Response) => {
         if(Response.data.Dormlist.length > 0){
@@ -54,7 +54,7 @@ function ResultMatch() {
     if (stateinside == true) {
       e.target.setAttribute("src", bookoff)
       let id = saveid;
-      Axios.delete(`/api/match/deletebook/${id}`, {
+      Axios.delete(url+`/api/match/deletebook/${id}`, {
         headers: authHeader(),
       })
         .then((Response) => {
@@ -75,7 +75,7 @@ function ResultMatch() {
         member_ID: currentUser.member_ID,
         dorm_ID: dormid,
       };
-      Axios.post("api/match/createbook", payload, {
+      Axios.post(url+"api/match/createbook", payload, {
         headers: authHeader(),
       })
         .then((Response) => {

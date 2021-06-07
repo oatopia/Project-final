@@ -22,7 +22,7 @@ function Adminfactor() {
   const [editimg, setEditimg] = useState("");
 
   useEffect(() => {
-    Axios.get("api/Admin/factor")
+    Axios.get(url+"api/Admin/factor")
       .then((Response) => {
         setFactor(Response.data);
       })
@@ -43,7 +43,7 @@ function Adminfactor() {
         "content-type": "multipart/form-data",
       },
     };
-    Axios.post("api/Admin/saveFactor", formData, config)
+    Axios.post(url+"api/Admin/saveFactor", formData, config)
       .then((Response) => {
         console.log(Response);
         setShowadd(false);
@@ -59,7 +59,7 @@ function Adminfactor() {
   //--------------------------------------ลบปัจจัย-------------------------------------------------------------------
   const deleteFactor = (id) => {
     console.log("ID:", id);
-    Axios.delete(`api/Admin/factorDelete/${id}`).then((Response) => {
+    Axios.delete(url+`api/Admin/factorDelete/${id}`).then((Response) => {
       setFactor(
         factor.filter((val) => {
           return val.factor_ID != id;
@@ -81,7 +81,7 @@ function Adminfactor() {
         "content-type": "multipart/form-data",
       },
     };
-    Axios.put(`api/Admin/updateFactor/${id}`, formData, config)
+    Axios.put(url+`api/Admin/updateFactor/${id}`, formData, config)
       .then((Response) => {
         let Data = Response.data
         setFactor(
@@ -134,7 +134,7 @@ function Adminfactor() {
                   "content-type": "multipart/form-data",
                 },
               };
-              Axios.post("api/Admin/saveFactor", formData, config)
+              Axios.post(url+"api/Admin/saveFactor", formData, config)
                 .then((Response) => {
                   console.log(Response);
                   setShowadd(false);
@@ -215,7 +215,7 @@ function Adminfactor() {
                         "content-type": "multipart/form-data",
                       },
                     };
-                    Axios.put(`api/Admin/updateFactor/${id}`, formData, config)
+                    Axios.put(url+`api/Admin/updateFactor/${id}`, formData, config)
                       .then((Response) => {
                         let Data = Response.data
                         setFactor(
@@ -276,7 +276,7 @@ function Adminfactor() {
                         </div>
                       ) : (
                         <img
-                          src={"images/" + data.image_Factor}
+                          src={url+"images/" + data.image_Factor}
                           width="60px"
                           height="60px"
                         ></img>

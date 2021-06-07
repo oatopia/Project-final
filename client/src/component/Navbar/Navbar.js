@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import logoapp from "../../img/logo.png";
-import { BrowserRouter, Route, Link, Router, Redirect, useHistory } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import Auth from '../../service/authService.js'
 import {DropdownButton,Dropdown} from 'react-bootstrap'
 const currentUser = Auth.getCurrentUser();

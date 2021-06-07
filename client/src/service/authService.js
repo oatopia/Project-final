@@ -5,7 +5,7 @@ const url = "https://matching-dorm-tu-server.herokuapp.com/";
 class AuthService {
   loginmember(username, password) {
     return axios
-      .post("api/user/loginmember", {
+      .post(url+"api/user/loginmember", {
         username,
         password
       })
@@ -20,7 +20,7 @@ class AuthService {
 
   loginowner(username, password) {
     return axios
-      .post("api/user/loginowner", {
+      .post(url+"api/user/loginowner", {
         username,
         password
       })
@@ -38,7 +38,7 @@ class AuthService {
   }
 
   register(username,password,type) {
-    return axios.post("api/user/register", {
+    return axios.post(url+"api/user/register", {
       username,
       password,
       type

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './LoginOwner.css';
 import img from './img/loginown.jpg'
@@ -12,16 +12,6 @@ import Swal from 'sweetalert2'
 const Loginowner = () => {
 
     var history = useHistory();
-    const [username, setusername] = useState("");
-    const [password, setpassword] = useState("");
-
-    const handleLogin = (e) => {
-        e.preventDefault();
-        Auth.loginowner(username, password)
-            .then(Response => {
-                history.push("/owner");
-            })
-    }
 
     const validate = Yup.object({
         username: Yup.string().required("กรุณากรอกชื่อผู้ใช้"),

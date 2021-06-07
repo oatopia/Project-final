@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./NavbarMember.css";
 import logoapp from "../../img/logo.png";
 import profilelogo from "../../img/user1.png";
-import { BrowserRouter, Route, Link, Router, Redirect, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Auth from '../../service/authService.js'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 
@@ -20,7 +20,6 @@ export default function Navbar() {
     Auth.logout();
     history.push("/");
   }
-  // console.log("navbar curretnuser: ",currentUser);
   return (
     <div className="NavMember-container">
       <img

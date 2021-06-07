@@ -20,7 +20,7 @@ function Visitor() {
 
   const onClickforSerach = () => {
     if(search){
-      Axios.post('api/visitor/searchDorm',{
+      Axios.post(url+'api/visitor/searchDorm',{
         dormname:search
       },)
       .then(Response => {

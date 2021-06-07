@@ -25,7 +25,7 @@ export default function Match() {
 
   useEffect(() => {
     Axios.post(
-      "api/match/getWeight",
+      url+"api/match/getWeight",
       { member_ID: currentUser.member_ID },
       { headers: authHeader() }
     )
@@ -159,8 +159,8 @@ export default function Match() {
           member_ID: currentUser.member_ID,
           data: weight
         };
-        Axios.put("api/match/editWeight", payload, { headers: authHeader() })
-        Axios.post("api/match/calPriority", weight, { headers: authHeader() })
+        Axios.put(url+"api/match/editWeight", payload, { headers: authHeader() })
+        Axios.post(url+"api/match/calPriority", weight, { headers: authHeader() })
           .then((Response) => {
             let value = Response.data
             console.log("calPriority value", value)
@@ -189,8 +189,8 @@ export default function Match() {
           member_ID: currentUser.member_ID,
           data: arrayweight,
         };
-        Axios.post("api/match/createweight", payload, { headers: authHeader() })
-        Axios.post("api/match/calPriority", weight, { headers: authHeader() })
+        Axios.post(url+"api/match/createweight", payload, { headers: authHeader() })
+        Axios.post(url+"api/match/calPriority", weight, { headers: authHeader() })
           .then((Response) => {
             let value = Response.data
             console.log("calPriority value", value)
@@ -231,7 +231,7 @@ export default function Match() {
 
 
   const matchFac = () => {
-    Axios.post("api/match/matchDorm", weight, { headers: authHeader() })
+    Axios.post(url+"api/match/matchDorm", weight, { headers: authHeader() })
       .then((Response) => {
         console.log(Response.data);
         history.push({
@@ -258,7 +258,7 @@ export default function Match() {
               <div className="box-match" id="box-match-1" >
                 <img
                   className="img-match-visitor"
-                  src={"images/" + obj.image_Factor1}
+                  src={url+"images/" + obj.image_Factor1}
                   width="140px"
                   height="140px"
                 ></img>
@@ -271,7 +271,7 @@ export default function Match() {
               <div className="box-match" id="box-match-2" >
                 <img
                   className="img-match-visitor"
-                  src={"images/" + obj.image_Factor2}
+                  src={url+"images/" + obj.image_Factor2}
                   width="140px"
                   height="140px"
                 ></img>
@@ -300,7 +300,7 @@ export default function Match() {
             return (
               <div key={key} className="detail-factor-visitor">
                 <img
-                  src={"images/" + data.image_Factor}
+                  src={url+"images/" + data.image_Factor}
                   width="50"
                   height="50"
                 ></img>
@@ -356,7 +356,7 @@ export default function Match() {
                       <h3 className='factor-result-cal'>{Math.round(parseInt(item.value * 100))}%</h3>
                     </td>
                     <td>
-                      <img className="icon-factor-result" src={"images/" + item.factor.image_Factor} />
+                      <img className="icon-factor-result" src={url+"images/" + item.factor.image_Factor} />
                     </td>
                   </tr>
 
@@ -391,7 +391,7 @@ export default function Match() {
                       <h3 className='factor-result-cal'>{Math.round(parseInt(item.value * 100))}%</h3>
                     </td>
                     <td>
-                      <img className="icon-factor-result" src={"images/" + item.factor.image_Factor} />
+                      <img className="icon-factor-result" src={url+"images/" + item.factor.image_Factor} />
                     </td>
                   </tr>
 

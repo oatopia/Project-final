@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import React from 'react';
+import {useHistory } from 'react-router-dom';
 import './LoginMember.css';
 import img from './img/loginimg.jpg'
 import Navbar from './component/Navbar/Navbar.js'
-import Axios from 'axios'
 import Auth from './service/authService.js'
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup"
@@ -13,9 +12,6 @@ import Swal from 'sweetalert2'
 const Loginmember = () => {
 
     var history = useHistory();
-    const [username, setusername] = useState("");
-    const [password, setpassword] = useState("");
-    const type = "สมาชิก";
 
     const validate = Yup.object({
         username: Yup.string().required("กรุณากรอกชื่อผู้ใช้"),

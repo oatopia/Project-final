@@ -1,7 +1,7 @@
 import "./register.css";
 import img from "./img/registerimg.png";
 import Navbar from "./component/Navbar/Navbar.js";
-import React, { useState } from "react";
+import React from "react";
 import Auth from "./service/authService.js";
 import { useHistory } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";

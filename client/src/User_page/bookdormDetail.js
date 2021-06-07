@@ -27,7 +27,7 @@ function BookdormDetail() {
     window.scrollTo(0, 0)
     async function fetchData(){
         const result = await Axios.post(
-            "api/match/getDormDetail",{ID:dataState.dorm_ID},
+            url+"api/match/getDormDetail",{ID:dataState.dorm_ID},
             { headers: authHeader() }
           );
           console.log("Result",result.data[1]);
@@ -46,7 +46,7 @@ function BookdormDetail() {
 
   const handleonclick = (id)=>(e) => {
       e.target.setAttribute("src", bookoff)
-      Axios.delete(`/api/match/deletebook/${id}`, {
+      Axios.delete(url+`/api/match/deletebook/${id}`, {
         headers: authHeader(),
       })
     }
@@ -63,7 +63,7 @@ function BookdormDetail() {
           <img className="book-icon book-icon-in-detail-page" src={bookon} onClick={handleonclick(dataState.save_ID)} />
           <div className="image-dormVisitor-container">
             {image.map(img => {
-              return <img className='img-box-dormVisitor' src={"img_Dorm/" + img.image}></img>
+              return <img className='img-box-dormVisitor' src={url+"img_Dorm/" + img.image}></img>
             })}
           </div>
 

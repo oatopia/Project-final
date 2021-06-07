@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./Dorm_data.css";
 import Navbar from "../component/Navbar/NavbarOwner.js";
 import Axios from "axios";
-import backgroundimg from "../img/operatorbackground.jpg";
 import Auth from "../service/authService.js";
 import { Redirect, useHistory } from "react-router-dom";
 import authHeader from "../service/auth-header.js";
 import { useLocation } from "react-router";
 import DeleteIcon from "../img/deleteicon.png";
-import axios from "axios"
 import Swal from 'sweetalert2'
 
 const Owner = () => {
@@ -67,7 +65,7 @@ const Owner = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
     Axios.post(
-      "api/dorm/getDormdatabyId",
+      url+"api/dorm/getDormdatabyId",
       { dorm_ID: dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
@@ -75,7 +73,7 @@ const Owner = () => {
       setDorm(Response.data[0]);
     });
     Axios.post(
-      "api/dorm/getFac",
+      url+"api/dorm/getFac",
       { dorm_ID: dorm_ID },
       { headers: authHeader() }
     ).then((Response) => {
@@ -88,7 +86,7 @@ const Owner = () => {
     }
 
     Axios.post(
-      "api/dorm/getImg",
+      url+"api/dorm/getImg",
       { dorm_ID: dorm_ID },
       { headers: authHeader() }
     )
@@ -101,7 +99,7 @@ const Owner = () => {
       });
 
     Axios.post(
-      "api/dorm/getRoom",
+      url+"api/dorm/getRoom",
       { dorm_ID: dorm_ID },
       { headers: authHeader() }
     )
@@ -126,7 +124,7 @@ const Owner = () => {
     }
 
     if (checkvalue == true) {
-      Axios.delete(`api/dorm/facdeleteDelete/${id}`).then((Response) => {
+      Axios.delete(url+`api/dorm/facdeleteDelete/${id}`).then((Response) => {
         setFac(
           fac.filter((item) => {
             return item.factor_ID != id;
@@ -140,7 +138,7 @@ const Owner = () => {
           type_F: "ภายในห้องพัก",
           facility: e.target.value,
         };
-        Axios.post("api/dorm/addfacil", facil, {
+        Axios.post(url+"api/dorm/addfacil", facil, {
           headers: authHeader(),
         }).then((Response) => {
           setFac([
@@ -159,7 +157,7 @@ const Owner = () => {
           type_F: "ส่วนกลาง",
           facility: e.target.value,
         };
-        Axios.post("api/dorm/addfacil", facil, {
+        Axios.post(url+"api/dorm/addfacil", facil, {
           headers: authHeader(),
         }).then((Response) => {
           setFac([
@@ -177,7 +175,7 @@ const Owner = () => {
   };
 
   const OnclickImage = (id, imagename) => (e) => {
-    Axios.delete(`api/dorm/Imagedelete/${id}`, {
+    Axios.delete(url+`api/dorm/Imagedelete/${id}`, {
       data: { image: imagename },
     }).then((Response) => {
       setImg(
@@ -202,7 +200,7 @@ const Owner = () => {
         "Content-Type": "multipart/form-data",
       },
     };
-    axios.post("api/dorm/createImage", formdata, config).then((Response) => {
+    Axios.post(url+"api/dorm/createImage", formdata, config).then((Response) => {
       console.log(Response);
     });
   };
@@ -221,7 +219,7 @@ const Owner = () => {
           Dorm:dorm,
           Room:room
         }
-      axios.put(`api/dorm/UpdateDorm/${id}`, payload).then((Response) => {
+      Axios.put(url+`api/dorm/UpdateDorm/${id}`, payload).then((Response) => {
         window.location.reload()
         // setShowedit(false)
       });
@@ -273,7 +271,7 @@ const Owner = () => {
                     <img
                       key={key}
                       className="img-dorm-data"
-                      src={"img_Dorm/" + pic.image}
+                      src={url+"img_Dorm/" + pic.image}
                     />
                   );
                 })}

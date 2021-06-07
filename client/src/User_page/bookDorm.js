@@ -20,7 +20,7 @@ function ResultMatch() {
     window.scrollTo(0, 0)
     async function fetchData(){
       const result = await Axios.post(
-        "/api/match/getBookmark",
+        url+"/api/match/getBookmark",
         { member_ID: currentUser.member_ID },
         { headers: authHeader() }
       )
@@ -39,7 +39,7 @@ function ResultMatch() {
   const handleonclick = (saveid) => (e) => {
     e.stopPropagation()
     let id = saveid
-    Axios.delete(`/api/match/deletebook/${id}`, {
+    Axios.delete(url+`/api/match/deletebook/${id}`, {
       headers: authHeader(),
     })
       .then((Response) => {
@@ -78,7 +78,7 @@ function ResultMatch() {
               })
             }}>
               <div className="start-result-box">
-                <img className='img-dorm-box' src={"img_Dorm/" + data.image}></img>
+                <img className='img-dorm-box' src={url+"img_Dorm/" + data.image}></img>
                 <h1>หอพัก{data.dorm_Name}</h1>
               </div>
               <div className="end-result-box">

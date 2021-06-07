@@ -74,7 +74,7 @@ export default function Indorm() {
       console.log("owner id", currentUser.owner_ID);
       axios
         .post(
-          "api/dorm/createDorm",
+          url+"api/dorm/createDorm",
           {
             dorm_Name: name,
             type_D: type,
@@ -97,7 +97,7 @@ export default function Indorm() {
           console.log("ID", Response.data.insertId);
           axios
             .post(
-              "api/dorm/createFacilities",
+              url+"api/dorm/createFacilities",
               { dorm_ID: ID, facilities: facilities },
               { headers: authHeader() }
             )
@@ -118,12 +118,12 @@ export default function Indorm() {
           };
           // console.log("Data in formData",formData);
           axios
-            .post("api/dorm/createImage", formData, config)
+            .post(url+"api/dorm/createImage", formData, config)
             .then((Response) => {
               console.log(Response);
             });
           axios
-            .post("api/dorm/createRoom", { dorm_ID: ID, room: room }, { headers: authHeader() })
+            .post(url+"api/dorm/createRoom", { dorm_ID: ID, room: room }, { headers: authHeader() })
             .then((Response) => {
               console.log(Response);
             });
