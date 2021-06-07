@@ -26,7 +26,7 @@ function ResultMatch() {
       Dorm:state
     }
     Axios.post(
-      url+"api/match/getdorm",payload,
+      "api/match/getdorm",payload,
       { headers: authHeader() }
     ).then((Response) => {
         if(Response.data.Dormlist.length > 0){
@@ -54,7 +54,7 @@ function ResultMatch() {
     if (stateinside == true) {
       e.target.setAttribute("src", bookoff)
       let id = saveid;
-      Axios.delete(url+`/api/match/deletebook/${id}`, {
+      Axios.delete(`/api/match/deletebook/${id}`, {
         headers: authHeader(),
       })
         .then((Response) => {
@@ -75,7 +75,7 @@ function ResultMatch() {
         member_ID: currentUser.member_ID,
         dorm_ID: dormid,
       };
-      Axios.post(url+"api/match/createbook", payload, {
+      Axios.post("api/match/createbook", payload, {
         headers: authHeader(),
       })
         .then((Response) => {
@@ -123,7 +123,7 @@ function ResultMatch() {
               })
             }}>
               <div className="start-result-box">
-                <img className='img-dorm-box' src={url+"img_Dorm/" + data.Image[0].image}  ></img>
+                <img className='img-dorm-box' src={"img_Dorm/" + data.Image[0].image}  ></img>
                 <h1>หอพัก{data.Dorm.dorm_Name}</h1>
               </div>
               <div className="end-result-box">

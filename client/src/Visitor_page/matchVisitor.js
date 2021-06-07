@@ -14,7 +14,7 @@ function MatchVisitor() {
     const [dorm, setDorm] = useState([])
     useEffect(() => {
         window.scrollTo(0, 0)
-        Axios.get(url+"api/visitor/getdetail").then((Response) => {
+        Axios.get("api/visitor/getdetail").then((Response) => {
             let data = Response.data
             console.log(data)
             payload.forEach(element => {
@@ -46,7 +46,7 @@ function MatchVisitor() {
                             })
                         }}>
                             <div className="start-result-box">
-                                <img className='img-dorm-box' src={url+"img_Dorm/" + data.Image[0].image}></img>
+                                <img className='img-dorm-box' src={"img_Dorm/" + data.Image[0].image}></img>
                                 <h1>หอพัก{data.Dorm.dorm_Name}</h1>
                             </div>
                             <div className="end-result-box">

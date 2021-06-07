@@ -135,12 +135,13 @@ Matching.updateweightbyID = (data, result) => {
 
 Matching.getbookmarkbyID = (id, result) => {
     console.log("user ID for getbook", id)
-    db.query("SELECT * FROM save JOIN dormitory ON dormitory.dorm_ID=save.dorm_ID  WHERE save.member_ID = ? ; SELECT * FROM image_dorm ; SELECT * FROM room ; SELECT * FROM facilities_dorm", id, (err, res) => {
+    db.query("SELECT save.save_ID,dormitory.dorm_ID,dorm_Name, image , room_Price FROM save JOIN dormitory ON dormitory.dorm_ID=save.dorm_ID JOIN (SELECT * FROM image_dorm WHERE image_dorm.image_ID IN (SELECT min(image_ID) FROM image_dorm GROUP BY dorm_ID)) I ON I.dorm_ID = save.dorm_ID JOIN (SELECT * FROM room WHERE room_ID IN (SELECT min(room_ID) FROM room GROUP BY dorm_ID)) R ON R.dorm_ID = save.dorm_ID WHERE save.member_ID = ?", id, (err, res) => {
         if (err) {
             console.log("error:", err);
             result(null, err);
             return;
         }
+        console.log("Result Get bookmark",res)
         result(null, res);
     });
 };
@@ -196,5 +197,18 @@ Matching.checkdormbyID = (data,result) => {
         result(null, res);
     });
 };
+
+Matching.getDormdetailbyID = (ID,result) => {
+    db.query("SELECT * FROM dormitory WHERE dorm_ID = ?; SELECT * FROM image_dorm WHERE dorm_ID = ? ;SELECT * FROM room WHERE dorm_ID = ? ;SELECT * FROM facilities_dorm WHERE dorm_ID = ?",[ID,ID,ID,ID],(err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(err, null);
+            return;
+        }
+        result(null, res);
+    });
+};
+
+
 
 export default Matching;

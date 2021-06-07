@@ -74,7 +74,7 @@ export default function Indorm() {
       console.log("owner id", currentUser.owner_ID);
       axios
         .post(
-          url+"api/dorm/createDorm",
+          "api/dorm/createDorm",
           {
             dorm_Name: name,
             type_D: type,
@@ -97,7 +97,7 @@ export default function Indorm() {
           console.log("ID", Response.data.insertId);
           axios
             .post(
-              url+"api/dorm/createFacilities",
+              "api/dorm/createFacilities",
               { dorm_ID: ID, facilities: facilities },
               { headers: authHeader() }
             )
@@ -118,12 +118,12 @@ export default function Indorm() {
           };
           // console.log("Data in formData",formData);
           axios
-            .post(url+"api/dorm/createImage", formData, config)
+            .post("api/dorm/createImage", formData, config)
             .then((Response) => {
               console.log(Response);
             });
           axios
-            .post(url+"api/dorm/createRoom", { dorm_ID: ID, room: room }, { headers: authHeader() })
+            .post("api/dorm/createRoom", { dorm_ID: ID, room: room }, { headers: authHeader() })
             .then((Response) => {
               console.log(Response);
             });
@@ -141,7 +141,7 @@ export default function Indorm() {
 
 
 
-  const OnchangeFac = (e) => {
+  const OnchangeFac =(type)=> (e) => {
     let checkvalue = false;
     let index = 0;
     facilities.map((data, key) => {
@@ -150,10 +150,18 @@ export default function Indorm() {
       }
     });
     if (checkvalue == false) {
-      setfacilities([
-        ...facilities,
-        { type_F: "ภายในห้องพัก", facility: e.target.value },
-      ]);
+      if(type == 'ภายในห้องพัก'){
+        setfacilities([
+          ...facilities,
+          { type_F: "ภายในห้องพัก", facility: e.target.value },
+        ]);
+      }else{
+        setfacilities([
+          ...facilities,
+          { type_F: "ส่วนกลาง", facility: e.target.value },
+        ]);
+      }
+      
     } else {
       setfacilities(
         facilities.filter((item) => item.facility != e.target.value)
@@ -412,7 +420,7 @@ export default function Indorm() {
                     type="checkbox"
                     id={key}
                     value={data}
-                    onChange={OnchangeFac}
+                    onChange={OnchangeFac('ภายในห้องพัก')}
                   ></input>
                   <label htmlFor={key}>{data}</label>
                 </div>
@@ -428,7 +436,7 @@ export default function Indorm() {
                     type="checkbox"
                     id={key}
                     value={data}
-                    onChange={OnchangeFac}
+                    onChange={OnchangeFac('ส่วนกลาง')}
                   ></input>
                   <label htmlFor={key}>{data}</label>
                 </div>

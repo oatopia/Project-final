@@ -52,13 +52,16 @@ export const createImage = (req, res) => {
   // console.log("ID in body", id)
   // console.log("Image files: ", req.files)
   const file = req.files.Image;
+  console.log("file image",req.files.Image)
   var imagename = [];
 
   if (file.length === undefined) {
     imagename.push(file.name);
     if (
       file.mimetype == "image/jpeg" ||
+      file.mimetype == "image/JPEG" ||
       file.mimetype == "image/png" ||
+      file.mimetype == "image/PNG" ||
       file.mimetype == "image/gif"
     ) {
       file.mv("public/img_Dorm/" + file.name, (err) => {
@@ -73,7 +76,9 @@ export const createImage = (req, res) => {
       imagename.push(file[i].name);
       if (
         file[i].mimetype == "image/jpeg" ||
+        file[i].mimetype == "image/JPEG" ||
         file[i].mimetype == "image/png" ||
+        file[i].mimetype == "image/PNG" ||
         file[i].mimetype == "image/gif"
       ) {
         file[i].mv("public/img_Dorm/" + file[i].name, (err) => {
@@ -86,7 +91,6 @@ export const createImage = (req, res) => {
     dorm_ID: id,
     image_Name: imagename,
   };
-  // console.log("object: ", object);
   dormModel.createImg(object, (err, data) => {
     if (err) {
       console.log(err);
@@ -172,10 +176,10 @@ export const addfac = (req, res) => {
 export const deleteImage = (req, res) => {
   const imageID = req.params.id;
   const filename = req.body.image
-  fs.unlink("public/img_Dorm/"+filename,(err)=>{
-    if(err){
+  fs.unlink("public/img_Dorm/" + filename, (err) => {
+    if (err) {
       throw err
-    }else{
+    } else {
       console.log("Delete file in folder success!")
     }
   })
@@ -194,15 +198,15 @@ export const updateDorm = (req, res) => {
   const room = object.Room
   // console.log("Object for update dorm: ",req.body)
   // console.log("ID dorm",object.dorm_ID)
-  dormModel.updateroom(room,(err,data)=>{
+  dormModel.updateroom(room, (err, data) => {
     if (err) {
       console.log(err);
-    } 
+    }
   })
   dormModel.updateDormbyID(dorm, (err, data) => {
     if (err) {
       console.log(err);
-    } 
+    }
   });
   res.send("update done")
 };

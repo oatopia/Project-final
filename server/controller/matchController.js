@@ -190,22 +190,22 @@ export const getBookmark = (req, res) => {
       console.log(err);
     } else {
       console.log("data from get bookmark: ",data)
-      let payload = []
-      let arraydorm = data[0]
-      console.log("arraydorm",arraydorm)
-      arraydorm.forEach(element => {
-        let getimg = data[1].filter(item => item.dorm_ID == element.dorm_ID)
-        let getroom = data[2].filter(item => item.dorm_ID == element.dorm_ID)
-        let getfacility = data[3].filter(item => item.dorm_ID == element.dorm_ID)
-        payload.push({
-          Image: getimg,
-          Room: getroom,
-          Facility: getfacility,
-          Dorm: element
-        })
-      })
+      // let payload = []
+      // let arraydorm = data[0]
+      // console.log("arraydorm",arraydorm)
+      // arraydorm.forEach(element => {
+      //   let getimg = data[1].filter(item => item.dorm_ID == element.dorm_ID)
+      //   let getroom = data[2].filter(item => item.dorm_ID == element.dorm_ID)
+      //   let getfacility = data[3].filter(item => item.dorm_ID == element.dorm_ID)
+      //   payload.push({
+      //     Image: getimg,
+      //     Room: getroom,
+      //     Facility: getfacility,
+      //     Dorm: element
+      //   })
+      // })
       // console.log('Payload', payload)
-      res.send(payload);
+      res.send(data);
     }
   });
 };
@@ -265,6 +265,20 @@ export const checkbook = (req, res) => {
     } else {
       console.log("data from get bookmark by ID: ", data);
       res.send(data[0]);
+    }
+  });
+};
+
+
+export const getDormdetail = (req, res) => {
+  let dorm_ID = req.body.ID;
+  console.log("dorm_ID is ",dorm_ID)
+  matchmodel.getDormdetailbyID(dorm_ID, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("data from get bookmark by ID: ", data);
+      res.send(data);
     }
   });
 };

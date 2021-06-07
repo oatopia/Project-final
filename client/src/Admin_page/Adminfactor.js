@@ -22,7 +22,7 @@ function Adminfactor() {
   const [editimg, setEditimg] = useState("");
 
   useEffect(() => {
-    Axios.get(url+"api/Admin/factor")
+    Axios.get("api/Admin/factor")
       .then((Response) => {
         setFactor(Response.data);
       })
@@ -43,7 +43,7 @@ function Adminfactor() {
         "content-type": "multipart/form-data",
       },
     };
-    Axios.post(url+"api/Admin/saveFactor", formData, config)
+    Axios.post("api/Admin/saveFactor", formData, config)
       .then((Response) => {
         console.log(Response);
         setShowadd(false);
@@ -59,7 +59,7 @@ function Adminfactor() {
   //--------------------------------------ลบปัจจัย-------------------------------------------------------------------
   const deleteFactor = (id) => {
     console.log("ID:", id);
-    Axios.delete(url+`api/Admin/factorDelete/${id}`).then((Response) => {
+    Axios.delete(`api/Admin/factorDelete/${id}`).then((Response) => {
       setFactor(
         factor.filter((val) => {
           return val.factor_ID != id;
@@ -81,7 +81,7 @@ function Adminfactor() {
         "content-type": "multipart/form-data",
       },
     };
-    Axios.put(url+`api/Admin/updateFactor/${id}`, formData, config)
+    Axios.put(`api/Admin/updateFactor/${id}`, formData, config)
       .then((Response) => {
         let Data = Response.data
         setFactor(
@@ -134,7 +134,7 @@ function Adminfactor() {
                   "content-type": "multipart/form-data",
                 },
               };
-              Axios.post(url+"api/Admin/saveFactor", formData, config)
+              Axios.post("api/Admin/saveFactor", formData, config)
                 .then((Response) => {
                   console.log(Response);
                   setShowadd(false);
@@ -192,7 +192,7 @@ function Adminfactor() {
         }
 
         {/* //--------------------------------------แสดงปัจจัย------------------------------------------------------------------- */}
-        {factor.map((data) => {
+        {factor.map((data,key) => {
           return (
             <div className="factor-box-Admin">
               <div >
@@ -215,7 +215,7 @@ function Adminfactor() {
                         "content-type": "multipart/form-data",
                       },
                     };
-                    Axios.put(url+`api/Admin/updateFactor/${id}`, formData, config)
+                    Axios.put(`api/Admin/updateFactor/${id}`, formData, config)
                       .then((Response) => {
                         let Data = Response.data
                         setFactor(
@@ -229,7 +229,7 @@ function Adminfactor() {
                 >
                   {({ errors }) => (
                     <Form className="factor-inner-box-Admin">
-                      <h1 className="factor-info">{data.factor_ID}</h1>
+                      <h1 className="factor-info">{key+1}</h1>
                       {textinput == data.factor_ID ? (
                         <div className="input-text-edit-contain">
                           <Field
@@ -276,7 +276,7 @@ function Adminfactor() {
                         </div>
                       ) : (
                         <img
-                          src={url+"images/" + data.image_Factor}
+                          src={"images/" + data.image_Factor}
                           width="60px"
                           height="60px"
                         ></img>

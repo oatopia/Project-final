@@ -18,38 +18,35 @@ function ResultMatch() {
   
   useEffect(() => {
     window.scrollTo(0, 0)
-    Axios.post(
-      url+"/api/match/getBookmark",
-      { member_ID: currentUser.member_ID },
-      { headers: authHeader() }
-    )
-      .then((Response) => {
-        console.log("Book mark dorm: ", Response.data);
-        let res = Response.data;
-        if (res.length > 0) {
-          setCheckdata(true)
-          setBook(res);
-        }else{
-          setCheckdata(false)
-        }
-      })
-      .catch((error) => {
-        console.log("Error from get Bookmark", error);
-      });
+    async function fetchData(){
+      const result = await Axios.post(
+        "/api/match/getBookmark",
+        { member_ID: currentUser.member_ID },
+        { headers: authHeader() }
+      )
+      let res = result.data
+      if (res.length > 0) {
+        setCheckdata(true)
+        setBook(res);
+      }else{
+        setCheckdata(false)
+      }
+    }
+    fetchData()
   }, []);
 
 
   const handleonclick = (saveid) => (e) => {
     e.stopPropagation()
     let id = saveid
-    Axios.delete(url+`/api/match/deletebook/${id}`, {
+    Axios.delete(`/api/match/deletebook/${id}`, {
       headers: authHeader(),
     })
       .then((Response) => {
         console.log("data from delete Book mark dorm: ", Response.data)
         setBook(
           book.filter((item) => {
-            return item.Dorm.save_ID != id
+            return item.save_ID != id
           })
         )
         if(!book){
@@ -76,20 +73,20 @@ function ResultMatch() {
           return (
             <div className="dorm-container" key={key} onClick={() => {
               history.push({
-                pathname: "/dormdetail",
-                state: data,
+                pathname: "/bookdormdetail",
+                state: data
               })
             }}>
               <div className="start-result-box">
-                <img className='img-dorm-box' src={url+"img_Dorm/" + data.Image[0].image}></img>
-                <h1>หอพัก{data.Dorm.dorm_Name}</h1>
+                <img className='img-dorm-box' src={"img_Dorm/" + data.image}></img>
+                <h1>หอพัก{data.dorm_Name}</h1>
               </div>
               <div className="end-result-box">
-                <img className="book-icon" src={bookon} onClick={handleonclick(data.Dorm.save_ID)} />
+                <img className="book-icon" src={bookon} onClick={handleonclick(data.save_ID)} />
                 <div className="line-end-box"></div>
                 <div className="price-box">
                   <p className="price-text-head"> ราคาเริ่มต้น</p>
-                  <p className="price-text-value">{data.Room[0].room_Price} บาท</p>
+                  <p className="price-text-value">{data.room_Price} บาท</p>
                 </div>
               </div>
 

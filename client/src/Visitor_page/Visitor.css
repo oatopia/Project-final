@@ -89,6 +89,7 @@
     font-family: 'Prompt', sans-serif;
     font-weight: bold;
     transition-duration: 0.5s;
+    cursor: pointer;
   }
 
   .searchbutton-Visitor:hover{

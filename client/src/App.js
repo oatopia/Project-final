@@ -24,6 +24,7 @@ import admin from "./Admin_page/Admin.js";
 import adminfactor from "./Admin_page/Adminfactor.js";
 import addDorm from "./Dorm_page/addDorm.js";
 import dormdata from "./Dorm_page/Dorm_data.js";
+import bookdormdetail from "./User_page/bookdormDetail.js"
 function App() {
   return (
     <BrowserRouter>
@@ -35,6 +36,7 @@ function App() {
         <Route path="/member" component={member} />
         <Route path="/owner" component={owner} />
         <Route path="/bookdorm" component={book} />
+        <Route path="/bookdormdetail" component={bookdormdetail} />
         <Route path="/dormdetail" component={dormdetail} />
         <Route path="/resultmatch" component={resultmatch} />
         <Route path="/searchvisitor" component={searchvisitor} />
