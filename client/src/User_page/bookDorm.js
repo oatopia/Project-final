@@ -65,8 +65,8 @@ function ResultMatch() {
         <NavbarMember />
       </div>
 
-      {checkdata == false && <h1 className="text-no-dorm-save">ไม่มีรายการหอพักที่บันทึก</h1>}
-      {checkdata == true &&    
+      {/* {checkdata == false && <h1 className="text-no-dorm-save">ไม่มีรายการหอพักที่บันทึก</h1>} */}
+      {/* {checkdata == true &&     */}
       <div>
         <h1 className='h1-bookdorm'>รายการหอพักที่บันทึก</h1>
         {book.map((data, key) => {
@@ -94,7 +94,7 @@ function ResultMatch() {
           )
         })}
       </div>
-      }
+      {/* } */}
     </div>
   );
 }

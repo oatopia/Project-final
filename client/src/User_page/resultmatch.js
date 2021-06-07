@@ -123,7 +123,7 @@ function ResultMatch() {
               })
             }}>
               <div className="start-result-box">
-                <img className='img-dorm-box' src={"img_Dorm/" + data.Image[0].image}  ></img>
+                <img className='img-dorm-box' src={url+"img_Dorm/" + data.Image[0].image}  ></img>
                 <h1>หอพัก{data.Dorm.dorm_Name}</h1>
               </div>
               <div className="end-result-box">
