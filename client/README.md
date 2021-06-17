@@ -68,3 +68,173 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## Group 35-nng-r2
+member
+
+`1.` Thanapat Tansiri 6009610202
+
+`2.` Kanchana Donmongkol 6009610244
+
+
+## Directory Tree
+Project code has separate two folder
+
+`1.`  Client
+
+This folder has code for client side  
+
+### `Client Structure`
+```bash
+client
+└───src
+    ├───Admin_page
+    │   ├───Admin.css
+    │   ├───Admin.js
+    │   ├───Adminfactor.css
+    │   └───Adminfactor.js
+    ├───component
+    │   ├───Dorm
+    |   │    ├───Indorm.css
+    │   |    └───Indorm.js
+    │   ├───Match
+    |   │    ├───Match-member.css
+    │   |    └───Match-member.js
+    │   ├───Navbar
+    |   │    ├───Navbar.css
+    |   │    ├───Navbar.js
+    |   │    ├───NavbarAdmin.css
+    |   │    ├───NavbarAdmin.js
+    |   │    ├───NavbarMember.css
+    |   │    ├───NavbarMember.js
+    |   │    ├───NavbarOwner.css
+    │   |    └───NavbarOwner.js
+    │   ├───showfactor.css
+    │   └───showfactor.js
+    ├───Dorm_page
+    │   ├───addDorm.css
+    │   ├───addDorm.js
+    │   ├───Dorm_data.css
+    │   ├───Dorm_data.js
+    │   ├───owner.css
+    │   └───owner.js
+    ├───img
+    │   └───icon
+    ├───service
+    │   ├───auth-header.css
+    │   └───auth-header.js
+    ├───User_page
+    │   ├───bookdorm.css
+    │   ├───bookdorm.js
+    │   ├───bookdormDetail.js
+    │   ├───dormdetail.css
+    │   ├───dormdetail.js
+    │   ├───member.css
+    │   ├───member.js
+    │   ├───resultmatch.css
+    │   └───resultmatch.js
+    ├───Visitor_page
+    │   ├───dormVisitor.js
+    │   ├───dormVisitor.js
+    │   ├───matchVisitor.css
+    │   ├───matchVisitor.js
+    │   ├───Visitor.css
+    │   ├───Visitor.js
+    │   ├───visitorResult.css
+    │   └───visitorResult.js
+    ├───App.css
+    ├───App.js
+    ├───index.js
+    ├───LoginMember.css
+    ├───LoginMember.js
+    ├───LoginOwner.css
+    ├───LoginOwner.js
+    ├───register.css
+    ├───register.js
+    ├───index.js
+    ├───memo.txt
+    ├───package-lock.json
+    ├───package.json
+    └───README.md
+
+
+
+```
+
+`2.`  Server
+
+This folder has code for Server side and Backend  
+
+### `Server Structure`
+```bash
+server
+├───config
+│   ├───config.js
+│   └───Jwt-Config.js
+├───controller
+│   ├───adminControllers.js
+│   ├───DormController.js
+│   ├───matchController.js
+│   ├───userController.js
+│   └───visitorController.js
+├───middleware
+│   └───Verify.js
+├───model
+│   ├───adminModel.js
+│   ├───DormModel.js
+│   ├───matchModel.js
+│   ├───ScoringModel.js
+│   ├───userModel.js
+│   └───visitorModel.js
+├───node_modules
+├───public
+│   ├───images
+│   └───img_Dorm
+├───rounter
+│   ├───AdminRouter.js
+│   ├───DormRouter.js
+│   ├───matchRouter.js
+│   ├───userRouter.js
+│   └───visitorRouter.js
+├───util
+│   ├───calmatch.js
+│   ├───database.js
+│   └───Jwt-Passports.js
+├───package-lock.json
+├───package.json
+├───Procfile
+├───Score_Dorm.txt
+└───server.js
+```
+
+# Step to install Dorm Matching TU
+`1. Push code to github repository` 
+
+You must have github repository after that push code to github repository
+
+\
+`2. Create serverapp on Heroku` 
+
+In Heroku create server app. go to setting
+ add builpack 
+by choose heroku/node.js 
+ and second buildpack is
+" https://github.com/timanovsky/subdir-heroku-buildpack.git".
+ Add config vars by set KEY = "PROJECT_PATH "
+ and VALUE = "server". go to deploy menu in 
+ deploy method select connect to github with your repository after that deploy branch
+
+\
+ `3. Create clientapp on Heroku` 
+
+In Heroku create client app, add builpack 
+by use "https://github.com/mars/create-react-app-buildpack "
+ and second buildpack is
+" https://github.com/timanovsky/subdir-heroku-buildpack.git".
+ Add config vars by set KEY = "PROJECT_PATH "
+ and VALUE = "client". go to deploy menu in 
+ deploy method select connect to github with your repository after that deploy branch
+
+### You can visit my web application by click this Link
+[https://matching-dorm-tu-client.herokuapp.com/](https://matching-dorm-tu-client.herokuapp.com/)
